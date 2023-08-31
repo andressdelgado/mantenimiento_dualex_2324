@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+	<meta charset=utf-8 />
+	<meta name=viewport content='width=device-width, initial-scale=1' />
+	<meta name=author content='Miguel Jaque <mjaque@migueljaque.com' />
+	<title>DUALEX - Evaluación de Formación DUAL</title>
+
+	<link rel=stylesheet href=css/reset.css />
+	<link rel=stylesheet href=css/estilos.css />
+	<link rel=manifest href=manifest.json />
+</head>
+
+<body>
+
+	<div id=divLogin>
+		<script src="https://accounts.google.com/gsi/client" async defer></script>
+		<h1>Dualex</h1>
+		<p>Aplicación para la evaluación de la formación DUAL.</p>
+		<p class=error></p>
+		<div id=divGoogleLogin ></div>
+
+		<!-- En producción, eliminar este párrafo -->
+		<p>Pruebas (eliminar en producción): 
+			<select id=testlogin>
+				<option></option>
+				<optgroup label="---Alumnos:">
+					<option value=alumno__101.guadalupe@alumnado.fundacionloyola.net>alumno_1</option>
+					<option value=alumno__102.guadalupe@alumnado.fundacionloyola.net>alumno_2</option>
+					<option value=alumno__103.guadalupe@alumnado.fundacionloyola.net>alumno_3</option>
+					<option value=alumno__104.guadalupe@alumnado.fundacionloyola.net>alumno_4</option>
+					<option value=alumno__105.guadalupe@alumnado.fundacionloyola.net>alumno_5</option>
+					<option value=alumno__106.guadalupe@alumnado.fundacionloyola.net>alumno_6</option>
+					<option value=alumno__107.guadalupe@alumnado.fundacionloyola.net>alumno_7</option>
+					<option value=alumno__108.guadalupe@alumnado.fundacionloyola.net>alumno_8</option>
+					<option value=alumno__109.guadalupe@alumnado.fundacionloyola.net>alumno_9</option>
+					<option value=alumno__110.guadalupe@alumnado.fundacionloyola.net>alumno_10</option>
+				</optgroup>
+				<optgroup label="---Profesores:">
+					<option value=aportero@fundacionloyola.es>aportero</option>
+					<option value=dcamison@fundacionloyola.es>dcamison</option>
+					<option value=mmolano@fundacionloyola.es>mmolano</option>
+					<option value=asanchez@fundacionloyola.es>asanchez</option>
+					<option value=prisco@fundacionloyola.es>prisco</option>
+					<option value=jahernandez@fundacionloyola.es>jahernandez</option>
+					<option value=tmora@fundacionloyola.es>tmora</option>
+					<option value=mfuentes@fundacionloyola.es>mfuentes</option>
+					<option value=bduran@fundacionloyola.es>bduran</option>
+					<option value=mjaque@fundacionloyola.es>mjaque</option>
+				</optgroup>
+			</select>
+		</p>
+	</div>
+
+	<div id=divDialogo>
+		<div>
+  			<span>&times;</span>
+  			<h2>Título del Diálogo</h2>
+  			<p>Mensaje del Diálogo</p>
+  			<button>Cancelar</button>
+  			<button>Aceptar</button>
+		</div>
+	</div>
+
+	<div id=divMenu></div>
+
+	<div id=divMensaje>
+		<span>X</span>
+		<span>Este es un mensaje de Error</span>
+	</div>
+
+	<div id=divTareas></div>
+
+	<div id=divTarea>
+		<h1>Tarea</h1>
+		<p>A completar por el alumno:</p>
+		<label>Título:
+			<input type=text placeholder='Título de la tarea realizada.' />
+		</label><br />
+		<label>Fecha de Inicio:
+			<input type=date />
+		</label><br />
+		<label>Fecha de Fin:
+			<input type=date />
+		</label><br />
+		<label>Imágenes:<br /><br />
+			<input type=file capture="camera" accept="image/*"/>
+			
+		</label>
+		
+		<!-- div de imágenes -->
+		<img />
+		<div></div>
+
+		<label>Descripción:<br />
+			<textarea placeholder='Descripción de la tarea realizada.'></textarea>
+		</label><br />
+		<fieldset>
+			<legend>Actividades Relacionadas:</legend>
+			<div></div>
+		</fieldset>
+		<hr />
+
+		<h2>Evaluación de la Empresa</h2>
+		<p>A completar por el tutor de empresa:</p>
+		<label>Evaluación:
+			<select>
+				<option value=null>Sin Calificar</option>
+			</select>
+		</label><br />
+			<label>Comentario:<br />
+			<textarea placeholder='Comentario del tutor de empresa'></textarea>
+		</label><br />
+			<hr />
+			
+		<h2>Evaluaciones de Profesores</h2>
+		<div></div>
+
+		<div>
+			<button>Cancelar</button>
+			<button>Aceptar</button>
+			<button id="btn_tarea_anterior">Tarea Anterior(sin guardar)</button>
+			<button id="btn_aceptar_siguiente">Aceptar y Siguente</button>
+		</div>
+	</div>
+
+	<div id=divAlumnos>
+		<div>
+			
+		</div>
+	</div>
+
+	<div id=divInforme>
+		<h1>Informe trimestral de valoracion sumativa (Anexo IV)</h1>
+		<div>
+			<p>Alumno/alumna: <span data-informe=alumno></span></p>
+			<p>Centro docente: <strong>ESCUELA VIRGEN DE GUADALUPE - FUNDACIÓN LOYOLA ACE</strong></p>
+		</div>	
+		<div>
+			<p class=derecha><span data-informe=grado></span></p>
+			<p>Ciclo Formativo: <strong><span data-informe=ciclo></span></strong></p>
+		</div>
+		<div>
+			<p class=derecha>Horas realizadas: 90</p>
+			<p>Centro de trabajo: <strong><input type=text placeholder='Nombre del centro' size=25 /></strong></p>
+		</div>
+		<div>
+			<p class=derecha><span data-informe=periodo></span></p>
+			<p>Tutor/tutora del alumno o alumna en el centro de trabajo: <strong><input type=text placeholder='Nombre del tutor' size=25 /></strong></p>
+		</div>	
+		<div>
+			<p>Coordinador del Ciclo: <strong><span data-informe=coordinador></span></strong></p>
+		</div>
+		<div class=contenedor-grid>
+			<p><strong>1.- VALORACIÓN DE LAS ACTIVIDADES FORMATIVAS REALIZADAS DURANTE ESTE TIEMPO Y GRADO DE DESEMPEÑO:</strong></p>
+			<div class=grid1> </div>
+		</div>
+		<div>
+			<p><strong>2.- VALORACIÓN GENERAL DEL ALUMNO/ALUMNA DE ESTE PERIODO EN EL CENTRO DE TRABAJO:</strong></p>
+			<div class=grid2> 
+				<div>ASPECTOS A CONSIDERAR</div>
+				<div>NEGATIVA</div>
+				<div>POSITIVA</div>
+				<div>EXCELENTE</div>
+
+				<div>Puntualidad, asistencia</div>
+				<div><input name=puntualidad type=radio /></div>
+				<div><input name=puntualidad type=radio /></div>
+				<div><input name=puntualidad type=radio /></div>
+
+				<div>Habilidades y Destrezas</div>
+				<div><input name=habilidades type=radio /></div>
+				<div><input name=habilidades type=radio /></div>
+				<div><input name=habilidades type=radio /></div>
+
+				<div>Técnicas y procedimientos</div>
+				<div><input name=tecnicas type=radio /></div>
+				<div><input name=tecnicas type=radio /></div>
+				<div><input name=tecnicas type=radio /></div>
+
+				<div>Competencias profesionales y organizativas</div>
+				<div><input name=cpo type=radio /></div>
+				<div><input name=cpo type=radio /></div>
+				<div><input name=cpo type=radio /></div>
+
+				<div>Competencias relacionales</div>
+				<div><input name=cr type=radio /></div>
+				<div><input name=cr type=radio /></div>
+				<div><input name=cr type=radio /></div>
+
+				<div>Otros aspectos:
+				<br/><textarea rows=1 cols=40 placeholder=Descripción ></textarea></div>
+				<div><input name=otros type=radio /></div>
+				<div><input name=otros type=radio /></div>
+				<div><input name=otros type=radio /></div>
+			</div>
+		</div>
+		<div>
+			<p><strong>3.- OBSERVACIONES, ASUNTOS TRATADOS Y DECISIONES TOMADAS:</strong></p>
+			<textarea rows=1 cols=50 placeholder=Observaciones ></textarea>
+			<p>En <input type=text placeholder=localidad />, a <input type=text placeholder=día size=15 /> de <input type=text placeholder=mes size=10 /> de <input type=text placeholder=año size=4 />.</p>
+			<p><strong>El tutor del centro de trabajo:</strong></p>
+			<p><strong>Fdo. <input type=text placeholder='Nombre del tutor' /></strong></p>
+			<br /><br />
+		</div>
+		<div>
+			<p><strong>EVALUACIÓN POR MÓDULOS:</strong></p>
+			<div class=grid3> </div>
+			<textarea rows=1 cols=50 placeholder='Comentarios de evaluación' ></textarea>
+		</div>
+	</div>
+
+	<div id=divCreditos>
+		<h2>Versión 1.2</h2>
+		<p>Dualex es una aplicación para la evaluación de alumnos de Ciclos Formativos en formación DUAL.</p>
+		<p><strong>Dirección Técnica</strong>: Pedro Risco &lt;prisco@fundacionloyola.es&gt;</p>
+		<p><strong>Programación</strong>: Miguel Jaque &lt;mjaque@migueljaque.com&gt;</p>
+		<p><strong>Fecha de Publicación</strong>: Julio 2022</p>
+		<p><strong>Licencia</strong>: <a href="licencia.html">GPL v3</a></p>
+	</div>
+	<script type=module src=js/dualex.js></script>
+</body>
+
+</html>
+

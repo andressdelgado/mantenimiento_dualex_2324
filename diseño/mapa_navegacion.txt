@@ -1,0 +1,15 @@
+MAPA DE NAVEGACIÓN
+
+ 	Login - formulario de login. Discrimina el rol.
+
+	ALUMNO:
+		Tareas
+			└ Crear Tarea 
+			└ Consultar/Editar Tarea 
+
+	PROFESOR
+		Alumnos
+			└ Tareas del alumno 
+				└ Consultar/Editar/Evaluar Tarea 
+			└ Informe del alumno 
+		Tareas (Vista de tareas pendientes de evaluar?)

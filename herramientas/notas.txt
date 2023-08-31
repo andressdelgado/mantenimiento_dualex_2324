@@ -1,0 +1,50 @@
+Generación de Documentación
+
+	Desde el directorio del proyecto:
+		./herramientas/phpDocumentor.phar -d ./src/php/ -t docs/php --ignore ./src/php/api/config_prod.php --ignore ./src/php/api/vendor
+		jsdoc -r -d docs/js src/js src/js
+---------------------
+Instalación y Uso de ESLint
+	Ref: https://eslint.org/docs/latest/use/getting-started
+	Instalar con:
+		npm init	(elegir opciones por defecto)
+		npm init @eslint/config
+			Opciones:
+				To check syntax, find problems, and enforce code syntax
+				JavaScript modules (import/export)
+				None of these
+				No
+				Browser
+				Use a popular style guide
+				Standard
+				JavaScript
+				Yes
+				npm
+	Usar con:
+		Comprobar: npx eslint src/js
+		Comprobar y Corregir: npx eslint src/js --fix
+---------------------
+Crear el directorio en despliegue (plesk) y actualizar desde allí:
+
+	git init
+	git remote add dualex https://github.com/mjaque/dualex.git
+	git fetch dualex
+	git checkout dualex/master -- src
+
+	Cambiar de nombre el directorio src a dualex.
+	Eliminar directorios de test, doc, etc.
+	Poner el archivo de configuración de producción.
+-------------------------------------------
+Branching 
+	git branch nueva_rama
+	git branch	//para comprobar
+	git checkout nueva_rama	//para cambiar de rama
+---------------------------------------------
+Merge
+	git checkout main		//Volvemos a main
+	git merge nueva_rama	//A ver si puede hacer fast-forward
+	git branch -d nueva_rama	//para borrar la rama...
+-------------------------------------------------
+Instalación de dependencias con composer
+	Desde el directorio /src/php/api, ejecutar:
+		composer require google/apiclient

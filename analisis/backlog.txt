@@ -1,0 +1,21 @@
+Mejoras Técnicas
+- Eliminar la carga dinámica de plantillas.
+- Revisar/mejorar el interfaz, evitando campos innecesarios o mal estructurados.
+- Revisar/mejorar las consultas SQL.
+- Pruebas automáticas.
+- Manual de Usuario y Manual del Programador.
+
+Mejoras Funcionales
+- Gestión de alumnos, profesores, coordinadores, cursos, ciclos, módulos, calificaciones, actividades y periodos.
+- Anexo de fotos a las tareas desde archivo y móvil. 
+- Mejorar avisos a alumnos y profesores. Portada?
+- Generación de informe en pdf.
+- Dashboard.
+
+Mejoras pedidas por Pedro
+- Corregir el cálculo de calificaciones.
+- Iconos de "avance" para pasar de una tarea de alumno a la siguiente/anterior ¿tras evaluar?
+- Mostrar un número de tarea para cada alumno ?¿
+- Ocultar tareas de primera evaluación en la segunda evaluación.
+- Campo de búsqueda de un alumno para la evolución desde el principio de su DUAL ¿¿??
+- Dividir DUALEX en 2, uno para primero y otro para segundo, porque los periodos son distintos.

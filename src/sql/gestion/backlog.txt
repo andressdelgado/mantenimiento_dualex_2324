@@ -1,0 +1,2 @@
+Corregir vista tarea (alumno) para que se muestre bien la parte de evaluación de profesores.
+Editar tarea (alumno)

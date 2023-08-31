@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+  <meta charset=utf-8 />
+  <meta name=viewport content='width=device-width, initial-scale=1' />
+  <meta name=author content='Miguel Jaque <mjaque@migueljaque.com' />
+  <title>DUALEX</title>
+
+  <link rel=stylesheet href=../css/estilos.css />
+  <style>
+	.vistatareas {
+  		max-width: 90%;
+  		margin: 1rem;
+  		padding: 2rem;
+	}
+	.vistatareas>div {
+  		border-bottom: 1px solid lightgrey;
+  		height: 2rem;
+	}
+	.icono_grande{
+		position: fixed;
+		top: 5%;
+		left: 80%;
+		background-color: blue;
+		border-radius: 2rem;
+		cursor: pointer;
+		transition: transform .7s ease-in-out;
+	}
+	.icono_grande:hover{
+		transform: rotate(360deg);
+	}
+    .iconos{
+      float: right;
+    }
+	.icono{
+		display: inline;
+		width: 1.5rem;
+		cursor: pointer;
+	}
+	.icono:hover{
+		background-color: lightblue;
+  		border-radius: 0.7rem;
+	}
+
+  </style>
+</head>
+
+<body>
+
+  <div class='vistatareas'>
+    <img class='icono_grande' title='alumnos' src=../iconos/group.svg />
+	<h1>Tareas</h1>
+	<p><strong>Nombre del Alumno</strong></p>
+	<div>
+      <span>MOD1: Título Tarea 1 - Óptimo(9)</span>
+      <span class=iconos >
+        <img class="icono" title="editar" src=../iconos/edit.svg />
+        <img class="icono" title="eliminar" src=../iconos/delete.svg />
+      </span>
+    </div>
+    <div>
+      <span>MOD1, MOD2: Título Tarea 2 - Óptimo(9)</span>
+      <span class=iconos >
+        <img class="icono" title="editar" src=../iconos/edit.svg />
+        <img class="icono" title="eliminar" src=../iconos/delete.svg />
+      </span>
+    </div>
+	<div>
+      <span>MOD3: Título Tarea 3 - ?(-)</span>
+      <span class=iconos >
+        <img class="icono" title="editar" src=../iconos/edit.svg />
+        <img class="icono" title="eliminar" src=../iconos/delete.svg />
+      </span>
+    </div>
+	<div>
+      <span style='color:red; font-weight:bold' title='evaluaciones pendientes'>!</span>
+      <span>MOD3: Título Tarea 4 - Aceptable(-)</span>
+      <span class=iconos >
+        <img class="icono" title="editar" src=../iconos/edit.svg />
+        <img class="icono" title="eliminar" src=../iconos/delete.svg />
+      </span>
+    </div>
+	<div>
+      <span>MOD3: Título Tarea 5 - ?(-)</span>
+      <span class=iconos >
+        <img class="icono" title="editar" src=../iconos/edit.svg />
+        <img class="icono" title="eliminar" src=../iconos/delete.svg />
+      </span>
+    </div>
+  </div>
+</body>
+
+</html>

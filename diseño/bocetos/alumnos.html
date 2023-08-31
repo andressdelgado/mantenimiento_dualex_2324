@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+  <meta charset=utf-8 />
+  <meta name=viewport content='width=device-width, initial-scale=1' />
+  <meta name=author content='Miguel Jaque <mjaque@migueljaque.com' />
+  <title>DUALEX</title>
+
+  <link rel=stylesheet href=../../src/css/estilos.css />
+  <style>
+	.vistaalumnos {
+  		max-width: 90%;
+  		margin: 1rem;
+  		padding: 2rem;
+	}
+	.vistaalumnos>div {
+  		border-bottom: 1px solid lightgrey;
+  		height: 2rem;
+	}
+	.icono_grande{
+		position: fixed;
+		top: 5%;
+		left: 80%;
+		background-color: blue;
+		border-radius: 2rem;
+		cursor: pointer;
+		transition: transform .7s ease-in-out;
+	}
+	.icono_grande:hover{
+		transform: rotate(360deg);
+	}
+    .iconos{
+      float: right;
+    }
+	.icono{
+		display: inline;
+		width: 1.5rem;
+		cursor: pointer;
+	}
+	.icono:hover{
+		background-color: lightblue;
+  		border-radius: 0.7rem;
+	}
+
+  </style>
+</head>
+
+<body>
+
+  <div class='vistaalumnos'>
+	<h1>Alumnos</h1>
+	<div>
+		<span class=modulo>PRFB</span>
+		<span class=modulo>SMEC</span>
+      <span>Nombre1 Apellido1 Apellido2</span>
+      <span class=iconos >
+        <img class="icono" title="tareas" src=../../src/iconos/build.svg />
+        <img class="icono" title="informe" src=../../src/iconos/description.svg />
+      </span>
+    </div>
+	<div>
+      <span style='color:red; font-weight:bold' title='evaluaciones pendientes'>!</span>
+      <span>Nombre Apellido1 Apellido2</span>
+      <span class=iconos >
+        <img class="icono" title="tareas" src=../../src/iconos/build.svg />
+        <img class="icono" title="informe" src=../../src/iconos/description.svg />
+      </span>
+    </div>
+	<div>
+      <span>Nombre Apellido1 Apellido2</span>
+      <span class=iconos >
+        <img class="icono" title="tareas" src=../../src/iconos/build.svg />
+        <img class="icono" title="informe" src=../../src/iconos/description.svg />
+      </span>
+    </div>
+  </div>
+</body>
+
+</html>

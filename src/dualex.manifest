@@ -1,0 +1,17 @@
+{
+	"name": "Dualex",
+	"short_name": "Dualex",
+	"start_url": "/dualex/index.html",
+	"display": "standalone",
+	"background_color": "#fff",
+	"description": "Aplicación para la evaluación de formación Dual.",
+	"icons": [{
+		"src": "iconos/logo.png",
+		"sizes": "192x192",
+		"type": "image/png"
+	}],
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"theme_color": "#006ea4",
+	"background_color": "#006ea4"
+}

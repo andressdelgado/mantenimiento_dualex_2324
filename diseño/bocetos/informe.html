@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+	<meta charset=utf-8 />
+	<meta name=viewport content='width=device-width, initial-scale=1' />
+	<meta name=author content='Miguel Jaque <mjaque@migueljaque.com' />
+	<title>DUALEX - Evaluación de Formación DUAL</title>
+
+	<link rel=stylesheet href=../../src/css/reset.css />
+	<link rel=stylesheet href=../../src/css/estilos.css />
+	<link rel=stylesheet href=../../src/js/vistas/vistamenu/vistamenu.css />
+	<style>
+			#divInforme{
+				display: block;
+				margin: 1cm;
+			}
+			.informe > h1{
+				text-align: center;
+				color: blue;
+				font-weight: bold;
+			}
+			.informe div{
+				border: 1px solid black;
+				padding: 0.5rem;
+			}
+			.informe strong{
+				font-weight: bold;
+			}
+			.informe .derecha{
+				float: right;
+			}
+			.informe div.contenedor-grid{
+				padding: 0px;
+			}
+			.informe div.contenedor-grid > p{
+				padding: 0.3rem;
+			}
+			.informe div.grid1{
+				display: grid; 
+				grid-template-columns: 45% 5% 45% 5%; 
+				padding: 0px;
+			}
+			.informe div.grid1 > div:nth-child(2n){
+				font-weight: bold;
+				text-align: center;
+			}
+			.informe div.grid2{
+				display: grid; 
+				grid-template-columns: 40% 20% 20% 20%; 
+				border: none;
+			}
+			.informe div.grid2 div{
+				padding: 0.1rem;
+			}
+			.informe div.grid2 > div:nth-child(2n), .informe div.grid2 > div:nth-child(4n+3){
+				text-align: center;
+			}
+			.informe div.grid3{
+				display: grid; 
+				grid-template-columns: 45% 5% 45% 5%; 
+				border: none;
+			}
+			.informe div.grid3 div{
+				padding: 0.1rem;
+			}
+			.informe div.grid3 > div:nth-child(2n){
+				text-align: center;
+			}
+			.informe div.grid3 em{
+				font-style: italic;
+				font-size: 0.8rem;
+			}
+			.informe table{
+				margin: 2rem auto;
+			}
+			.informe td, .informe th{
+				border: 1px solid black;
+				padding: 0.2rem;
+			}
+			.informe th{
+				font-weight: bold;
+				background-color: lightgrey;
+			}
+			.informe tbody:nth-child(2){
+				text-align: center;
+			}
+			@page { 
+				margin: 0; /* Quita el encabezado y pie que pone el navegador */
+				size: A4;
+			}	
+
+			@media print{
+				#divLogin, #divDialogo, #divMenu {
+					display: none !important;
+				}
+				#divInforme{
+					font-size: 0.7rem;
+					/* Para evitar que el navegador ahorre tinta en los fondos */
+					/* print-color-adjust: exact; */
+				}
+				.informe > div{
+					padding: 0.2rem 0.5rem;
+				}
+				.informe div.grid1 > {
+					padding: 0;
+				}
+				.informe div.grid1 > div:nth-child(2n+1){
+					font-size: 0.5rem;
+				}
+				.informe textarea, .informe input[type='text']{
+					border: none;
+				}
+			}
+	</style>
+</head>
+
+<body>
+	<div id=divLogin>
+		aportero@fundacionloyola.es
+	</div>
+	<div id=divDialogo></div>
+	<div id="divMenu" class="vistamenu" style="display: flex;">
+		<h1>Informe de Alumno</h1>
+		<img src="../../src/iconos/print.svg" title="imprimir" class="icono" style="order: 2;">
+		<img src="../../src/iconos/logout.svg" title="salir" class="icono" style="order: 2;">
+	</div>
+	<div id=divMensaje></div>
+	<div id=divTareas></div>
+	<div id=divTarea></div>
+	<div id=divAlumnos></div>
+	<div id=divInforme class=informe>
+		<h1>Informe trimestral de valoracion sumativa (Anexo IV)</h1>
+		<div>
+			<p>Alumno/alumna: Fulano de Tal</p>
+			<p>Centro docente: <strong>ESCUELA VIRGEN DE GUADALUPE - FUNDACIÓN LOYOLA ACE</strong></p>
+		</div>	
+		<div>
+			<p class=derecha>Grado: SUPERIOR</p>
+			<p>Ciclo Formativo: <strong>MECATRÓNICA INDUSTRIAL</strong></p>
+		</div>
+		<div>
+			<p class=derecha>Horas realizadas: 90</p>
+			<p>Centro de trabajo: <input type=text /></p>
+		</div>
+		<div>
+			<p class=derecha>Primer Periodo</p>
+			<p>Tutor/tutora del alumno o alumna en el centro de trabajo: <strong>PERICO PALOTES DE FRESA</strong></p>
+		</div>	
+		<div>
+			<p>Profesor responsable del seguimiento: <strong>PEDRO RISCO AGUILERA</strong></p>
+		</div>
+		<div class=contenedor-grid>
+			<p><strong>1.- VALORACIÓN DE LAS ACTIVIDADES FORMATIVAS REALIZADAS DURANTE ESTE TIEMPO Y GRADO DE DESEMPEÑO:</strong></p>
+			<div class=grid1> 
+				<div>1. Aplicar reglamentos así como normativa referida a la Prevención de Riesgos Laborales.</div>
+				<div>8</div>
+				<div>11. Reparación e instalación de circuitos neumáticos e hidráulicos para maquinaria y equipo industrial a partir de planos, normas y especificaciones técnicas.</div>
+				<div> </div>
+
+				<div>2. Planificar la fabricación o reparación de elementos mecánicos de las máquinas, estableciendo las etapas y fijando los recursos</div>
+				<div>8</div>
+				<div>12. Diagnóstico del estado, fallo y/o avería de elementos mecánicos, sistemas hidráulicos y neumáticos, así como su reparación utilizando manuales de instrucción y planos.</div>
+				<div>8</div>
+
+				<div>3. Colaborar en la fabricación de componentes mecánicos utilizando las máquinas-herramientas del taller de mantenimiento.</div>
+				<div>7,5</div>
+				<div>13. Obtención de croquis de los elementos mecánicos y/o circuitos neumáticos o hidráulicos a partir de datos recogidos del elemento deteriorado y de la documentación técnica disponible para su reconstrucción o reparación.</div>
+				<div> </div>
+
+				<div>4. Colaborar en la reparación de componentes mecánicos de la máquina.</div>
+				<div> </div>
+				<div>14. Montaje y reparación de equipos y circuitos eléctricos para maquinaria y equipo industrial a partir de planos y especificaciones estableciendo el proceso de montaje y desmontaje de acuerdo con las instrucciones técnicas.</div>
+				<div> </div>
+
+				<div>5. Colaborar en la reparación de componentes mecánicos de la máquina.</div>
+				<div> </div>
+				<div>14. Montaje y reparación de equipos y circuitos eléctricos para maquinaria y equipo industrial a partir de planos y especificaciones estableciendo el proceso de montaje y desmontaje de acuerdo con las instrucciones técnicas.</div>
+				<div> </div>
+
+				<div>6. Colaborar en la reparación de componentes mecánicos de la máquina.</div>
+				<div> </div>
+				<div>14. Montaje y reparación de equipos y circuitos eléctricos para maquinaria y equipo industrial a partir de planos y especificaciones estableciendo el proceso de montaje y desmontaje de acuerdo con las instrucciones técnicas.</div>
+				<div> </div>
+
+				<div>7. Colaborar en la reparación de componentes mecánicos de la máquina.</div>
+				<div> </div>
+				<div>14. Montaje y reparación de equipos y circuitos eléctricos para maquinaria y equipo industrial a partir de planos y especificaciones estableciendo el proceso de montaje y desmontaje de acuerdo con las instrucciones técnicas.</div>
+				<div> </div>
+
+				<div>8. Colaborar en la reparación de componentes mecánicos de la máquina.</div>
+				<div> </div>
+				<div>14. Montaje y reparación de equipos y circuitos eléctricos para maquinaria y equipo industrial a partir de planos y especificaciones estableciendo el proceso de montaje y desmontaje de acuerdo con las instrucciones técnicas.</div>
+				<div> </div>
+
+				<div>9. Colaborar en la reparación de componentes mecánicos de la máquina.</div>
+				<div> </div>
+				<div>14. Montaje y reparación de equipos y circuitos eléctricos para maquinaria y equipo industrial a partir de planos y especificaciones estableciendo el proceso de montaje y desmontaje de acuerdo con las instrucciones técnicas.</div>
+				<div> </div>
+
+				<div>10. Colaborar en la reparación de componentes mecánicos de la máquina.</div>
+				<div> </div>
+				<div>14. Montaje y reparación de equipos y circuitos eléctricos para maquinaria y equipo industrial a partir de planos y especificaciones estableciendo el proceso de montaje y desmontaje de acuerdo con las instrucciones técnicas.</div>
+				<div> </div>
+			</div>
+		</div>
+		<div>
+			<p><strong>2.- VALORACIÓN GENERAL DEL ALUMNO/ALUMNA DE ESTE PERIODO EN EL CENTRO DE TRABAJO:</strong></p>
+			<div class=grid2> 
+				<div>ASPECTOS A CONSIDERAR</div>
+				<div>NEGATIVA</div>
+				<div>POSITIVA</div>
+				<div>EXCELENTE</div>
+
+				<div>Puntualidad, asistencia</div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+
+				<div>Habilidades y Destrezas</div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+
+				<div>Técnicas y procedimientos</div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+
+				<div>Competencias profesionales y organizativas</div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+
+				<div>Competencias relacionales</div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+
+				<div>Otros aspectos:
+				<br/><textarea rows=1 cols=40 ></textarea></div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+				<div><input type=checkbox /></div>
+			</div>
+		</div>
+		<div>
+			<p><strong>3.- OBSERVACIONES, ASUNTOS TRATADOS Y DECISIONES TOMADAS:</strong></p>
+			<textarea rows=1 cols=50 ></textarea>
+			<p>En <input type=text />, a <input type=text size=15 /> de <input type=text size=10 /> de <input type=text size=4 />.</p>
+			<p><strong>El tutor del centro de trabajo:</strong></p>
+			<p><strong>Fdo. <input type=text /></strong></p>
+			<br /><br />
+		</div>
+		<div>
+			<p><strong>EVALUACIÓN POR MÓDULOS:</strong></p>
+			<div class=grid3> 
+				<div>PRFB - Procesos de Fabricación
+ 					<br /><em>Has hecho un buen trabajo (texto de evaluación).</em>
+				</div>
+				<div>9</div>
+				<div>SMEC - Sistemas Mecánicos</div>
+				<div>8</div>
+				<div>SHYN - Sistemas Hidráulicos y Neumáticos
+ 					<br /><em>Comentario del profesor.</em>
+				</div>
+				<div>8</div>
+				<div>CSM - Configuración de Sistemas Mecatrónicos</div>
+				<div>9</div>
+				<div>SEYE - Sistemas Eléctricos y Electrónicos</div>
+				<div>8</div>
+				<div>SSM - Simulación de Sistemas Mecatrónicos</div>
+				<div>9</div>
+				<div>IS - Integración de Sistemas</div>
+				<div>9</div>
+			</div>
+		</div>
+		<!-- 
+		<table>
+			<thead>
+				<tr>
+					<th colspan=6>INDICADORES DE DESEMPEÑO DE ACTIVIDADES</th>
+				</tr>
+				<tr>
+					<th>NOMENCLATURA</th>
+					<th>M</th>
+					<th>S</th>
+					<th>B</th>
+					<th>O</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>ESCALA</th>
+					<th>Mejorable</th>
+					<th>Suficiente</th>
+					<th>Bueno</th>
+					<th>Óptimo</th>
+					<th>No realizada</th>
+				</tr>
+				<tr>
+					<th>PUNTUACIÓN</th>
+					<td>2-3</td>
+					<td>4-5</td>
+					<td>6-8</td>
+					<td>9-10</td>
+					<td rowspan=2>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>DESCRIPTORES DE LOGRO</th>
+					<td>Sin autonomía.<br />Interés mejorable</td>
+					<td>Autonomía parcial.<br />Interés mejorable.<br />Destreza técnica mejorable.</td>
+					<td>Autonomía aceptable.<br />Interés correcto.<br />Muestra destrezas técnicas.</td>
+					<td>Mucha autonomía.<br />Bastante interés.<br />Destreza técnica manifiesta.</td>
+				</tr>
+			</tbody>
+		</table>
+		-->
+	</div>
+
+</body>
+
+</html>
+

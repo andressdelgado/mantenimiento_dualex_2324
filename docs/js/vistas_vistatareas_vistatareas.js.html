@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vistas/vistatareas/vistatareas.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: vistas/vistatareas/vistatareas.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+  Vista con la lista de tareas de un alumno.
+**/
+import {Vista} from '../vista.js'
+
+export class VistaTareas extends Vista{
+  /**
+    Constructor de la clase.
+    @param {Object} controlador Controlador de la vista.
+    @param {Node} base Nodo al que se añadirá la vista.
+  **/
+  constructor(controlador, base) {
+    super(controlador)
+    this.base = base
+    this.base.classList.add(this.getNombreClase())
+    this.callback = null //Función que se llamará al cerrar el diálogo.
+  }
+	/**
+		Inicia la vista.
+		Obtiene las referencias a los elementos del interfaz, captura los eventos, transfiere la plantilla al documento principal...
+	**/
+	iniciar(){
+    	//Cogemos referencias a los elementos del interfaz
+		this.btnNueva = this.doc.getElementsByClassName('icono_grande')[0]
+
+    	//Asociamos eventos
+
+    	super.transferir(this.base, this.doc)
+    	super.cargarCSS(`${this.getNombreClase()}.css`)
+	}
+	/**
+		Carga las tareas.
+		@param tareas {Array} Array de tareas.
+	**/
+	cargar(tareas){
+		this.eliminarHijos(this.base)
+		if (!tareas)
+			this.base.appendChild(document.createTextNode('No tiene tareas.'))
+		else
+			tareas.forEach(this.crearDivTarea.bind(this))
+	}
+	/**
+		Crea el div asociado a una tarea y lo añade a la base.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	crearDivTarea(tarea){
+		let div = document.createElement('div')
+		this.base.appendChild(div)
+		div.id = `tarea_${tarea.id}`	//Nos servirá para las pruebas
+		//TODO: Refactorizar para evitar DRY.
+		let divIconos = document.createElement('div')
+		div.appendChild(divIconos)
+		divIconos.classList.add('iconos')
+		if ((tarea.calificacion_empresa != null || tarea.calificacion != null) &amp;&amp; this.controlador.getUsuario().rol == 'alumno'){
+			let iconoConsultar = document.createElement('img')
+			divIconos.appendChild(iconoConsultar)
+			iconoConsultar.classList.add('icono')
+			iconoConsultar.setAttribute('title', 'consultar')
+			iconoConsultar.setAttribute('src', 'iconos/visibility.svg')
+			iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
+		}
+		else{
+			let iconoEditar = document.createElement('img')
+			divIconos.appendChild(iconoEditar)
+			iconoEditar.classList.add('icono')
+			iconoEditar.setAttribute('title', 'editar')
+			iconoEditar.setAttribute('src', 'iconos/edit.svg')
+			iconoEditar.onclick = this.pulsarEditar.bind(this, tarea)
+
+			let iconoEliminar = document.createElement('img')
+			divIconos.appendChild(iconoEliminar)
+			iconoEliminar.classList.add('icono')
+			iconoEliminar.setAttribute('title', 'eliminar')
+			iconoEliminar.setAttribute('src', 'iconos/delete.svg')
+			iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
+		}
+		//TODO: Código de colores para las tareas en función de su evaluación.
+		tarea.modulos.forEach(this.crearSpanModulo.bind(this, div))
+		let spanTarea = document.createElement('span')
+		div.appendChild(spanTarea)
+		spanTarea.classList.add('tarea')
+		//Si es profesor, ponemos el aviso de tarea pendiente de corrección
+		if (this.controlador.getUsuario().rol == 'profesor'){
+			if (!tarea.calificacion){
+				let spanAviso = document.createElement('span')
+				spanTarea.appendChild(spanAviso)
+				spanAviso.classList.add('tarea_pendiente')
+				spanAviso.textContent = '!'
+				spanAviso.setAttribute('title', 'pendiente de evaluación')
+			}
+		}
+		let texto = `${tarea.titulo} - `
+		if (tarea.calificacion_empresa)
+			texto += tarea.calificacion_empresa
+		else
+			texto += 'Sin calificación de empresa'
+		if (tarea.calificacion)
+			texto += ' - ' + tarea.calificacion
+		else
+			texto += ' - Sin calificación del profesor'
+		spanTarea.appendChild(document.createTextNode(texto))
+
+	}
+	//TODO: DRY con vistaalumnos.js
+	/**
+		Crea el span asociado a un módulo y lo añade al div.
+		@param div {DivElement} Elemento div la que se añadirá el span.
+		@param alumno {Modulo} Datos del módulo.
+		@param index {Number} Índice del alumno en el array.
+		@param array {Array} Array de alumnos.
+	**/
+	crearSpanModulo(div, modulo, index, array){
+		let span = document.createElement('span')
+		div.appendChild(span)
+		//TODO: falta incluir el icono del módulo.
+		span.classList.add('modulo')
+		span.textContent = modulo.codigo
+		span.setAttribute('title', modulo.titulo)
+		span.style.backgroundColor = modulo.color_fondo
+		span.style.color = modulo.color_letra
+	}
+	/**
+		Atención a la pulsación en el icono de "Nueva"
+	**/
+	pulsarNueva(){
+		this.controlador.mostrarTarea()
+	}
+	/**
+		Atención a la pulsación en el icono de "Consultar"
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	pulsarConsultar(tarea){
+		this.controlador.mostrarTarea(tarea)
+	}
+	/**
+		Atención a la pulsación en el icono de "Eliminar"
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	pulsarEliminar(tarea){
+		this.controlador.eliminarTarea(tarea)
+	}
+	/**
+		Atención a la pulsación en el icono de "Editar"
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	pulsarEditar(tarea){
+		this.controlador.mostrarTarea(tarea)
+	}
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaCreditos_VistaCreditos.html">VistaCreditos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaInforme_VistaInforme.html">VistaInforme</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaMensaje_VistaMensaje.html">VistaMensaje</a></li><li><a href="VistaMenu_VistaMenu.html">VistaMenu</a></li><li><a href="VistaMenuContexto_VistaMenuContexto.html">VistaMenuContexto</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Sep 04 2022 10:05:17 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

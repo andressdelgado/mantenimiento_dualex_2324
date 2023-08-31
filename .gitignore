@@ -1,0 +1,7 @@
+phpDocumentor.phar
+*.phpdoc
+*.swp
+config_prod.php
+src/php/api/vendor/*
+node_modules
+

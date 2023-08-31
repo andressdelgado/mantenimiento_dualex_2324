@@ -1,0 +1,637 @@
+/* Reglas de css */
+
+body {
+	font-family: arial;
+}
+
+h1, h2{
+	color: blue;
+}
+
+h1{
+	font-size: 140%;
+	padding-bottom: 0.5em;
+}
+
+h2{
+	font-size: 120%;
+	font-style: italic;
+	padding-bottom: 0.2em;
+}
+
+fieldset{
+	border: 1px solid gray;
+	border-radius: 1rem;
+	padding: 0.5rem;
+}
+legend{
+	padding: 0 0.5rem;
+}
+
+/* Inicialmente ocultamos las vistas */
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos{
+	display: none;
+}
+
+#divLoginGoogle{
+	border: 1px solid red;
+}
+
+.icono_rectangular{
+	float: right;
+	margin: 1rem;
+	background-color: darkred;
+	cursor: pointer;
+}
+.icono_rectangular:hover{
+	float: right;
+	background-color: red;
+}
+
+#divCreditos{
+	padding: 1rem;
+	line-height: 2rem;
+}
+#divCreditos p strong{
+	font-weight: bold;
+	color: blue;
+}
+
+#divMensaje{
+	width: 60%;
+	margin: 1em auto;
+	padding: 1em;
+	font-size: 1.5em;
+	font-weight: bold;
+	border-radius: 0.3em;
+	display: none;
+}
+/* Botón de cierre del div */
+#divMensaje > span:first-child{
+	margin-right: 1rem;
+	float: right;
+	font-size: 1rem;
+	color: grey;
+	cursor: pointer;
+}
+/* Texto del mensaje */
+#divMensaje > span:nth-child(2){
+	font-size: 1rem;
+}
+#divMensaje.info{
+	background-color: blue;
+	color: white;
+}
+#divMensaje.ok{
+	background-color: green;
+	color: white;
+}
+#divMensaje.aviso{
+	background-color: orange;
+	color: white;
+}
+#divMensaje.error{
+	background-color: red;
+	color: white;
+}
+#divMenu{
+	display:flex;
+	justify-content: flex-end;
+	padding: 0.5rem;
+}
+#divMenu div.usuario{
+	position: absolute;
+	left: 1%;
+	font-size: 0.8rem;
+	color: grey;
+}
+#divMenu h1{
+	flex-grow: 2;
+	text-align: left;
+	order: 0;
+	margin: auto;
+	padding: 0.5rem;
+}
+#divMenu .icono{
+	cursor: pointer;
+	border-radius: 0.5rem;
+	transition: background-color 1s;
+	margin: 0.3rem;
+}
+#divMenu .icono:hover{
+	background-color: lightgreen;
+}
+
+#divTarea {
+	max-width: 90%;
+	margin: 2rem auto;
+	/* padding-bottom para que quepa el botón actualizar */
+	padding: 2rem 1rem 4rem 2rem;
+	border: 1px solid blue;
+	border-radius: 0.5rem;
+	box-shadow: 0.5rem 0.5rem grey;
+}
+#divTarea input{
+	margin: 0.3rem;
+}
+#divTarea input[type='text']:first-of-type{
+	width: 80%;
+}
+#divTarea input[type='number']{
+	width: 3rem;
+	margin: 0.3rem;
+}
+#divTarea .modulo{
+	padding: 0.2rem 0.3rem;
+	border: 1px solid grey;
+	border-radius: 0.3rem;
+	font-size: 0.8rem;
+}
+#divTarea label, #divTarea legend{
+	font-weight: bold;
+}
+	
+#divTarea fieldset label{
+	font-weight: normal;
+}
+#divTarea textarea{
+	margin: 0.5rem;
+	width: 80%;
+}
+#divTarea select{
+	margin: 0.5rem;
+}
+/* div de Evaluación de Profesores */
+#divTarea > div:nth-of-type(3){
+	text-align: right;
+}
+
+#divTarea button{
+	cursor: pointer;
+	border: none;
+	color: white;
+	margin: 1rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1.2rem;
+}
+
+#divTarea button:hover{
+	text-decoration: underline;
+}
+#divTarea button:nth-child(1){
+	background-color: red;
+}
+#divTarea button:nth-child(2){
+	background-color: blue;
+}
+#divTarea > div:nth-of-type(2) p {
+	line-height: 2rem;
+}
+#divTarea div.alto{
+	line-height: 1.5rem;
+}
+/* div de imágenes */
+#divTarea > div:nth-of-type(1){
+	position: relative;
+	border: 1px solid grey;
+}
+#divTarea > div:nth-of-type(1) > img:nth-child(odd){
+	max-width: 10rem;
+}
+#divTarea > div:nth-of-type(1) > img:nth-child(even){
+	position: relative;
+	background-color: white;
+	border-radius: 0.2rem;
+	width: 2rem;
+	left: -2rem;
+	cursor: pointer;
+}
+#divTarea > img:nth-of-type(1){
+	display: none;
+	position: absolute;
+	border:1px solid blue;
+	cursor: pointer;
+	z-index: 2;
+}
+#divTarea > img.ampliada{
+	display: block;
+}
+/* Reglas de VistaLogin */
+#divLogin{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	box-shadow: 0.5rem 0.5rem 2rem grey;
+}
+#divLogin input{
+	margin: 0.3rem;
+}
+#divLogin p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divLogin p.error{
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+#divGoogleLogin{
+	margin: 0.5rem;
+}
+
+/* Reglas de VistaAlumnos */
+#divAlumnos {
+	max-width: 90%;
+	margin: 1rem;
+ 	padding: 2rem;
+}
+#divAlumnos>div {
+	border-bottom: 1px solid lightgrey;
+	height: 1.3rem;
+	margin-bottom: 0.7rem;
+}
+#divAlumnos .ciclo{
+	border-radius: 0.5rem;
+	padding: 0.1rem 0.3rem;
+	margin: 0 0.2rem;
+	cursor: help;
+}
+#divAlumnos .iconos{
+	float: right;
+}
+#divAlumnos .icono{
+	display: inline;
+	width: 1.5rem;
+	cursor: pointer;
+}
+#divAlumnos .icono:hover{
+	background-color: lightblue;
+	border-radius: 0.7rem;
+}
+
+
+#buscador{
+	margin-left: 35%;
+	margin-bottom: 52px;
+	margin-right: 2px;
+	background-color: white;
+	border:1px solid black;
+	border-radius: 5px;
+	padding-left: 11px;
+	width: 200px;
+	height: 18px;
+}
+#filtro{
+	margin-left: 30px;
+	width:200px;
+	background-color: white;
+	border:1px solid black;
+	border-radius: 10px;
+	padding-left: 11px;
+	height: 23px;
+}
+#btnBuscar{
+	background-color: white;
+	border:1px solid black;
+	border-radius: 3px;
+}
+#divMenuBusqueda{
+	margin-bottom: 21px!important;
+    border-bottom-color: white!important;
+}
+@media (max-width: 1056px) {
+	#buscador{
+		margin-left: 25%;
+		margin-bottom: 50px;
+		margin-right: 2px;
+	}
+}
+@media (max-width: 725px) {
+	#buscador{
+		margin-left: 15%;
+		margin-bottom: 50px;
+		margin-right: 2px;
+	}
+}
+@media (max-width: 652px) {
+	#buscador{
+		margin-left: 10%;
+		margin-bottom: 10px;
+		margin-right: 2px;
+	}
+	#filtro{
+		margin-left: 10% !important;
+		display: block;
+		width:150px;
+		margin-bottom: 50px;
+	}
+	#divMenuBusqueda{
+		margin-bottom: 40px!important;
+		border-bottom-color: white!important;
+	}
+}
+@media (max-width: 500px) {
+	#buscador{
+		margin-bottom: 10px;
+		margin-right: 2px;
+		
+	}
+	#filtro{
+		margin-left: 10% !important;
+		display: block;
+		width:150px;
+		margin-bottom: 50px;
+	}
+	#divMenuBusqueda{
+		margin-bottom: 40px!important;
+		border-bottom-color: white!important;
+	}
+	
+}
+
+/* Reglas de VistaMenuContexto */
+.vistamenucontexto{
+	display: none;
+	position: absolute;
+	height: auto !important;
+	z-index: 1;
+ 	border-radius: 0.5rem;
+ 	box-shadow: 0.1rem 0.1rem 0.1rem grey;
+	background-color: whitesmoke;
+	padding: 1rem;
+	line-height: 1.5rem;
+}
+.vistamenucontexto a {
+	color: blue;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Reglas de VistaTareas */
+#divTareas {
+	max-width: 90%;
+  	margin: 1rem;
+  	padding: 2rem;
+}
+#divTareas>div {
+  	margin-bottom: 0.5rem;
+	border-bottom: 1px solid lightgrey;
+	min-height: 1.5rem;
+}
+#divTareas .icono_grande{
+	position: fixed;
+	top: 2%;
+	left: 90%;
+	background-color: blue;
+	border-radius: 2rem;
+	cursor: pointer;
+	transition: transform .7s ease-in-out;
+}
+#divTareas .icono_grande:hover{
+	transform: rotate(180deg);
+}
+#divTareas .iconos{
+	position: absolute;
+	right: 2%;
+	white-space: nowrap;
+}
+#divTareas .icono{
+	display: inline;
+	width: 1.5rem;
+	cursor: pointer;
+}
+#divTareas .icono:hover{
+	background-color: lightblue;
+  	border-radius: 0.7rem;
+}
+#divTareas .modulo{
+	font-size: 0.8rem;
+	margin: 0 0.3rem;
+	padding: 0.2rem;
+	border-radius: 0.2rem;
+}
+#divTareas .tarea{
+	margin-right: 20%;	/* Para dejar espacio a los iconos */
+	line-height: 1.5rem;
+}
+#divTareas .tarea_pendiente{
+	font-weight: bold;
+	color: red;
+}
+
+/* Reglas de VistaDialogo */
+#divDialogo{
+  /* Ref. https://www.w3schools.com/howto/howto_css_modals.asp */
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+#divDialogo > div{
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 2rem;
+  border: 1px solid #888;
+  border-radius: 0.5rem;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+#divDialogo span {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+#divDialogo span:hover, #divDialogo span:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+#divDialogo button{
+  cursor: pointer;
+  border: none;
+  margin: 1rem;
+  margin-left: 5rem;
+  padding: 0.5rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
+}
+#divDialogo button:nth-of-type(1){
+  background-color: green;
+  color: white;
+}
+#divDialogo button:nth-of-type(2){
+  background-color: red;
+  color: white;
+}
+#divDialogo button:hover{
+  text-decoration: underline;
+}
+
+/* Reglas de VistaInforme */
+#divInforme{
+	margin: 1cm;
+}
+#divInforme > h1{
+	text-align: center;
+	color: blue;
+	font-weight: bold;
+}
+#divInforme div{
+	border: 1px solid black;
+	padding: 0.5rem;
+}
+#divInforme strong{
+	font-weight: bold;
+}
+#divInforme .derecha{
+	float: right;
+}
+#divInforme div.contenedor-grid{
+	padding: 0px;
+}
+#divInforme div.contenedor-grid > p{
+	padding: 0.3rem;
+}
+#divInforme div.grid1{
+	display: grid; 
+	grid-template-columns: 45% 5% 45% 5%; 
+	padding: 0px;
+}
+#divInforme div.grid1 > div:nth-child(2n){
+	font-weight: bold;
+	text-align: center;
+}
+#divInforme div.grid2{
+	display: grid; 
+	grid-template-columns: 40% 20% 20% 20%; 
+	border: none;
+}
+#divInforme div.grid2 div{
+	padding: 0.1rem;
+}
+#divInforme div.grid2 > div:nth-child(2n), #divInforme div.grid2 > div:nth-child(4n+3){
+	text-align: center;
+}
+#divInforme div.grid3{
+	display: grid; 
+	grid-template-columns: 45% 5% 45% 5%; 
+	border: none;
+}
+#divInforme div.grid3 div{
+	padding: 0.1rem;
+}
+#divInforme div.grid3 > div:nth-child(2n){
+	text-align: center;
+}
+#divInforme div.grid3 em{
+	font-style: italic;
+	font-size: 0.8rem;
+}
+#divInforme table{
+	margin: 2rem auto;
+}
+#divInforme td, #divInforme th{
+	border: 1px solid black;
+	padding: 0.2rem;
+}
+#divInforme th{
+	font-weight: bold;
+	background-color: lightgrey;
+}
+#divInforme tbody:nth-child(2){
+	text-align: center;
+}
+#divInforme .modulo{
+	font-size: 0.8rem;
+	margin: 0 0.3rem;
+	padding: 0.2rem;
+	border-radius: 0.2rem;
+}
+@page {
+	margin: 0; /* Quita el encabezado y pie que pone el navegador */
+	size: A4;
+}	
+
+@media print{
+	#divLogin, #divDialogo, #divMenu {
+		display: none !important;
+	}
+	#divInforme{
+		font-size: 0.7rem;
+		/* Para evitar que el navegador ahorre tinta en los fondos */
+		/* print-color-adjust: exact; */
+	}
+	.informe > div{
+		padding: 0.2rem 0.5rem;
+	}
+	.informe div.grid1 {
+		padding: 0;
+	}
+	.informe div.grid1 > div:nth-child(2n+1){
+		font-size: 0.5rem;
+	}
+	.informe textarea, .informe input[type='text']{
+		border: none;
+	}
+	#divInforme .modulo{
+		font-size: 0.5rem;
+		margin: 0 0.2rem;
+		padding: 0 0.2rem;
+		/* antes era none */
+		background-color: white !important;	
+	}
+	#divInforme .modulo::before{
+		content: "(";
+	}
+	#divInforme .modulo::after{
+		content: ")";
+	}
+}
+
+#btn_tarea_anterior{
+	background-color: orange;
+	float: left;
+}
+#btn_aceptar_siguiente{
+	background-color: green;
+}
+span.alumno:hover{
+	color:blue;
+	cursor: pointer;
+	font-weight: bold;
+}
+.tarea:hover{
+	color:blue;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#imagen1,#imagen2,#imagen3{
+	/*display: none !important; */
+    width: 80px;
+    height: 80px;
+    float: right;
+    margin-left: 5px;
+}
+
+#spanImg1,#spanImg2,#spanImg3{
+	/*display: none !important; */
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-left: 5px;
+	background-image: url('../iconos/delete.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+}

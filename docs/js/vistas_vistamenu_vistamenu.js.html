@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vistas/vistamenu/vistamenu.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: vistas/vistamenu/vistamenu.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+	Vista del menú de navegación de la aplicación.
+	Muestra los enlaces de contexto.
+**/
+import {Vista} from '../vista.js'
+
+export class VistaMenu extends Vista{
+	/**
+		Constructor de la clase.
+		@param {Object} controlador Controlador de la vista principal.
+		@param {Node} base Nodo al que se añadirá la vista principal.
+	**/
+	constructor(controlador, base) {
+		super(controlador)
+		this.base = base
+		this.base.classList.add(this.getNombreClase())
+		this.display = 'flex'
+	}
+	/**
+		Inicia la vista.
+		Obtiene las referencias a los elementos del interfaz, captura los eventos, transfiere la plantilla al documento principal...
+	**/
+	iniciar(){
+		//Cogemos referencias a los elementos del interfaz
+
+		//Asociamos eventos
+
+		super.transferir(this.base, this.doc)
+		super.cargarCSS(`${this.getNombreClase()}.css`)
+	}
+	/**
+		Muestra el menú asociado a la lista de alumnos de un profesor.
+		El menú incluye: título y logout.
+	**/
+	verAlumnosProfesor(){
+		this.limpiar()
+		this.verUsuario()
+		//this.verTitulo('Lista Alumnos')
+		let h1 = document.createElement('h1')
+		this.base.appendChild(h1)
+		h1.appendChild(document.createTextNode('Lista de Alumnos'))
+		h1.appendChild(this.crearIconoAyuda('Muestra la lista de alumnos que tienen tareas registradas de los módulos asignados al profesor'))
+		this.verLogout(2);
+		this.verAcercaDe()
+	}
+	/**
+		Muestra el menú asociado a la vista de informe de alumno.
+		@param alumno {Alumno} Datos del alumno.
+	**/
+	verInforme(alumno){
+		this.limpiar()
+		this.verUsuario()
+		this.verTitulo(`Informe de ${alumno.nombre} ${alumno.apellidos}`)
+		this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		this.base.appendChild(this.crearIcono('print.svg', 1, 'imprimir', this.controlador.imprimir.bind(this.controlador)))
+		this.verLogout(3);
+		this.verAcercaDe()
+	}
+	/**
+		Muestra el menú asociado a la vista de créditos.
+	**/
+	verCreditos(){
+		this.limpiar()
+		this.verUsuario()
+		this.verTitulo('Acerca de DUALEX')
+		if (this.controlador.getUsuario().rol == 'profesor')
+			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		else
+			this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, this.controlador.getUsuario())))
+		this.verLogout(3);
+		this.verAcercaDe()
+	}
+	/**
+		Muestra el menú asociado a la vista de tarea.
+		@param tarea {Tarea} Datos de la tarea.
+	**/
+	verTarea(tarea){
+		this.limpiar()
+		this.verUsuario()
+		if (tarea)
+			this.verTitulo(`Tarea: ${tarea.titulo}`)
+		else
+			this.verTitulo('Nueva Tarea')
+		this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, null)))
+		this.verLogout(2);
+		this.verAcercaDe()
+	}
+	/**
+		Muestra el menú asociado a la lista de tareas de un alumno.
+		El menú incluye: título y logout. Y si es un alumno se añade el icono de crear tarea.
+		@param alumno {Alumno} Datos del alumno.
+	**/
+	verTareasAlumno(alumno){
+		this.limpiar()
+		this.verUsuario()
+		if (this.controlador.getUsuario().rol == 'alumno'){
+			this.verTitulo(`Tus Tareas`)
+			this.base.appendChild(this.crearIcono('add.svg', 1, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
+		}
+		else{
+			this.verTitulo(`Tareas de ${alumno.nombre} ${alumno.apellidos}`)
+			this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+		}
+		this.verLogout(2);
+		this.verAcercaDe()
+	}
+	/**
+		Elimina los elementos del menú.
+	**/
+	limpiar(){
+		this.eliminarHijos(this.base)
+	}
+	/**
+		Pone el icono de "Acerca de"
+	**/
+	verAcercaDe(){
+		this.base.appendChild(this.crearIcono('question_mark.svg', 10, 'acerca de Dualex', this.controlador.verCreditos.bind(this.controlador))) 
+	}
+	/**
+		Muestra el usuario logeado.
+	**/
+	verUsuario(){
+		let div = document.createElement('div')
+		this.base.appendChild(div)
+		div.textContent = this.controlador.getUsuario().email
+		div.classList.add('usuario')
+	}
+	/**
+		Muestra el título del menú.
+		@param titulo {String} Título del menú.
+	**/
+	verTitulo(titulo){
+		let h1 = document.createElement('h1')
+		this.base.appendChild(h1)
+		h1.textContent = titulo
+	}
+	/**
+		Añade el icono de logout.
+		@param orden {Number} Orden de posición en el menú.
+	**/
+	verLogout(orden){
+		this.base.appendChild(this.crearIcono('logout.svg', orden, 'logout', this.controlador.logout.bind(this.controlador)))
+	}
+	/**
+		Añade el icono de Nueva Tarea.
+		@param order {Number} Orden de posición en el menú.
+	**/
+	verNuevaTarea(orden){
+		this.base.appendChild(this.crearIcono('add.svg', orden, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
+	}
+	/**
+		Crea un icono para el menú.
+		@param imagen {String} Nombre del fichero de imagen (svg) que formará el icono.
+		@param orden {Number} Número de orden del icono en el menú.
+		@param titulo {String} Texto que se mostrará en el tooltip del icono.
+		@param callback {Function} Función que se llamará al pulsar el icono.
+		@return {HTMLElement} Elemento HTML (img) que forma el icono.
+	**/
+	crearIcono(imagen, orden = null, titulo, callback = null){
+		let icono = document.createElement('img')
+		icono.setAttribute('src', 'iconos/' + imagen)
+		icono.setAttribute('title', titulo)
+		icono.classList.add('icono')
+		if (orden)
+			icono.style.order = orden
+		if (callback)
+			icono.onclick = callback
+		return icono
+	}
+	crearIconoAyuda(texto){
+		return this.crearIcono('help.svg', null, texto)
+	}
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DualEx.html">DualEx</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Rest.html">Rest</a></li><li><a href="Vista.html">Vista</a></li><li><a href="VistaAlumnos_VistaAlumnos.html">VistaAlumnos</a></li><li><a href="VistaCreditos_VistaCreditos.html">VistaCreditos</a></li><li><a href="VistaDialogo_VistaDialogo.html">VistaDialogo</a></li><li><a href="VistaInforme_VistaInforme.html">VistaInforme</a></li><li><a href="VistaLogin_VistaLogin.html">VistaLogin</a></li><li><a href="VistaMensaje_VistaMensaje.html">VistaMensaje</a></li><li><a href="VistaMenu_VistaMenu.html">VistaMenu</a></li><li><a href="VistaMenuContexto_VistaMenuContexto.html">VistaMenuContexto</a></li><li><a href="VistaTarea_VistaTarea.html">VistaTarea</a></li><li><a href="VistaTareas_VistaTareas.html">VistaTareas</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Sep 04 2022 10:05:17 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

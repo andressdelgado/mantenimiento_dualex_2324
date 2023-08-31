@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+  <meta charset=utf-8 />
+  <meta name=viewport content='width=device-width, initial-scale=1' />
+  <meta name=author content='Miguel Jaque <mjaque@migueljaque.com' />
+  <title>DUALEX</title>
+
+  <link rel=stylesheet href=../css/estilos.css />
+  <style>
+	.vistatarea {
+  		max-width: 90%;
+  		margin: 2rem auto;
+		/* padding-bottom para que quepa el botón actualizar */
+  		padding: 2rem 1rem 4rem 2rem;
+  		border: 1px solid blue;
+  		border-radius: 0.5rem;
+  		box-shadow: 0.5rem 0.5rem grey;
+	}
+	.vistatarea input{
+  		margin: 0.3rem;
+	}
+	.icono_rectangular{
+		float: right;
+		margin: 1rem;
+		background-color: darkred;
+		cursor: pointer;
+	}
+	.icono_rectangular:hover{
+		float: right;
+		background-color: red;
+	}
+	.vistatarea .modulo{
+		padding: 0.3rem 1rem;
+		border: 1px solid grey;
+		border-radius: 0.4rem;
+	}
+	.vistatarea label{
+		font-weight: bold;
+	}
+	.vistatarea textarea{
+		margin: 0.5rem;
+		width: 80%;
+	}
+	.vistatarea select{
+		margin: 0.5rem;
+	}
+	.vistatarea button{
+  		cursor: pointer;
+		background-color: blue;
+		border: none;
+		color: white;
+		margin: 1rem;
+		margin-left: 80%;
+		padding: 0.5rem 1.5rem;
+		text-align: center;
+		text-decoration: none;
+		font-size: 1.2rem;
+		float: right;
+	}
+	.vistatarea button:hover{
+		text-decoration: underline;
+	}
+  </style>
+</head>
+
+<body>
+
+  <div class='vistatarea'>
+    <img class='icono_rectangular' title='volver' src=../iconos/arrow_back_blanco.svg />
+	<h1>Tarea</h1>
+	<p>A completar por el alumno:</p>
+    <label>Título:
+        <input type=text value='Título Tarea 1' />
+    </label><br />
+	<label>Descripción:<br />
+		<textarea placeholder='Descripción de la tarea realizada.'></textarea>
+    </label><br />
+	<fieldset>
+		<legend>Actividades Relacionadas:</legend>
+		<div style="display:flex; flex-wrap: wrap; white-space: nowrap;">
+		<div><input type=checkbox id=a1 /><label for=a1>Aplicar reglamentos y normativa referidos a la Prevención de Riesgos Laborales"</label></div>
+		<div><input type=checkbox id=a1 /><label for=a1>Nombre de Actividad 1</label></div>
+		<div><input type=checkbox id=a1 /><label for=a1>Nombre de Actividad 1</label></div>
+		<div><input type=checkbox id=a1 /><label for=a1>Nombre de Actividad 1</label></div>
+		<div><input type=checkbox id=a1 /><label for=a1>Nombre de Actividad 1</label></div>
+		<div><input type=checkbox id=a1 /><label for=a1>Nombre de Actividad 1</label></div>
+		</div>
+	</fieldset>
+	    <span class=modulo title='nombre módulo 1'>MOD1</span>
+	    <span class=modulo title='nombre módulo 2'>MOD2</span>
+	<hr />
+	<h2>Evaluación de la Empresa</h2>
+	<p>A completar por el tutor de empresa:</p>
+	<label>Calificación:
+		<select>
+			<option>Calificación 1</option>
+			<option selected=true>Calificación 2</option>
+			<option>Calificación 3</option>
+			<option>Calificación 4</option>
+		</select>
+    </label><br />
+	<label>Comentario:<br />
+		<textarea>El alumno ha realizado la tarea boca abajo, con gran nivel de dificultad.</textarea>
+    </label><br />
+	<hr />
+	<h2>Evaluación del Profesor</h2>
+	<p>Pendiente de la evaluación del profesor.</p>
+
+     <button>Actualizar</button>
+  </div>
+</body>
+
+</html>
