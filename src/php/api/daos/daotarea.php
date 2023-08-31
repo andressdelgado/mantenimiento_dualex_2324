@@ -111,6 +111,7 @@ class DAOTarea{
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= ', Curso_Modulo.id_curso AS id_curso ';
 		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion, Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
+		$sql .= ', Imagen.id AS id_imagen, Imagen.imagen ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
 		$sql .= 'LEFT JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
@@ -120,6 +121,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Curso_Modulo ON Modulo.id = Curso_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Modulo_Profesor ON Modulo.id = Modulo_Profesor.id_modulo ';
 		$sql .= 'JOIN Actividad_Modulo_Tarea ON (Actividad_Modulo_Tarea.id_actividad = Actividad.id AND Actividad_Modulo_Tarea.id_modulo = Modulo.id AND Actividad_Modulo_Tarea.id_tarea = Tarea.id) ';
+		$sql .= 'LEFT JOIN Imagen ON Tarea.id = Imagen.id_tarea ';
 		$sql .= 'WHERE Modulo_Profesor.id_profesor = :id_profesor AND Tarea.id = :id_tarea ';
 		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
 		
@@ -141,14 +143,14 @@ class DAOTarea{
 		
 		$params = array('id_alumno' => $usuario->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha,'fecha_fin'=>$tarea->fecha_fin, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa);
 
-		$idNuevo = BD::insertar($sql, $params);
+		$tarea->id = BD::insertar($sql, $params);
 
 		if (count($tarea->actividades) > 0){
 			$sql = 'INSERT INTO Actividad_Tarea (id_actividad, id_tarea) VALUES ';
 			$values = array();
 			$params = array();
 			for ($i = 0; $i < count($tarea->actividades); $i++){
-				array_push($values, "(:campo_$i, $idNuevo)");
+				array_push($values, "(:campo_$i, $tarea->id)");
 				$params["campo_$i"] = $tarea->actividades[$i];
 			}
 			$sql .= join(",", $values);
@@ -163,25 +165,15 @@ class DAOTarea{
 		$sql .= 'JOIN Actividad_Tarea ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad ';
 		$sql .= 'WHERE id_tarea = :id_tarea2';
 
-		$params = array('id_tarea1' => $idNuevo, 'id_tarea2' => $idNuevo);
+		$params = array('id_tarea1' => $tarea->id, 'id_tarea2' => $tarea->id);
 		BD::insertar($sql, $params);
 
 		//Inserción de imágenes
-		if (count($tarea->imagenes) > 0){
-			$sql  = 'INSERT INTO Imagen (id_tarea, imagen) VALUES ';
-			$values = array();
-			$param = array();
-			for ($i = 0; $i < count($tarea->imagenes); $i++){
-				array_push($values, "($idNuevo, :campo_$i)");
-				$param["campo_$i"] = $tarea->imagenes[$i];
-			}
-			$sql .= join(",", $values);
-			BD::insertar($sql, $param);
-		}
+		self::_insertarImagenes($tarea);
 
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
-		return $idNuevo;
+		return $tarea->id;
 	}
 	/**
 		Modificación de tarea por alumno.
@@ -190,10 +182,6 @@ class DAOTarea{
 		@param usuario {Usuario} Datos del usuario loggeado.
 	**/
 	public static function modificar($tarea, $usuario){
-		$imagenes = '';
-		for($i=0;$i<sizeof($tarea->imagenes);$i=$i+1){
-			$imagenes .= ''.$tarea->imagenes[$i].' ';
-		}
 		if (!BD::iniciarTransaccion())
 			throw new Exception('No es posible iniciar la transacción.');
 
@@ -206,13 +194,13 @@ class DAOTarea{
 			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo,'imagenes'=>$imagenes, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha,'fecha_fin'=>$tarea->fecha_fin, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa);
 		}
 		if ($usuario->rol == 'alumno'){
-			$sql = 'UPDATE Tarea SET titulo = :titulo, imagenes = :imagenes,descripcion = :descripcion , fecha = :fecha,fecha_fin = :fecha_fin, id_calificacion_empresa = :idCalificacionEmpresa, ';
+			$sql = 'UPDATE Tarea SET titulo = :titulo,descripcion = :descripcion , fecha = :fecha,fecha_fin = :fecha_fin, id_calificacion_empresa = :idCalificacionEmpresa, ';
 			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
 			$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno ';
 			$sql .= ' AND Tarea.id_calificacion_empresa IS NULL ';
 			$sql .= ' AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE calificacion IS NOT NULL) '; 
 		
-			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo,'imagenes'=>$imagenes ,'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha,'fecha_fin'=>$tarea->fecha_fin, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa,'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
+			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo,'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha,'fecha_fin'=>$tarea->fecha_fin, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa,'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
 		}
 		//print_r($params);die($sql);
 		$idNuevo = BD::actualizar($sql, $params);
@@ -270,15 +258,38 @@ class DAOTarea{
 					'id_tarea' => $tarea->id,
 					'id_modulo' => $tarea->evaluaciones[$i]->id
 				);
-				$idNuevo = BD::actualizar($sql, $params);
+				BD::actualizar($sql, $params);
 			}
 		}
 
-		//Actualización (Inserción/Eliminación) de fotos
+		//Actualización (Inserción/Eliminación) de imágenes
+		//Inserción de imágenes
+		if ($resultado == 0 || $usuario->rol == 'profesor')
+			self::_insertarImagenes($tarea);
+
 
 		if (!BD::commit())
 			throw new Exception('No se pudo confirmar la transacción.');
 	}
+
+	private static function _insertarImagenes($tarea){
+		//Inserción de imágenes
+		if (count($tarea->imagenes) > 0){
+			$sql  = 'INSERT INTO Imagen (id_tarea, imagen) VALUES ';
+			$values = array();
+			$param = array();
+			for ($i = 0; $i < count($tarea->imagenes); $i++){
+				if ($tarea->imagenes[$i]->id === 'null'){
+					array_push($values, "($tarea->id, :campo_$i)");
+					$param["campo_$i"] = $tarea->imagenes[$i]->src;
+				}
+			}
+			$sql .= join(",", $values);
+			BD::insertar($sql, $param);
+		}
+
+	}
+
 	/**
 		Borrado de tarea por alumno.
 		Condiciones: la tarea tiene que pertenceder al alumno y no puede tener calificación ni de empresa ni del profesor.

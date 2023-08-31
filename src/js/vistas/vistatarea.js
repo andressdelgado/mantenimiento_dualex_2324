@@ -97,7 +97,6 @@ export class VistaTarea extends Vista{
         div.appendChild(iCalificacion)
         iCalificacion.value = modulo.calificacion
         iCalificacion.setAttribute('type', 'checkbox')
-        console.log(iCalificacion.value)
         if(iCalificacion.value== 1){
           iCalificacion.checked = true
         }
@@ -311,7 +310,7 @@ export class VistaTarea extends Vista{
       tarea.descripcion = this.taDescripcion.value
 			tarea.imagenes = []
 			this.divImagenes.querySelectorAll('.imgTarea').forEach( 
-				img => tarea.imagenes.push(img.src)
+				img => tarea.imagenes.push({'id': img.getAttribute('data-idImagen'), 'src': img.src})
 			)
       tarea.actividades = []
       for (const iActividad of document.querySelectorAll('input[data-idActividad]')) {

@@ -1,5 +1,8 @@
 - Alta de Tarea. Insertar Fotos.
-	- En VistaTarea, con Alumno, navegar a Anterior y Siguiente Tarea.
+	- En VistaTarea:
+		- Modificar Tarea para:
+			- Añadir Imagen.
+			- Quitar Imagen.
 	Aquí no hay problema, se envían las imágenes por post y se insertan en la BBDD
 - Editar Tarea.
 	- Si es alumno y está calificada: ocultar el botón de añadir imágen, ocultar el botón de eliminación de imágen.

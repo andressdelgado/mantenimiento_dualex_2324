@@ -181,7 +181,7 @@ class Tarea{
 			if ($k == count($resultado[$j]['actividades']))	//La actividad no está en los resultados
 				array_push($resultado[$j]['actividades'], $this->verActividad($tareas[$i]));
 
-			//Vemos si la actividad ya está en el resultado
+			//Vemos si la imagen ya está en el resultado
 			if (array_key_exists('id_imagen', $tareas[$i])) { 	//Al seleccionar la lista de tareas, no traemos las imágenes
 				for($k = 0; $k < count($resultado[$j]['imagenes']); $k++)
 					if ($resultado[$j]['imagenes'][$k]['id'] == $tareas[$i]['id_imagen'])

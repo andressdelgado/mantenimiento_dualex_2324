@@ -36,7 +36,7 @@ class Login{
 			$payload = $client->verifyIdToken($token);
 			if (!$payload) {
 				// Invalid ID token
-				header('HTTP/1.1 401 Unauthorized');
+				header('HTTP/1.1 401 Unauthorized 42');
 				die();
 			}
 			//El usuario ha sido identificado por Google

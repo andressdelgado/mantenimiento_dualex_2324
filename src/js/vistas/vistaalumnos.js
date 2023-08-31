@@ -134,7 +134,6 @@ export class VistaAlumnos extends Vista{
    */
   cargarFiltro(){
     this.cursos = []
-    console.log(this.controlador)
     this.controlador.getCursos()
     .then(cursos => {
       for(let i=0; i<cursos.length; i++){
