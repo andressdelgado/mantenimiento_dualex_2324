@@ -264,8 +264,22 @@ class DAOTarea{
 
 		//Actualización (Inserción/Eliminación) de imágenes
 		//Inserción de imágenes
-		if ($resultado == 0 || $usuario->rol == 'profesor')
+		if ($resultado == 0 || $usuario->rol == 'profesor'){
 			self::_insertarImagenes($tarea);
+			//Borrado de imágenes
+			for ($i = 0; $i  < count($tarea->idImagenesBorrar); $i++){
+				$values = array();
+				$param = array();
+				for ($i = 0; $i < count($tarea->idImagenesBorrar); $i++){
+					array_push($values, ":campo_$i");
+					$param["campo_$i"] = $tarea->idImagenesBorrar[$i];
+				}
+			}
+			$sql  = 'DELETE FROM Imagen WHERE id IN ('.join(',', $values).') AND id_tarea = :id_tarea';
+			echo $sql;
+			$param['id_tarea'] = $tarea->id;
+			BD::borrar($sql, $param);
+		}
 
 
 		if (!BD::commit())
@@ -278,14 +292,18 @@ class DAOTarea{
 			$sql  = 'INSERT INTO Imagen (id_tarea, imagen) VALUES ';
 			$values = array();
 			$param = array();
+			$contador = 0;
 			for ($i = 0; $i < count($tarea->imagenes); $i++){
 				if ($tarea->imagenes[$i]->id === 'null'){
+					$contador++;
 					array_push($values, "($tarea->id, :campo_$i)");
 					$param["campo_$i"] = $tarea->imagenes[$i]->src;
 				}
 			}
-			$sql .= join(",", $values);
-			BD::insertar($sql, $param);
+			if ($contador > 0){
+				$sql .= join(",", $values);
+				BD::insertar($sql, $param);
+			}
 		}
 
 	}

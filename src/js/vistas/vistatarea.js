@@ -50,6 +50,7 @@ export class VistaTarea extends Vista{
     this.tarea = null		// Referencia a la tarea que se está mostrando
 		this.indiceTareaActual = null //Índice de la tarea actual en la lista de tareas.
 		this.deshabilitado = null //Indica si la edición de tareas está habilitada
+		this.idImagenesBorrar = []	//Array con los ids de las imágenes que hay que borrar
   }
 
   /**
@@ -228,6 +229,8 @@ export class VistaTarea extends Vista{
 		//Ocultamos los botones de Anterior y Siguiente
     this.btnAnterior.style.display = 'none'
     this.btnSiguiente.style.display = 'none'
+
+		this.idImagenesBorrar = []	//Vaciamos la lista de imágenes a borrar
   }
 
   /**
@@ -340,6 +343,7 @@ export class VistaTarea extends Vista{
 
       if (this.tarea) {
         tarea.id = this.tarea.id
+				tarea.idImagenesBorrar = this.idImagenesBorrar
         this.controlador.modificarTarea(tarea, siguienteTarea)
       } else { this.controlador.crearTarea(tarea, siguienteTarea) }
     } catch (e) {
@@ -400,7 +404,7 @@ export class VistaTarea extends Vista{
 				img.remove()
 				iconoEliminar.remove()
 				if (idImagen)
-					console.log('TODO: Añadir el idImagen a la lista de borrado pendiente') 
+					this.idImagenesBorrar.push(idImagen)
 			}
 
 			this.divImagenes.appendChild(img)
