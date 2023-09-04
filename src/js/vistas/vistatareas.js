@@ -43,12 +43,21 @@ export class VistaTareas extends Vista {
     div.appendChild(divIconos)
     divIconos.classList.add('iconos')
     let editable = true
+		let texto = `${tarea.titulo}. `
+	
+		//Formamos el texo de calificación
+		if (tarea.calificacion_empresa) { texto += tarea.calificacion_empresa } else { texto += 'Sin calificación de empresa' }
+		// Calculamos las revisiones de la tarea
+		let revisiones = tarea.modulos.reduce((accumulator, modulo) => {
+			return accumulator + modulo.revisado
+		}, 0);
+		texto += ` - Revisiones Profesores: ${revisiones}/${tarea.modulos.length}`
+
     if (this.controlador.getUsuario().rol === 'alumno') {
-      for (const modulo of tarea.modulos) {
-        if (modulo.calificacion) { editable = false }
-      }
-      if (tarea.calificacion_empresa != null || tarea.calificacion_profesor != null) { editable = false }
-    }
+      if (tarea.calificacion_empresa != null) { editable = false }
+			if (revisiones > 0) { editable = false }
+		}
+    
     if (editable) {
       const iconoEditar = document.createElement('img')
       divIconos.appendChild(iconoEditar)
@@ -71,7 +80,6 @@ export class VistaTareas extends Vista {
       iconoConsultar.setAttribute('src', 'iconos/visibility.svg')
       iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
     }
-    // TODO: Código de colores para las tareas en función de su evaluación.
     tarea.modulos.forEach(this.crearSpanModulo.bind(this, div))
     const spanTarea = document.createElement('span')
     div.appendChild(spanTarea)
@@ -79,21 +87,15 @@ export class VistaTareas extends Vista {
     spanTarea.onclick = this.pulsarEditar.bind(this, tarea)
     // Si es profesor, ponemos el aviso de tarea pendiente de corrección
     if (this.controlador.getUsuario().rol === 'profesor') {
-      if (!tarea.calificacion_profesor) {
+      if (revisiones < tarea.modulos.length) {
         const spanAviso = document.createElement('span')
         spanTarea.appendChild(spanAviso)
         spanAviso.classList.add('tarea_pendiente')
         spanAviso.textContent = '!'
-        spanAviso.setAttribute('title', 'pendiente de evaluación')
+        spanAviso.setAttribute('title', 'pendiente de revisión')
       }
     }
-    let texto = `${tarea.titulo} - `
-    if (tarea.calificacion_empresa) { texto += tarea.calificacion_empresa } else { texto += 'Sin calificación de empresa' }
-    // Formamos las calificaciones de cada módulo para la tarea
-    const calificaciones = []
-    for (const modulo of tarea.modulos) { calificaciones.push(modulo.calificacion) }
-    texto += ' - Calificaciones Profesores: (' + calificaciones.join(',') + ')'
-    spanTarea.appendChild(document.createTextNode(texto))
+		spanTarea.appendChild(document.createTextNode(texto))
   }
 
   // TODO: DRY con vistaalumnos.js

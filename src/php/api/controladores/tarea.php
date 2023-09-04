@@ -193,7 +193,7 @@ class Tarea{
 		}
 		//Quitamos los elementos que sobran
 		for($i = 0; $i < count($resultado); $i++)
-			unset($resultado[$i]['imagen'], $resultado[$i]['id_imagen'], $resultado[$i]['id_actividad'], $resultado[$i]['actividad_titulo'], $resultado[$i]['actividad_descripcion'], $resultado[$i]['id_modulo'],$resultado[$i]['codigo'],$resultado[$i]['modulo_titulo'], $resultado[$i]['color_fondo'], $resultado[$i]['color_letra'],$resultado[$i]['modulo_calificacion'], $resultado[$i]['modulo_evaluacion'], $resultado[$i]['imagen']);
+			unset($resultado[$i]['imagen'], $resultado[$i]['id_imagen'], $resultado[$i]['id_actividad'], $resultado[$i]['actividad_titulo'], $resultado[$i]['actividad_descripcion'], $resultado[$i]['id_modulo'],$resultado[$i]['codigo'],$resultado[$i]['modulo_titulo'], $resultado[$i]['color_fondo'], $resultado[$i]['color_letra'],$resultado[$i]['modulo_revisado'], $resultado[$i]['modulo_comentario'], $resultado[$i]['imagen']);
 		return $resultado;
 	}
 	/**
@@ -206,8 +206,8 @@ class Tarea{
 		$modulo['id'] = $elemento['id_modulo'];
 		$modulo['codigo'] = $elemento['codigo'];
 		$modulo['titulo'] = $elemento['modulo_titulo'];
-		$modulo['calificacion'] = $elemento['modulo_calificacion'];
-		$modulo['evaluacion'] = $elemento['modulo_evaluacion'];
+		$modulo['revisado'] = $elemento['modulo_revisado'];
+		$modulo['comentario'] = $elemento['modulo_comentario'];
 		$modulo['color_fondo'] = $elemento['color_fondo'];
 		$modulo['color_letra'] = $elemento['color_letra'];
 		return $modulo;

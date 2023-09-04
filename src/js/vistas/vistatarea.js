@@ -81,7 +81,7 @@ export class VistaTarea extends Vista{
           }
         }
       })
-    // Creamos el interfaz para mostrar las evaluaciones de los módulos
+    // Creamos el interfaz para mostrar las revisiones de los módulos
     while (this.divEvaluaciones.firstChild) { this.divEvaluaciones.firstChild.remove() }
     for (const modulo of tarea.modulos) {
       const div = document.createElement('div')
@@ -89,14 +89,14 @@ export class VistaTarea extends Vista{
       div.classList.add('alto')
       this.crearSpanModulo(div, modulo)
       if (this.controlador.getUsuario().rol === 'alumno') {
-        let evaluacion = ' Sin calificar'
-        if (modulo.calificacion) { evaluacion = ' ' + modulo.calificacion + ' ' + modulo.evaluacion }
-        div.appendChild(document.createTextNode(evaluacion))
+        let revision = ' Sin revisar'
+        if (modulo.revisado) { revision = ` Revisado. ${modulo.comentario}` }
+        div.appendChild(document.createTextNode(revision))
       }
       if (this.controlador.getUsuario().rol === 'profesor') {
         const iCalificacion = document.createElement('input')
         div.appendChild(iCalificacion)
-        iCalificacion.value = modulo.calificacion
+        iCalificacion.value = modulo.revisado
         iCalificacion.setAttribute('type', 'checkbox')
         if(iCalificacion.value== 1){
           iCalificacion.checked = true
@@ -113,7 +113,7 @@ export class VistaTarea extends Vista{
         div.appendChild(document.createElement('br'))
         const taEvaluacion = document.createElement('textarea')
         div.appendChild(taEvaluacion)
-        taEvaluacion.value = modulo.evaluacion
+        taEvaluacion.value = modulo.comentario
         taEvaluacion.setAttribute('placeholder', 'Comentario de evaluación de ' + modulo.titulo)
       }
     }
@@ -174,6 +174,8 @@ export class VistaTarea extends Vista{
 			this.btnAnterior.textContent = 'Tarea Anterior (sin guardar)'
 			this.btnSiguiente.textContent = 'Aceptar y Siguiente'
 		}
+		//Quitamos los iconos para eliminar imágenes
+		this.divImagenes.querySelectorAll('img[title="eliminar la imagen"]').forEach( icono => {icono.style.display = 'none'})
   }
 
   /**
@@ -330,11 +332,11 @@ export class VistaTarea extends Vista{
           else{
             divEvaluacion.getElementsByTagName('input')[0].value = 0
           }
-          const calificacion = divEvaluacion.getElementsByTagName('input')[0].value
+          const revisado = divEvaluacion.getElementsByTagName('input')[0].value
           const comentario = divEvaluacion.getElementsByTagName('textarea')[0].value
           const evaluacion = {
             id: divEvaluacion.modulo.id,
-            calificacion,
+            revisado,
             comentario
           }
           tarea.evaluaciones.push(evaluacion)

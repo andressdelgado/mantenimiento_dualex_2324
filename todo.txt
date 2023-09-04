@@ -1,16 +1,8 @@
 - No funciona el "Revisado" de los profesores.
 - Editar Tarea.
 	- Si es alumno y está calificada: ocultar el botón de añadir imágen, ocultar el botón de eliminación de imágen.
-	- Al Eliminar imágen, anotar el id de la imágen a eliminar.
-	- Al aceptar, enviar los ids de las imágenes eliminadas y los datos de las imágenes a añadir.
-- Almacenar las imágenes en BBDD.
-- En vistaTarea, ¿porque Aceptar y Siguiente no llama a aceptar?
+- Revisar la calificación de informes.
 
-Permitir que los alumnos añadan imágenes (desde su móvil o como adjuntos) a una tarea. También deben poder eliminar las imágenes si la tarea no ha sido calificada.
-
-Las imágenes pueden añadirse desde fichero (PC y smartphone), con drag&Dropbox (PC) o desde cámara (smartphone). Tras añadirse deben mostrarse como thumbs con icono para eliminarlas.
-
-Los profesores deben poder ver también las imágenes en thumb y ampliadas (¿y eliminarlas?)
 
 Al eliminar una tarea se deben eliminar sus imágenes
 

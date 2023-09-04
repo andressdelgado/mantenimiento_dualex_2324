@@ -16,8 +16,8 @@ class DAOTarea{
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
-		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion ';
-		$sql .= ', Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
+		$sql .= ', Actividad_Modulo_Tarea.revisado AS modulo_revisado ';
+		$sql .= ', Actividad_Modulo_Tarea.comentario AS modulo_comentario ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
@@ -46,8 +46,8 @@ class DAOTarea{
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= ', Curso_Modulo.id_curso AS id_curso ';
-		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion ';
-		$sql .= ', Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
+		$sql .= ', Actividad_Modulo_Tarea.revisado AS modulo_revisado ';
+		$sql .= ', Actividad_Modulo_Tarea.comentario AS modulo_comentario ';
 		$sql .= ', Imagen.id AS id_imagen, Imagen.imagen ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
@@ -78,7 +78,7 @@ class DAOTarea{
 		$sql .= ', Calificacion.titulo AS calificacion_empresa ';
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
-		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion, Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
+		$sql .= ', Actividad_Modulo_Tarea.revisado AS modulo_revisado, Actividad_Modulo_Tarea.comentario AS modulo_comentario ';
 		$sql .= ', Alumno.id_curso AS id_curso ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';
@@ -110,7 +110,7 @@ class DAOTarea{
 		$sql .= ', Actividad.id AS id_actividad, Actividad.titulo AS actividad_titulo, Actividad.descripcion AS actividad_descripcion';
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= ', Curso_Modulo.id_curso AS id_curso ';
-		$sql .= ', Actividad_Modulo_Tarea.calificacion AS modulo_calificacion, Actividad_Modulo_Tarea.evaluacion AS modulo_evaluacion ';
+		$sql .= ', Actividad_Modulo_Tarea.revisado AS modulo_revisado, Actividad_Modulo_Tarea.comentario AS modulo_comentario ';
 		$sql .= ', Imagen.id AS id_imagen, Imagen.imagen ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
@@ -187,18 +187,18 @@ class DAOTarea{
 
 		//Actualizamos la información básica (Tarea)
 		if ($usuario->rol == 'profesor'){
-			$sql = 'UPDATE Tarea SET titulo = :titulo,imagenes = :imagenes, descripcion = :descripcion , fecha = :fecha,fecha_fin = :fecha_fin, id_calificacion_empresa = :idCalificacionEmpresa, ';
+			$sql = 'UPDATE Tarea SET titulo = :titulo, descripcion = :descripcion , fecha = :fecha,fecha_fin = :fecha_fin, id_calificacion_empresa = :idCalificacionEmpresa, ';
 			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
 			$sql .= 'WHERE Tarea.id = :id';
 		
-			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo,'imagenes'=>$imagenes, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha,'fecha_fin'=>$tarea->fecha_fin, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa);
+			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo, 'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha,'fecha_fin'=>$tarea->fecha_fin, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa, 'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa);
 		}
 		if ($usuario->rol == 'alumno'){
 			$sql = 'UPDATE Tarea SET titulo = :titulo,descripcion = :descripcion , fecha = :fecha,fecha_fin = :fecha_fin, id_calificacion_empresa = :idCalificacionEmpresa, ';
 			$sql .= 'comentario_calificacion_empresa = :comentarioCalificacionEmpresa ';
 			$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno ';
 			$sql .= ' AND Tarea.id_calificacion_empresa IS NULL ';
-			$sql .= ' AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE calificacion IS NOT NULL) '; 
+			$sql .= ' AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE revisado = 1) '; 
 		
 			$params = array('id'=>$tarea->id, 'titulo'=>$tarea->titulo,'descripcion'=>$tarea->descripcion, 'fecha'=>$tarea->fecha,'fecha_fin'=>$tarea->fecha_fin, 'idCalificacionEmpresa'=>$tarea->idCalificacionEmpresa,'comentarioCalificacionEmpresa'=>$tarea->comentarioCalificacionEmpresa, 'idAlumno'=>$usuario->id);
 		}
@@ -206,7 +206,7 @@ class DAOTarea{
 		$idNuevo = BD::actualizar($sql, $params);
 
 		//Vemos si la tarea está calificada.
-		$sql = 'SELECT COUNT(*) AS count FROM Actividad_Modulo_Tarea WHERE id_tarea = :id AND calificacion IS NOT NULL';
+		$sql = 'SELECT COUNT(*) AS count FROM Actividad_Modulo_Tarea WHERE id_tarea = :id AND revisado != 0';
 		$params = array('id' => $tarea->id);
 		$resultado = BD::seleccionar($sql, $params)[0]['count'];
 
@@ -250,10 +250,10 @@ class DAOTarea{
 		//Si es profesor, actualizamos con las calificaciones de sus módulos
 		if ($usuario->rol == 'profesor'){
 			for ($i = 0; $i  < count($tarea->evaluaciones); $i++){
-				$sql  = 'UPDATE Actividad_Modulo_Tarea SET calificacion = :calificacion, evaluacion = :comentario ';
+				$sql  = 'UPDATE Actividad_Modulo_Tarea SET revisado = :revisado, comentario = :comentario ';
 				$sql .= 'WHERE id_tarea = :id_tarea AND id_modulo = :id_modulo';
 				$params = array(
-					'calificacion' => $tarea->evaluaciones[$i]->calificacion, 
+					'revisado' => $tarea->evaluaciones[$i]->revisado, 
 					'comentario' => $tarea->evaluaciones[$i]->comentario,
 					'id_tarea' => $tarea->id,
 					'id_modulo' => $tarea->evaluaciones[$i]->id
@@ -267,18 +267,19 @@ class DAOTarea{
 		if ($resultado == 0 || $usuario->rol == 'profesor'){
 			self::_insertarImagenes($tarea);
 			//Borrado de imágenes
-			for ($i = 0; $i  < count($tarea->idImagenesBorrar); $i++){
-				$values = array();
-				$param = array();
-				for ($i = 0; $i < count($tarea->idImagenesBorrar); $i++){
-					array_push($values, ":campo_$i");
-					$param["campo_$i"] = $tarea->idImagenesBorrar[$i];
+			if (count($tarea->idImagenesBorrar) > 0){
+				for ($i = 0; $i  < count($tarea->idImagenesBorrar); $i++){
+					$values = array();
+					$param = array();
+					for ($i = 0; $i < count($tarea->idImagenesBorrar); $i++){
+						array_push($values, ":campo_$i");
+						$param["campo_$i"] = $tarea->idImagenesBorrar[$i];
+					}
 				}
+				$sql  = 'DELETE FROM Imagen WHERE id IN ('.join(',', $values).') AND id_tarea = :id_tarea';
+				$param['id_tarea'] = $tarea->id;
+				BD::borrar($sql, $param);
 			}
-			$sql  = 'DELETE FROM Imagen WHERE id IN ('.join(',', $values).') AND id_tarea = :id_tarea';
-			echo $sql;
-			$param['id_tarea'] = $tarea->id;
-			BD::borrar($sql, $param);
 		}
 
 
@@ -317,7 +318,7 @@ class DAOTarea{
 	public static function borrar($idTarea, $usuario){
 		$sql = 'DELETE FROM Tarea ';
 		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL ';
-		$sql .= 'AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE calificacion IS NOT NULL) '; 
+		$sql .= 'AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE revisado != 1) '; 
 		
 		$params = array('id'=>$idTarea, 'idAlumno'=>$usuario->id);
 
