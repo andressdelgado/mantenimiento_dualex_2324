@@ -19,16 +19,17 @@ class DAOAlumno{
 	$sql .= 'JOIN Curso_Modulo ON Curso.id = Curso_Modulo.id_curso ';
 	$sql .= 'JOIN Modulo ON Modulo.id = Curso_Modulo.id_curso ';
 	$sql .= 'JOIN Modulo_Profesor ON Curso_Modulo.id_modulo = Modulo_Profesor.id_modulo '; 
-	$sql .= 'JOIN Tarea ON Tarea.id_alumno = Alumno.id '; 
-	$sql .= 'JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
-	$sql .= 'JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad ';
+/*	$sql .= 'LEFT JOIN Tarea ON Tarea.id_alumno = Alumno.id '; 
+	$sql .= 'LEFT JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
+	$sql .= 'LEFT JOIN Actividad_Modulo ON Actividad_Modulo.id_actividad = Actividad_Tarea.id_actividad '; */
 	$sql .= 'WHERE ';
-	$sql .= 'Actividad_Modulo.id_modulo = Modulo_Profesor.id_modulo ';
-	$sql .= 'AND Modulo_Profesor.id_profesor = :id_profesor ';
+	//$sql .= 'Actividad_Modulo.id_modulo = Modulo_Profesor.id_modulo AND ';
+	$sql .= 'Modulo_Profesor.id_profesor = :id_profesor ';
 	$sql .= 'ORDER BY Curso.codigo, Usuario.apellidos, Usuario.nombre '; 
 
     $params = array('id_profesor' => $id_profesor);
 
     return BD::seleccionar($sql, $params);
+  }
   }
 }
