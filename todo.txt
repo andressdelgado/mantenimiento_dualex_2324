@@ -1,4 +1,4 @@
-- Revisar la calificación de informes.
+- Rehacer la calificación de informes.
 - Como profesor, tras buscar alumnos e ir a la lista de tareas de uno de ellos, la flecha de "Volver" vuelve al buscador sin resultados.
 	- Intentar mantener la lista de resultados al volver.
 
