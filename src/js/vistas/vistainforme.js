@@ -39,7 +39,6 @@ export class VistaInforme extends Vista {
     this.borrar()
     this.alumno=alumno
     this.informe = informe
-    console.log(informe)
     this.sAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
     this.sCoordinador.textContent = informe.coordinador
     this.sGrado.textContent = informe.grado
@@ -49,7 +48,7 @@ export class VistaInforme extends Vista {
     this.modulos = await this.ponerNotasModulos()
     this._crearGrid(informe.valoracion, this.divValoracion)
     this._anadirModulos(informe.modulos, this.divValoracion)
-    this._crearGrid(informe.evaluacion, this.divEvaluacion)
+    //TODO: this._crearGrid(informe.evaluacion, this.divEvaluacion)
   }
 
   /**
@@ -80,12 +79,9 @@ export class VistaInforme extends Vista {
   }
 
   _crearGrid (informe, div) {
-    console.log(informe)
-    console.log(div)
     // Mejor si primero lo borramos
     while (div.children.length > 0) { div.lastChild.remove() }
     let i=0
-    console.log(div.classList.value)
     if(div.classList[0]=='grid1'){
       for (const dato of informe) {
         const div1 = document.createElement('div')
@@ -96,7 +92,6 @@ export class VistaInforme extends Vista {
         // Ponemos la calificación
         const div2 = document.createElement('div')
         div.appendChild(div2)
-        console.log(dato.titulo.split('.-')[1])
         for(let i=0;i<this.actividades.length;i++){
           if(this.actividades[i].titulo===dato.titulo.split('.-')[1]){
             div2.textContent = this.actividades[i].nota_final.substring(0, this.actividades[i].nota_final.length - 2)
@@ -114,7 +109,6 @@ export class VistaInforme extends Vista {
         // Ponemos la calificación
         const div2 = document.createElement('div')
         div.appendChild(div2)
-        console.log(dato.titulo.split(' - ')[1])
         for(let i=0;i<this.modulos.length;i++){
           if(this.modulos[i].titulo===dato.titulo.split(' - ')[1]){
             div2.textContent = this.modulos[i].nota_final.substring(0, this.modulos[i].nota_final.length - 2)
@@ -143,9 +137,7 @@ export class VistaInforme extends Vista {
    */
   async ponerNotas(){
     var periodo = this.informe.periodo.split(' ')
-    console.log(periodo[1])
     this.actividades = await this.controlador.traerActividadNotas(this.alumno.id,periodo[1])
-    console.log(this.actividades)
     return this.actividades
   }
 
@@ -155,9 +147,7 @@ export class VistaInforme extends Vista {
    */
   async ponerNotasModulos(){
     var periodo = this.informe.periodo.split(' ')
-    console.log(periodo[1])
     this.modulos = await this.controlador.traerModulosNotas(this.alumno.id,periodo[1])
-    console.log(this.modulos)
     return this.modulos
   }
 }

@@ -152,7 +152,6 @@ export class VistaAlumnos extends Vista{
    */
   cargarFiltrado(){
    	this.eliminarHijos(this.base, 2) 
-    console.log(this.controlador)
     this.controlador.getAlumnosProfesor()
     .then(alumnos => {
       if(this.select.value=='todos'){
