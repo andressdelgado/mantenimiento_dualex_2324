@@ -1,7 +1,7 @@
 phpDocumentor.phar
 *.phpdoc
 *.swp
-config_prod.php
+config_produccion.php
 src/php/api/vendor/*
 node_modules
 

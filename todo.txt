@@ -1,7 +1,6 @@
-- No funciona el "Revisado" de los profesores.
-- Editar Tarea.
-	- Si es alumno y está calificada: ocultar el botón de añadir imágen, ocultar el botón de eliminación de imágen.
-- Revisar la calificación de informes.
+- Rehacer la calificación de informes.
+- Como profesor, tras buscar alumnos e ir a la lista de tareas de uno de ellos, la flecha de "Volver" vuelve al buscador sin resultados.
+	- Intentar mantener la lista de resultados al volver.
 
 
 Al eliminar una tarea se deben eliminar sus imágenes

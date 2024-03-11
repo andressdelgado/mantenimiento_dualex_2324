@@ -39,7 +39,6 @@ export class VistaMenuContexto{
     var alumnos=document.getElementById('divAlumnos')
     alumnos.appendChild(this.base)
     this.mostrar(true)
-    console.log(this.base)
     this.base.style.position = 'absolute'
     this.base.className = 'vistamenucontexto'
     

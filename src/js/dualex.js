@@ -171,13 +171,15 @@ class DualEx {
 
   /**
     Muestra la vista de alumnos del profesor.
+    @param borrar {Boolean} Indica si hay que borrar la lista de alumnos anterior.
   **/
-  mostrarAlumnos () {
+  mostrarAlumnos (borrar = true) {
     if (this.#usuario.rol !== 'profesor') { throw Error('Operación no permitida.') }
     this.modelo.getAlumnosProfesor()
       .then(alumnos => {
         this.vistaMenu.verAlumnosProfesor()
-        this.vistaAlumnos.cargar(alumnos)
+        if (borrar)
+            this.vistaAlumnos.cargar(alumnos)
         this.ocultarVistas()
         this.vistaAlumnos.mostrar(true)
       })

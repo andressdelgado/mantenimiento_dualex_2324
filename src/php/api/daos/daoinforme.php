@@ -13,9 +13,9 @@ class DAOInforme{
 		@param $idProfesor Identificador del profesor.
 		@return Un array de arrays con los datos de cada tarea.
 	**/
-	public static function verValoracion_old($idAlumno, $idPeriodo, $idProfesor){
+	public static function verValoracion($idAlumno, $idPeriodo, $idProfesor){
 		$sql  = 'SELECT Actividad_Curso.orden, CONCAT(Actividad_Curso.orden, ".-", Actividad.titulo) AS titulo, ';
-		$sql .= 'ROUND((AVG(calificacion) + AVG(Calificacion.valor))/2, 1) as calificacion ';
+		$sql .= 'ROUND(AVG(Calificacion.valor), 1) as calificacion ';
 		//$sql .= 'Modulo.codigo AS modulo_codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= 'FROM `Actividad` ';
 		$sql .= 'LEFT JOIN Actividad_Curso ON Actividad.id = Actividad_Curso.id_actividad ';
@@ -40,7 +40,7 @@ class DAOInforme{
 
 		return BD::seleccionar($sql, $params);
 	}
-	public static function verValoracion($idAlumno, $idPeriodo, $idProfesor){
+	public static function verValoracion_old($idAlumno, $idPeriodo, $idProfesor){
 		$sql = 'SELECT Actividad_Curso.orden, CONCAT(Actividad_Curso.orden, ".-", Actividad.titulo) AS titulo, ';
 		$sql .= 'ROUND ( ((SELECT AVG(calificacion) ';
 		$sql .= 'FROM Actividad_Modulo_Tarea ';

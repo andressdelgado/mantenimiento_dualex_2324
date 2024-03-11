@@ -44,7 +44,7 @@ export class VistaMenu extends Vista{
     this.limpiar()
     this.verUsuario()
     this.verTitulo(`Informe de ${alumno.nombre} ${alumno.apellidos}`)
-    this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+    this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false)))
     this.base.appendChild(this.crearIcono('print.svg', 1, 'imprimir', this.controlador.imprimir.bind(this.controlador)))
     this.verLogout(3)
     this.verAcercaDe()
@@ -57,7 +57,7 @@ export class VistaMenu extends Vista{
     this.limpiar()
     this.verUsuario()
     this.verTitulo('Acerca de DUALEX')
-    if (this.controlador.getUsuario().rol === 'profesor') { this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador))) } else { this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, this.controlador.getUsuario()))) }
+    if (this.controlador.getUsuario().rol === 'profesor') { this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false))) } else { this.base.appendChild(this.crearIcono('volver.svg', 2, 'volver', this.controlador.mostrarTareasAlumno.bind(this.controlador, this.controlador.getUsuario()))) }
     this.verLogout(3)
     this.verAcercaDe()
   }
@@ -88,7 +88,7 @@ export class VistaMenu extends Vista{
       this.base.appendChild(this.crearIcono('add.svg', 1, 'nueva tarea', this.controlador.mostrarTarea.bind(this.controlador, null)))
     } else {
       this.verTitulo(`Tareas de ${alumno.nombre} ${alumno.apellidos}`)
-      this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador)))
+      this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false)))
     }
     this.verLogout(2)
     this.verAcercaDe()
