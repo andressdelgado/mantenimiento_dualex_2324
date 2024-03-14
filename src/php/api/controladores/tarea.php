@@ -30,8 +30,10 @@ class Tarea{
 						$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
 				}
 				elseif (is_numeric($pathParams[0]))
-					if ($usuario->rol == 'alumno')
+					if ($usuario->rol == 'alumno'){
 						$resultado = DAOTarea::verTareaDeAlumno($pathParams[0], $usuario->id);
+						//print_r($resultado);
+					}
 					else 
 						$resultado = DAOTarea::verTareaDeAlumnoComoProfesor($pathParams[0], $usuario->id);
 				else{
@@ -111,7 +113,10 @@ class Tarea{
 		@param $usuario {Usuario} Usuario que realiza la petición.
 	**/
 	function delete($pathParams, $queryParams, $usuario){
-    	$id = DAOTarea::borrar($pathParams[0], $usuario);
+	    if ($usuario->rol == 'profesor')
+    	    $id = DAOTarea::borrarTareaProfesor($pathParams[0]);
+    	else
+    	    $id = DAOTarea::borrarTareaAlumno($pathParams[0], $usuario);
     	//Respuesta a un DELETE
     	header('HTTP/1.1 200 Ok');
     	die();

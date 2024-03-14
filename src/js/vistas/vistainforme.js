@@ -94,7 +94,10 @@ export class VistaInforme extends Vista {
         div.appendChild(div2)
         for(let i=0;i<this.actividades.length;i++){
           if(this.actividades[i].titulo===dato.titulo.split('.-')[1]){
-            div2.textContent = this.actividades[i].nota_final.substring(0, this.actividades[i].nota_final.length - 2)
+						if (this.actividades[i].nota_final)
+	            div2.textContent = this.actividades[i].nota_final.substring(0, this.actividades[i].nota_final.length - 2)
+						else
+							div2.textContent = '-'
           }
         }
       }

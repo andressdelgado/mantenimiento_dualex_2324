@@ -315,12 +315,24 @@ class DAOTarea{
 		@param idTarea {Number} Identificador de la tarea a eliminar.
 		@param usuario {Usuario} Datos del usuario loggeado.
 	**/
-	public static function borrar($idTarea, $usuario){
+	public static function borrarTareaAlumno($idTarea, $usuario){
 		$sql = 'DELETE FROM Tarea ';
 		$sql .= 'WHERE Tarea.id = :id AND Tarea.id_alumno = :idAlumno AND Tarea.id_calificacion_empresa IS NULL ';
 		$sql .= 'AND Tarea.id NOT IN (SELECT DISTINCT id_tarea FROM Actividad_Modulo_Tarea WHERE revisado != 1) '; 
 		
 		$params = array('id'=>$idTarea, 'idAlumno'=>$usuario->id);
+
+		$idNuevo = BD::borrar($sql, $params);
+	}
+	/**
+		Borrado de tarea por profesor.
+		@param idTarea {Number} Identificador de la tarea a eliminar.
+	**/
+	public static function borrarTareaProfesor($idTarea){
+		$sql = 'DELETE FROM Tarea ';
+		$sql .= 'WHERE Tarea.id = :id'; 
+		
+		$params = array('id'=>$idTarea);
 
 		$idNuevo = BD::borrar($sql, $params);
 	}
