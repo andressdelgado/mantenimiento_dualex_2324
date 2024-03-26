@@ -37,6 +37,8 @@ class DAOInforme{
 		$sql .= 'ORDER BY Actividad_Curso.orden';
 
 		$params = array('id_alumno' => $idAlumno, 'id_periodo1' => $idPeriodo, 'id_periodo2' => $idPeriodo);
+		
+		//print_r($params);echo $sql; die();
 
 		return BD::seleccionar($sql, $params);
 	}

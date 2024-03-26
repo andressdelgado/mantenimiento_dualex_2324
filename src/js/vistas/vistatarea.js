@@ -382,7 +382,7 @@ export class VistaTarea extends Vista{
             this.controlador.gestionarError('La imagen es demasiado grande.')
           }
           else
-		    		this.crearImagen(valorimagen)
+		    this.crearImagen(valorimagen)
           this.iImagenes.value = ''
         })
         lector.readAsDataURL(archivo)

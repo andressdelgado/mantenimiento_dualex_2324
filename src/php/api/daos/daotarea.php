@@ -48,7 +48,7 @@ class DAOTarea{
 		$sql .= ', Curso_Modulo.id_curso AS id_curso ';
 		$sql .= ', Actividad_Modulo_Tarea.revisado AS modulo_revisado ';
 		$sql .= ', Actividad_Modulo_Tarea.comentario AS modulo_comentario ';
-		$sql .= ', Imagen.id AS id_imagen, Imagen.imagen ';
+		//$sql .= ', Imagen.id AS id_imagen, Imagen.imagen ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
 		$sql .= 'LEFT JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
@@ -57,7 +57,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Modulo ON Modulo.id = Actividad_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Curso_Modulo ON Modulo.id = Curso_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Actividad_Modulo_Tarea ON (Actividad.id = Actividad_Modulo_Tarea.id_actividad AND Modulo.id = Actividad_Modulo_Tarea.id_modulo AND Tarea.id = Actividad_Modulo_Tarea.id_tarea) ';
-		$sql .= 'LEFT JOIN Imagen ON Tarea.id = Imagen.id_tarea ';
+		//$sql .= 'LEFT JOIN Imagen ON Tarea.id = Imagen.id_tarea ';
 		$sql .= 'WHERE Tarea.id_alumno = :id_alumno AND Tarea.id = :id_tarea ';
 		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
 		
@@ -111,7 +111,7 @@ class DAOTarea{
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= ', Curso_Modulo.id_curso AS id_curso ';
 		$sql .= ', Actividad_Modulo_Tarea.revisado AS modulo_revisado, Actividad_Modulo_Tarea.comentario AS modulo_comentario ';
-		$sql .= ', Imagen.id AS id_imagen, Imagen.imagen ';
+		//$sql .= ', Imagen.id AS id_imagen, Imagen.imagen ';
 		$sql .= 'FROM Tarea ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';
 		$sql .= 'LEFT JOIN Actividad_Tarea ON Actividad_Tarea.id_tarea = Tarea.id ';
@@ -121,7 +121,7 @@ class DAOTarea{
 		$sql .= 'LEFT JOIN Curso_Modulo ON Modulo.id = Curso_Modulo.id_modulo ';
 		$sql .= 'LEFT JOIN Modulo_Profesor ON Modulo.id = Modulo_Profesor.id_modulo ';
 		$sql .= 'JOIN Actividad_Modulo_Tarea ON (Actividad_Modulo_Tarea.id_actividad = Actividad.id AND Actividad_Modulo_Tarea.id_modulo = Modulo.id AND Actividad_Modulo_Tarea.id_tarea = Tarea.id) ';
-		$sql .= 'LEFT JOIN Imagen ON Tarea.id = Imagen.id_tarea ';
+		//$sql .= 'LEFT JOIN Imagen ON Tarea.id = Imagen.id_tarea ';
 		$sql .= 'WHERE Modulo_Profesor.id_profesor = :id_profesor AND Tarea.id = :id_tarea ';
 		$sql .= 'ORDER BY Actividad.titulo, Tarea.titulo ';
 		
