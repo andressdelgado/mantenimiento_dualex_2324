@@ -84,10 +84,10 @@ class Tarea{
 		//Control de valores nulos
 		if ($tarea->idCalificacionEmpresa === "null")
 			$tarea->idCalificacionEmpresa = null;
-		for ($i = 0; $i < count($tarea->evaluaciones); $i++)
+		/*for ($i = 0; $i < count($tarea->evaluaciones); $i++)
 			if ($tarea->evaluaciones[$i]->calificacion === "")
 				$tarea->evaluaciones[$i]->calificacion = null;
-
+		*/
     	$id = DAOTarea::modificar($tarea, $usuario);
 
 		if (self::$email_aviso){
