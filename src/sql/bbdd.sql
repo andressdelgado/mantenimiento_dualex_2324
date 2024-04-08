@@ -10348,6 +10348,7 @@ CREATE TABLE `Imagen` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `id_tarea` int unsigned NOT NULL,
   `imagen` longtext NOT NULL,
+	CHECK (LENGTH(imagen) < 4000000),
   PRIMARY KEY (`id`),
     FOREIGN KEY (id_tarea) REFERENCES Tarea (id) ON DELETE CASCADE
 )

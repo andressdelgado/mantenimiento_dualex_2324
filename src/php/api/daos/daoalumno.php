@@ -31,5 +31,4 @@ class DAOAlumno{
 
     return BD::seleccionar($sql, $params);
   }
-  }
 }

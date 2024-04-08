@@ -370,7 +370,7 @@ export class VistaTarea extends Vista{
     }
 
     /**
-     * Añadir imagen al array
+     * Añadir imagen al array y aumenta el valor del numImagenes para saber cuantas podemos introducir
      */
     async anadirImagen(){
         let valorimagen = null
@@ -378,11 +378,11 @@ export class VistaTarea extends Vista{
         const lector = new FileReader()
         lector.addEventListener('load',() => {
           valorimagen = lector.result
-          if (valorimagen.length > 8000000){
-          	this.controlador.gestionarError('La imagen no puede exceder de 8MB.') 
-          	return
+          if (valorimagen.length > 4000000){
+            this.controlador.gestionarError('La imagen es demasiado grande.')
           }
-		  this.crearImagen(valorimagen)
+          else
+		    this.crearImagen(valorimagen)
           this.iImagenes.value = ''
         })
         lector.readAsDataURL(archivo)
