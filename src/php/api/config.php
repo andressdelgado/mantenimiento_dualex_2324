@@ -10,6 +10,7 @@
 		'usuario' => 'dualex3',
 		'clave' => 'dualex3',
 		'bd' => 'dualex3',
+		'coordinador' => 'coordinador_dualex3@gmail.com',
 		'algoritmo_encriptacion' => 'aes-256-ctr',
 		'clave_encriptacion' => 'Clave de encriptación',
 		'email_aviso' => false
