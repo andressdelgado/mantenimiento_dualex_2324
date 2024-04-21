@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+    <meta charset=utf-8 />
+    <meta name=viewport content='width=device-width, initial-scale=1' />
+    <meta name=author content='Alfonso David Recio <alfonsodavidreciocalderon.guadalupe@alumnado.fundacionloyola.es' />
+    <title>DUALEX</title>
+
+    <link rel=stylesheet href=../css/reset.css />
+    <link rel=stylesheet href=../css/estilos.css />
+    <style>
+        #divAltaConvenios{
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .vistaConvenios{
+            width: 40%;
+            margin: 5rem auto;
+            padding: 2rem;
+            border: 2px solid blue;
+            border-radius: 1rem;
+        }
+        .vistaConvenios input{
+            margin: 0.3rem;
+        }
+        .vistaConvenios button{
+            cursor: pointer;
+            background-color: blue;
+            border: none;
+            color: white;
+            margin: 1rem;
+            margin-left: 2rem;
+            padding: 0.5rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+        .vistaConvenios button:hover{
+            text-decoration: underline;
+        }
+        .vistaConvenios p{
+            font-size: 0.9rem;
+            line-height: 1.2rem;
+        }
+        .vistaConvenios p:first-of-type{
+            cursor: pointer;
+            color: blue;
+        }
+        .vistaConvenios p:first-of-type:hover{
+            text-decoration: underline;
+        }
+        /* Párrafo de Error */
+        .vistaConvenios p:nth-of-type(2){
+            display: none;
+            color: red;
+            font-weight: bold;
+        }
+
+        #divAltaConvenios>label{
+            display: block;
+            width: 30%;
+        }
+
+        #divAltaConvenios>label>input{
+            margin-left: 15%;
+
+        }
+
+        .divFlex, .divFlexBotones{
+            display: flex;
+        }
+        .divFlex{
+            font-size: large;
+        }
+        .divFlex label{
+            width: 40%;
+        }
+        .divFlex input{
+            width: 50%;
+        }
+        .divFlexBotones{
+            margin-top: 2%;
+            flex-direction: row-reverse;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class='vistaConvenios' id=divAltaConvenios>
+    <div class="divFlex">
+        <label>Titulo:</label>
+        <input type=text placeholder='(Titulo del documento)' />
+    </div>
+    <div class="divFlex">
+        <label>Fecha de Frima del delegado:</label>
+        <input type=text placeholder='(Fecha firma)' />
+    </div>
+    <div class="divFlex">
+        <label>Documento:</label>
+        <input type=file  />
+    </div>
+    <div class="divFlexBotones">
+        <button>Añadir</button>
+        <button style="background-color: darkred">Limpiar</button>
+    </div>
+</div>
+<script>
+  window.onload = function(){divAltaConvenios.style.opacity = '1'}
+</script>
+</body>
+
+</html>

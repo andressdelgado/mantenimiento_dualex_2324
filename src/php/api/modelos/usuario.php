@@ -11,4 +11,6 @@ class Usuario{
 	public $rol = null;
 	public $tsConexion = null;  //Timestamp de conexión
 	public $autorizacion = null;
+	public $idCurso = null;
+	public $curso = null;
 }

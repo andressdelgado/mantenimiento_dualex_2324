@@ -14,7 +14,7 @@
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 	}
-	
+
 	try{
 		//Inyección de dependencias
 		require_once('./servicios/bd.php');
@@ -56,6 +56,7 @@
 		//Inyección de dependencias
 		Login::$clave = $config['clave_encriptacion'];
 		Login::$algoritmo_encriptacion = $config['algoritmo_encriptacion'];
+        Login::$coordinador = $config['coordinador'];
 		if(array_key_exists('Authorization2', apache_request_headers())){
 			$autorizacion = apache_request_headers()['Authorization2'];
 			if ($autorizacion != "null")
@@ -104,7 +105,7 @@
 				header('HTTP/1.1 501 Not Implemented');
 				die();
 		}
-		
+
 		if ($controlador)
 			switch($metodo){
 					case 'GET':

@@ -13,6 +13,7 @@ class Login{
 	public static $clave = null;
 	public static $algoritmo_encriptacion = null;
 	public static $iv = 'PantUfl45--;jeu$';
+    public static $coordinador = "";
 	//Id de cliente de Google.
 	private static $ID_CLIENTE = '756573648994-cn4uk8gsic003hnotjb9mpt1mjtnqvgm.apps.googleusercontent.com';
 

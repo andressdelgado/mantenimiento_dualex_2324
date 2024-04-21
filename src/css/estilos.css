@@ -29,7 +29,7 @@ legend{
 }
 
 /* Inicialmente ocultamos las vistas */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos{
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos,#divAltaConvenios{
 	display: none;
 }
 
@@ -150,7 +150,7 @@ legend{
 #divTarea label, #divTarea legend{
 	font-weight: bold;
 }
-	
+
 #divTarea fieldset label{
 	font-weight: normal;
 }
@@ -272,6 +272,13 @@ legend{
 	border-radius: 0.7rem;
 }
 
+/* DIV Convenios */
+#divAltaConvenios{
+	background-color: red;
+}
+#divAltaConvenios>label>input{
+	margin-left: 15%;
+}
 
 #buscador{
 	margin-left: 35%;
@@ -337,7 +344,7 @@ legend{
 	#buscador{
 		margin-bottom: 10px;
 		margin-right: 2px;
-		
+
 	}
 	#filtro{
 		margin-left: 10% !important;
@@ -349,7 +356,7 @@ legend{
 		margin-bottom: 40px!important;
 		border-bottom-color: white!important;
 	}
-	
+
 }
 
 /* Reglas de VistaMenuContexto */
@@ -504,8 +511,8 @@ legend{
 	padding: 0.3rem;
 }
 #divInforme div.grid1{
-	display: grid; 
-	grid-template-columns: 45% 5% 45% 5%; 
+	display: grid;
+	grid-template-columns: 45% 5% 45% 5%;
 	padding: 0px;
 }
 #divInforme div.grid1 > div:nth-child(2n){
@@ -513,8 +520,8 @@ legend{
 	text-align: center;
 }
 #divInforme div.grid2{
-	display: grid; 
-	grid-template-columns: 40% 20% 20% 20%; 
+	display: grid;
+	grid-template-columns: 40% 20% 20% 20%;
 	border: none;
 }
 #divInforme div.grid2 div{
@@ -524,8 +531,8 @@ legend{
 	text-align: center;
 }
 #divInforme div.grid3{
-	display: grid; 
-	grid-template-columns: 45% 5% 45% 5%; 
+	display: grid;
+	grid-template-columns: 45% 5% 45% 5%;
 	border: none;
 }
 #divInforme div.grid3 div{
@@ -561,7 +568,7 @@ legend{
 @page {
 	margin: 0; /* Quita el encabezado y pie que pone el navegador */
 	size: A4;
-}	
+}
 
 @media print{
 	#divLogin, #divDialogo, #divMenu {
@@ -589,7 +596,7 @@ legend{
 		margin: 0 0.2rem;
 		padding: 0 0.2rem;
 		/* antes era none */
-		background-color: white !important;	
+		background-color: white !important;
 	}
 	#divInforme .modulo::before{
 		content: "(";
