@@ -10,7 +10,7 @@
     <link rel=stylesheet href=../css/reset.css />
     <link rel=stylesheet href=../css/estilos.css />
     <style>
-        #divAltaConvenios{
+        #divConvenios{
             opacity: 0;
             transition: opacity 1s;
         }
@@ -58,12 +58,12 @@
             font-weight: bold;
         }
 
-        #divAltaConvenios>label{
+        #divConvenios>label{
             display: block;
             width: 30%;
         }
 
-        #divAltaConvenios>label>input{
+        #divConvenios>label>input{
             margin-left: 15%;
 
         }
@@ -89,7 +89,7 @@
 
 <body>
 
-<div class='vistaConvenios' id=divAltaConvenios>
+<div class='vistaConvenios' id=divConvenios>
     <div class="divFlex">
         <label>Titulo:</label>
         <input type=text placeholder='(Titulo del documento)' />
@@ -108,7 +108,7 @@
     </div>
 </div>
 <script>
-  window.onload = function(){divAltaConvenios.style.opacity = '1'}
+  window.onload = function(){divConvenios.style.opacity = '1'}
 </script>
 </body>
 

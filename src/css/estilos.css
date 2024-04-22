@@ -29,7 +29,7 @@ legend{
 }
 
 /* Inicialmente ocultamos las vistas */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos,#divAltaConvenios{
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenios{
 	display: none;
 }
 
@@ -273,12 +273,79 @@ legend{
 }
 
 /* DIV Convenios */
-#divAltaConvenios{
-	background-color: red;
+#divConvenios{
+	transition: opacity 1s;
 }
-#divAltaConvenios>label>input{
+.vistaConvenios{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border: 2px solid blue;
+	border-radius: 1rem;
+}
+.vistaConvenios input{
+	margin: 0.3rem;
+}
+.vistaConvenios button{
+	cursor: pointer;
+	background-color: blue;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+.vistaConvenios button:hover{
+	text-decoration: underline;
+}
+.vistaConvenios p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+.vistaConvenios p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+.vistaConvenios p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+.vistaConvenios p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+#divConvenios>label{
+	display: block;
+	width: 30%;
+}
+
+#divConvenios>label>input{
 	margin-left: 15%;
 }
+
+.divFlex, .divFlexBotones{
+	display: flex;
+}
+.divFlex{
+	font-size: large;
+}
+.divFlex label{
+	width: 40%;
+}
+.divFlex input{
+	width: 50%;
+}
+.divFlexBotones{
+	margin-top: 2%;
+	flex-direction: row-reverse;
+}
+/** FIN DIV CONVENIOS **/
 
 #buscador{
 	margin-left: 35%;

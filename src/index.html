@@ -218,9 +218,26 @@
 		<p><strong>Fecha de Publicación</strong>: Julio 2022</p>
 		<p><strong>Licencia</strong>: <a href="licencia.html">GPL v3</a></p>
 	</div>
-	<div id="divAltaConvenios">
 
+	<div class='vistaConvenios' id=divConvenios>
+		<div class="divFlex">
+			<label>Titulo:</label>
+			<input type=text placeholder='(Titulo del documento)' />
+		</div>
+		<div class="divFlex">
+			<label>Fecha de Frima del delegado:</label>
+			<input type=text placeholder='(Fecha firma)' />
+		</div>
+		<div class="divFlex">
+			<label>Documento:</label>
+			<input type=file  />
+		</div>
+		<div class="divFlexBotones">
+			<button>Añadir</button>
+			<button style="background-color: darkred">Limpiar</button>
+		</div>
 	</div>
+
 	<script type=module src=js/dualex.js></script>
 </body>
 
