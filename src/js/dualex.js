@@ -82,6 +82,9 @@ class DualEx {
           case 'profesor':
             this.mostrarAlumnos()
             break
+          case 'coordinador':
+            this.mostrarAlumnos()
+            break
           default:
             console.error(`Rol de usuario desconocido: ${usuario.rol}`)
         }
@@ -126,7 +129,7 @@ class DualEx {
   mostrarTareasAlumno (alumno) {
     this.alumno = alumno
     // Para saber volver cuando sea el profesor
-    if (this.#usuario.rol === 'profesor') {
+    if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador') {
       if (!alumno) {
         alumno = this.alumnoMostrado 
         this.alumno = this.alumnoMostrado
@@ -157,7 +160,7 @@ class DualEx {
   **/
   mostrarInformeAlumno (alumno, periodo) {
     this.alumno = alumno
-    if (this.#usuario.rol !== 'profesor') return
+    if (this.#usuario.rol !== 'profesor' || this.#usuario.rol === 'coordinador') return
     this.ocultarVistas()
     this.modelo.getInformeAlumno(alumno, periodo)
       .then(informe => {
@@ -174,7 +177,7 @@ class DualEx {
     @param borrar {Boolean} Indica si hay que borrar la lista de alumnos anterior.
   **/
   mostrarAlumnos (borrar = true) {
-    if (this.#usuario.rol !== 'profesor') { throw Error('Operación no permitida.') }
+    if (this.#usuario.rol !== 'profesor' || this.#usuario.rol === 'coordinador') { throw Error('Operación no permitida.') }
     this.modelo.getAlumnosProfesor()
       .then(alumnos => {
         this.vistaMenu.verAlumnosProfesor()
@@ -245,7 +248,7 @@ class DualEx {
       .then(resultado => {
         if(!siguienteTarea){
           this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
-          if (this.#usuario.rol === 'profesor') {
+          if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador') {
             this.mostrarTareasAlumno(this.alumnoMostrado) 
           } 
           else {
