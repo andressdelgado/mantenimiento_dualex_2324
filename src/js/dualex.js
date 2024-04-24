@@ -24,6 +24,7 @@ import { VistaCreditos } from './vistas/vistacreditos.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
+import { VistaConvenios } from './vistas/vistaconvenios'
 
 /**
   Controlador principal de la aplicación.
@@ -52,6 +53,7 @@ class DualEx {
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
+    this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios'))
     this.vistaLogin.mostrar()
   }
 
@@ -128,16 +130,16 @@ class DualEx {
     // Para saber volver cuando sea el profesor
     if (this.#usuario.rol === 'profesor') {
       if (!alumno) {
-        alumno = this.alumnoMostrado 
+        alumno = this.alumnoMostrado
         this.alumno = this.alumnoMostrado
-      } 
+      }
       else {
         this.alumnoMostrado = alumno
       }
     }
-   
+
     //if (alumno == null) { alumno = this.#usuario }
-		alumno = this.alumno ?? this.#usuario 
+		alumno = this.alumno ?? this.#usuario
     this.ocultarVistas()
     this.modelo.getTareasAlumno(alumno)
       .then(tareas => {
@@ -246,10 +248,10 @@ class DualEx {
         if(!siguienteTarea){
           this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
           if (this.#usuario.rol === 'profesor') {
-            this.mostrarTareasAlumno(this.alumnoMostrado) 
-          } 
+            this.mostrarTareasAlumno(this.alumnoMostrado)
+          }
           else {
-            this.mostrarTareasAlumno(this.#usuario) 
+            this.mostrarTareasAlumno(this.#usuario)
           }
         }
 				else
@@ -343,7 +345,7 @@ class DualEx {
    * @returns array
    */
   getTareas(){
-		//let alumno = this.alumno ?? this.#usuario 
+		//let alumno = this.alumno ?? this.#usuario
     //return this.modelo.getTareasAlumno(alumno)
 		return this.tareas
   }
@@ -356,7 +358,7 @@ class DualEx {
     console.log(tarea.titulo)
     this.vistaMenu.verTarea(tarea)
   }
-  
+
 }
 
 /* eslint-disable no-new */

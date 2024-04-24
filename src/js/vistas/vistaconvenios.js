@@ -12,36 +12,74 @@ export class VistaConvenios extends Vista {
   constructor (controlador, base) {
     super(controlador)
     this.base = base
-
+    console.log('saludos')
     // Cogemos referencias a los elementos del interfaz
     // Inputs
-    this.inputTitulo = this.base.getElementsByTagName('intput')[0]
-    this.inputFirma = this.base.getElementsByTagName('intput')[1]
-    this.inputDocumento = this.base.getElementsByTagName('intput')[2]
+    this.inputTitulo = document.getElementsByTagName('input')[0]
+    this.inputFechaFirma = document.getElementsByTagName('input')[1]
+    this.inputDocumento = document.getElementsByTagName('input')[2]
     // Bontones
-    this.btnLimpiar = this.base.getElementsByTagName('button')[0]
-    this.btnAnadir = this.base.getElementsByTagName('button')[1]
+    this.btnAnadir = document.getElementsByTagName('button')[0]
+    this.btnLimpiar = document.getElementsByTagName('button')[1]
 
     // Asociamos eventos
     this.btnLimpiar.onclick = this.limpiar.bind(this)
     this.btnAnadir.onclick = this.anadirConvenio.bind(this)
+    this.inputTitulo.onchange = this.validarTituloUsuario.bind(this)
   }
 
-  /**
-   Cierra el mensaje.
-   **/
-  cerrar () {
-    this.base.style.display = 'none'
-  }
 
   limpiar () {
     this.inputTitulo.value = ''
-    this.inputFirma.value = ''
+    this.inputFechaFirma.value = ''
     this.inputDocumento.value = ''
   }
 
   anadirConvenio () {
-    console.log('añadir convenio')
+    console.log('Datos')
+    console.log('Titulo: ' + this.inputTitulo.value)
+    console.log('Fecha: ' + this.inputFechaFirma.value)
+    console.log('Documento: ')
+    console.log(this.inputDocumento)
+
+    // const reader = new FileReader()
+    // reader.readAsDataURL(this.inputDocumento.files[0])
+    // reader.onload = () => {
+    //   // Llamar al método del controlador y pasar el contenido del archivo
+    //   this.controlador.altaConvenio(this.inputTitulo.value, this.inputFechaFirma.value, reader.result)
+    // }
+    // Crear un nuevo objeto FormData
+    const formData = new FormData()
+    formData.append('titulo', this.inputTitulo.value)
+    formData.append('fecha_firma', this.inputFechaFirma.value)
+    formData.append('documento_convenio', this.inputDocumento.files[0])
+
+    // Realizar la solicitud Fetch
+    fetch('./../../src/php/api/controladores/convenio.php', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.text())
+      .then(result => {
+        console.log(result)
+        // Aquí puedes realizar acciones adicionales en función de la respuesta del servidor
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud:', error);
+      })
+  }
+
+  validarTituloUsuario() {
+    const titulo = this.inputTitulo.value.trim()
+    const tituloLength = titulo.length
+
+    if (tituloLength >= 1 && tituloLength <= 255) {
+      this.inputTitulo.classList.add('valid') // Agregar clase CSS para marcar en verde
+      this.inputTitulo.classList.remove('invalid') // Remover clase CSS para marcar en rojo
+    } else {
+      this.inputTitulo.classList.add('invalid') // Agregar clase CSS para marcar en rojo
+      this.inputTitulo.classList.remove('valid') // Remover clase CSS para marcar en verde
+    }
   }
 
   // altaConvenio(){
@@ -50,3 +88,5 @@ export class VistaConvenios extends Vista {
   //   * */
   // }
 }
+// eslint-disable-next-line no-new
+window.onload = () => { new VistaConvenios() }
