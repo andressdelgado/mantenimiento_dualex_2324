@@ -44,6 +44,7 @@
 		parse_str($_SERVER['QUERY_STRING'], $queryParams);
 		$recurso = $pathParams[1];	//El primer elemento es la /.
 		array_splice($pathParams, 0, 2);	//Quitamos la / y el recurso solicitado.
+
 		//Procesamos los nulos
 		for($i = 0; $i < count($pathParams); $i++)
 			if ($pathParams[$i] == 'null')
@@ -101,6 +102,10 @@
 				require_once('./controladores/general.php');
 				$controlador = new Controlador($recurso);
 				break;
+            case 'convenio':
+                require_once ('./controladores/convenio.php');
+                $controlador = new Convenio($recurso);
+                break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
 				die();

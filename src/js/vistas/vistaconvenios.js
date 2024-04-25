@@ -1,4 +1,5 @@
-import { Vista } from './vista.js'
+import { Vista } from './vista'
+
 /**
  Vista del alta de convenios de la aplicación.
  Sirve para dar de alta los convenios.
@@ -12,7 +13,6 @@ export class VistaConvenios extends Vista {
   constructor (controlador, base) {
     super(controlador)
     this.base = base
-    console.log('saludos')
     // Cogemos referencias a los elementos del interfaz
     // Inputs
     this.inputTitulo = document.getElementsByTagName('input')[0]
@@ -42,27 +42,15 @@ export class VistaConvenios extends Vista {
     console.log('Documento: ')
     console.log(this.inputDocumento)
 
-    // const reader = new FileReader()
-    // reader.readAsDataURL(this.inputDocumento.files[0])
-    // reader.onload = () => {
-    //   // Llamar al método del controlador y pasar el contenido del archivo
-    //   this.controlador.altaConvenio(this.inputTitulo.value, this.inputFechaFirma.value, reader.result)
-    // }
-    // Crear un nuevo objeto FormData
+
     const formData = new FormData()
     formData.append('titulo', this.inputTitulo.value)
     formData.append('fecha_firma', this.inputFechaFirma.value)
     formData.append('documento_convenio', this.inputDocumento.files[0])
 
-    // Realizar la solicitud Fetch
-    fetch('./../../src/php/api/controladores/convenio.php', {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.text())
-      .then(result => {
-        console.log(result)
-        // Aquí puedes realizar acciones adicionales en función de la respuesta del servidor
+    this.controlador.enviarSolicitudConvenio(formData)
+      .then(respuesta => {
+        console.log(respuesta)
       })
       .catch(error => {
         console.error('Error al realizar la solicitud:', error);
@@ -81,12 +69,6 @@ export class VistaConvenios extends Vista {
       this.inputTitulo.classList.remove('valid') // Remover clase CSS para marcar en verde
     }
   }
-
-  // altaConvenio(){
-  //   /*
-  //   * Aqui se hara la llamada a la petición de alta de convenio
-  //   * */
-  // }
 }
-// eslint-disable-next-line no-new
-window.onload = () => { new VistaConvenios() }
+// // eslint-disable-next-line no-new
+// window.onload = () => { new VistaConvenios() }
