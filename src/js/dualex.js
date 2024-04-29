@@ -24,6 +24,7 @@ import { VistaCreditos } from './vistas/vistacreditos.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
+import { VistaConvenios } from './vistas/vistaconvenios.js'
 
 /**
   Controlador principal de la aplicación.
@@ -52,6 +53,7 @@ class DualEx {
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
+    this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios'))
     this.vistaLogin.mostrar()
   }
 
