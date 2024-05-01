@@ -28,8 +28,8 @@ legend{
 	padding: 0 0.5rem;
 }
 
-/* Inicialmente ocultamos las vistas */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenios{
+/* Inicialmente ocultamos las vistas #divConvenios */
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos{
 	display: none;
 }
 
@@ -346,6 +346,17 @@ legend{
 	flex-direction: row-reverse;
 }
 /** FIN DIV CONVENIOS **/
+
+/** ESTILO VALIDACIONES **/
+/* Estilos para el estado válido */
+input.valid {
+	border-color: green; /* Cambia el borde a verde */
+}
+
+/* Estilos para el estado inválido */
+input.invalid {
+	border-color: red; /* Cambia el borde a rojo */
+}
 
 #buscador{
 	margin-left: 35%;

@@ -5,16 +5,15 @@ require_once('./daos/daoconvenio.php');
 class Convenio{
     function post($pathParams, $queryParams, $body, $usuario){
         // Extraer datos del body
-        $titulo = $body->get('titulo');
-        $fecha_firma = $body->get('fecha_firma');
-        $documento_convenio = $body->get('documento_convenio');
+        $titulo = $body->tituloConvenio;
+        $fecha_firma = $body->fechaFirma;
+        $documento_convenio = $body->documento;
 
         // Validaciones
-        if (!empty($titulo) && !empty($fecha_firma) && !empty($documento_convenio)) {
-            $documento = file_get_contents($documento_convenio);
-
+        if (!empty($titulo) && strlen($titulo) > 0 && strlen($titulo) <= 255 && $titulo !== ' '
+            && !empty($fecha_firma) && !empty($documento_convenio)) {
             // Alta convenio
-            if (DAOConvenio::insertar($titulo, $fecha_firma, $documento)) {
+            if (DAOConvenio::insertar($titulo, $fecha_firma, $documento_convenio)) {
                 echo "Convenio subido exitosamente.";
             } else {
                 echo "Error al subir el convenio.";

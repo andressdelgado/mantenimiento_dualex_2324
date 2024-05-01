@@ -98,28 +98,28 @@
 
 <body>
 
-<div class='vistaConvenios' id=divConvenios>
+<div class='vistaConvenios' id="divConvenios">
     <div class="divFlex">
-        <label>Titulo:</label>
-        <input type=text placeholder='(Titulo del documento)' />
+        <label for="titulo">Titulo:</label>
+        <input type="text" id="titulo" placeholder="(Titulo del documento)" />
     </div>
     <div class="divFlex">
-        <label>Fecha de Frima del delegado:</label>
-        <input type=date placeholder='(Fecha firma)' />
+        <label for="fechaFirma">Fecha de Firma del delegado:</label>
+        <input type="date" id="fechaFirma" placeholder="(Fecha firma)" />
     </div>
     <div class="divFlex">
-        <label>Documento:</label>
-        <input type=file  />
+        <label for="documento">Documento:</label>
+        <input type="file" id="documento" accept=".pdf" size="10485760"/>
     </div>
     <div class="divFlexBotones">
-        <button>Añadir</button>
-        <button style="background-color: darkred">Limpiar</button>
+        <button id="btnAnadir">Añadir</button>
+        <button id="btnLimpiar" style="background-color: darkred">Limpiar</button>
     </div>
 </div>
 <script>
   window.onload = function(){divConvenios.style.opacity = '1'}
 </script>
-<!--<script type=module src=./../../src/js/vistas/vistaconvenios.js></script>-->
+<script type=module src=./../../src/js/vistas/vistaconvenios.js></script>
 </body>
 
 </html>

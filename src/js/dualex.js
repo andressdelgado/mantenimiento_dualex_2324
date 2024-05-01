@@ -360,7 +360,7 @@ class DualEx {
   }
 
   enviarSolicitudConvenio (formData) {
-    return Rest.post('convenio', [], formData)
+    return Rest.post('convenio', [], formData, false)
   }
 }
 
