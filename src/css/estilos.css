@@ -28,7 +28,7 @@ legend{
 	padding: 0 0.5rem;
 }
 
-/* Inicialmente ocultamos las vistas #divConvenios */
+/* Inicialmente ocultamos las vistas #divConvenio */
 #divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos{
 	display: none;
 }
@@ -272,8 +272,8 @@ legend{
 	border-radius: 0.7rem;
 }
 
-/* DIV Convenios */
-#divConvenios{
+/* DIV Convenio */
+#divConvenio{
 	transition: opacity 1s;
 }
 .vistaConvenios{
@@ -320,12 +320,12 @@ legend{
 	font-weight: bold;
 }
 
-#divConvenios>label{
+#divConvenio>label{
 	display: block;
 	width: 30%;
 }
 
-#divConvenios>label>input{
+#divConvenio>label>input{
 	margin-left: 15%;
 }
 

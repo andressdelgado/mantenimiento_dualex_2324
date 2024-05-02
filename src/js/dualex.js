@@ -24,7 +24,7 @@ import { VistaCreditos } from './vistas/vistacreditos.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
-import { VistaConvenios } from './vistas/vistaconvenios.js'
+import { Vistaconvenio } from './vistas/vistaconvenio.js'
 
 /**
   Controlador principal de la aplicación.
@@ -53,7 +53,7 @@ class DualEx {
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
-    this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios'))
+    this.vistaConvenio = new Vistaconvenio(this, document.getElementById('divConvenio'))
     this.vistaLogin.mostrar()
   }
 
@@ -361,6 +361,18 @@ class DualEx {
 
   enviarSolicitudConvenio (formData) {
     return Rest.post('convenio', [], formData, false)
+      // .then(respuesta => {
+      //   if (respuesta.status === 200) {
+      //     console.log('Se realizó la consulta')
+      //     this.vistaConvenio.mostrar(false)
+      //     this.vistaConvenios.mostrar(true)
+      //   } else {
+      //     console.error('Hubo un error al realizar la consulta')
+      //   }
+      // })
+      // .catch(error => {
+      //   console.error('Error al realizar la solicitud:', error)
+      // })
   }
 }
 

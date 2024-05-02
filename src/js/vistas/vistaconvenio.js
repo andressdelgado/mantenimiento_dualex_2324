@@ -1,10 +1,10 @@
 import { Vista } from './vista.js'
 
 /**
- Vista del alta de convenios de la aplicación.
- Sirve para dar de alta los convenios.
+ Vista del alta de convenio de la aplicación.
+ Sirve para dar de alta los convenio.
  **/
-export class VistaConvenios extends Vista {
+export class Vistaconvenio extends Vista {
   /**
    Constructor de la clase.
    @param {Object} controlador Controlador de la vista principal.
@@ -103,4 +103,4 @@ export class VistaConvenios extends Vista {
   }
 }
 // // eslint-disable-next-line no-new
-// window.onload = () => { new VistaConvenios() }
+// window.onload = () => { new Vistaconvenio() }

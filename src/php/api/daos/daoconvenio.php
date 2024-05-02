@@ -9,9 +9,6 @@ class DAOConvenio
         $params = array('titulo'=>$titulo, 'fecha_firma' => $fecha_firma, 'documento'=> $documento);
 
         $id = BD::insertar($sql,$params);
-
-        if (!BD::commit())
-            throw new Exception('No se pudo confirmar la transacción.');
         return $id;
     }
 }
