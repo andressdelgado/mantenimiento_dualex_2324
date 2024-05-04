@@ -1,7 +1,7 @@
 <?php
 
 class DAOCiclo {
-    function verCiclos()
+    public static function verCiclos()
     {
         $sql = "SELECT * FROM ciclo";
 

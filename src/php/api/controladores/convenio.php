@@ -9,12 +9,14 @@ class Convenio{
             $titulo = $body->tituloConvenio;
             $fecha_firma = $body->fechaFirma;
             $documento_convenio = $body->documento;
+            $idCiclo = $body->idCiclo;
+            $idEmpresa = $body->idEmpresa;
 
             // Validaciones
             if (!empty($titulo) && strlen($titulo) > 0 && strlen($titulo) <= 255 && $titulo !== ' '
                 && !empty($fecha_firma) && !empty($documento_convenio)) {
                 // Alta convenio
-                $id = DAOConvenio::insertar($titulo, $fecha_firma, $documento_convenio);
+                $id = DAOConvenio::insertar($titulo, $fecha_firma, $documento_convenio, $idCiclo, $idEmpresa);
                 if (!empty($id)) {
                     header('HTTP/1.1 200 OK');
                     $localizacion = '/convenio/'.$id; //id insertado

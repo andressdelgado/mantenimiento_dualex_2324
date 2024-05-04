@@ -110,6 +110,10 @@
                 require_once ('./controladores/ciclo.php');
                 $controlador = new Ciclo();
                 break;
+            case 'empresa':
+                require_once ('./controladores/empresa.php');
+                $controlador = new Empresa();
+                break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
 				die();

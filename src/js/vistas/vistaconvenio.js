@@ -21,6 +21,12 @@ export class Vistaconvenio extends Vista {
     // Bontones
     this.btnAnadir = document.getElementById('btnAnadir')
     this.btnLimpiar = document.getElementById('btnLimpiar')
+    // Selects
+    this.selectCiclo = document.getElementById('selectCiclo')
+    this.selectEmpresa = document.getElementById('selectEmpresa')
+
+    // Ejecutar metodos necesarios
+    this.cargarDatos()
 
     // Asociamos eventos
     this.btnLimpiar.onclick = this.limpiar.bind(this)
@@ -35,6 +41,41 @@ export class Vistaconvenio extends Vista {
     this.inputDocumento.value = ''
   }
 
+  cargarDatos () {
+    this.cargarDatosCiclos()
+    this.cargarDatosEmpresas()
+  }
+
+  cargarDatosCiclos () {
+    this.controlador.recibirDatosCiclo()
+      .then(ciclos => {
+        ciclos.forEach(ciclo => {
+          const option = document.createElement('option')
+          option.value = ciclo.id
+          option.textContent = ciclo.grado
+          this.selectCiclo.appendChild(option)
+        })
+      })
+      .catch(error => {
+        console.error('Error al cargar los ciclos:', error)
+      })
+  }
+
+  cargarDatosEmpresas () {
+    this.controlador.recibirDatosEmpresa()
+      .then(empresas => {
+        empresas.forEach(empresa => {
+          const option = document.createElement('option')
+          option.value = empresa.id
+          option.textContent = empresa.nombre
+          this.selectEmpresa.appendChild(option)
+        })
+      })
+      .catch(error => {
+        console.error('Error al cargar las empresas:', error)
+      })
+  }
+
   anadirConvenio () {
     if (this.validarTituloUsuario() && this.validarDocumento()) {
       const file = this.inputDocumento.files[0]
@@ -44,7 +85,9 @@ export class Vistaconvenio extends Vista {
         const convenioData = {
           tituloConvenio: this.inputTitulo.value,
           fechaFirma: this.inputFechaFirma.value,
-          documento: reader.result // reader.result es el resultado obtenido de reader.readAsText(file)
+          documento: reader.result, // reader.result es el resultado obtenido de reader.readAsText(file)
+          idCiclo: this.selectCiclo.value,
+          idEmpresa: this.selectEmpresa.value
         }
 
         // Se envia al completar la lectura del archivo

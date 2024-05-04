@@ -374,6 +374,14 @@ class DualEx {
       //   console.error('Error al realizar la solicitud:', error)
       // })
   }
+
+  recibirDatosCiclo(){
+    return Rest.get('ciclo')
+  }
+
+  recibirDatosEmpresa () {
+    return Rest.get('empresa')
+  }
 }
 
 /* eslint-disable no-new */
