@@ -1,7 +1,7 @@
 import { Vista } from './vista.js'
 
 /**
- Vista del alta de convenio de la aplicación.
+ Vista correspondiente al alta de convenio de la aplicación dualex.
  Sirve para dar de alta los convenio.
  **/
 export class Vistaconvenio extends Vista {

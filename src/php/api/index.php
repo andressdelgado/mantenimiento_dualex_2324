@@ -104,7 +104,11 @@
 				break;
             case 'convenio':
                 require_once ('./controladores/convenio.php');
-                $controlador = new Convenio($recurso);
+                $controlador = new Convenio();
+                break;
+            case 'ciclo':
+                require_once ('./controladores/ciclo.php');
+                $controlador = new Ciclo();
                 break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
