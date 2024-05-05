@@ -80,7 +80,7 @@ export class VistaConvenios extends Vista {
           botonVerConvenio.textContent = 'Ver Convenio'
           botonVerConvenio.className = 'boton-ver-convenios'
           // Asociar evento para visualizar el documento
-          botonVerConvenio.onclick = () => this.mostrarConvenio(convenio.documento)
+          botonVerConvenio.onclick = () => this.mostrarConvenio(convenio.documento,convenio.titulo)
 
           verConvenioCelda.appendChild(botonVerConvenio)
 
@@ -100,7 +100,7 @@ export class VistaConvenios extends Vista {
       })
   }
 
-  mostrarConvenio (documento) {
+  mostrarConvenio (documento, titulo) {
     // El encabezado en B64 empieza con eso y hay que reemplzarlo
     const base64Data = documento.replace(/^data:application\/pdf;base64,/, '')
 
@@ -119,5 +119,6 @@ export class VistaConvenios extends Vista {
     // Abrir una nueva ventana y cargar el PDF en un iframe
     const newWindow = window.open()
     newWindow.document.write('<iframe src="' + url + '" width="100%" height="100%"></iframe>')
+    newWindow.document.title = titulo // Titulo de la pestaña
   }
 }
