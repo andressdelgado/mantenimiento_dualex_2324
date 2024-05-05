@@ -101,7 +101,7 @@ export class Vistaconvenio extends Vista {
       }
 
       // Lectura del archivo para poder tener en reader.result el resultado. Es un metodo asincrono por eso mismo el .onload
-      reader.readAsText(file)
+      reader.readAsDataURL(file) // Formato Base64
     } else {
       console.log('Los datos introducidos no tienen un formato valido')
     }
