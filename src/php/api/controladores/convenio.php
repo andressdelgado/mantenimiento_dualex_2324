@@ -4,7 +4,7 @@ require_once('./daos/daoconvenio.php');
 
 class Convenio{
     function post($pathParams, $queryParams, $body, $usuario){
-        //if ($usuario->rol == 'coordinador') {
+        //if ($usuario->rol != 'coordinador') {
         //    header('HTTP/1.1 401 Unauthorized');
         //    die();
         //}
