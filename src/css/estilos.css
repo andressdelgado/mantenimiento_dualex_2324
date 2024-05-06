@@ -29,7 +29,7 @@ legend{
 }
 
 /* Inicialmente ocultamos las vistas #divConvenio */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenio{
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenios{
 	display: none;
 }
 

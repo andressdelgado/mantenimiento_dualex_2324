@@ -32,6 +32,7 @@ export class Vistaconvenio extends Vista {
     this.btnLimpiar.onclick = this.limpiar.bind(this)
     this.btnAnadir.onclick = this.anadirConvenio.bind(this)
     this.inputTitulo.onchange = this.validarTituloUsuario.bind(this)
+    this.inputFechaFirma.onchange = this.validarFechaFirma.bind(this)
     this.inputDocumento.onchange = this.validarDocumento.bind(this)
   }
 
@@ -77,7 +78,11 @@ export class Vistaconvenio extends Vista {
   }
 
   anadirConvenio () {
-    if (this.validarTituloUsuario() && this.validarDocumento()) {
+    console.log('fecha')
+    console.log(this.inputFechaFirma.value)
+    console.log('Documentos')
+    console.log(this.inputDocumento.files[0])
+    if (this.comprobarVacio() && this.validarTituloUsuario() && this.validarDocumento() && this.validarFechaFirma()) {
       const file = this.inputDocumento.files[0]
       const reader = new FileReader()
 
@@ -143,6 +148,49 @@ export class Vistaconvenio extends Vista {
       errorDocumento.textContent = 'El documento debe ser un archivo PDF.'
       return false
     }
+  }
+
+  validarFechaFirma () {
+    // Comprobar el campo de fecha de firma
+    const fechaFirma = this.inputFechaFirma.value
+    const errorFechaFirma = document.getElementById('errorFechaFirma')
+    if (fechaFirma === '') {
+      errorFechaFirma.textContent = 'El campo de fecha de firma no puede estar vacío.'
+      return false
+    } else {
+      errorFechaFirma.textContent = ''
+      return true
+    }
+  }
+
+  comprobarVacio () {
+    let camposValidos = true
+
+    // Comprobar el campo de título
+    const titulo = this.inputTitulo.value
+    const errorTitulo = document.getElementById('errorTitulo')
+    if (titulo === '') {
+      this.inputTitulo.classList.add('invalid')
+      this.inputTitulo.classList.remove('valid')
+      errorTitulo.textContent = 'El campo de título no puede estar vacío.'
+      camposValidos = false
+    } else {
+      errorTitulo.textContent = ''
+    }
+
+    camposValidos = this.validarFechaFirma()
+
+    // Comprobar el campo de documento
+    const file = this.inputDocumento.files[0]
+    const errorDocumento = document.getElementById('errorDocumento')
+    if (file === undefined) {
+      errorDocumento.textContent = 'Debe seleccionar un documento.'
+      camposValidos = false
+    } else {
+      errorDocumento.textContent = ''
+    }
+
+    return camposValidos
   }
 }
 // // eslint-disable-next-line no-new

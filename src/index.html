@@ -229,23 +229,24 @@
 			<label for="fechaFirma">Fecha de Firma del delegado:</label>
 			<input type="date" id="fechaFirma" placeholder="(Fecha firma)" />
 		</div>
+		<span id="errorFechaFirma" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
 			<label for="documento">Documento:</label>
 			<input type="file" id="documento" accept=".pdf" size="10485760"/>
 		</div>
+		<span id="errorDocumento" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
 			<label for="selectCiclo">Ciclo:</label>
 			<select id="selectCiclo">
-				<!-- Aquí irán las opciones del select -->
+				<!-- Options -->
 			</select>
 		</div>
 		<div class="divFlex">
 			<label for="selectEmpresa">Empresa:</label>
 			<select id="selectEmpresa">
-				<!-- Aquí irán las opciones del select -->
+				<!-- options -->
 			</select>
 		</div>
-		<span id="errorDocumento" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlexBotones">
 			<button id="btnAnadir">Añadir</button>
 			<button id="btnLimpiar" style="background-color: darkred">Limpiar</button>
