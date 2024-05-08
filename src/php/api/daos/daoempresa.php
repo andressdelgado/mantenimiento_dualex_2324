@@ -14,6 +14,7 @@ class DAOEmpresa{
         $sql = 'INSERT INTO empresa(siglas, nombre, notas) ';
 		$sql .= 'VALUES (:siglas, :nombre, :notas)';
 		$params = array('siglas' => $empresa->siglas, 'nombre'=>$empresa->nombre, 'notas'=>$empresa->notas);
-		BD::insertar($sql, $params);
+		$id = BD::insertar($sql, $params);
+        return $id;
 	}
 }
