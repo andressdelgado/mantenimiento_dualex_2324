@@ -21,6 +21,8 @@ import { VistaAlumnos } from './vistas/vistaalumnos.js'
 import { VistaInforme } from './vistas/vistainforme.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
+// Créditos
+import { VistaEmpresa } from './vistas/vistaempresa.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
