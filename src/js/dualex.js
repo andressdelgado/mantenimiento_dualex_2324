@@ -21,7 +21,7 @@ import { VistaAlumnos } from './vistas/vistaalumnos.js'
 import { VistaInforme } from './vistas/vistainforme.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
-// Créditos
+// Empresa
 import { VistaEmpresa } from './vistas/vistaempresa.js'
 
 // Servicios
@@ -54,6 +54,8 @@ class DualEx {
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
+    this.vistaEmpresa = new VistaEmpresa(this, document.getElementById('divEmpresa'))
+
     this.vistaLogin.mostrar()
   }
 
@@ -83,6 +85,7 @@ class DualEx {
             break
           case 'profesor':
             this.mostrarAlumnos()
+            this.mostrarFormulario()
             break
           case 'coordinador':
             this.mostrarAlumnos()
@@ -122,6 +125,7 @@ class DualEx {
     this.vistaAlumnos.mostrar(false)
     this.vistaInforme.mostrar(false)
     this.vistaCreditos.mostrar(false)
+    this.vistaEmpresa.mostrar(false)
   }
 
   /**
@@ -361,8 +365,21 @@ class DualEx {
     console.log(tarea.titulo)
     this.vistaMenu.verTarea(tarea)
   }
-  
-}
+
+  mostrarFormulario () {
+    if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador') { throw Error('Operación no permitida.') }
+      this.vistaEmpresa.mostrar(true)
+  }
+
+  /**
+    Crea una nueva empresa
+    @param empresa {Empresa} Datos de la nueva tarea.
+  **/
+    crearEmpresa (empresa) {
+      this.modelo.crearEmpresa(empresa)
+      }
+    }
+
 
 /* eslint-disable no-new */
 new DualEx()

@@ -302,11 +302,11 @@ legend{
 	margin-bottom: 21px!important;
     border-bottom-color: white!important;
 }
-#divEmpresas{
+#divEmpresa{
 	/*opacity: 0;*/
 	transition: opacity 1s;
 }
-.vistaEmpresas {
+.vistaEmpresa {
 	width: 40%;
 	margin: 5rem auto;
 	padding: 2rem;
@@ -314,10 +314,10 @@ legend{
 	border-color: black;
 	border-style: solid;
 }
-.vistaEmpresas input{
+.vistaEmpresa input{
 	margin: 0.3rem;
 }
-.vistaEmpresas button{
+.vistaEmpresa button{
 	cursor: pointer;
 	background-color: blue;
 	border: none;
@@ -330,33 +330,33 @@ legend{
 	display: inline-block;
 	font-size: 1.2rem;
 }
-.vistaEmpresas button:hover{
+.vistaEmpresa button:hover{
 	text-decoration: underline;
 }
-.vistaEmpresas p{
+.vistaEmpresa p{
 	font-size: 0.9rem;
 	line-height: 1.2rem;
 }
-.vistaEmpresas p:first-of-type{
+.vistaEmpresa p:first-of-type{
 	cursor: pointer;
 	color: blue;
 }
-.vistaEmpresas p:first-of-type:hover{
+.vistaEmpresa p:first-of-type:hover{
 	text-decoration: underline;
 }
 /* Párrafo de Error */
-.vistaEmpresas p:nth-of-type(2){
+.vistaEmpresa p:nth-of-type(2){
 	display: none;
 	color: red;
 	font-weight: bold;
 }
 
-#divEmpresas>label{
+#divEmpresa>label{
 	display: block;
 	width: 30%;
 }
 
-#divEmpresas>label>input{
+#divEmpresa>label>input{
 	margin-left: 15%;
 
 }

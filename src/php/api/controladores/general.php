@@ -24,6 +24,8 @@ class Controlador{
 			case 'periodo':
 				$this->entidad = 'Periodo';
 				break; 
+			case 'empresa':
+				$this->entidad = 'Empresa';
 			default:
 				header('HTTP/1.1 500 Internal Server Error');
 				die();

@@ -134,4 +134,14 @@ export class Modelo {
       queryParams.set('periodo', periodo)
       return Rest.get('modulo', ['moduloNota'], queryParams)
     }
+
+    /**
+    Crea una empresa.
+    @param empresa {Empresa} Datos de la empresa.
+    @return {Promise} Devuelve la promesa asociada a la petición.
+    **/
+    crearEmpresa (empresa) {
+      return Rest.post('empresa', [], empresa)
+    }
+
 }
