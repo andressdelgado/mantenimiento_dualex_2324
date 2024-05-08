@@ -58,6 +58,7 @@ export class Rest {
       headers: Rest._getHeaders(),
       body: JSON.stringify(requestBody)
     }
+    console.log(opciones)
     // Construimos la petición
     return fetch(Rest._construirURL(path, pathParams), opciones) // Hacemos la petición
       .then(respuesta => {

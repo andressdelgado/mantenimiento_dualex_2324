@@ -44,22 +44,10 @@ export class VistaEmpresa extends Vista {
         console.log(empresaData)
         // Se envia al completar la lectura del formulario
         this.controlador.crearEmpresa(empresaData)
-          .then(respuesta => {
-            console.log(respuesta)
-          })
-          .catch(error => {
-            console.error('Error al realizar la solicitud:', error)
-          })
     } else {
       console.log('Los datos introducidos no tienen un formato valido')
     }
   }
-
-  mostrar (ver) {
-    if (ver) 
-    super.mostrar(ver)
-  }
-
 
   comprobarVacio () {
     let camposValidos = true

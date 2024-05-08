@@ -141,6 +141,7 @@ export class Modelo {
     @return {Promise} Devuelve la promesa asociada a la petición.
     **/
     crearEmpresa (empresa) {
+      console.log(empresa, 'datso dew ña empresa')
       return Rest.post('empresa', [], empresa)
     }
 

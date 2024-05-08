@@ -3,7 +3,7 @@
 require_once('./daos/daoempresa.php');
 
 class Empresa{
-    function post($pathParams, $queryParams, $body){
+    function post($pathParams, $queryParams, $empresa){
         //if ($usuario->rol != 'coordinador') {
         //    header('HTTP/1.1 401 Unauthorized');
         //    die();
@@ -13,11 +13,13 @@ class Empresa{
         $nombre = $body->nombre;
         $notas = $body->notas;
 
+        echo('datos recogidos');
+
 
         // Validaciones
         if (!empty($siglas) && !empty($nombre) &&!empty($notas)) {
-            // Alta empre
-            $id = DAOEmpresa::insertar($siglas, $nombre, $notas);
+            // Alta empresa
+            $id = DAOEmpresa::insertar($empresa);
             if (!empty($id)) {
                 header('HTTP/1.1 200 OK');
                 $localizacion = '/empresa/'.$id; //id insertado

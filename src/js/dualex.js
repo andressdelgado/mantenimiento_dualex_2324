@@ -85,7 +85,6 @@ class DualEx {
             break
           case 'profesor':
             this.mostrarAlumnos()
-            this.mostrarFormulario()
             break
           case 'coordinador':
             this.mostrarAlumnos()
@@ -125,7 +124,7 @@ class DualEx {
     this.vistaAlumnos.mostrar(false)
     this.vistaInforme.mostrar(false)
     this.vistaCreditos.mostrar(false)
-    this.vistaEmpresa.mostrar(false)
+    //this.vistaEmpresa.mostrar(true)
   }
 
   /**
@@ -373,10 +372,11 @@ class DualEx {
 
   /**
     Crea una nueva empresa
-    @param empresa {Empresa} Datos de la nueva tarea.
+    @param datosdelaempresa {Empresa} Datos de la nueva tarea.
   **/
-    crearEmpresa (empresa) {
-      this.modelo.crearEmpresa(empresa)
+    crearEmpresa (datosdelaempresa) {
+      console.log('estoy en el controlador')
+      this.modelo.crearEmpresa(datosdelaempresa)
       }
     }
 
