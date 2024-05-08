@@ -9,14 +9,10 @@ class Empresa{
         //    die();
         //}
         // Extraer datos del body
-        $siglas = $body->siglas;
-        $nombre = $body->nombre;
-        $notas = $body->notas;
-
-        echo('datos recogidos');
-
-
-        // Validaciones
+        $siglas = $empresa->siglas;
+        $nombre = $empresa->nombre;
+        $notas = $empresa->notas;
+            // Validaciones
         if (!empty($siglas) && !empty($nombre) &&!empty($notas)) {
             // Alta empresa
             $id = DAOEmpresa::insertar($empresa);
