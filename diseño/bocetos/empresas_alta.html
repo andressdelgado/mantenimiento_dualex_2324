@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang=es>
+    <head>
+        <style>
+            #divEmpresas{
+                /*opacity: 0;*/
+                transition: opacity 1s;
+            }
+            .vistaEmpresas {
+                width: 40%;
+                margin: 5rem auto;
+                padding: 2rem;
+                border-width: 1px;
+                border-color: black;
+                border-style: solid;
+            }
+            .vistaEmpresas input{
+                margin: 0.3rem;
+            }
+            .vistaEmpresas button{
+                cursor: pointer;
+                background-color: blue;
+                border: none;
+                color: white;
+                margin: 1rem;
+                margin-left: 2rem;
+                padding: 0.5rem 1.5rem;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 1.2rem;
+            }
+            .vistaEmpresas button:hover{
+                text-decoration: underline;
+            }
+            .vistaEmpresas p{
+                font-size: 0.9rem;
+                line-height: 1.2rem;
+            }
+            .vistaEmpresas p:first-of-type{
+                cursor: pointer;
+                color: blue;
+            }
+            .vistaEmpresas p:first-of-type:hover{
+                text-decoration: underline;
+            }
+            /* Párrafo de Error */
+            .vistaEmpresas p:nth-of-type(2){
+                display: none;
+                color: red;
+                font-weight: bold;
+            }
+
+            #divEmpresas>label{
+                display: block;
+                width: 30%;
+            }
+
+            #divEmpresas>label>input{
+                margin-left: 15%;
+
+            }
+
+            .divFlex, .divFlexBotones{
+                display: flex;
+            }
+            .divFlex{
+                font-size: large;
+            }
+            .divFlex label{
+                width: 40%;
+            }
+            .divFlex input{
+                width: 50%;
+            }
+            .divFlex textarea {
+                width: 50%;
+                padding: 8px;
+                box-sizing: border-box;
+                border-radius: 4px;
+            }
+            .divFlexBotones{
+                margin-top: 2%;
+                flex-direction: row-reverse;
+            }
+            /* Estilos para el estado válido */
+            input.valid {
+                border-color: green; /* Cambia el borde a verde */
+            }
+
+            /* Estilos para el estado inválido */
+            input.invalid {
+                border-color: red; /* Cambia el borde a rojo */
+            }
+        </style>
+    </head>
+    <body>
+        <div class='vistaEmpresas' id="divEmpresas">
+            <div class="divFlex">
+                <label for="siglas">Siglas:</label>
+                <input type="text" id="titulo" placeholder="(Siglas de la empresa)" />
+            </div>
+            <div class="divFlex">
+                <label for="nombreEmpresa">Nombre de la empresa:</label>
+                <input type="text" id="nombreEmpresa" placeholder="(Nombre de la empresa)" />
+            </div>
+            <div class="divFlex">
+                <label for="notas">Notas:</label>
+                <textarea id="notas"></textarea>
+            </div>
+            <div class="divFlexBotones">
+                <button id="btnAnadir">Añadir</button>
+            </div>
+        </div>
+    </body>
+</html>
