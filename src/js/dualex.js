@@ -242,7 +242,7 @@ class DualEx {
   /**
     Modifica una tarea y vuelve a la vista de tareas del alumno.
     @param tarea {Tarea} Datos de la tarea.
-		@param siguienteTarea {Tarea} Datos de la siguiente tarea a mostrar.
+    @param siguienteTarea {Tarea} Datos de la siguiente tarea a mostrar.
   **/
   modificarTarea (tarea, siguienteTarea = null) {
     this.modelo.modificarTarea(tarea)
@@ -251,13 +251,12 @@ class DualEx {
           this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
           if (this.#usuario.rol === 'profesor') {
             this.mostrarTareasAlumno(this.alumnoMostrado)
-          }
-          else {
+          } else {
             this.mostrarTareasAlumno(this.#usuario)
           }
+        } else {
+          this.mostrarTarea(siguienteTarea)
         }
-				else
-					this.mostrarTarea(siguienteTarea)
       })
       .catch(error => this.gestionarError(error))
   }
@@ -361,6 +360,11 @@ class DualEx {
     this.vistaMenu.verTarea(tarea)
   }
 
+  /**
+   * Realiza una peticion de alta de convenio
+   * @param formData Datos para la peticion
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
   enviarSolicitudConvenio (formData) {
     return Rest.post('convenio', [], formData, false)
       // .then(respuesta => {
@@ -377,14 +381,26 @@ class DualEx {
       // })
   }
 
+  /**
+   * Realiza una petición para obtener los datos de la tabla ciclos
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
   recibirDatosCiclo () {
     return Rest.get('ciclo')
   }
 
+  /**
+   * Realiza una petición para obtener los datos de la tabla empresa
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
   recibirDatosEmpresa () {
     return Rest.get('empresa')
   }
 
+  /**
+   * Realiza una petición para obtener los datos de la tabla convenio
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
   recibirDatosConvenios () {
     return Rest.get('convenio')
   }

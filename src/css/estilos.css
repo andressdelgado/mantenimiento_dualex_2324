@@ -29,7 +29,7 @@ legend{
 }
 
 /* Inicialmente ocultamos las vistas #divConvenio */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenios{
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenio, #divConvenios{
 	display: none;
 }
 
@@ -276,17 +276,18 @@ legend{
 #divConvenio{
 	transition: opacity 1s;
 }
-.vistaConvenios{
+#divConvenio{
 	width: 40%;
 	margin: 5rem auto;
 	padding: 2rem;
 	border: 2px solid blue;
 	border-radius: 1rem;
+	transition: opacity 1s;
 }
-.vistaConvenios input{
+#divConvenio input{
 	margin: 0.3rem;
 }
-.vistaConvenios button{
+#divConvenio button{
 	cursor: pointer;
 	background-color: blue;
 	border: none;
@@ -299,22 +300,22 @@ legend{
 	display: inline-block;
 	font-size: 1.2rem;
 }
-.vistaConvenios button:hover{
+#divConvenio button:hover{
 	text-decoration: underline;
 }
-.vistaConvenios p{
+#divConvenio p{
 	font-size: 0.9rem;
 	line-height: 1.2rem;
 }
-.vistaConvenios p:first-of-type{
+#divConvenio p:first-of-type{
 	cursor: pointer;
 	color: blue;
 }
-.vistaConvenios p:first-of-type:hover{
+#divConvenio p:first-of-type:hover{
 	text-decoration: underline;
 }
 /* Párrafo de Error */
-.vistaConvenios p:nth-of-type(2){
+#divConvenio p:nth-of-type(2){
 	display: none;
 	color: red;
 	font-weight: bold;
@@ -350,6 +351,7 @@ legend{
 /** DIV Convenios **/
 #divConvenios {
 	transition: opacity 1s;
+	margin-bottom: 2%;
 }
 h1{
 	text-align: center; /* Centra el contenido del div */
@@ -369,6 +371,11 @@ h1{
 
 #tablaListaConvenios th {
 	background-color: #f0f0f0;
+}
+
+#tablaListaConvenios th:first-child,
+#tablaListaConvenios td:first-child {
+	text-align: left;
 }
 
 /* Estilo del botón personalizado */

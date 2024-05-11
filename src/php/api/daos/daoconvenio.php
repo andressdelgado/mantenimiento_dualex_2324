@@ -1,7 +1,19 @@
 <?php
 
-class DAOConvenio
-{
+/**
+    DAO de Convenio.
+    Objeto para el acceso a los datos relacionados con los convenios.
+ **/
+class DAOConvenio{
+    /**
+     * Inserta un convenio en la base de datos.
+     * @param $titulo {String} Título del convenio.
+     * @param $fecha_firma {Date} Fecha de firma del convenio.
+     * @param $documento {String} Contenido del documento del convenio codificado en B64.
+     * @param $idCiclo {Integer} Identificador del ciclo.
+     * @param $idEmpresa {Integer} Identificador de la empresa.
+     * @return false|string|null {Integer} Identificador del convenio insertado.
+     */
     public static function insertar($titulo, $fecha_firma, $documento, $idCiclo, $idEmpresa){
         $sql = 'INSERT INTO Convenio(titulo, fecha_firma, documento, idCiclo, idEmpresa)';
         $sql .= 'VALUES (:titulo, :fecha_firma, :documento, :idCiclo, :idEmpresa)';
@@ -13,11 +25,14 @@ class DAOConvenio
         return $id;
     }
 
-    public static function verConvenios()
-    {
-        $sql = "SELECT convenio.id, convenio.titulo, convenio.fecha_firma, convenio.documento, ciclo.nombre AS nombreCiclo, empresa.nombre AS nombreEmpresa FROM convenio ";
-        $sql .= "INNER JOIN ciclo ON convenio.idCiclo = ciclo.id ";
-        $sql .= "INNER JOIN empresa ON convenio.idEmpresa = empresa.id ";
+    /**
+     * Devuelve un array con los datos de los convenios.
+     * @return {Array[Convenio]} Array de convenios.
+     */
+    public static function verConvenios(){
+        $sql = "SELECT Convenio.id, Convenio.titulo, Convenio.fecha_firma, Convenio.documento, Ciclo.nombre AS nombreCiclo, Empresa.nombre AS nombreEmpresa FROM Convenio ";
+        $sql .= "INNER JOIN Ciclo ON Convenio.idCiclo = Ciclo.id ";
+        $sql .= "INNER JOIN Empresa ON Convenio.idEmpresa = Empresa.id ";
         $sql .= "ORDER BY convenio.id ";
 
         $params = array();

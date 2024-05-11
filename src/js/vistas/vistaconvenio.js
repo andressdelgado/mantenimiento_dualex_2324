@@ -2,7 +2,7 @@ import { Vista } from './vista.js'
 
 /**
  Vista correspondiente al alta de convenio de la aplicación dualex.
- Sirve para dar de alta los convenio.
+ Sirve para dar de alta a un convenio.
  **/
 export class Vistaconvenio extends Vista {
   /**
@@ -36,17 +36,26 @@ export class Vistaconvenio extends Vista {
     this.inputDocumento.onchange = this.validarDocumento.bind(this)
   }
 
+  /**
+   * Limpia los campos del formulario.
+   */
   limpiar () {
     this.inputTitulo.value = ''
     this.inputFechaFirma.value = ''
     this.inputDocumento.value = ''
   }
 
+  /**
+   * Carga los datos de los ciclos y las empresas en sus respectivos select.
+   */
   cargarDatos () {
     this.cargarDatosCiclos()
     this.cargarDatosEmpresas()
   }
 
+  /**
+   * Carga los ciclos en el select de ciclos.
+   */
   cargarDatosCiclos () {
     this.controlador.recibirDatosCiclo()
       .then(ciclos => {
@@ -62,6 +71,9 @@ export class Vistaconvenio extends Vista {
       })
   }
 
+  /**
+   * Carga las empresas en el select de empresas.
+   */
   cargarDatosEmpresas () {
     this.controlador.recibirDatosEmpresa()
       .then(empresas => {
@@ -77,11 +89,10 @@ export class Vistaconvenio extends Vista {
       })
   }
 
+  /**
+   * Añade un convenio a la base de datos.
+   */
   anadirConvenio () {
-    console.log('fecha')
-    console.log(this.inputFechaFirma.value)
-    console.log('Documentos')
-    console.log(this.inputDocumento.files[0])
     if (this.comprobarVacio() && this.validarTituloUsuario() && this.validarDocumento() && this.validarFechaFirma()) {
       const file = this.inputDocumento.files[0]
       const reader = new FileReader()
@@ -112,6 +123,10 @@ export class Vistaconvenio extends Vista {
     }
   }
 
+  /**
+   * Valida el campo de titulo de usuario.
+   * @returns {boolean} Devuelve true si el campo es valido, false en caso contrario.
+   */
   validarTituloUsuario () {
     const titulo = this.inputTitulo.value.trim()
     const tituloLength = titulo.length
@@ -130,6 +145,10 @@ export class Vistaconvenio extends Vista {
     }
   }
 
+  /**
+   * Valida el campo de documento.
+   * @returns {boolean} Devuelve true si el campo es valido, false en caso contrario.
+   */
   validarDocumento () {
     const file = this.inputDocumento.files[0]
     const tipoDocumento = file ? file.type : ''
@@ -150,6 +169,10 @@ export class Vistaconvenio extends Vista {
     }
   }
 
+  /**
+   * Valida el campo de fecha de firma.
+   * @returns {boolean} Devuelve true si el campo es valido, false en caso contrario.
+   */
   validarFechaFirma () {
     // Comprobar el campo de fecha de firma
     const fechaFirma = this.inputFechaFirma.value
@@ -163,6 +186,10 @@ export class Vistaconvenio extends Vista {
     }
   }
 
+  /**
+   * Comprueba si los campos del formulario están vacíos.
+   * @returns {boolean} Devuelve true si los campos no están vacíos, false en caso contrario.
+   */
   comprobarVacio () {
     let camposValidos = true
 

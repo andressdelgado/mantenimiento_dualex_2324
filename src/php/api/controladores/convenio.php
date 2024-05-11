@@ -3,6 +3,14 @@
 require_once('./daos/daoconvenio.php');
 
 class Convenio{
+
+    /**
+        Inserta un convenio en la base de datos
+        @param $pathParams {Array} Array de parámetros.
+        @param $queryParams {Array} Array de parámetros.
+        @param $body {Object} Cuerpo de la petición.
+        @param $usuario {Usuario} Usuario que realiza la petición.
+     * */
     function post($pathParams, $queryParams, $body, $usuario){
         //if ($usuario->rol != 'coordinador') {
         //    header('HTTP/1.1 401 Unauthorized');
@@ -34,6 +42,14 @@ class Convenio{
             die();
         }
     }
+
+    /**
+        Devuelve la lista de convenios.
+        @param $pathParams {Array} No utilizado
+        @param $queryParams {Array} No utilizado
+        @param $usuario {Usuario} No utilizado
+        @return {Array[Convenio]}
+     * */
     function get($pathParams, $queryParams, $usuario){
         $resultado = DAOConvenio::verConvenios();
         $json = json_encode($resultado);

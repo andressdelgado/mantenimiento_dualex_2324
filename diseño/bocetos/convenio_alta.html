@@ -11,20 +11,17 @@
     <link rel=stylesheet href=../css/estilos.css />-->
     <style>
         #divConvenio{
-            /*opacity: 0;*/
-            transition: opacity 1s;
-        }
-        .vistaConvenios{
             width: 40%;
             margin: 5rem auto;
             padding: 2rem;
             border: 2px solid blue;
             border-radius: 1rem;
+            transition: opacity 1s;
         }
-        .vistaConvenios input{
+        #divConvenio input{
             margin: 0.3rem;
         }
-        .vistaConvenios button{
+        #divConvenio button{
             cursor: pointer;
             background-color: blue;
             border: none;
@@ -37,22 +34,22 @@
             display: inline-block;
             font-size: 1.2rem;
         }
-        .vistaConvenios button:hover{
+        #divConvenio button:hover{
             text-decoration: underline;
         }
-        .vistaConvenios p{
+        #divConvenio p{
             font-size: 0.9rem;
             line-height: 1.2rem;
         }
-        .vistaConvenios p:first-of-type{
+        #divConvenio p:first-of-type{
             cursor: pointer;
             color: blue;
         }
-        .vistaConvenios p:first-of-type:hover{
+        #divConvenio p:first-of-type:hover{
             text-decoration: underline;
         }
         /* Párrafo de Error */
-        .vistaConvenios p:nth-of-type(2){
+        #divConvenio p:nth-of-type(2){
             display: none;
             color: red;
             font-weight: bold;
@@ -98,7 +95,7 @@
 
 <body>
 
-<div class='vistaConvenios' id="divConvenio">
+<div id="divConvenio">
     <div class="divFlex">
         <label for="titulo">Titulo:</label>
         <input type="text" id="titulo" placeholder="(Titulo del documento)" />

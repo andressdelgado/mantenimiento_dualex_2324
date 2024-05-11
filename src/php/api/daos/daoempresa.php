@@ -1,9 +1,15 @@
 <?php
 
+/**
+    DAO de Empresa.
+    Objeto para el acceso a los datos relacionados con las empresas.
+ **/
 class DAOEmpresa {
-    public static function verEmpresas()
-    {
-        $sql = "SELECT * FROM empresa";
+    /**
+        Devuelve un array con los datos de las empresas.
+     */
+    public static function verEmpresas(){
+        $sql = "SELECT * FROM Empresa";
 
         $params = array();
 

@@ -1,9 +1,15 @@
 <?php
 
+/**
+    DAO de Ciclo.
+    Objeto para el acceso a los datos relacionados con el ciclo.
+ **/
 class DAOCiclo {
-    public static function verCiclos()
-    {
-        $sql = "SELECT * FROM ciclo";
+    /**
+        Devuelve un array con los datos de los ciclos.
+     */
+    public static function verCiclos() {
+        $sql = "SELECT * FROM Ciclo";
 
         $params = array();
 

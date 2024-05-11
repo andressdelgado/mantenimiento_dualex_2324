@@ -35,6 +35,8 @@ export class VistaTareas extends Vista {
     @param tarea {Tarea} Datos de la tarea.
   **/
   crearDivTarea (tarea) {
+    console.log('********* CONTENIDO TAREA *********')
+    console.log(tarea)
     const div = document.createElement('div')
     this.base.appendChild(div)
     div.id = `tarea_${tarea.id}` // Nos servirá para las pruebas
@@ -44,7 +46,7 @@ export class VistaTareas extends Vista {
     divIconos.classList.add('iconos')
     let editable = true
 		let texto = `${tarea.titulo}. `
-	
+
 		//Formamos el texo de calificación
 		if (tarea.calificacion_empresa) { texto += tarea.calificacion_empresa } else { texto += 'Sin calificación de empresa' }
 		// Calculamos las revisiones de la tarea
@@ -57,7 +59,7 @@ export class VistaTareas extends Vista {
       if (tarea.calificacion_empresa != null) { editable = false }
 			if (revisiones > 0) { editable = false }
 		}
-    
+
     if (editable) {
       const iconoEditar = document.createElement('img')
       divIconos.appendChild(iconoEditar)

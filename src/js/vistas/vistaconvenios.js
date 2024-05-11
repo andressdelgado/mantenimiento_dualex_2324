@@ -1,8 +1,8 @@
 import { Vista } from './vista.js'
 
 /**
- Vista correspondiente al alta de convenio de la aplicación dualex.
- Sirve para dar de alta los convenio.
+ Vista correspondiente al listado de convenios de la aplicación dualex.
+ Sirve para dar de listar todos los convenios.
  **/
 export class VistaConvenios extends Vista {
   /**
@@ -21,6 +21,9 @@ export class VistaConvenios extends Vista {
     this.cargarDatosConvenios()
   }
 
+  /**
+   * Carga los convenios en la tabla del listado.
+   */
   cargarDatosConvenios () {
     this.controlador.recibirDatosConvenios()
       .then(convenios => {
@@ -100,6 +103,11 @@ export class VistaConvenios extends Vista {
       })
   }
 
+  /**
+   * Muestra el convenio en una nueva ventana.
+   * @param documento codigo del documento almacenado en la base de datos.
+   * @param titulo titulo del convenio.
+   */
   mostrarConvenio (documento, titulo) {
     // El encabezado en B64 empieza con eso y hay que reemplzarlo
     const base64Data = documento.replace(/^data:application\/pdf;base64,/, '')
