@@ -7,21 +7,20 @@
         <title>DUALEX</title>
         <link rel=stylesheet href=../css/estilos.css />
         <style>
-            #vistaTareas table {
+            #divTareas table {
                 width: 90%;
                 border-collapse: collapse;
                 margin: auto;
                 border: 1px solid black;
-                margin-bottom: 2%;
             }
 
-            #vistaTareas td {
+            #divTareas td {
                 border: 1px solid black;
                 padding: 1%;
                 vertical-align: middle;
             }
 
-            #vistaTareas td button {
+            #divTareas td button {
                 background-color: red;
                 color: white;
                 border: 1px solid red;
@@ -31,27 +30,30 @@
                 font-size: large;
             }
 
-            #vistaTareas td button:hover {
+            #divTareas td button:hover {
                 background-color: darkred;
             }
 
-            #vistaTareas .centrado-horizontal {
+            #divTareas .centrado-horizontal {
                 text-align: center;
             }
 
-            #vistaTareas .centrado-vertical {
+            #centrado-vertical {
                 vertical-align: middle;
+            }
+            #tdModulos{
+                width: 15%;
             }
         </style>
     </head>
     <body>
-    <div id='vistaTareas'>
+    <div id='divTareas'>
         <table>
             <tbody>
             <tr>
-                <td rowspan="2">SEYE SHY<br>ELE</td>
+                <td rowspan="2" id="tdModulos">SEYE SHY<br>ELE</td>
                 <td colspan="4" rowspan="1">Título de la Tarea 1</td>
-                <td rowspan="2" class="centrado-horizontal centrado-vertical"><a href="#"><img src="./../../src/iconos/delete.svg" alt="Borrar"></a></td>
+                <td rowspan="2" class="centrado-horizontal" id="centrado-vertical"><a href="#"><img src="./../../src/iconos/delete.svg" alt="Borrar"></a></td>
             </tr>
             <tr>
                 <td class="centrado-horizontal">01/04/2024</td>
@@ -59,7 +61,15 @@
                 <td class="centrado-horizontal">Excelente</td>
                 <td class="centrado-horizontal">4/6</td>
             </tr>
-            <tr>
+            </tbody>
+        </table>
+    </div>
+    </body>
+
+</html>
+
+<!--
+ <tr>
                 <td rowspan="2">MMM IS <br/> MOT</td>
                 <td colspan="4" rowspan="1">Título de la Tarea 2</td>
                 <td rowspan="2" class="centrado-horizontal centrado-vertical"><a href="#"><img src="./../../src/iconos/delete.svg" alt="Borrar"></a></td>
@@ -81,9 +91,4 @@
                 <td class="centrado-horizontal">Regular</td>
                 <td class="centrado-horizontal">3/6</td>
             </tr>
-            </tbody>
-        </table>
-    </div>
-    </body>
-
-</html>
+ -->

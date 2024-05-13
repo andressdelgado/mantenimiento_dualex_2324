@@ -518,6 +518,46 @@ input.invalid {
 	border-bottom: 1px solid lightgrey;
 	min-height: 1.5rem;
 }
+
+
+#divTareas table {
+	width: 90%;
+	border-collapse: collapse;
+	margin: auto;
+	border: 1px solid black;
+}
+
+#divTareas td {
+	border: 1px solid black;
+	padding: 1%;
+	vertical-align: middle;
+}
+
+#divTareas td button {
+	background-color: red;
+	color: white;
+	border: 1px solid red;
+	border-radius: 15%;
+	padding: 4% 6%;
+	width: 50%;
+	font-size: large;
+}
+
+#divTareas td button:hover {
+	background-color: darkred;
+}
+
+#divTareas .centrado-horizontal {
+	text-align: center;
+}
+
+#centrado-vertical {
+	vertical-align: middle;
+}
+#tdModulos{
+	width: 15%;
+}
+
 #divTareas .icono_grande{
 	position: fixed;
 	top: 2%;
@@ -536,7 +576,7 @@ input.invalid {
 	white-space: nowrap;
 }
 #divTareas .icono{
-	display: inline;
+	/*display: inline;*/
 	width: 1.5rem;
 	cursor: pointer;
 }
