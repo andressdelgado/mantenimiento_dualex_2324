@@ -22,6 +22,10 @@ export class Modelo {
     return Rest.get('alumno', ['profesor'])
   }
 
+  getEmpresas(){
+    return Rest.get('empresa')
+  }
+
   /**
     Devuelve la lista de tareas de un alumno.
     @param alumno {Alumno} Datos del alumno.

@@ -17,4 +17,9 @@ class DAOEmpresa{
 		$id = BD::insertar($sql, $params);
         return $id;
 	}
+
+	public static function verEmpresas(){
+		$sql = 'SELECT * FROM empresa';
+		return BD::seleccionar($sql, []);
+	}
 }

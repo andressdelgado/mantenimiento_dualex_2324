@@ -29,7 +29,7 @@ legend{
 }
 
 /* Inicialmente ocultamos las vistas */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos{
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divEmpresa, #divEmpresas{
 	display: none;
 }
 
@@ -303,10 +303,6 @@ legend{
     border-bottom-color: white!important;
 }
 #divEmpresa{
-	/*opacity: 0;*/
-	transition: opacity 1s;
-}
-.vistaEmpresa {
 	width: 40%;
 	margin: 5rem auto;
 	padding: 2rem;
@@ -314,10 +310,10 @@ legend{
 	border-color: black;
 	border-style: solid;
 }
-.vistaEmpresa input{
+#divEmpresa input{
 	margin: 0.3rem;
 }
-.vistaEmpresa button{
+#divEmpresa button{
 	cursor: pointer;
 	background-color: blue;
 	border: none;
@@ -330,22 +326,22 @@ legend{
 	display: inline-block;
 	font-size: 1.2rem;
 }
-.vistaEmpresa button:hover{
+#divEmpresa button:hover{
 	text-decoration: underline;
 }
-.vistaEmpresa p{
+#divEmpresa p{
 	font-size: 0.9rem;
 	line-height: 1.2rem;
 }
-.vistaEmpresa p:first-of-type{
+#divEmpresa p:first-of-type{
 	cursor: pointer;
 	color: blue;
 }
-.vistaEmpresa p:first-of-type:hover{
+#divEmpresa p:first-of-type:hover{
 	text-decoration: underline;
 }
 /* Párrafo de Error */
-.vistaEmpresa p:nth-of-type(2){
+#divEmpresa p:nth-of-type(2){
 	display: none;
 	color: red;
 	font-weight: bold;
@@ -725,3 +721,52 @@ span.alumno:hover{
 	background-repeat: no-repeat;
 	background-size: contain;
 }
+
+#divMenuCoordinador {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+  }
+  
+ .wrapper {
+	display: flex;
+	flex-wrap: wrap;
+  }
+  
+ .box {
+	width: 200px;
+	height: 250px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	margin: 10px;
+	padding: 10px;
+	position: relative;
+  }
+  
+  #divMenuCoordinador > h2 {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 0;
+  }
+  
+  #divMenuCoordinador > #divMenuCoordinador > p {
+	font-size: 12px;
+	margin-top: 0;
+  }
+  
+  #divMenuCoordinador > button {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	width: 60px;
+	height: 30px;
+	background-color: blue;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+	font-size: 14px;
+	text-decoration: none;
+  }

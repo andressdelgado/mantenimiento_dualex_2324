@@ -21,12 +21,16 @@ import { VistaAlumnos } from './vistas/vistaalumnos.js'
 import { VistaInforme } from './vistas/vistainforme.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
-// Empresa
+// Vista del alta de Empresa
 import { VistaEmpresa } from './vistas/vistaempresa.js'
+//Vista del listado de Empresas
+import { VistaEmpresas } from './vistas/vistaempresas.js'
+//Vista del menú del Coordinador
+import { VistaMenuCoordinador } from './vistas/vistamenucoordinador.js'
+
 
 // Servicios
 import { Rest } from './servicios/rest.js'
-
 /**
   Controlador principal de la aplicación.
 **/
@@ -55,6 +59,8 @@ class DualEx {
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
     this.vistaEmpresa = new VistaEmpresa(this, document.getElementById('divEmpresa'))
+    this.vistaMenuCoordinador = new VistaMenuCoordinador(this, document.getElementById('divMenuCoordinador'))
+    this.vistaEmpresas = new VistaEmpresas(this, document.getElementById('divEmpresas'))
 
     this.vistaLogin.mostrar()
   }
@@ -124,9 +130,15 @@ class DualEx {
     this.vistaAlumnos.mostrar(false)
     this.vistaInforme.mostrar(false)
     this.vistaCreditos.mostrar(false)
-    //this.vistaEmpresa.mostrar(true)
+    this.vistaEmpresa.mostrar(false)
+    this.vistaMenuCoordinador.mostrar(false)
   }
 
+  irAVistaEmpresas() {
+    this.ocultarVistas()
+    this.vistaEmpresas.cargarEmpresas()
+    this.vistaEmpresas.mostrar(true)
+  }
   /**
     Muestra la vista de tareas del alumno.
     @param alumno {Alumno} Datos del alumno.
@@ -192,6 +204,10 @@ class DualEx {
         this.vistaAlumnos.mostrar(true)
       })
       .catch(error => this.gestionarError(error))
+  }
+
+  mostrarEmpresas(){
+    return this.modelo.getEmpresas();
   }
 
   /**
@@ -365,16 +381,11 @@ class DualEx {
     this.vistaMenu.verTarea(tarea)
   }
 
-  mostrarFormulario () {
-    if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador') { throw Error('Operación no permitida.') }
-      this.vistaEmpresa.mostrar(true)
-  }
-
   /**
     Crea una nueva empresa
     @param datosdelaempresa {Empresa} Datos de la nueva tarea.
   **/
-    crearEmpresa (datosdelaempresa) {
+    crearEmpresa(datosdelaempresa) {
       console.log('estoy en el controlador')
       this.modelo.crearEmpresa(datosdelaempresa)
       }
