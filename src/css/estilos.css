@@ -274,9 +274,6 @@ legend{
 
 /* DIV Convenio */
 #divConvenio{
-	transition: opacity 1s;
-}
-#divConvenio{
 	width: 40%;
 	margin: 5rem auto;
 	padding: 2rem;
