@@ -13,6 +13,7 @@ class Login{
 	public static $clave = null;
 	public static $algoritmo_encriptacion = null;
 	public static $iv = 'PantUfl45--;jeu$';
+    public static $coordinador = null;
 	//Id de cliente de Google.
 	private static $ID_CLIENTE = '756573648994-cn4uk8gsic003hnotjb9mpt1mjtnqvgm.apps.googleusercontent.com';
 
@@ -49,6 +50,9 @@ class Login{
     	}
 		//Completamos los datos del usuario
 		$usuario->email = $payload['email'];
+        if ($payload['email'] === self::$coordinador){
+            $usuario->rol = 'coordinador';
+        }
 		$usuario->autorizacion = openssl_encrypt(json_encode($usuario), self::$algoritmo_encriptacion, self::$clave, 0, self::$iv);
     	//print_r(openssl_get_cipher_methods()); //Muestra los algoritmos de encriptación disponibles
 

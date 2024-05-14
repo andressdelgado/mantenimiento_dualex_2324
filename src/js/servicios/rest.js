@@ -23,7 +23,7 @@ export class Rest {
     Realiza una llamada AJAX por GET
     @param path {String} Path del recurso solicitado.
     @param pathParams {Array} Parámetros de path que se añadirán a la llamada.
-    @param queryParams {Map} Mapa de parámetros que se añadirán después del path.
+    @param queryParams {{h}} Mapa de parámetros que se añadirán después del path.
     @return {Promise} Devuelve una promesa.
   **/
   static get (path, pathParams = [], queryParams) {
@@ -58,6 +58,7 @@ export class Rest {
       headers: Rest._getHeaders(),
       body: JSON.stringify(requestBody)
     }
+
     // Construimos la petición
     return fetch(Rest._construirURL(path, pathParams), opciones) // Hacemos la petición
       .then(respuesta => {

@@ -21,7 +21,7 @@
 		<p class=error></p>
 		<div id=divGoogleLogin ></div>
 <!-- En producción, eliminar este párrafo -->
-		<p>Pruebas (eliminar en producción): 
+		<p>Pruebas (eliminar en producción):
 			<select id=testlogin>
 				<option></option>
 				<optgroup label="---Alumnos:">
@@ -85,9 +85,9 @@
 		</label><br />
 		<label>Imágenes:<br /><br />
 			<input type=file capture="camera" accept="image/*"/>
-			
+
 		</label>
-		
+
 		<!-- div de imágenes -->
 		<img />
 		<div></div>
@@ -112,7 +112,7 @@
 			<textarea placeholder='Comentario del tutor de empresa'></textarea>
 		</label><br />
 			<hr />
-			
+
 		<h2>Evaluaciones de Profesores</h2>
 		<div></div>
 
@@ -126,7 +126,7 @@
 
 	<div id=divAlumnos>
 		<div>
-			
+
 		</div>
 	</div>
 
@@ -135,7 +135,7 @@
 		<div>
 			<p>Alumno/alumna: <span data-informe=alumno></span></p>
 			<p>Centro docente: <strong>ESCUELA VIRGEN DE GUADALUPE - FUNDACIÓN LOYOLA ACE</strong></p>
-		</div>	
+		</div>
 		<div>
 			<p class=derecha><span data-informe=grado></span></p>
 			<p>Ciclo Formativo: <strong><span data-informe=ciclo></span></strong></p>
@@ -147,7 +147,7 @@
 		<div>
 			<p class=derecha><span data-informe=periodo></span></p>
 			<p>Tutor/tutora del alumno o alumna en el centro de trabajo: <strong><input type=text placeholder='Nombre del tutor' size=25 /></strong></p>
-		</div>	
+		</div>
 		<div>
 			<p>Coordinador del Ciclo: <strong><span data-informe=coordinador></span></strong></p>
 		</div>
@@ -157,7 +157,7 @@
 		</div>
 		<div>
 			<p><strong>2.- VALORACIÓN GENERAL DEL ALUMNO/ALUMNA DE ESTE PERIODO EN EL CENTRO DE TRABAJO:</strong></p>
-			<div class=grid2> 
+			<div class=grid2>
 				<div>ASPECTOS A CONSIDERAR</div>
 				<div>NEGATIVA</div>
 				<div>POSITIVA</div>
@@ -218,8 +218,50 @@
 		<p><strong>Fecha de Publicación</strong>: Julio 2022</p>
 		<p><strong>Licencia</strong>: <a href="licencia.html">GPL v3</a></p>
 	</div>
+
+	<div id="divConvenio" class='vistaConvenios'>
+		<div class="divFlex">
+			<label for="tituloConvenio">Titulo:</label>
+			<input type="text" id="tituloConvenio" placeholder="(Titulo del documento)" />
+		</div>
+		<span id="errorTitulo" class="error" style="color: red; margin-left: 41%"></span>
+		<div class="divFlex">
+			<label for="fechaFirma">Fecha de Firma del delegado:</label>
+			<input type="date" id="fechaFirma" placeholder="(Fecha firma)" />
+		</div>
+		<span id="errorFechaFirma" class="error" style="color: red; margin-left: 41%"></span>
+		<div class="divFlex">
+			<label for="documento">Documento:</label>
+			<input type="file" id="documento" accept=".pdf" size="10485760"/>
+		</div>
+		<span id="errorDocumento" class="error" style="color: red; margin-left: 41%"></span>
+		<div class="divFlex">
+			<label for="selectCiclo">Ciclo:</label>
+			<select id="selectCiclo">
+				<!-- Options -->
+			</select>
+		</div>
+		<div class="divFlex">
+			<label for="selectEmpresa">Empresa:</label>
+			<select id="selectEmpresa">
+				<!-- options -->
+			</select>
+		</div>
+		<div class="divFlexBotones">
+			<button id="btnAnadir">Añadir</button>
+			<button id="btnLimpiar" style="background-color: darkred">Limpiar</button>
+		</div>
+	</div>
+
+	<div id="divConvenios">
+		<h1 id="tituloConvenios">Convenios</h1>
+
+		<table id="tablaListaConvenios">
+
+		</table>
+	</div>
+
 	<script type=module src=js/dualex.js></script>
 </body>
 
 </html>
-

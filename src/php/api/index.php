@@ -14,7 +14,7 @@
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 	}
-	
+
 	try{
 		//Inyección de dependencias
 		require_once('./servicios/bd.php');
@@ -44,6 +44,7 @@
 		parse_str($_SERVER['QUERY_STRING'], $queryParams);
 		$recurso = $pathParams[1];	//El primer elemento es la /.
 		array_splice($pathParams, 0, 2);	//Quitamos la / y el recurso solicitado.
+
 		//Procesamos los nulos
 		for($i = 0; $i < count($pathParams); $i++)
 			if ($pathParams[$i] == 'null')
@@ -56,6 +57,7 @@
 		//Inyección de dependencias
 		Login::$clave = $config['clave_encriptacion'];
 		Login::$algoritmo_encriptacion = $config['algoritmo_encriptacion'];
+        Login::$coordinador = $config['coordinador'];
 		if(array_key_exists('Authorization2', apache_request_headers())){
 			$autorizacion = apache_request_headers()['Authorization2'];
 			if ($autorizacion != "null")
@@ -100,11 +102,23 @@
 				require_once('./controladores/general.php');
 				$controlador = new Controlador($recurso);
 				break;
+            case 'convenio':
+                require_once ('./controladores/convenio.php');
+                $controlador = new Convenio();
+                break;
+            case 'ciclo':
+                require_once ('./controladores/ciclo.php');
+                $controlador = new Ciclo();
+                break;
+            case 'empresa':
+                require_once ('./controladores/empresa.php');
+                $controlador = new Empresa();
+                break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
 				die();
 		}
-		
+
 		if ($controlador)
 			switch($metodo){
 					case 'GET':

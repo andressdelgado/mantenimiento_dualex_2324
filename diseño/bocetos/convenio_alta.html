@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang=es>
+
+<head>
+    <meta charset=utf-8 />
+    <meta name=viewport content='width=device-width, initial-scale=1' />
+    <meta name=author content='Alfonso David Recio <alfonsodavidreciocalderon.guadalupe@alumnado.fundacionloyola.es' />
+    <title>DUALEX</title>
+
+    <!--<link rel=stylesheet href=../css/reset.css />
+    <link rel=stylesheet href=../css/estilos.css />-->
+    <style>
+        #divConvenio{
+            width: 40%;
+            margin: 5rem auto;
+            padding: 2rem;
+            border: 2px solid blue;
+            border-radius: 1rem;
+            transition: opacity 1s;
+        }
+        #divConvenio input{
+            margin: 0.3rem;
+        }
+        #divConvenio button{
+            cursor: pointer;
+            background-color: blue;
+            border: none;
+            color: white;
+            margin: 1rem;
+            margin-left: 2rem;
+            padding: 0.5rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+        #divConvenio button:hover{
+            text-decoration: underline;
+        }
+        #divConvenio p{
+            font-size: 0.9rem;
+            line-height: 1.2rem;
+        }
+        #divConvenio p:first-of-type{
+            cursor: pointer;
+            color: blue;
+        }
+        #divConvenio p:first-of-type:hover{
+            text-decoration: underline;
+        }
+        /* Párrafo de Error */
+        #divConvenio p:nth-of-type(2){
+            display: none;
+            color: red;
+            font-weight: bold;
+        }
+
+        #divConvenio>label{
+            display: block;
+            width: 30%;
+        }
+
+        #divConvenio>label>input{
+            margin-left: 15%;
+
+        }
+
+        .divFlex, .divFlexBotones{
+            display: flex;
+        }
+        .divFlex{
+            font-size: large;
+        }
+        .divFlex label{
+            width: 40%;
+        }
+        .divFlex input{
+            width: 50%;
+        }
+        .divFlexBotones{
+            margin-top: 2%;
+            flex-direction: row-reverse;
+        }
+        /* Estilos para el estado válido */
+        input.valid {
+            border-color: green; /* Cambia el borde a verde */
+        }
+
+        /* Estilos para el estado inválido */
+        input.invalid {
+            border-color: red; /* Cambia el borde a rojo */
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="divConvenio">
+    <div class="divFlex">
+        <label for="titulo">Titulo:</label>
+        <input type="text" id="titulo" placeholder="(Titulo del documento)" />
+    </div>
+    <div class="divFlex">
+        <label for="fechaFirma">Fecha de Firma del delegado:</label>
+        <input type="date" id="fechaFirma" placeholder="(Fecha firma)" />
+    </div>
+    <div class="divFlex">
+        <label for="documento">Documento:</label>
+        <input type="file" id="documento" accept=".pdf" size="10485760"/>
+    </div>
+    <div class="divFlex">
+        <label for="selectCiclo">Ciclo:</label>
+        <select id="selectCiclo">
+            <!-- Aquí irán las opciones del select -->
+        </select>
+    </div>
+    <div class="divFlex">
+        <label for="selectEmpresa">Empresa:</label>
+        <select id="selectEmpresa">
+            <!-- Aquí irán las opciones del select -->
+        </select>
+    </div>
+    <div class="divFlexBotones">
+        <button id="btnAnadir">Añadir</button>
+        <button id="btnLimpiar" style="background-color: darkred">Limpiar</button>
+    </div>
+</div>
+<script>
+  window.onload = function(){divConvenio.style.opacity = '1'}
+</script>
+<script type=module src=../../src/js/vistas/vistaconvenio.js></script>
+</body>
+
+</html>

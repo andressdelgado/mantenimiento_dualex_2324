@@ -24,6 +24,8 @@ import { VistaCreditos } from './vistas/vistacreditos.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
+import { Vistaconvenio } from './vistas/vistaconvenio.js'
+import { VistaConvenios } from './vistas/vistaconvenios.js'
 
 /**
   Controlador principal de la aplicación.
@@ -52,6 +54,8 @@ class DualEx {
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
+    this.vistaConvenio = new Vistaconvenio(this, document.getElementById('divConvenio')) // Vista alta convenios
+    this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios')) // Vista listado convenios
     this.vistaLogin.mostrar()
   }
 
@@ -131,16 +135,16 @@ class DualEx {
     // Para saber volver cuando sea el profesor
     if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador') {
       if (!alumno) {
-        alumno = this.alumnoMostrado 
+        alumno = this.alumnoMostrado
         this.alumno = this.alumnoMostrado
-      } 
+      }
       else {
         this.alumnoMostrado = alumno
       }
     }
-   
+
     //if (alumno == null) { alumno = this.#usuario }
-		alumno = this.alumno ?? this.#usuario 
+		alumno = this.alumno ?? this.#usuario
     this.ocultarVistas()
     this.modelo.getTareasAlumno(alumno)
       .then(tareas => {
@@ -241,7 +245,7 @@ class DualEx {
   /**
     Modifica una tarea y vuelve a la vista de tareas del alumno.
     @param tarea {Tarea} Datos de la tarea.
-		@param siguienteTarea {Tarea} Datos de la siguiente tarea a mostrar.
+    @param siguienteTarea {Tarea} Datos de la siguiente tarea a mostrar.
   **/
   modificarTarea (tarea, siguienteTarea = null) {
     this.modelo.modificarTarea(tarea)
@@ -249,14 +253,14 @@ class DualEx {
         if(!siguienteTarea){
           this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
           if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador') {
-            this.mostrarTareasAlumno(this.alumnoMostrado) 
-          } 
-          else {
-            this.mostrarTareasAlumno(this.#usuario) 
+            this.mostrarTareasAlumno(this.alumnoMostrado)
           }
+          else {
+            this.mostrarTareasAlumno(this.#usuario)
+          }
+        } else {
+          this.mostrarTarea(siguienteTarea)
         }
-				else
-					this.mostrarTarea(siguienteTarea)
       })
       .catch(error => this.gestionarError(error))
   }
@@ -346,7 +350,7 @@ class DualEx {
    * @returns array
    */
   getTareas(){
-		//let alumno = this.alumno ?? this.#usuario 
+		//let alumno = this.alumno ?? this.#usuario
     //return this.modelo.getTareasAlumno(alumno)
 		return this.tareas
   }
@@ -359,7 +363,51 @@ class DualEx {
     console.log(tarea.titulo)
     this.vistaMenu.verTarea(tarea)
   }
-  
+
+  /**
+   * Realiza una peticion de alta de convenio
+   * @param formData Datos para la peticion
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  enviarSolicitudConvenio (formData) {
+    return Rest.post('convenio', [], formData, false)
+      // .then(respuesta => {
+      //   if (respuesta.status === 200) {
+      //     console.log('Se realizó la consulta')
+      //     this.vistaConvenio.mostrar(false)
+      //     this.vistaConvenios.mostrar(true)
+      //   } else {
+      //     console.error('Hubo un error al realizar la consulta')
+      //   }
+      // })
+      // .catch(error => {
+      //   console.error('Error al realizar la solicitud:', error)
+      // })
+  }
+
+  /**
+   * Realiza una petición para obtener los datos de la tabla ciclos
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosCiclo () {
+    return Rest.get('ciclo')
+  }
+
+  /**
+   * Realiza una petición para obtener los datos de la tabla empresa
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosEmpresa () {
+    return Rest.get('empresa')
+  }
+
+  /**
+   * Realiza una petición para obtener los datos de la tabla convenio
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosConvenios () {
+    return Rest.get('convenio')
+  }
 }
 
 /* eslint-disable no-new */

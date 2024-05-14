@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Alfonso David Recio <alfonsodavidreciocalderon.guadalupe@alumnado.fundacionloyola.es" />
+    <title>DUALEX</title>
+
+    <style>
+        #divConvenios {
+            opacity: 0;
+            transition: opacity 1s;
+
+        }
+        h1{
+            text-align: center; /* Centra el contenido del div */
+        }
+        #tablaListaConvenios {
+            border-collapse: collapse;
+            width: 90%;
+            margin: auto;
+            margin-top: 20px; /* Añade un margen superior a la tabla */
+        }
+
+        #tablaListaConvenios th, #tablaListaConvenios td {
+            text-align: center; /* Centra el contenido de las celdas */
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #tablaListaConvenios th {
+            background-color: #f0f0f0;
+        }
+
+        /* Estilo del botón personalizado */
+        .boton-ver-convenios {
+            background-color: rgb(4, 0, 128); /* Color de fondo */
+            color: white; /* Color del texto */
+            padding: 10px 20px; /* Espaciado interno */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Borde redondeado */
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            text-decoration: none; /* Sin subrayado */
+            font-size: 14px; /* Tamaño de la fuente */
+            font-weight: bold; /* Texto en negrita */
+            transition: background-color 0.3s; /* Transición suave del color de fondo */
+        }
+
+        /* Cambio de color al pasar el cursor sobre el botón */
+        .boton-ver-convenios:hover {
+            background-color: rgb(0, 0, 80);
+        }
+    </style>
+</head>
+<body>
+
+<div id="divConvenios">
+    <h1 id="tituloConvenios">Convenios</h1>
+
+    <table id="tablaListaConvenios">
+        <thead>
+        <tr>
+            <th>Título</th>
+            <th>Fecha Firma</th>
+            <th>Empresa</th>
+            <th>Ciclo</th>
+            <th>Ver Convenio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Convenio colectivo de centros de enseñanza</td>
+            <td>07/05/2023</td>
+            <td>Vitaly</td>
+            <td>DAW</td>
+            <td><button class="boton-ver-convenios">Ver Convenio</button></td>
+        </tr>
+        <tr>
+            <td>VII Convenio colectivo colegios mayores</td>
+            <td>12/09/2023</td>
+            <td>Meta</td>
+            <td>DAM</td>
+            <td><button class="boton-ver-convenios">Ver Convenio</button></td>
+        </tr>
+        <tr>
+            <td>XII Convenio colectivos de centros de educacion infantil</td>
+            <td>16/03/2024</td>
+            <td>Indra</td>
+            <td>DAW</td>
+            <td><button class="boton-ver-convenios">Ver Convenio</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+  window.onload = function(){divConvenios.style.opacity = '1';}
+</script>
+</body>
+</html>
