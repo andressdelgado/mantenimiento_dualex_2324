@@ -34,73 +34,7 @@ export class VistaTareas extends Vista {
     Crea el div asociado a una tarea y lo añade a la base.
     @param tarea {Tarea} Datos de la tarea.
   **/
-  // crearDivTarea (tarea) {
-  //   console.log('********* CONTENIDO TAREA *********')
-  //   console.log(tarea)
-  //   const div = document.createElement('div')
-  //   this.base.appendChild(div)
-  //   div.id = `tarea_${tarea.id}` // Nos servirá para las pruebas
-  //   // TODO: Refactorizar para evitar DRY.
-  //   const divIconos = document.createElement('div')
-  //   div.appendChild(divIconos)
-  //   divIconos.classList.add('iconos')
-  //   let editable = true
-	// 	let texto = `${tarea.titulo}. `
-  //
-	// 	//Formamos el texo de calificación
-	// 	if (tarea.calificacion_empresa) { texto += tarea.calificacion_empresa } else { texto += 'Sin calificación de empresa' }
-	// 	// Calculamos las revisiones de la tarea
-	// 	let revisiones = tarea.modulos.reduce((accumulator, modulo) => {
-	// 		return accumulator + modulo.revisado
-	// 	}, 0);
-	// 	texto += ` - Revisiones Profesores: ${revisiones}/${tarea.modulos.length}`
-  //
-  //   if (this.controlador.getUsuario().rol === 'alumno') {
-  //     if (tarea.calificacion_empresa != null) { editable = false }
-	// 		if (revisiones > 0) { editable = false }
-	// 	}
-  //
-  //   if (editable) {
-  //     const iconoEditar = document.createElement('img')
-  //     divIconos.appendChild(iconoEditar)
-  //     iconoEditar.classList.add('icono')
-  //     iconoEditar.setAttribute('title', 'editar')
-  //     iconoEditar.setAttribute('src', 'iconos/edit.svg')
-  //     iconoEditar.onclick = this.pulsarEditar.bind(this, tarea)
-  //
-  //     const iconoEliminar = document.createElement('img')
-  //     divIconos.appendChild(iconoEliminar)
-  //     iconoEliminar.classList.add('icono')
-  //     iconoEliminar.setAttribute('title', 'eliminar')
-  //     iconoEliminar.setAttribute('src', 'iconos/delete.svg')
-  //     iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
-  //   } else {
-  //     const iconoConsultar = document.createElement('img')
-  //     divIconos.appendChild(iconoConsultar)
-  //     iconoConsultar.classList.add('icono')
-  //     iconoConsultar.setAttribute('title', 'consultar')
-  //     iconoConsultar.setAttribute('src', 'iconos/visibility.svg')
-  //     iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
-  //   }
-  //   tarea.modulos.forEach(this.crearSpanModulo.bind(this, div))
-  //   const spanTarea = document.createElement('span')
-  //   div.appendChild(spanTarea)
-  //   spanTarea.classList.add('tarea')
-  //   spanTarea.onclick = this.pulsarEditar.bind(this, tarea)
-  //   // Si es profesor, ponemos el aviso de tarea pendiente de corrección
-  //   if (this.controlador.getUsuario().rol === 'profesor') {
-  //     if (revisiones < tarea.modulos.length) {
-  //       const spanAviso = document.createElement('span')
-  //       spanTarea.appendChild(spanAviso)
-  //       spanAviso.classList.add('tarea_pendiente')
-  //       spanAviso.textContent = '!'
-  //       spanAviso.setAttribute('title', 'pendiente de revisión')
-  //     }
-  //   }
-	// 	spanTarea.appendChild(document.createTextNode(texto))
-  // }
-
-  crearDivTarea(tarea) {
+  crearDivTarea (tarea) {
     const tabla = document.createElement('table')
     const tbody = document.createElement('tbody')
     tabla.appendChild(tbody)
@@ -112,7 +46,7 @@ export class VistaTareas extends Vista {
     // Primer TD con los módulos
     const tdModulos = document.createElement('td')
     tdModulos.setAttribute('rowspan', '2')
-    tdModulos.setAttribute('id', 'tdModulos') // Añadir ID
+    tdModulos.setAttribute('id', 'tdModulos')
     tarea.modulos.forEach(this.crearSpanModulo.bind(this, tdModulos))
     tr1.appendChild(tdModulos)
 
@@ -168,17 +102,10 @@ export class VistaTareas extends Vista {
     const tdFecha = document.createElement('td')
     tdFecha.textContent = tarea.fecha
     tdFecha.classList.add('tarea')
-    tdFecha.classList.add('centrado-horizontal') // Agregar centrado horizontal
+    tdFecha.classList.add('centrado-horizontal')
     tr2.appendChild(tdFecha)
 
-    // Segundo TD con la palabra "Vitally"
-    const tdVitally = document.createElement('td')
-    tdVitally.textContent = 'Vitally'
-    tdVitally.classList.add('tarea')
-    tdVitally.classList.add('centrado-horizontal') // Agregar centrado horizontal
-    tr2.appendChild(tdVitally)
-
-    // Tercer TD con la calificación de la empresa
+    // Segundo TD con la calificación de la empresa
     const tdCalificacionEmpresa = document.createElement('td')
     if (tarea.calificacion_empresa) {
       tdCalificacionEmpresa.textContent += tarea.calificacion_empresa
@@ -186,14 +113,14 @@ export class VistaTareas extends Vista {
       tdCalificacionEmpresa.textContent += 'Sin calificación de empresa'
     }
     tdCalificacionEmpresa.classList.add('tarea')
-    tdCalificacionEmpresa.classList.add('centrado-horizontal') // Agregar centrado horizontal
+    tdCalificacionEmpresa.classList.add('centrado-horizontal')
     tr2.appendChild(tdCalificacionEmpresa)
 
     // Cuarto TD con la cantidad de revisiones
     const tdRevisiones = document.createElement('td')
     tdRevisiones.textContent = `${revisiones}/${tarea.modulos.length}`
     tdRevisiones.classList.add('tarea')
-    tdRevisiones.classList.add('centrado-horizontal') // Agregar centrado horizontal
+    tdRevisiones.classList.add('centrado-horizontal')
     tr2.appendChild(tdRevisiones)
 
     // Verificar si es profesor y si hay tareas pendientes de revisión (Exclamacion)
