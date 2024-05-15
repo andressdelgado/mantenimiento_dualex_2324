@@ -17,8 +17,8 @@ class Alumno{
 	switch(count($pathParams)){
 		case 1:
 			if ($pathParams[0] == 'profesor'){
-				if ($usuario->rol != 'profesor'){
-							header('HTTP/1.1 401 Unauthorized');
+				if ($usuario->rol != 'profesor' && $usuario->rol != 'coordinador'){
+							header('HTTP/1.1 401 Unauthorized...');
 							die();
 				}
 				$resultado = DAOAlumno::verAlumnosPorProfesor($usuario->id);
@@ -46,7 +46,7 @@ class Alumno{
 	**/
 	function agruparModulos($alumnos){
 		if (count($alumnos) == 0) return [];
-		
+
 		$resultado = [];
 		$alumnos[0]['modulos'] = [$this->verModuloAlumno($alumnos[0])];
 		array_push($resultado, $alumnos[0]);

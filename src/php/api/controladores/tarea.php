@@ -24,7 +24,7 @@ class Tarea{
 						header('HTTP/1.1 403 Forbidden');
 						die();
 					}
-					if ($usuario->rol == 'profesor')
+					if ($usuario->rol == 'profesor'|| $usuario->rol == 'coordinador')
 						$resultado = DAOTarea::verTareasDeAlumnoComoProfesor($queryParams['id'], $usuario->id);
 					if ($usuario->rol == 'alumno')
 						$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
@@ -34,7 +34,7 @@ class Tarea{
 						$resultado = DAOTarea::verTareaDeAlumno($pathParams[0], $usuario->id);
 						//print_r($resultado);
 					}
-					else 
+					else
 						$resultado = DAOTarea::verTareaDeAlumnoComoProfesor($pathParams[0], $usuario->id);
 				else{
 					header('HTTP/1.1 422 Unprocesable entity');
@@ -128,7 +128,7 @@ class Tarea{
 	**/
 	function agruparPorModulos($tareas){
 		if (count($tareas) == 0) return [];
-		
+
 		$resultado = [];
 
 		for($i = 0; $i < count($tareas); $i++){
@@ -178,7 +178,7 @@ class Tarea{
 					break;
 			if ($k == count($resultado[$j]['modulos']))	//El módulo no está en los resultados
 				array_push($resultado[$j]['modulos'], $this->verModulo($tareas[$i]));
-			
+
 			//Vemos si la actividad ya está en el resultado
 			for($k = 0; $k < count($resultado[$j]['actividades']); $k++)
 				if ($resultado[$j]['actividades'] == $tareas[$i]['id_actividad'])
