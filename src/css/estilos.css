@@ -506,9 +506,9 @@ input.invalid {
 
 /* Reglas de VistaTareas */
 #divTareas {
-	max-width: 90%;
-  	margin: 1rem;
-  	padding: 2rem;
+	width: 90%;
+	margin: 1rem;
+	padding: 2rem;
 }
 #divTareas>div {
   	margin-bottom: 0.5rem;
@@ -518,10 +518,11 @@ input.invalid {
 
 
 #divTareas table {
-	width: 90%;
+	width: 100%;
 	border-collapse: collapse;
-	margin: auto;
+	margin-bottom: 1%;
 	border: 1px solid black;
+	border-bottom: 5px solid rgba(0, 0, 0, 0.2);
 }
 
 #divTareas td {
@@ -586,6 +587,7 @@ input.invalid {
 	margin: 0 0.3rem;
 	padding: 0.2rem;
 	border-radius: 0.2rem;
+	display: inline-block;
 }
 #divTareas .tarea{
 	margin-right: 20%;	/* Para dejar espacio a los iconos */

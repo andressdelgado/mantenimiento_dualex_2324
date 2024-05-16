@@ -101,7 +101,7 @@ export class VistaTareas extends Vista {
     // Primer TD con la fecha
     const tdFecha = document.createElement('td')
     tdFecha.textContent = tarea.fecha
-    tdFecha.classList.add('tarea')
+    tdFecha.title = 'Fecha de inicio'
     tdFecha.classList.add('centrado-horizontal')
     tr2.appendChild(tdFecha)
 
@@ -112,15 +112,14 @@ export class VistaTareas extends Vista {
     } else {
       tdCalificacionEmpresa.textContent += 'Sin calificación de empresa'
     }
-    tdCalificacionEmpresa.classList.add('tarea')
     tdCalificacionEmpresa.classList.add('centrado-horizontal')
     tr2.appendChild(tdCalificacionEmpresa)
 
     // Cuarto TD con la cantidad de revisiones
     const tdRevisiones = document.createElement('td')
     tdRevisiones.textContent = `${revisiones}/${tarea.modulos.length}`
-    tdRevisiones.classList.add('tarea')
     tdRevisiones.classList.add('centrado-horizontal')
+    tdRevisiones.title = 'Revisiones de profesores'
     tr2.appendChild(tdRevisiones)
 
     // Verificar si es profesor y si hay tareas pendientes de revisión (Exclamacion)
