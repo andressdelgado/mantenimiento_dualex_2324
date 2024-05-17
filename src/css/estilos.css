@@ -28,8 +28,8 @@ legend{
 	padding: 0 0.5rem;
 }
 
-/* Inicialmente ocultamos las vistas */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos{
+/* Inicialmente ocultamos las vistas #divConvenio */
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenio, #divConvenios{
 	display: none;
 }
 
@@ -150,7 +150,7 @@ legend{
 #divTarea label, #divTarea legend{
 	font-weight: bold;
 }
-	
+
 #divTarea fieldset label{
 	font-weight: normal;
 }
@@ -272,6 +272,140 @@ legend{
 	border-radius: 0.7rem;
 }
 
+/* DIV Convenio */
+#divConvenio{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border: 2px solid blue;
+	border-radius: 1rem;
+	transition: opacity 1s;
+}
+#divConvenio input{
+	margin: 0.3rem;
+}
+#divConvenio button{
+	cursor: pointer;
+	background-color: blue;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+#divConvenio button:hover{
+	text-decoration: underline;
+}
+#divConvenio p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divConvenio p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+#divConvenio p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+#divConvenio p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+#divConvenio>label{
+	display: block;
+	width: 30%;
+}
+
+#divConvenio>label>input{
+	margin-left: 15%;
+}
+
+.divFlex, .divFlexBotones{
+	display: flex;
+}
+.divFlex{
+	font-size: large;
+}
+.divFlex label{
+	width: 40%;
+}
+.divFlex input{
+	width: 50%;
+}
+.divFlexBotones{
+	margin-top: 2%;
+	flex-direction: row-reverse;
+}
+/** FIN DIV CONVENIOS **/
+
+/** DIV Convenios **/
+#divConvenios {
+	transition: opacity 1s;
+	margin-bottom: 2%;
+}
+h1{
+	text-align: center; /* Centra el contenido del div */
+}
+#tablaListaConvenios {
+	border-collapse: collapse;
+	width: 90%;
+	margin: auto;
+	margin-top: 20px; /* Añade un margen superior a la tabla */
+}
+
+#tablaListaConvenios th, #tablaListaConvenios td {
+	text-align: center; /* Centra el contenido de las celdas */
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+#tablaListaConvenios th {
+	background-color: #f0f0f0;
+}
+
+#tablaListaConvenios th:first-child,
+#tablaListaConvenios td:first-child {
+	text-align: left;
+}
+
+/* Estilo del botón personalizado */
+.boton-ver-convenios {
+	background-color: rgb(4, 0, 128); /* Color de fondo */
+	color: white; /* Color del texto */
+	padding: 10px 20px; /* Espaciado interno */
+	border: none; /* Sin borde */
+	border-radius: 5px; /* Borde redondeado */
+	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+	text-decoration: none; /* Sin subrayado */
+	font-size: 14px; /* Tamaño de la fuente */
+	font-weight: bold; /* Texto en negrita */
+	transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+/* Cambio de color al pasar el cursor sobre el botón */
+.boton-ver-convenios:hover {
+	background-color: rgb(0, 0, 80);
+}
+/** FIN DIV Convenios **/
+
+
+/** ESTILO VALIDACIONES **/
+/* Estilos para el estado válido */
+input.valid {
+	border-color: green; /* Cambia el borde a verde */
+}
+
+/* Estilos para el estado inválido */
+input.invalid {
+	border-color: red; /* Cambia el borde a rojo */
+}
 
 #buscador{
 	margin-left: 35%;
@@ -337,7 +471,7 @@ legend{
 	#buscador{
 		margin-bottom: 10px;
 		margin-right: 2px;
-		
+
 	}
 	#filtro{
 		margin-left: 10% !important;
@@ -349,7 +483,7 @@ legend{
 		margin-bottom: 40px!important;
 		border-bottom-color: white!important;
 	}
-	
+
 }
 
 /* Reglas de VistaMenuContexto */
@@ -372,15 +506,56 @@ legend{
 
 /* Reglas de VistaTareas */
 #divTareas {
-	max-width: 90%;
-  	margin: 1rem;
-  	padding: 2rem;
+	width: 90%;
+	margin: 1rem;
+	padding: 2rem;
 }
 #divTareas>div {
   	margin-bottom: 0.5rem;
 	border-bottom: 1px solid lightgrey;
 	min-height: 1.5rem;
 }
+
+
+#divTareas table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 1%;
+	border: 1px solid black;
+	border-bottom: 5px solid rgba(0, 0, 0, 0.2);
+}
+
+#divTareas td {
+	border: 1px solid black;
+	padding: 1%;
+	vertical-align: middle;
+}
+
+#divTareas td button {
+	background-color: red;
+	color: white;
+	border: 1px solid red;
+	border-radius: 15%;
+	padding: 4% 6%;
+	width: 50%;
+	font-size: large;
+}
+
+#divTareas td button:hover {
+	background-color: darkred;
+}
+
+#divTareas .centrado-horizontal {
+	text-align: center;
+}
+
+#centrado-vertical {
+	vertical-align: middle;
+}
+#tdModulos{
+	width: 15%;
+}
+
 #divTareas .icono_grande{
 	position: fixed;
 	top: 2%;
@@ -399,7 +574,7 @@ legend{
 	white-space: nowrap;
 }
 #divTareas .icono{
-	display: inline;
+	/*display: inline;*/
 	width: 1.5rem;
 	cursor: pointer;
 }
@@ -412,6 +587,7 @@ legend{
 	margin: 0 0.3rem;
 	padding: 0.2rem;
 	border-radius: 0.2rem;
+	display: inline-block;
 }
 #divTareas .tarea{
 	margin-right: 20%;	/* Para dejar espacio a los iconos */
@@ -504,8 +680,8 @@ legend{
 	padding: 0.3rem;
 }
 #divInforme div.grid1{
-	display: grid; 
-	grid-template-columns: 45% 5% 45% 5%; 
+	display: grid;
+	grid-template-columns: 45% 5% 45% 5%;
 	padding: 0px;
 }
 #divInforme div.grid1 > div:nth-child(2n){
@@ -513,8 +689,8 @@ legend{
 	text-align: center;
 }
 #divInforme div.grid2{
-	display: grid; 
-	grid-template-columns: 40% 20% 20% 20%; 
+	display: grid;
+	grid-template-columns: 40% 20% 20% 20%;
 	border: none;
 }
 #divInforme div.grid2 div{
@@ -524,8 +700,8 @@ legend{
 	text-align: center;
 }
 #divInforme div.grid3{
-	display: grid; 
-	grid-template-columns: 45% 5% 45% 5%; 
+	display: grid;
+	grid-template-columns: 45% 5% 45% 5%;
 	border: none;
 }
 #divInforme div.grid3 div{
@@ -561,7 +737,7 @@ legend{
 @page {
 	margin: 0; /* Quita el encabezado y pie que pone el navegador */
 	size: A4;
-}	
+}
 
 @media print{
 	#divLogin, #divDialogo, #divMenu {
@@ -589,7 +765,7 @@ legend{
 		margin: 0 0.2rem;
 		padding: 0 0.2rem;
 		/* antes era none */
-		background-color: white !important;	
+		background-color: white !important;
 	}
 	#divInforme .modulo::before{
 		content: "(";
