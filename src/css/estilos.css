@@ -811,3 +811,107 @@ span.alumno:hover{
 	background-repeat: no-repeat;
 	background-size: contain;
 }
+
+/* Reglas de VistaAltaAlumno */
+
+#divAltaAlumno{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border: 2px solid blue;
+	border-radius: 1rem;
+	transition: opacity 1s;
+}
+#divAltaAlumno input{
+	margin: 0.3rem;
+}
+#divAltaAlumno button{
+	cursor: pointer;
+	background-color: blue;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+#divAltaAlumno button:hover{
+	text-decoration: underline;
+}
+#divAltaAlumno p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divAltaAlumno p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+#divAltaAlumno p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+#divAltaAlumno p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+#divAltaAlumno>label{
+	display: block;
+	width: 30%;
+}
+
+#divAltaAlumno>label>input{
+	margin-left: 15%;
+
+}
+#divAltaAlumno>h1{
+	text-align: center;
+	color: blue;
+}
+#divAltaAlumno>.divFlex>input[type=text], #divAltaAlumno>.divFlex>select{
+	padding-left: 0.5rem;
+	margin: 4px;
+}
+#divAltaAlumno>.divFlex>select{
+	min-width: 20%;
+}
+
+/* Reglas de VistaGestionAlumno */
+
+#vistaGestionAlumnos {
+	max-width: 90%;
+	margin: 1rem;
+	padding: 2rem;
+}
+#vistaGestionAlumnos>div {
+	border-bottom: 1px solid lightgrey;
+	height: 2rem;
+}
+#vistaGestionAlumnos>p {
+	height: 5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#vistaGestionAlumnos>.icono_grande{
+	position: fixed;
+	top: 5%;
+	left: 80%;
+	border-radius: 2rem;
+	cursor: pointer;
+	transition: transform .7s ease-in-out;
+}
+#vistaGestionAlumnos>.icono_grande:hover{
+	transform: rotate(360deg);
+}
+#vistaGestionAlumnos>p>select{
+	padding-left: 0.5rem;
+	min-width: 10%;
+}
+#vistaGestionAlumnos>p>label{
+	margin-right: 0.5rem;
+}

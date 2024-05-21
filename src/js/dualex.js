@@ -56,6 +56,8 @@ class DualEx {
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
     this.vistaConvenio = new Vistaconvenio(this, document.getElementById('divConvenio')) // Vista alta convenios
     this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios')) // Vista listado convenios
+    this.vistaAlumnosAlta = new VistaAlumnos(this, document.getElementById('divAltaAlumno'))
+    this.vistaAlumnosListado = new VistaAlumnos(this, document.getElementById('vistaGestionAlumnos'))
     this.vistaLogin.mostrar()
   }
 

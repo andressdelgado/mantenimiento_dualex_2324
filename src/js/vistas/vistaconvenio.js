@@ -102,8 +102,8 @@ export class Vistaconvenio extends Vista {
           tituloConvenio: this.inputTitulo.value,
           fechaFirma: this.inputFechaFirma.value,
           documento: reader.result, // reader.result es el resultado obtenido de reader.readAsText(file)
-          idCiclo: this.selectCiclo.value,
-          idEmpresa: this.selectEmpresa.value
+          id_ciclo: this.selectCiclo.value,
+          id_empresa: this.selectEmpresa.value
         }
 
         // Se envia al completar la lectura del archivo

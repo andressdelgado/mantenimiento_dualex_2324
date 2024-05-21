@@ -19,11 +19,11 @@
 
     <h1 class="page-title">Source: vistas/vistatarea/vistatarea.js</h1>
 
-    
 
 
 
-    
+
+
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
@@ -69,8 +69,8 @@ export class VistaTarea extends Vista{
 
 		//Referencia a la tarea que se está mostrando
 		this.tarea = null;
-		
-		//Cargamos los valores	
+
+		//Cargamos los valores
 		this.cargarCalificaciones()
 	}
 	/**
@@ -134,7 +134,7 @@ export class VistaTarea extends Vista{
 				this.cargarActividades(tarea.id_ciclo)
 					.then(() => this.setTarea(tarea))
 			else{
-				this.cargarActividades(this.controlador.getUsuario().idCiclo)
+				this.cargarActividades(this.controlador.getUsuario().id_ciclo)
 				this.tarea = null
 			}
 		}
@@ -154,11 +154,11 @@ export class VistaTarea extends Vista{
 	}
 	/**
 		Carga la lista de Actividades de un ciclo.
-		@param idCiclo {Number} Identificador del ciclo.
+		@param id_ciclo {Number} Identificador del ciclo.
 		@return Promise
 	**/
-	cargarActividades(idCiclo){
-		return this.controlador.verActividades(idCiclo)
+	cargarActividades(id_ciclo){
+		return this.controlador.verActividades(id_ciclo)
 			.then(actividades => {
 				this.eliminarHijos(this.divActividades)
 				for(let actividad of actividades){
@@ -228,13 +228,13 @@ export class VistaTarea extends Vista{
 				tarea.evaluacion = this.taEvaluacion.value
 				tarea.calificacion = this.iCalificacion.value
 			}
-			
+
 			if (this.tarea){
 				tarea.id = this.tarea.id
-				this.controlador.modificarTarea(tarea)	
+				this.controlador.modificarTarea(tarea)
 			}
 			else
-				this.controlador.crearTarea(tarea)	
+				this.controlador.crearTarea(tarea)
 		}
 		catch(e){
 			this.controlador.gestionarError(e)

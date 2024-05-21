@@ -9,7 +9,7 @@ export class Vista {
   **/
   constructor (controlador, display = 'block') {
     this.controlador = controlador
-    this.display = display 
+    this.display = display
   }
 
   /**
