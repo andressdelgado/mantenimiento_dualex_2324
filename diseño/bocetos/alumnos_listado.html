@@ -8,16 +8,16 @@
 
     <link rel=stylesheet href=../../src/css/estilos.css />
     <style>
-        .vistaGestionAlumnos {
+        #vistaGestionAlumnos {
             max-width: 90%;
             margin: 1rem;
             padding: 2rem;
         }
-        .vistaGestionAlumnos>div {
+        #vistaGestionAlumnos>div {
             border-bottom: 1px solid lightgrey;
             height: 2rem;
         }
-        .vistaGestionAlumnos>p {
+        #vistaGestionAlumnos>p {
             height: 5rem;
             display: flex;
             align-items: center;
@@ -34,17 +34,27 @@
         .icono_grande:hover{
             transform: rotate(360deg);
         }
+        #vistaGestionAlumnos>p>select{
+            padding-left: 0.5rem;
+            min-width: 10%;
+        }
+        #vistaGestionAlumnos>p>label{
+            margin-right: 0.5rem;
+        }
 
     </style>
 </head>
 <body>
-    <div class='vistaGestionAlumnos'>
+    <div id='vistaGestionAlumnos'>
         <img class="icono_grande" src="../../src/iconos/add.svg">
         <h1>Listado - Gestión - Alumnos</h1>
         <p>
-            <label for="selectCiclo">Ciclo:</label>
+            <label for="selectCiclo">Ciclo: </label>
             <select id="selectCiclo">
-                <!-- Aquí irán las opciones del select -->
+                <option disabled selected>Selecciona un ciclo</option>
+                <option>DAW</option>
+                <option>SMR</option>
+                <option>...</option>
             </select>
         </p>
         <div>
@@ -62,5 +72,6 @@
           </span>
         </div>
     </div>
+    <script type=module src=../../src/js/vistas/vistaalumnoslistado.js></script>
 </body>
 </html>

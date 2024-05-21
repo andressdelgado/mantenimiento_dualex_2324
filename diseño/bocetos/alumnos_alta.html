@@ -92,9 +92,12 @@
         input.invalid {
             border-color: red; /* Cambia el borde a rojo */
         }
-        #divAltaAlumno>.divFlex>input[type=text], #divAltaAlumno>.divFlex>select{
+        .divFlex>input[type=text], .divFlex>select{
             padding-left: 0.5rem;
             margin: 4px;
+        }
+        .divFlex>select{
+            min-width: 20%;
         }
     </style>
 </head>
@@ -118,6 +121,7 @@
     <div class="divFlex">
         <label for="selectCiclo">Ciclo:</label>
         <select id="selectCiclo">
+            <option disabled selected>Selecciona un ciclo</option>
             <option>DAW</option>
             <option>SMR</option>
             <option>...</option>
@@ -131,7 +135,7 @@
 <script>
   window.onload = function(){divConvenio.style.opacity = '1'}
 </script>
-<script type=module src=../../src/js/vistas/vistaconvenio.js></script>
+<script type=module src=../../src/js/vistas/vistaalumnosalta.js></script>
 </body>
 
 </html>
