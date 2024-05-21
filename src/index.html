@@ -295,7 +295,7 @@
 
 	<div style="width: 100%; height: 100vh;">
 		<div id='vistaGestionAlumnos'>
-			<img class="icono_grande" src="../src/iconos/add.svg">
+			<img id="gestionAlumnosAlta" class="icono_grande" src="../src/iconos/add.svg">
 			<h1>Listado - Gestión - Alumnos</h1>
 			<p>
 				<label for="selectCicloListadoAlumnos">Ciclo: </label>
@@ -306,17 +306,19 @@
 					<option>...</option>
 				</select>
 			</p>
-			<div>
-				<span class=modulo>PRFB</span>
-				<span class=modulo>SMEC</span>
-				<span>Nombre1 Apellido1 Apellido2</span>
-			</div>
-			<div>
-				<span>Nombre Apellido1 Apellido2</span>
-			</div>
-			<div>
-				<span>Nombre Apellido1 Apellido2</span>
-			</div>
+			<section id="gestionAlumnosListado">
+				<div>
+					<span class=modulo>PRFB</span>
+					<span class=modulo>SMEC</span>
+					<span>Nombre1 Apellido1 Apellido2</span>
+				</div>
+				<div>
+					<span>Nombre Apellido1 Apellido2</span>
+				</div>
+				<div>
+					<span>Nombre Apellido1 Apellido2</span>
+				</div>
+			</section>
 		</div>
 	</div>
 	<script type=module src=js/dualex.js></script>
