@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=utf-8 />
+    <meta name=viewport content='width=device-width, initial-scale=1' />
+    <meta name=author content='Rubén Sancho <>' />
+    <title>DUALEX - Alumnos_Listado</title>
+
+    <link rel=stylesheet href=../../src/css/estilos.css />
+    <style>
+        .vistaGestionAlumnos {
+            max-width: 90%;
+            margin: 1rem;
+            padding: 2rem;
+        }
+        .vistaGestionAlumnos>div {
+            border-bottom: 1px solid lightgrey;
+            height: 2rem;
+        }
+        .vistaGestionAlumnos>p {
+            height: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icono_grande{
+            position: fixed;
+            top: 5%;
+            left: 80%;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: transform .7s ease-in-out;
+        }
+        .icono_grande:hover{
+            transform: rotate(360deg);
+        }
+
+    </style>
+</head>
+<body>
+    <div class='vistaGestionAlumnos'>
+        <img class="icono_grande" src="../../src/iconos/add.svg">
+        <h1>Listado - Gestión - Alumnos</h1>
+        <p>
+            <label for="selectCiclo">Ciclo:</label>
+            <select id="selectCiclo">
+                <!-- Aquí irán las opciones del select -->
+            </select>
+        </p>
+        <div>
+            <span class=modulo>PRFB</span>
+            <span class=modulo>SMEC</span>
+            <span>Nombre1 Apellido1 Apellido2</span>
+          </span>
+        </div>
+        <div>
+            <span>Nombre Apellido1 Apellido2</span>
+          </span>
+        </div>
+        <div>
+            <span>Nombre Apellido1 Apellido2</span>
+          </span>
+        </div>
+    </div>
+</body>
+</html>
