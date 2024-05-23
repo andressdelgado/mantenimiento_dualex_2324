@@ -21,6 +21,10 @@ import { VistaAlumnos } from './vistas/vistaalumnos.js'
 import { VistaInforme } from './vistas/vistainforme.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
+// Vista de Gestión de alumnos
+import { VistaGestionAlumnos } from './vistas/vistagestionalumnos.js'
+// Vista de alta de alumno
+import { VistaAltaAlumno } from './vistas/vistaaltaalumno.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
@@ -56,8 +60,8 @@ class DualEx {
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
     this.vistaConvenio = new Vistaconvenio(this, document.getElementById('divConvenio')) // Vista alta convenios
     this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios')) // Vista listado convenios
-    this.vistaAlumnosAlta = new VistaAlumnos(this, document.getElementById('divAltaAlumno'))
-    this.vistaAlumnosListado = new VistaAlumnos(this, document.getElementById('vistaGestionAlumnos'))
+    this.vistaAlumnosAlta = new VistaAltaAlumno(this, document.getElementById('divAltaAlumno'))
+    this.vistaAlumnosListado = new VistaGestionAlumnos(this, document.getElementById('divGestionAlumnos'))
     this.vistaLogin.mostrar()
   }
 
@@ -86,10 +90,10 @@ class DualEx {
             this.mostrarTareasAlumno(this.#usuario)
             break
           case 'profesor':
-            this.mostrarAlumnos()
+            this.mostrarGestionAlumnos()
             break
           case 'coordinador':
-            this.mostrarAlumnos()
+            this.mostrarGestionAlumnos()
             break
           default:
             console.error(`Rol de usuario desconocido: ${usuario.rol}`)
@@ -126,6 +130,8 @@ class DualEx {
     this.vistaAlumnos.mostrar(false)
     this.vistaInforme.mostrar(false)
     this.vistaCreditos.mostrar(false)
+    this.vistaAlumnosAlta.mostrar(false)
+    this.vistaAlumnosListado.mostrar(false)
   }
 
   /**
@@ -212,6 +218,22 @@ class DualEx {
       this.ocultarVistas()
       this.vistaTarea.mostrar(true)
     }
+  }
+
+  /**
+   Muestra la vista de gestion de alumnos.
+   **/
+  mostrarGestionAlumnos () {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+    // this.modelo.getAlumnosProfesor()
+    //   .then(alumnos => {
+    this.vistaMenu.verGestionAlumnos()
+    this.vistaAlumnosListado.cargarFiltroCursos()
+
+    this.ocultarVistas()
+    this.vistaAlumnosListado.mostrar(true)
+    // })
+    // .catch(error => this.gestionarError(error))
   }
 
   /**
@@ -325,6 +347,15 @@ class DualEx {
    */
   getAlumnosProfesor(){
     return this.modelo.getAlumnosProfesor()
+  }
+
+  /**
+   * Develve la lista de alumnos de un curso
+   * @returns array
+   */
+  getAlumnosByCurso(curso){
+    console.log(curso + ' en controlador')
+    return this.modelo.getAlumnosByCurso(curso)
   }
 
   /**

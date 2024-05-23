@@ -9,7 +9,7 @@
 
 	<link rel=stylesheet href=css/reset.css />
 	<link rel=stylesheet href=css/estilos.css />
-	<link rel=manifest href=manifest.json />
+<!--	<link rel=manifest href=manifest.json />-->
 </head>
 
 <body>
@@ -261,66 +261,60 @@
 		</table>
 	</div>
 
-	<div style="width: 100%; height: 100vh;">
-		<div id="divAltaAlumno">
-			<h1>Añadir - Alumno</h1>
-			<div class="divFlex">
-				<label for="titulo">Nombre:</label>
-				<input type="text" id="titulo" placeholder="(Nombre)" />
-			</div>
-			<div class="divFlex">
-				<label for="apellidos">Apellidos:</label>
-				<input type="text" id="apellidos" placeholder="(Apellidos)" />
-			</div>
-			<div class="divFlex">
-				<label for="email">Email:</label>
-				<input type="text" id="email" placeholder="(Email)" />
-			</div>
-			<div class="divFlex">
-				<label for="selectCicloAltaAlumno">Ciclo:</label>
-				<select id="selectCicloAltaAlumno">
-					<option disabled selected>Selecciona un ciclo</option>
-					<option>DAW</option>
-					<option>SMR</option>
-					<option>...</option>
-				</select>
-			</div>
-			<div class="divFlexBotones">
-				<button id="btnAnadirAltaAlumno">Añadir</button>
-				<button id="btnLimpiarAltaAlumno" style="background-color: darkred">Limpiar</button>
-				<button id="btnCancelarAltaAlumno" style="background-color: red">Cancelar</button>
-			</div>
+	<div id="divAltaAlumno">
+		<h1>Añadir - Alumno</h1>
+		<div class="divFlex">
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" placeholder="(Nombre)" />
+		</div>
+		<div class="divFlex">
+			<label for="apellidos">Apellidos:</label>
+			<input type="text" id="apellidos" placeholder="(Apellidos)" />
+		</div>
+		<div class="divFlex">
+			<label for="email">Email:</label>
+			<input type="text" id="email" placeholder="(Email)" />
+		</div>
+		<div class="divFlex">
+			<label for="selectCicloAltaAlumno">Ciclo:</label>
+			<select id="selectCicloAltaAlumno">
+				<option disabled selected>Selecciona un ciclo</option>
+				<option>DAW</option>
+				<option>SMR</option>
+				<option>...</option>
+			</select>
+		</div>
+		<div class="divFlexBotones">
+			<button id="btnAnadirAltaAlumno">Añadir</button>
+			<button id="btnLimpiarAltaAlumno" style="background-color: darkred">Limpiar</button>
+			<button id="btnCancelarAltaAlumno" style="background-color: red">Cancelar</button>
 		</div>
 	</div>
 
-	<div style="width: 100%; height: 100vh;">
-		<div id='vistaGestionAlumnos'>
-			<img id="gestionAlumnosAlta" class="icono_grande" src="../src/iconos/add.svg">
-			<h1>Listado - Gestión - Alumnos</h1>
-			<p>
-				<label for="selectCicloListadoAlumnos">Ciclo: </label>
-				<select id="selectCicloListadoAlumnos">
-					<option disabled selected>Selecciona un ciclo</option>
-					<option>DAW</option>
-					<option>SMR</option>
-					<option>...</option>
-				</select>
-			</p>
-			<section id="gestionAlumnosListado">
-				<div>
-					<span class=modulo>PRFB</span>
-					<span class=modulo>SMEC</span>
-					<span>Nombre1 Apellido1 Apellido2</span>
-				</div>
-				<div>
-					<span>Nombre Apellido1 Apellido2</span>
-				</div>
-				<div>
-					<span>Nombre Apellido1 Apellido2</span>
-				</div>
-			</section>
-		</div>
+
+	<div id='divGestionAlumnos'>
+		<h1>Listado - Gestión - Alumnos</h1>
+		<p>
+			<label for="selectCursoListadoAlumnos">Curso: </label>
+			<select id="selectCursoListadoAlumnos">
+
+			</select>
+		</p>
+		<section id="gestionAlumnosListado">
+			<div>
+				<span class=modulo>PRFB</span>
+				<span class=modulo>SMEC</span>
+				<span>Nombre1 Apellido1 Apellido2</span>
+			</div>
+			<div>
+				<span>Nombre Apellido1 Apellido2</span>
+			</div>
+			<div>
+				<span>Nombre Apellido1 Apellido2</span>
+			</div>
+		</section>
 	</div>
+
 	<script type=module src=js/dualex.js></script>
 </body>
 

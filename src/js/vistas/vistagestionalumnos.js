@@ -15,20 +15,86 @@ export class VistaGestionAlumnos extends Vista{
 
     // Cogemos referencias a los elementos del interfaz
     this.listaAlumnos = document.getElementById('gestionAlumnosListado')
-    this.listaAlumnosAltaBtn = document.getElementById('gestionAlumnosAlta')
-    this.listaAlumnosSelect = document.getElementById('selectCicloListadoAlumnos')
+    this.listaAlumnosSelect = document.getElementById('selectCursoListadoAlumnos')
 
     // Asociamos eventos
-    this.listaAlumnosAltaBtn.addEventListener('click', this.altaAlumno.bind(this))
+    this.listaAlumnosSelect.addEventListener("change",this.cargarFiltrado.bind(this))
 
     // Ejecutar metodos necesarios
-    this.cargarCiclos()
-    this.cargarDatosAlumnos()
+
   }
 
   /**
-   * Carga los ciclos en el select de la vista.
+   * Carga los cursos en el select de la vista.
    */
+  cargarFiltroCursos(){
+    console.log('cargarFiltroCursos')
+    this.cursos = []
+    this.controlador.getCursos()
+      .then(cursos => {
+
+        let option1 = document.createElement('option')
+        this.listaAlumnosSelect.appendChild(option1)
+        option1.value = ''
+        option1.textContent = 'Seleccione'
+        option1.disabled = 'true'
+
+        for(let i=0; i<cursos.length; i++){
+          this.cursos[i]=cursos[i]
+          let option = document.createElement('option')
+          this.listaAlumnosSelect.appendChild(option)
+          option.value = cursos[i].codigo
+          option.textContent = cursos[i].codigo
+        }
+      })
+      .catch(error => console.log(error))
+  }
+
+  /**
+   * Carga los alumnos en el listado filtrados por curso.
+   */
+  cargarFiltrado(){
+    this.eliminarHijos(this.listaAlumnos, 1)
+    const curso = this.listaAlumnosSelect.value
+    this.controlador.getAlumnosByCurso(curso)
+      .then(alumnos => {
+        //     if(this.select.value=='todos'){
+        //       for(let i=0; i<alumnos.length; i++){
+        //         this.crearDivAlumno(alumnos[i])
+        //       }
+        //     }
+        //     else{
+        //       this.creadivs = false
+        for (let i = 0; i < alumnos.length; i++) {
+          if (alumnos[i].codigo == this.select.value) {
+            this.creadivs = true
+            this.crearDivAlumno(alumnos[i])
+          }
+        }
+        //       if(this.creadivs == false){
+        //         const div = document.createElement('div')
+        //         this.base.appendChild(div)
+        //         div.textContent = 'No hay ningún alumno de este curso.'
+        //       }
+        //     }
+        //   })
+      })
+  }
+
+  /**
+   Crea el div asociado a un alumno y lo añade a la base.
+   @param alumno {Alumno} Datos del alumno.
+   **/
+  crearDivAlumno (alumno){
+    const div = document.createElement('div')
+    this.base.appendChild(div)
+
+    const spanAlumno = document.createElement('span')
+    div.appendChild(spanAlumno)
+    spanAlumno.classList.add('alumno')
+    spanAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
+    spanAlumno.onclick = this.pulsarTareas.bind(this, alumno)
+  }
 
   /**
    * Carga los alumnos en el listado.

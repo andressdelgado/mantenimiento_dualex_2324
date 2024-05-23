@@ -815,6 +815,7 @@ span.alumno:hover{
 /* Reglas de VistaAltaAlumno */
 
 #divAltaAlumno{
+	display: none;
 	width: 40%;
 	margin: 5rem auto;
 	padding: 2rem;
@@ -882,36 +883,26 @@ span.alumno:hover{
 
 /* Reglas de VistaGestionAlumno */
 
-#vistaGestionAlumnos {
+#divGestionAlumnos {
+	display: none;
 	max-width: 90%;
 	margin: 1rem;
 	padding: 2rem;
 }
-#vistaGestionAlumnos>div {
+#divGestionAlumnos>div {
 	border-bottom: 1px solid lightgrey;
 	height: 2rem;
 }
-#vistaGestionAlumnos>p {
+#divGestionAlumnos>p {
 	height: 5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
-#vistaGestionAlumnos>.icono_grande{
-	position: fixed;
-	top: 5%;
-	left: 80%;
-	border-radius: 2rem;
-	cursor: pointer;
-	transition: transform .7s ease-in-out;
-}
-#vistaGestionAlumnos>.icono_grande:hover{
-	transform: rotate(360deg);
-}
-#vistaGestionAlumnos>p>select{
+#divGestionAlumnos>p>select{
 	padding-left: 0.5rem;
 	min-width: 10%;
 }
-#vistaGestionAlumnos>p>label{
+#divGestionAlumnos>p>label{
 	margin-right: 0.5rem;
 }

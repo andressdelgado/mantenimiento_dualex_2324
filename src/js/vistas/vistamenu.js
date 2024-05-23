@@ -14,7 +14,7 @@ export class VistaMenu extends Vista{
   constructor (controlador, base) {
 	super(controlador, 'flex')
     this.base = base
-  
+
     // Cogemos referencias a los elementos del interfaz
 
     // Asociamos eventos
@@ -32,6 +32,23 @@ export class VistaMenu extends Vista{
     this.base.appendChild(h1)
     h1.appendChild(document.createTextNode('Lista de Alumnos'))
     h1.appendChild(this.crearIconoAyuda('Muestra la lista de alumnos que tienen tareas registradas de los módulos asignados al profesor'))
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  /**
+   Muestra el menú asociado a la lista de alumnos de un profesor.
+   El menú incluye: título y logout.
+   **/
+  verGestionAlumnos () {
+    this.limpiar()
+    this.verUsuario()
+    // this.verTitulo('Lista Alumnos')
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Listado de Alumnos'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el listado de alumnos para ser gestionados por el profesor'))
+    this.base.appendChild(this.crearIcono('add.svg', 1, 'nuevo alumno', this.controlador.mostrarTarea.bind(this.controlador, null)))
     this.verLogout(2)
     this.verAcercaDe()
   }

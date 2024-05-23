@@ -114,6 +114,10 @@
                 require_once ('./controladores/empresa.php');
                 $controlador = new Empresa();
                 break;
+            case 'alumnosbycurso':
+                require_once ('./controladores/alumnosbyclase.php');
+                $controlador = new AlumnosByClase();
+                break;
 			default:
 				header('HTTP/1.1 501 Not Implemented');
 				die();
