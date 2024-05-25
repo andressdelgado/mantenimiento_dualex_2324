@@ -14,7 +14,7 @@ export class VistaMenu extends Vista{
   constructor (controlador, base) {
 	super(controlador, 'flex')
     this.base = base
-  
+
     // Cogemos referencias a los elementos del interfaz
 
     // Asociamos eventos
@@ -209,4 +209,27 @@ export class VistaMenu extends Vista{
     this.verLogout(2)
     this.verAcercaDe()
   }*/
+  verConvenios () {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Lista de Convenios')
+      this.base.appendChild(this.crearIcono('add.svg', 1, 'Nuevo Convenio', this.controlador.mostrarVistaConvenio.bind(this.controlador, null)))
+      this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false)))
+    }
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  crearConvenio() {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Alta de Convenios')
+      this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.irAVistaConvenios.bind(this.controlador, false)))
+
+    }
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
 }

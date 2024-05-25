@@ -85,7 +85,7 @@ class DualEx {
     console.error(error)
   }
 
-  
+
   /**
     Recibe el token del login con Google y lo envía al servidor para identificar al usuario.
     @param token {Object} Token de identificación de usuario de Google.
@@ -150,6 +150,7 @@ class DualEx {
     this.vistaEmpresas.mostrar(false)
     this.vistaEditarEmpresa.mostrar(false)
     this.vistaMenuCoordinador.mostrar(false)
+    this.vistaConvenio.mostrar(false)
     this.vistaConvenios.mostrar(false)
     this.vistaProfesores.mostrar(false)
 }
@@ -299,7 +300,7 @@ class DualEx {
       .catch(error => this.gestionarError(error))
   }
 
-  
+
 
 
   /**
@@ -452,8 +453,9 @@ class DualEx {
    * Navega a la vista de convenios.
    */
   irAVistaConvenios() {
-    this.ocultarVistas();
-    this.vistaConvenios.mostrar(true);
+    this.ocultarVistas()
+    this.vistaMenu.verConvenios()
+    this.vistaConvenios.mostrar(true)
   }
 
   /**
@@ -489,6 +491,12 @@ class DualEx {
     this.ocultarVistas();
     this.vistaMenu.crearEmpresa();
     this.vistaEmpresa.mostrar(true);
+  }
+
+  mostrarVistaConvenio(){
+    this.ocultarVistas()
+    this.vistaMenu.crearConvenio()
+    this.vistaConvenio.mostrar(true)
   }
 
   /**

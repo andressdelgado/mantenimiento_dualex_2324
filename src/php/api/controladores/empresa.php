@@ -45,10 +45,10 @@ class Empresa {
      * @param usuario {Object} - Usuario que realiza la solicitud.
      */
     function get($pathParams, $queryParams, $usuario) {
-        if ($usuario->rol != 'profesor' && $usuario->rol != 'coordinador') {
-            header('HTTP/1.1 401 Unauthorized');
-            die();
-        }
+//        if ($usuario->rol != 'profesor' && $usuario->rol != 'coordinador') {
+//            header('HTTP/1.1 401 Unauthorized');
+//            die();
+//        }
         if (isset($pathParams[0]) && !empty($pathParams[0]) && is_numeric($pathParams[0])) {
             // Si hay un ID de empresa válido en la URL, obtener y mostrar datos de esa empresa
             $resultado = DAOEmpresa::mostrarDatosEmpresa($pathParams[0]);
