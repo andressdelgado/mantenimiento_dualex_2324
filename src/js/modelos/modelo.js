@@ -28,10 +28,9 @@ export class Modelo {
    @return {Promise} Devuelve la promesa asociada a la petición.
    **/
   getAlumnosByCurso (curso) {
-    console.log(curso + ' en modelo')
     const queryParams = new Map()
-    queryParams.set('id', alumno.id)
-    return Rest.get('alumnosbycurso', ['curso'], curso)
+    queryParams.set('curso', curso)
+    return Rest.get('gestionalumnos', [], queryParams)
   }
 
   /**
@@ -104,6 +103,15 @@ export class Modelo {
   **/
   borrarTarea (tarea) {
     return Rest.delete('tarea', [tarea.id])
+  }
+
+  /**
+   Borrar un alumno.
+   @param alumnoId {Number} Identificador del alumno.
+   @return {Promise} Devuelve la promesa asociada a la petición.
+   **/
+  borrarAlumno (alumnoId) {
+    return Rest.delete('gestionalumnos', [alumnoId])
   }
 
   /**

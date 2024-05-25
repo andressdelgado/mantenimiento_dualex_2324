@@ -37,18 +37,33 @@ export class VistaMenu extends Vista{
   }
 
   /**
-   Muestra el menú asociado a la lista de alumnos de un profesor.
-   El menú incluye: título y logout.
+   Muestra el menú asociado a la lista de gestión de alumnos.
+   El menú incluye: título, logout y add.
    **/
   verGestionAlumnos () {
     this.limpiar()
     this.verUsuario()
-    // this.verTitulo('Lista Alumnos')
     const h1 = document.createElement('h1')
     this.base.appendChild(h1)
     h1.appendChild(document.createTextNode('Listado de Alumnos'))
-    h1.appendChild(this.crearIconoAyuda('Muestra el listado de alumnos para ser gestionados por el profesor'))
-    this.base.appendChild(this.crearIcono('add.svg', 1, 'nuevo alumno', this.controlador.mostrarTarea.bind(this.controlador, null)))
+    h1.appendChild(this.crearIconoAyuda('Muestra el listado de alumnos para ser gestionados por el profesor o coordinador'))
+    this.base.appendChild(this.crearIcono('add.svg', 1, 'nuevo alumno', this.controlador.mostrarAltaAlumno.bind(this.controlador, null)))
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  /**
+   Muestra el menú asociado a el alta de alumnos.
+   El menú incluye: título, logout y retorno.
+   **/
+  verAltaAlumno () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Alta de Alumno'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el el formulario para dar de alta a un alumno'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionAlumnos().bind(this.controlador, false)))
     this.verLogout(2)
     this.verAcercaDe()
   }

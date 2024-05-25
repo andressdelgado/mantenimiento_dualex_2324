@@ -29,7 +29,8 @@ legend{
 }
 
 /* Inicialmente ocultamos las vistas #divConvenio */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenio, #divConvenios{
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme,
+#divCreditos, #divConvenio, #divConvenios, #divAltaAlumno, #divGestionAlumnos {
 	display: none;
 }
 
@@ -815,7 +816,6 @@ span.alumno:hover{
 /* Reglas de VistaAltaAlumno */
 
 #divAltaAlumno{
-	display: none;
 	width: 40%;
 	margin: 5rem auto;
 	padding: 2rem;
@@ -884,12 +884,11 @@ span.alumno:hover{
 /* Reglas de VistaGestionAlumno */
 
 #divGestionAlumnos {
-	display: none;
 	max-width: 90%;
 	margin: 1rem;
 	padding: 2rem;
 }
-#divGestionAlumnos>div {
+#gestionAlumnosListado>div {
 	border-bottom: 1px solid lightgrey;
 	height: 2rem;
 }
@@ -905,4 +904,18 @@ span.alumno:hover{
 }
 #divGestionAlumnos>p>label{
 	margin-right: 0.5rem;
+}
+#gestionAlumnosListado>div>.iconos{
+	position:absolute;
+	left: 90%;
+	white-space: nowrap;
+}
+#gestionAlumnosListado>div>.iconos>.icono{
+	display: inline;
+	width: 1.5rem;
+	cursor: pointer;
+}
+#gestionAlumnosListado>div>.iconos>.icono:hover{
+	background-color: lightblue;
+	border-radius: 0.7rem;
 }

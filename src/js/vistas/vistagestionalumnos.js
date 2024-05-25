@@ -54,30 +54,19 @@ export class VistaGestionAlumnos extends Vista{
    * Carga los alumnos en el listado filtrados por curso.
    */
   cargarFiltrado(){
-    this.eliminarHijos(this.listaAlumnos, 1)
+    this.listaAlumnos.innerHTML = ''
     const curso = this.listaAlumnosSelect.value
     this.controlador.getAlumnosByCurso(curso)
       .then(alumnos => {
-        //     if(this.select.value=='todos'){
-        //       for(let i=0; i<alumnos.length; i++){
-        //         this.crearDivAlumno(alumnos[i])
-        //       }
-        //     }
-        //     else{
-        //       this.creadivs = false
-        for (let i = 0; i < alumnos.length; i++) {
-          if (alumnos[i].codigo == this.select.value) {
-            this.creadivs = true
-            this.crearDivAlumno(alumnos[i])
+        if (alumnos.length > 0){
+          for(let i=0; i<alumnos.length; i++){
+              this.crearDivAlumno(alumnos[i])
           }
+        } else {
+          const div = document.createElement('div')
+          this.base.appendChild(div)
+          div.textContent = 'No hay ningún alumno que coincida.'
         }
-        //       if(this.creadivs == false){
-        //         const div = document.createElement('div')
-        //         this.base.appendChild(div)
-        //         div.textContent = 'No hay ningún alumno de este curso.'
-        //       }
-        //     }
-        //   })
       })
   }
 
@@ -86,33 +75,47 @@ export class VistaGestionAlumnos extends Vista{
    @param alumno {Alumno} Datos del alumno.
    **/
   crearDivAlumno (alumno){
+
     const div = document.createElement('div')
-    this.base.appendChild(div)
+    this.listaAlumnos.appendChild(div)
 
     const spanAlumno = document.createElement('span')
     div.appendChild(spanAlumno)
     spanAlumno.classList.add('alumno')
-    spanAlumno.textContent = `${alumno.nombre} ${alumno.apellidos}`
-    spanAlumno.onclick = this.pulsarTareas.bind(this, alumno)
+    spanAlumno.textContent = `${alumno.nombre} ${alumno.apellidos} `
+    spanAlumno.addEventListener("click", () => this.modificarAlumno(alumno))
+
+    const spanAlumnoEmail = document.createElement('span')
+    div.appendChild(spanAlumnoEmail)
+    spanAlumnoEmail.textContent = `/ ${alumno.email}`
+
+    const spanIconos = document.createElement('span')
+    div.appendChild(spanIconos)
+    spanIconos.classList.add('iconos')
+
+    const spanIconoBorrar = document.createElement('img')
+    spanIconos.appendChild(spanIconoBorrar)
+    spanIconoBorrar.classList.add('icono')
+    spanIconoBorrar.src = 'iconos/delete.svg'
+    spanIconoBorrar.addEventListener("click", () => this.borrarAlumno(alumno.id, alumno.nombre))
+
   }
 
   /**
-   * Carga los alumnos en el listado.
+   * Borra el alumno seleccionado.
+   * @param alumnoId {Number} Identificador del alumno.
    */
-  cargarDatosAlumnos () {
-    this.controlador.recibirDatosAlumnos()
-      .then(alumnos => {
-        // Limpiar contenido actual de la lista
-        this.listaAlumnos.innerHTML = ''
+  borrarAlumno(alumnoId, alumnoNombre) {
+    this.controlador.eliminarAlumno(alumnoId, alumnoNombre)
+  }
 
-        // Sobre cada alumno crear fila de la lista
-        alumnos.forEach(alumno => {
-          const fila = document.createElement('span')
-          fila.textContent = alumno.nombre
-          fila.textContent += " " + alumno.apellidos
-          this.listaAlumnos.appendChild(fila)
-        })
-      })
+
+  /**
+   * Redirige a la vista para modificar el alumno.
+   * @param alumno {} Datos modificables del alumno.
+   */
+  modificarAlumno (alumno) {
+    console.log('Modificar ' + alumno.id)
   }
 
 }
