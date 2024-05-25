@@ -28,8 +28,8 @@ legend{
 	padding: 0 0.5rem;
 }
 
-/* Inicialmente ocultamos las vistas #divConvenio */
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenio, #divConvenios{
+/* Inicialmente ocultamos las vistas */
+#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenio, #divConvenios, #divEmpresa, #divEmpresas, #divEditarEmpresa, #divMenuCoordinador, #divProfesores, #divConvenios{
 	display: none;
 }
 
@@ -436,6 +436,147 @@ input.invalid {
 	margin-bottom: 21px!important;
     border-bottom-color: white!important;
 }
+#divEmpresa{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+#divEmpresa input{
+	margin: 0.3rem;
+}
+#divEmpresa button{
+	cursor: pointer;
+	background-color: blue;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+#divEmpresa button:hover{
+	text-decoration: underline;
+}
+#divEmpresa p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divEmpresa p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+#divEmpresa p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+#divEmpresa p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+#divEmpresa>label{
+	display: block;
+	width: 30%;
+}
+
+#divEmpresa>label>input{
+	margin-left: 15%;
+
+}
+
+#divEditarEmpresa{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+#divEditarEmpresa input{
+	margin: 0.3rem;
+}
+#divEditarEmpresa button{
+	cursor: pointer;
+	background-color: blue;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+#divEditarEmpresa button:hover{
+	text-decoration: underline;
+}
+#divEditarEmpresa p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divEditarEmpresa p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+#divEditarEmpresa p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+#divEditarEmpresa p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+#divEditarEmpresa>label{
+	display: block;
+	width: 30%;
+}
+
+#divEditarEmpresa>label>input{
+	margin-left: 15%;
+
+}
+
+.divFlex, .divFlexBotones{
+	display: flex;
+}
+.divFlex{
+	font-size: large;
+}
+.divFlex label{
+	width: 40%;
+}
+.divFlex input{
+	width: 50%;
+}
+.divFlex textarea {
+	width: 50%;
+	padding: 8px;
+	box-sizing: border-box;
+	border-radius: 4px;
+}
+.divFlexBotones{
+	margin-top: 2%;
+	flex-direction: row-reverse;
+}
+/* Estilos para el estado válido */
+input.valid {
+	border-color: green; /* Cambia el borde a verde */
+}
+
+/* Estilos para el estado inválido */
+input.invalid {
+	border-color: red; /* Cambia el borde a rojo */
+}
 @media (max-width: 1056px) {
 	#buscador{
 		margin-left: 25%;
@@ -810,4 +951,161 @@ span.alumno:hover{
 	background-image: url('../iconos/delete.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
+}
+
+#divMenuCoordinador {
+    margin: auto;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    #divMenuCoordinador {
+        margin-top: 20%; 
+    }
+}
+
+@media (max-width: 400px) {
+    #divMenuCoordinador {
+        margin-top: 30%; 
+    }
+}
+
+#divMenuCoordinadorWraper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.divMenuCoordinadorBox {
+    width: 200px;
+    height: 250px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+#divMenuCoordinador > h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+#divMenuCoordinador > p {
+    font-size: 12px;
+    margin-top: 0;
+}
+
+#divMenuCoordinador > button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 60px;
+    height: 30px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+  
+#divMenuCoordinadorWraper{
+	display: flex;
+	flex-wrap: wrap;
+  }
+  
+ .divMenuCoordinadorBox{
+	width: 200px;
+	height: 250px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	margin: 10px;
+	padding: 10px;
+	position: relative;
+  }
+  
+  #divMenuCoordinador > h2{
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 0;
+  }
+  
+  #divMenuCoordinador > p{
+	font-size: 12px;
+	margin-top: 0;
+  }
+  
+  #divMenuCoordinador > button{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	width: 60px;
+	height: 30px;
+	background-color: blue;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+	font-size: 14px;
+	text-decoration: none;
+  }
+  
+  #divEmpresas {
+    transition: opacity 1s;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#divEmpresa > button, #divEditarEmpresa > button {
+    background-color: rgb(4, 0, 128);
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.2rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-bottom: 0.8rem;
+    margin-left: 5%;
+}
+
+#divEmpresa > button, #divEditarEmpresa > button {
+    background-color: rgb(0, 0, 80);
+}
+.empresa-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.empresa-info span {
+    margin-right: 15px;
+}
+
+.iconos img {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.icono.editar {
+    color: blue;
+}
+
+.icono.borrar {
+    color: red;
+}
+
+.icono.editar, .icono.borrar {
+    width: 30%;
+    height: 30%;
 }

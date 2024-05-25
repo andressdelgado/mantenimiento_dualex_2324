@@ -128,8 +128,48 @@
 		<div>
 
 		</div>
+		
+	</div>
+	
+
+	<div id="divEmpresa">
+		<div class="divFlex">
+			<label for="siglas">Siglas:</label>
+			<input type="text" id="siglas" placeholder="(Siglas de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="nombreEmpresa">Nombre de la empresa:</label>
+			<input type="text" id="nombreEmpresa" placeholder="(Nombre de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="notas">Notas:</label>
+			<textarea id="notas"></textarea>
+		</div>
+		<div class="divFlexBotones">
+			<button id="btnAnadir">Añadir</button>
+			<button id="volver-aniadir">Volver</button>
+		</div>	
 	</div>
 
+	<div id="divEditarEmpresa">
+		<div class="divFlex">
+			<label for="siglasEditar">Siglas:</label>
+			<input type="text" id="siglasEditar" placeholder="(Siglas de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="nombreEmpresaEditar">Nombre de la empresa:</label>
+			<input type="text" id="nombreEmpresaEditar" placeholder="(Nombre de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="notasEditar">Notas:</label>
+			<textarea id="notasEditar"></textarea>
+		</div>
+		<div class="divFlexBotones">
+			<button id="btnEditar">Editar</button>
+			<button id="volver-editar">Volver</button>
+		</div>
+	</div>
+	
 	<div id=divInforme>
 		<h1>Informe trimestral de valoracion sumativa (Anexo IV)</h1>
 		<div>
@@ -260,6 +300,38 @@
 
 		</table>
 	</div>
+
+
+	<div id="divMenuCoordinador">
+		<div id="divMenuCoordinadorWraper">
+		  <div class="divMenuCoordinadorBox">
+			<h2>Alumnos</h2>
+			<p>Gestión de los alumnos</p>
+			<button id="botonAlumnos">Entrar</button>
+		  </div>
+		  <div class="divMenuCoordinadorBox">
+			<h2>Profesores</h2>
+			<p>Gestión de los profesores</p>
+			<button id="botonProfesores">Entrar</button>
+		  </div>
+		  <div class="divMenuCoordinadorBox"> 
+			<h2>Empresas</h2>
+			<p>Gestión de las empresas</p>
+			<button id="botonEmpresa">Entrar</button>
+		  </div>
+		  <div class="divMenuCoordinadorBox">
+			<h2>Convenios</h2>
+			<p>Gestión de los convenios</p>
+			<button id="botonConvenios">Entrar</button>
+		  </div>
+	  	</div>
+	</div>
+
+	  <div id="divEmpresas">
+	  </div>
+
+	  <div id="divProfesores">
+	  </div>
 
 	<script type=module src=js/dualex.js></script>
 </body>

@@ -21,6 +21,18 @@ import { VistaAlumnos } from './vistas/vistaalumnos.js'
 import { VistaInforme } from './vistas/vistainforme.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
+// Vista del alta de Empresa
+import { VistaEmpresa } from './vistas/vistaempresa.js'
+//Vista del listado de Empresas
+import { VistaEmpresas } from './vistas/vistaempresas.js'
+//Vista de editar empresa
+import { VistaEditarEmpresa } from './vistas/vistaeditarempresa.js'
+
+//Vista del menú del Coordinador
+import { VistaMenuCoordinador } from './vistas/vistamenucoordinador.js'
+
+//vista Profesores
+import { VistaProfesores } from './vistas/vistaprofesores.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
@@ -54,6 +66,11 @@ class DualEx {
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
+    this.vistaEmpresa = new VistaEmpresa(this, document.getElementById('divEmpresa'))
+    this.vistaMenuCoordinador = new VistaMenuCoordinador(this, document.getElementById('divMenuCoordinador'))
+    this.vistaEmpresas = new VistaEmpresas(this, document.getElementById('divEmpresas'))
+    this.vistaEditarEmpresa = new VistaEditarEmpresa(this, document.getElementById('divEditarEmpresa'))
+    this.vistaProfesores = new VistaProfesores(this, document.getElementById('divProfesores'))
     this.vistaConvenio = new Vistaconvenio(this, document.getElementById('divConvenio')) // Vista alta convenios
     this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios')) // Vista listado convenios
     this.vistaLogin.mostrar()
@@ -68,6 +85,7 @@ class DualEx {
     console.error(error)
   }
 
+  
   /**
     Recibe el token del login con Google y lo envía al servidor para identificar al usuario.
     @param token {Object} Token de identificación de usuario de Google.
@@ -115,6 +133,10 @@ class DualEx {
     return this.#usuario
   }
 
+  mostrarMenuCoordinador(){
+    this.vistaMenuCoordinador.mostrar(true)
+  }
+
   /**
     Oculta todas las vistas.
   **/
@@ -124,7 +146,15 @@ class DualEx {
     this.vistaAlumnos.mostrar(false)
     this.vistaInforme.mostrar(false)
     this.vistaCreditos.mostrar(false)
-  }
+    this.vistaEmpresa.mostrar(false)
+    this.vistaEmpresas.mostrar(false)
+    this.vistaEditarEmpresa.mostrar(false)
+    this.vistaMenuCoordinador.mostrar(false)
+    this.vistaConvenios.mostrar(false)
+    this.vistaProfesores.mostrar(false)
+}
+
+
 
   /**
     Muestra la vista de tareas del alumno.
@@ -189,9 +219,13 @@ class DualEx {
             this.vistaAlumnos.cargar(alumnos)
         this.ocultarVistas()
         this.vistaAlumnos.mostrar(true)
+        if (this.#usuario.rol == 'coordinador'){
+          this.vistaMenuCoordinador.mostrar(true)
+        }
       })
       .catch(error => this.gestionarError(error))
   }
+
 
   /**
     Muestra la vista de tarea.
@@ -264,6 +298,9 @@ class DualEx {
       })
       .catch(error => this.gestionarError(error))
   }
+
+  
+
 
   /**
     Elimina una tarea.
@@ -362,6 +399,96 @@ class DualEx {
   cargarNombreTarea(tarea){
     console.log(tarea.titulo)
     this.vistaMenu.verTarea(tarea)
+  }
+
+   /**
+   * Crea una nueva empresa.
+   * @param {Empresa} datosdelaempresa - Datos de la nueva empresa.
+   */
+   crearEmpresa(datosdelaempresa) {
+    this.modelo.crearEmpresa(datosdelaempresa);
+  }
+
+  /**
+   * Borra una empresa.
+   * @param {number} id - ID de la empresa a borrar.
+   * @returns {Promise} - Promesa que se resuelve cuando se borra la empresa.
+   */
+  borrarEmpresa(id) {
+    return this.modelo.borrarEmpresa(id)
+      .then(() => {
+        this.irAVistaEmpresas();
+      })
+      .catch(error => this.gestionarError(error));
+  }
+
+  /**
+   * Obtiene los datos de una empresa por su ID.
+   * @param {number} id - ID de la empresa.
+   * @returns {Promise} - Promesa que se resuelve con los datos de la empresa.
+   */
+  mostrarDatosEmpresa(id) {
+    return this.modelo.getEmpresaById(id);
+  }
+
+  /**
+   * Edita una empresa.
+   * @param {Object} datosEmpresa - Datos de la empresa a editar.
+   * @returns {Promise} - Promesa que se resuelve cuando se edita la empresa.
+   */
+  editarEmpresa(datosEmpresa) {
+    return this.modelo.editarEmpresa(datosEmpresa);
+  }
+
+  /**
+   * Navega a la vista de alumnos.
+   */
+  irAVistaAlumnos() {
+    this.ocultarVistas();
+    this.vistaAlumnos.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de convenios.
+   */
+  irAVistaConvenios() {
+    this.ocultarVistas();
+    this.vistaConvenios.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de profesores.
+   */
+  irAVistaProfesores() {
+    this.ocultarVistas();
+    this.vistaProfesores.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de empresas.
+   */
+  irAVistaEmpresas() {
+    this.ocultarVistas();
+    this.vistaMenu.verEmpresas();
+    this.vistaEmpresas.cargarEmpresas();
+    this.vistaEmpresas.mostrar(true);
+  }
+
+  /**
+   * Obtiene la lista de empresas.
+   * @returns {Promise} - Promesa que se resuelve con la lista de empresas.
+   */
+  mostrarEmpresas() {
+    return this.modelo.getEmpresas();
+  }
+
+  /**
+   * Muestra la vista para crear una nueva empresa.
+   */
+  mostrarVistaEmpresa() {
+    this.ocultarVistas();
+    this.vistaMenu.crearEmpresa();
+    this.vistaEmpresa.mostrar(true);
   }
 
   /**

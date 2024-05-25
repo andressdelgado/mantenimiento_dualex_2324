@@ -9,6 +9,7 @@ class Controlador{
 		Constructor de la clase.
 		@param $recurso {String} Nombre del recurso de la que se obtendrán los campos.
 	**/
+	private $entidad;
 	function __construct($recurso){
 		$this->entidad = null;
 		switch($recurso){
@@ -24,6 +25,9 @@ class Controlador{
 			case 'periodo':
 				$this->entidad = 'Periodo';
 				break; 
+			case 'empresa':
+				$this->entidad = 'Empresa';
+				break;
 			default:
 				header('HTTP/1.1 500 Internal Server Error');
 				die();

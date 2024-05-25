@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#divMenuCoordinador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box {
+  width: 200px;
+  height: 250px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+p {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+a.button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 60px;
+  height: 30px;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  font-size: 14px;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<div id="divMenuCoordinador">
+  <div class="wrapper">
+    <div class="box">
+      <h2>Alumnos</h2>
+      <p>Gestión de los alumnos</p>
+      <a href="#" class="button">Entrar</a>
+    </div>
+    <div class="box">
+      <h2>Profesores</h2>
+      <p>Gestión de los profesores</p>
+      <a href="#" class="button">Entrar</a>
+    </div>
+    <div class="box"> 
+      <h2>Empresas</h2>
+      <p>Gestión de las empresas</p>
+      <a href="#" class="button">Entrar</a>
+    </div>
+    <div class="box">
+      <h2>Convenios</h2>
+      <p>Gestión de los convenios</p>
+      <a href="#" class="button">Entrar</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
