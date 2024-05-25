@@ -25,9 +25,17 @@ import { VistaCreditos } from './vistas/vistacreditos.js'
 import { VistaEmpresa } from './vistas/vistaempresa.js'
 //Vista del listado de Empresas
 import { VistaEmpresas } from './vistas/vistaempresas.js'
+//Vista de editar empresa
+import { VistaEditarEmpresa } from './vistas/vistaeditarempresa.js'
+
 //Vista del menú del Coordinador
 import { VistaMenuCoordinador } from './vistas/vistamenucoordinador.js'
 
+//vista Profesores
+import { VistaProfesores } from './vistas/vistaprofesores.js'
+
+//Vista Convenios
+import { VistaConvenios } from './vistas/vistaconvenios.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
@@ -61,7 +69,9 @@ class DualEx {
     this.vistaEmpresa = new VistaEmpresa(this, document.getElementById('divEmpresa'))
     this.vistaMenuCoordinador = new VistaMenuCoordinador(this, document.getElementById('divMenuCoordinador'))
     this.vistaEmpresas = new VistaEmpresas(this, document.getElementById('divEmpresas'))
-
+    this.vistaEditarEmpresa = new VistaEditarEmpresa(this, document.getElementById('divEditarEmpresa'))
+    this.vistaProfesores = new VistaProfesores(this, document.getElementById('divProfesores'))
+    this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios'))
     this.vistaLogin.mostrar()
   }
 
@@ -74,6 +84,7 @@ class DualEx {
     console.error(error)
   }
 
+  
   /**
     Recibe el token del login con Google y lo envía al servidor para identificar al usuario.
     @param token {Object} Token de identificación de usuario de Google.
@@ -121,6 +132,10 @@ class DualEx {
     return this.#usuario
   }
 
+  mostrarMenuCoordinador(){
+    this.vistaMenuCoordinador.mostrar(true)
+  }
+
   /**
     Oculta todas las vistas.
   **/
@@ -131,14 +146,15 @@ class DualEx {
     this.vistaInforme.mostrar(false)
     this.vistaCreditos.mostrar(false)
     this.vistaEmpresa.mostrar(false)
+    this.vistaEmpresas.mostrar(false)
+    this.vistaEditarEmpresa.mostrar(false)
     this.vistaMenuCoordinador.mostrar(false)
-  }
+    this.vistaConvenios.mostrar(false)
+    this.vistaProfesores.mostrar(false)
+}
 
-  irAVistaEmpresas() {
-    this.ocultarVistas()
-    this.vistaEmpresas.cargarEmpresas()
-    this.vistaEmpresas.mostrar(true)
-  }
+
+
   /**
     Muestra la vista de tareas del alumno.
     @param alumno {Alumno} Datos del alumno.
@@ -177,7 +193,7 @@ class DualEx {
   **/
   mostrarInformeAlumno (alumno, periodo) {
     this.alumno = alumno
-    if (this.#usuario.rol !== 'profesor' || this.#usuario.rol === 'coordinador') return
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') return
     this.ocultarVistas()
     this.modelo.getInformeAlumno(alumno, periodo)
       .then(informe => {
@@ -194,7 +210,7 @@ class DualEx {
     @param borrar {Boolean} Indica si hay que borrar la lista de alumnos anterior.
   **/
   mostrarAlumnos (borrar = true) {
-    if (this.#usuario.rol !== 'profesor' || this.#usuario.rol === 'coordinador') { throw Error('Operación no permitida.') }
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
     this.modelo.getAlumnosProfesor()
       .then(alumnos => {
         this.vistaMenu.verAlumnosProfesor()
@@ -202,13 +218,13 @@ class DualEx {
             this.vistaAlumnos.cargar(alumnos)
         this.ocultarVistas()
         this.vistaAlumnos.mostrar(true)
+        if (this.#usuario.rol == 'coordinador'){
+          this.vistaMenuCoordinador.mostrar(true)
+        }
       })
       .catch(error => this.gestionarError(error))
   }
 
-  mostrarEmpresas(){
-    return this.modelo.getEmpresas();
-  }
 
   /**
     Muestra la vista de tarea.
@@ -281,6 +297,9 @@ class DualEx {
       })
       .catch(error => this.gestionarError(error))
   }
+
+  
+
 
   /**
     Elimina una tarea.
@@ -381,16 +400,96 @@ class DualEx {
     this.vistaMenu.verTarea(tarea)
   }
 
-  /**
-    Crea una nueva empresa
-    @param datosdelaempresa {Empresa} Datos de la nueva tarea.
-  **/
-    crearEmpresa(datosdelaempresa) {
-      console.log('estoy en el controlador')
-      this.modelo.crearEmpresa(datosdelaempresa)
-      }
-    }
+   /**
+   * Crea una nueva empresa.
+   * @param {Empresa} datosdelaempresa - Datos de la nueva empresa.
+   */
+   crearEmpresa(datosdelaempresa) {
+    this.modelo.crearEmpresa(datosdelaempresa);
+  }
 
+  /**
+   * Borra una empresa.
+   * @param {number} id - ID de la empresa a borrar.
+   * @returns {Promise} - Promesa que se resuelve cuando se borra la empresa.
+   */
+  borrarEmpresa(id) {
+    return this.modelo.borrarEmpresa(id)
+      .then(() => {
+        this.irAVistaEmpresas();
+      })
+      .catch(error => this.gestionarError(error));
+  }
+
+  /**
+   * Obtiene los datos de una empresa por su ID.
+   * @param {number} id - ID de la empresa.
+   * @returns {Promise} - Promesa que se resuelve con los datos de la empresa.
+   */
+  mostrarDatosEmpresa(id) {
+    return this.modelo.getEmpresaById(id);
+  }
+
+  /**
+   * Edita una empresa.
+   * @param {Object} datosEmpresa - Datos de la empresa a editar.
+   * @returns {Promise} - Promesa que se resuelve cuando se edita la empresa.
+   */
+  editarEmpresa(datosEmpresa) {
+    return this.modelo.editarEmpresa(datosEmpresa);
+  }
+
+  /**
+   * Navega a la vista de alumnos.
+   */
+  irAVistaAlumnos() {
+    this.ocultarVistas();
+    this.vistaAlumnos.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de convenios.
+   */
+  irAVistaConvenios() {
+    this.ocultarVistas();
+    this.vistaConvenios.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de profesores.
+   */
+  irAVistaProfesores() {
+    this.ocultarVistas();
+    this.vistaProfesores.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de empresas.
+   */
+  irAVistaEmpresas() {
+    this.ocultarVistas();
+    this.vistaMenu.verEmpresas();
+    this.vistaEmpresas.cargarEmpresas();
+    this.vistaEmpresas.mostrar(true);
+  }
+
+  /**
+   * Obtiene la lista de empresas.
+   * @returns {Promise} - Promesa que se resuelve con la lista de empresas.
+   */
+  mostrarEmpresas() {
+    return this.modelo.getEmpresas();
+  }
+
+  /**
+   * Muestra la vista para crear una nueva empresa.
+   */
+  mostrarVistaEmpresa() {
+    this.ocultarVistas();
+    this.vistaMenu.crearEmpresa();
+    this.vistaEmpresa.mostrar(true);
+  }
+}
 
 /* eslint-disable no-new */
 new DualEx()

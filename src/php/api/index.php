@@ -56,6 +56,7 @@
 		//Inyección de dependencias
 		Login::$clave = $config['clave_encriptacion'];
 		Login::$algoritmo_encriptacion = $config['algoritmo_encriptacion'];
+		Login::$coordinador = $config['coordinador'];
 		if(array_key_exists('Authorization2', apache_request_headers())){
 			$autorizacion = apache_request_headers()['Authorization2'];
 			if ($autorizacion != "null")

@@ -140,13 +140,40 @@ export class Modelo {
     }
 
     /**
-    Crea una empresa.
-    @param empresa {Empresa} Datos de la empresa.
-    @return {Promise} Devuelve la promesa asociada a la petición.
-    **/
-    crearEmpresa (empresa) {
-      console.log(empresa, 'datso dew ña empresa')
-      return Rest.post('empresa', [], empresa)
+     * Crea una empresa.
+     * @param {Empresa} empresa - Datos de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    crearEmpresa(empresa) {
+      console.log(empresa, 'datso dew ña empresa');
+      return Rest.post('empresa', [], empresa);
+    }
+
+    /**
+     * Borra una empresa por su ID.
+     * @param {number} id - ID de la empresa a borrar.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    borrarEmpresa(id) {
+      return Rest.delete('empresa', [id]);
+    }
+
+    /**
+     * Obtiene los datos de una empresa por su ID.
+     * @param {number} id - ID de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    getEmpresaById(id) {
+      return Rest.get('empresa', [id]);
+    }
+
+    /**
+     * Edita una empresa.
+     * @param {Empresa} datosdelaempresa - Datos actualizados de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    editarEmpresa(datosdelaempresa) {
+      return Rest.put('empresa', [], datosdelaempresa);
     }
 
 }

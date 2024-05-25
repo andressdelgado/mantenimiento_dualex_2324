@@ -147,6 +147,26 @@
 		</div>
 		<div class="divFlexBotones">
 			<button id="btnAnadir">Añadir</button>
+			<button id="volver-aniadir">Volver</button>
+		</div>	
+	</div>
+
+	<div id="divEditarEmpresa">
+		<div class="divFlex">
+			<label for="siglasEditar">Siglas:</label>
+			<input type="text" id="siglasEditar" placeholder="(Siglas de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="nombreEmpresaEditar">Nombre de la empresa:</label>
+			<input type="text" id="nombreEmpresaEditar" placeholder="(Nombre de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="notasEditar">Notas:</label>
+			<textarea id="notasEditar"></textarea>
+		</div>
+		<div class="divFlexBotones">
+			<button id="btnEditar">Editar</button>
+			<button id="volver-editar">Volver</button>
 		</div>
 	</div>
 	
@@ -240,31 +260,36 @@
 	</div>
 
 	<div id="divMenuCoordinador">
-		<div class="wrapper">
-		  <div class="box">
+		<div id="divMenuCoordinadorWraper">
+		  <div class="divMenuCoordinadorBox">
 			<h2>Alumnos</h2>
 			<p>Gestión de los alumnos</p>
-			<button href="#">Entrar</button>
+			<button id="botonAlumnos">Entrar</button>
 		  </div>
-		  <div class="box">
+		  <div class="divMenuCoordinadorBox">
 			<h2>Profesores</h2>
 			<p>Gestión de los profesores</p>
-			<button href="#">Entrar</button>
+			<button id="botonProfesores">Entrar</button>
 		  </div>
-		  <div class="box"> 
+		  <div class="divMenuCoordinadorBox"> 
 			<h2>Empresas</h2>
 			<p>Gestión de las empresas</p>
 			<button id="botonEmpresa">Entrar</button>
 		  </div>
-		  <div class="box">
+		  <div class="divMenuCoordinadorBox">
 			<h2>Convenios</h2>
 			<p>Gestión de los convenios</p>
-			<button href="#">Entrar</button>
+			<button id="botonConvenios">Entrar</button>
 		  </div>
-		</div>
-	  </div>
+	  	</div>
+	</div>
 
 	  <div id="divEmpresas">
+	  </div>
+
+	  <div id="divConvenios">
+	  </div>
+	  <div id="divProfesores">
 	  </div>
 
 	<script type=module src=js/dualex.js></script>

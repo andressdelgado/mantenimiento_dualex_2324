@@ -14,29 +14,29 @@ class Alumno{
 		@return {Array[Usuario]}
 	**/
 	function get($pathParams, $queryParams, $usuario){
-	switch(count($pathParams)){
-		case 1:
-			if ($pathParams[0] == 'profesor'){
-				if ($usuario->rol != 'profesor'){
-							header('HTTP/1.1 401 Unauthorized');
-							die();
+		switch(count($pathParams)){
+			case 1:
+				if ($pathParams[0] == 'profesor'){
+					if ($usuario->rol != 'profesor' && $usuario->rol != 'coordinador'){
+								header('HTTP/1.1 401 Unauthorized...');
+								die();
+					}
+					$resultado = DAOAlumno::verAlumnosPorProfesor($usuario->id);
 				}
-				$resultado = DAOAlumno::verAlumnosPorProfesor($usuario->id);
-			}
-			else{
-				$id = $pathParams[0];
+				else{
+					$id = $pathParams[0];
+					die("No implementado.");
+				}
+				break;
+			default:
 				die("No implementado.");
-			}
-			break;
-		default:
-			die("No implementado.");
-	}
-		//Adaptación del Resultado
-		$json = json_encode($resultado);
-		header('Content-type: application/json; charset=utf-8');
-		header('HTTP/1.1 200 OK');
-		echo $json;
-		die();
+		}
+			//Adaptación del Resultado
+			$json = json_encode($resultado);
+			header('Content-type: application/json; charset=utf-8');
+			header('HTTP/1.1 200 OK');
+			echo $json;
+			die();
 	}
 	/**
 		Procesa un array de alumnos x módulo para unificar los módulos en un array.
