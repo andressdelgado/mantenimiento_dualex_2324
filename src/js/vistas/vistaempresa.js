@@ -20,12 +20,12 @@ export class VistaEmpresa extends Vista {
     this.inputNombre = document.getElementById('nombreEmpresa');
     this.inputNotas = document.getElementById('notas');
     // Botones
-    this.btnAnadir = document.getElementById('btnAnadir');
+    this.btnAnadirEmpresa = document.getElementById('btnAnadirEmpresa');
     this.btnVolver = document.getElementById('volver-editar');
     this.btnVolver2 = document.getElementById('volver-aniadir');
 
     // Asociamos eventos
-    this.btnAnadir.onclick = this.anadirEmpresa.bind(this);
+    this.btnAnadirEmpresa.onclick = this.anadirEmpresa.bind(this);
     this.btnVolver.onclick = this.volverListado.bind(this);
     this.btnVolver2.onclick = this.volverListado.bind(this);
   }
@@ -42,18 +42,12 @@ export class VistaEmpresa extends Vista {
    * Método anadirEmpresa: Maneja la creación de una nueva empresa.
    */
   anadirEmpresa() {
-    console.log('siglas:', this.inputSiglas.value);
-    console.log('nombreEmpresa:', this.inputNombre.value);
-    console.log('notas:', this.inputNotas.value);
-
     if (this.comprobarVacio()) {
       const empresaData = {
         siglas: this.inputSiglas.value,
         nombre: this.inputNombre.value,
         notas: this.inputNotas.value,
       };
-
-      console.log(empresaData);
       // Se envía al completar la lectura del formulario
       this.controlador.crearEmpresa(empresaData);
     } else {
