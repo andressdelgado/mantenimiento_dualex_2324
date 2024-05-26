@@ -77,7 +77,7 @@ export class VistaTarea extends Vista{
           }
         } else {
           for (const modulo of tarea.modulos) {
-            if (modulo.calificacion) { this.deshabilitarActividades(true) }
+            if (modulo.revisado) { this.deshabilitarActividades(true) }
           }
         }
       })
@@ -382,7 +382,7 @@ export class VistaTarea extends Vista{
             this.controlador.gestionarError('La imagen es demasiado grande.')
           }
           else
-		    		this.crearImagen(valorimagen)
+		    this.crearImagen(valorimagen)
           this.iImagenes.value = ''
         })
         lector.readAsDataURL(archivo)
