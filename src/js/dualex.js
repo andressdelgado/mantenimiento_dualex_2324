@@ -506,18 +506,13 @@ class DualEx {
    */
   enviarSolicitudConvenio (formData) {
     return Rest.post('convenio', [], formData, false)
-      // .then(respuesta => {
-      //   if (respuesta.status === 200) {
-      //     console.log('Se realizó la consulta')
-      //     this.vistaConvenio.mostrar(false)
-      //     this.vistaConvenios.mostrar(true)
-      //   } else {
-      //     console.error('Hubo un error al realizar la consulta')
-      //   }
-      // })
-      // .catch(error => {
-      //   console.error('Error al realizar la solicitud:', error)
-      // })
+      .then(respuesta => {
+        this.vistaConvenios.cargarDatosConvenios()
+        this.irAVistaConvenios()
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud:', error)
+      })
   }
 
   /**

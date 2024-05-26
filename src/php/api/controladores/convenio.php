@@ -30,8 +30,6 @@ class Convenio{
             $id = DAOConvenio::insertar($titulo, $fecha_firma, $documento_convenio, $id_ciclo, $id_empresa);
             if (!empty($id)) {
                 header('HTTP/1.1 200 OK');
-                $localizacion = '/convenio/'.$id; //id insertado
-                echo $localizacion;
                 die();
             } else {
                 header('HTTP/1.1 500 Internal Server Error');

@@ -108,9 +108,6 @@ export class Vistaconvenio extends Vista {
 
         // Se envia al completar la lectura del archivo
         this.controlador.enviarSolicitudConvenio(convenioData)
-          .then(respuesta => {
-            console.log(respuesta)
-          })
           .catch(error => {
             console.error('Error al realizar la solicitud:', error)
           })
