@@ -68,6 +68,18 @@ export class VistaMenu extends Vista{
     this.verAcercaDe()
   }
 
+  verModificarAlumno () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Modificar Alumno'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el el formulario para modificar los datos de un alumno'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionAlumnos.bind(this.controlador, false)));
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
   /**
     Muestra el menú asociado a la vista de informe de alumno.
     @param alumno {Alumno} Datos del alumno.

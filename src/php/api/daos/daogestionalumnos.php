@@ -7,7 +7,7 @@
 class DAOGestionAlumnos{
 
     public static function verAlumnosByCurso($curso){
-        $sql = "SELECT u.id, u.nombre, u.apellidos, u.email ";
+        $sql = "SELECT u.id, u.nombre, u.apellidos, u.email, c.codigo ";
         $sql .= "FROM alumno a ";
         $sql .= "JOIN curso c ON a.id_curso = c.id ";
         $sql .= "JOIN usuario u ON u.id = a.id ";
@@ -37,11 +37,38 @@ class DAOGestionAlumnos{
 
         $usuarioId = BD::ejecutar($sql, $params);
 
-        $sql = "INSERT INTO alumno (id, id_curso) VALUES (:id, :curso)";
+        $sql = "INSERT INTO alumno (id, id_curso) ";
+        $sql .= "VALUES (:id, :curso)";
 
         $params = array(
             ':id' => $usuarioId,
             ':curso' => $alumno->curso
+        );
+
+        BD::ejecutar($sql, $params);
+    }
+
+    public static function actualizarAlumno($alumno){
+        $sql = "UPDATE usuario ";
+        $sql .= "SET nombre = :nombre, apellidos = :apellidos, email = :email ";
+        $sql .= "WHERE id = :id";
+
+        $params = array(
+            ':nombre' => $alumno->nombre,
+            ':apellidos' => $alumno->apellidos,
+            ':email' => $alumno->email,
+            ':id' => $alumno->id
+        );
+
+        BD::ejecutar($sql, $params);
+
+        $sql = "UPDATE alumno ";
+        $sql .= "SET id_curso = :curso ";
+        $sql .= "WHERE id = :id";
+
+        $params = array(
+            ':curso' => $alumno->curso,
+            ':id' => $alumno->id
         );
 
         BD::ejecutar($sql, $params);

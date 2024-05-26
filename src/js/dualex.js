@@ -25,6 +25,8 @@ import { VistaCreditos } from './vistas/vistacreditos.js'
 import { VistaGestionAlumnos } from './vistas/vistagestionalumnos.js'
 // Vista de alta de alumno
 import { VistaAltaAlumno } from './vistas/vistaaltaalumno.js'
+// Vista de modificación de alumno
+import { VistaModificarAlumno } from './vistas/vistamodificaralumno.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
@@ -62,6 +64,7 @@ class DualEx {
     this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios')) // Vista listado convenios
     this.vistaAlumnoAlta = new VistaAltaAlumno(this, document.getElementById('divAltaAlumno'))
     this.vistaAlumnosListado = new VistaGestionAlumnos(this, document.getElementById('divGestionAlumnos'))
+    this.vistaModificarAlumno = new VistaModificarAlumno(this, document.getElementById('divModificarAlumno'))
     this.vistaLogin.mostrar()
   }
 
@@ -132,6 +135,7 @@ class DualEx {
     this.vistaCreditos.mostrar(false)
     this.vistaAlumnoAlta.mostrar(false)
     this.vistaAlumnosListado.mostrar(false)
+    this.vistaModificarAlumno.mostrar(false)
   }
 
   /**
@@ -221,8 +225,8 @@ class DualEx {
   }
 
   /**
-   Muestra la vista de gestion de alumnos.
-   **/
+   * Muestra la vista de gestion de alumnos.
+   */
   mostrarGestionAlumnos () {
     if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
 
@@ -234,8 +238,8 @@ class DualEx {
   }
 
   /**
-   Muestra la vista de alta de alumno.
-   **/
+   * Muestra la vista de alta de alumno.
+   */
   mostrarAltaAlumno () {
     if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
 
@@ -253,7 +257,30 @@ class DualEx {
   }
 
   /**
+   * Muestra la vista de modificación de alumno.
+   * @param alumno {} Datos del alumno a modificar.
+   * @param cursos {} Lista de cursos.
+   */
+  mostrarModificarAlumno (alumno, cursos) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.vistaMenu.verModificarAlumno()
+    this.vistaModificarAlumno.cargarDatos(alumno, cursos)
+
+    this.ocultarVistas()
+    new Promise((resolve) => {
+      this.vistaModificarAlumno.mostrar(true);
+      resolve();
+    }).then(() => {
+      this.vistaModificarAlumno.inputNombre.focus();
+    }).catch((error) => {
+      console.error('Error mostrando vista de modificación de alumno:', error);
+    });
+  }
+
+  /**
    * Realiza una petición para insertar un nuevo alumno.
+   * @param alumno {} Datos del alumno a insertar.
    */
   altaAlumno (alumno) {
     if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
@@ -262,6 +289,21 @@ class DualEx {
       .then(resultado => {
         this.vistaMensaje.mostrar('El alumno se creó correctamente', VistaMensaje.OK)
         this.vistaAlumnoAlta.limpiarCampos()
+        this.vistaAlumnosListado.cargarFiltrado()
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Realiza una petición para modificar un alumno.
+   * @param alumno {} Datos del alumno a modificar.
+   */
+  modificarAlumno (alumno) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.modificarAlumno(alumno)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El alumno se actualizó correctamente', VistaMensaje.OK)
         this.vistaAlumnosListado.cargarFiltrado()
       })
       .catch(error => this.gestionarError(error))

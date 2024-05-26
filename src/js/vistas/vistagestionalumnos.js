@@ -12,6 +12,7 @@ export class VistaGestionAlumnos extends Vista{
   constructor (controlador, base) {
     super(controlador)
     this.base = base
+    this.cursos = []
 
     // Cogemos referencias a los elementos del interfaz
     this.listaAlumnos = document.getElementById('gestionAlumnosListado')
@@ -28,25 +29,26 @@ export class VistaGestionAlumnos extends Vista{
    * Carga los cursos en el select de la vista.
    */
   cargarFiltroCursos(){
-    this.cursos = []
-    this.controlador.getCursos()
-      .then(cursos => {
+    if (this.cursos.length === 0) {
+      this.controlador.getCursos()
+        .then(cursos => {
 
-        let option1 = document.createElement('option')
-        this.listaAlumnosSelect.appendChild(option1)
-        option1.value = ''
-        option1.textContent = 'Seleccione'
-        option1.disabled = 'true'
+          let option1 = document.createElement('option')
+          this.listaAlumnosSelect.appendChild(option1)
+          option1.value = ''
+          option1.textContent = 'Seleccione'
+          option1.disabled = 'true'
 
-        for(let i=0; i<cursos.length; i++){
-          this.cursos[i]=cursos[i]
-          let option = document.createElement('option')
-          this.listaAlumnosSelect.appendChild(option)
-          option.value = cursos[i].codigo
-          option.textContent = cursos[i].codigo
-        }
-      })
-      .catch(error => console.log(error))
+          for (let i = 0; i < cursos.length; i++) {
+            this.cursos[i] = cursos[i]
+            let option = document.createElement('option')
+            this.listaAlumnosSelect.appendChild(option)
+            option.value = cursos[i].codigo
+            option.textContent = cursos[i].codigo
+          }
+        })
+        .catch(error => console.log(error))
+    }
   }
 
   /**
@@ -114,7 +116,7 @@ export class VistaGestionAlumnos extends Vista{
    * @param alumno {} Datos modificables del alumno.
    */
   modificarAlumno (alumno) {
-    console.log('Modificar ' + alumno.id)
+    this.controlador.mostrarModificarAlumno(alumno, this.cursos)
   }
 
 }

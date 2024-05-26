@@ -23,17 +23,6 @@ export class Modelo {
   }
 
   /**
-   Devuelve la lista de alumnos por curso.
-   La lista está formada por los alumnos que están asignados a un curso.
-   @return {Promise} Devuelve la promesa asociada a la petición.
-   **/
-  getAlumnosByCurso (curso) {
-    const queryParams = new Map()
-    queryParams.set('curso', curso)
-    return Rest.get('gestionalumnos', [], queryParams)
-  }
-
-  /**
     Devuelve la lista de tareas de un alumno.
     @param alumno {Alumno} Datos del alumno.
     @return {Promise} Devuelve la promesa asociada a la petición.
@@ -106,6 +95,17 @@ export class Modelo {
   }
 
   /**
+   Devuelve la lista de alumnos por curso.
+   La lista está formada por los alumnos que están asignados a un curso.
+   @return {Promise} Devuelve la promesa asociada a la petición.
+   **/
+  getAlumnosByCurso (curso) {
+    const queryParams = new Map()
+    queryParams.set('curso', curso)
+    return Rest.get('gestionalumnos', [], queryParams)
+  }
+
+  /**
    Borrar un alumno.
    @param alumnoId {Number} Identificador del alumno.
    @return {Promise} Devuelve la promesa asociada a la petición.
@@ -114,9 +114,22 @@ export class Modelo {
     return Rest.delete('gestionalumnos', [alumnoId])
   }
 
+  /**
+   * Realiza el alta de un alumno.
+   * @param alumno {} Datos del alumno.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
   altaAlumno (alumno) {
-    console.log(alumno)
     return Rest.post('gestionalumnos', [], alumno)
+  }
+
+  /**
+   * Modifica un alumno.
+   * @param alumno {} Datos del alumno.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  modificarAlumno (alumno) {
+    return Rest.put('gestionalumnos', [], alumno)
   }
 
   /**
