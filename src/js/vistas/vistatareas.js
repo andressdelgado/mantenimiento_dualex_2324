@@ -35,68 +35,112 @@ export class VistaTareas extends Vista {
     @param tarea {Tarea} Datos de la tarea.
   **/
   crearDivTarea (tarea) {
-    const div = document.createElement('div')
-    this.base.appendChild(div)
-    div.id = `tarea_${tarea.id}` // Nos servirá para las pruebas
-    // TODO: Refactorizar para evitar DRY.
-    const divIconos = document.createElement('div')
-    div.appendChild(divIconos)
-    divIconos.classList.add('iconos')
+    const tabla = document.createElement('table')
+    const tbody = document.createElement('tbody')
+    tabla.appendChild(tbody)
+
+    // Primer TR
+    const tr1 = document.createElement('tr')
+    tbody.appendChild(tr1)
+
+    // Primer TD con los módulos
+    const tdModulos = document.createElement('td')
+    tdModulos.setAttribute('rowspan', '2')
+    tdModulos.classList.add('tdModulos')
+    tarea.modulos.forEach(this.crearSpanModulo.bind(this, tdModulos))
+    tr1.appendChild(tdModulos)
+
+    // Segundo TD con el título de la tarea
+    const tdTitulo = document.createElement('td')
+    tdTitulo.classList.add('tarea')
+    tdTitulo.setAttribute('colspan', '4')
+    tdTitulo.textContent = tarea.titulo
+    tdTitulo.onclick = this.pulsarEditar.bind(this, tarea)
+    if(tarea.retrasada === 1)
+        tdTitulo.classList.add('retrasada')
+    if(tarea.retrasada === 2)
+        tdTitulo.classList.add('muyRetrasada')
+    tr1.appendChild(tdTitulo)
+
+    // Tercer TD con el icono de eliminar
+    let revisiones = tarea.modulos.reduce((accumulator, modulo) => accumulator + modulo.revisado, 0)
     let editable = true
-		let texto = `${tarea.titulo}. `
-	
-		//Formamos el texo de calificación
-		if (tarea.calificacion_empresa) { texto += tarea.calificacion_empresa } else { texto += 'Sin calificación de empresa' }
-		// Calculamos las revisiones de la tarea
-		let revisiones = tarea.modulos.reduce((accumulator, modulo) => {
-			return accumulator + modulo.revisado
-		}, 0);
-		texto += ` - Revisiones Profesores: ${revisiones}/${tarea.modulos.length}`
 
     if (this.controlador.getUsuario().rol === 'alumno') {
-      if (tarea.calificacion_empresa != null) { editable = false }
-			if (revisiones > 0) { editable = false }
-		}
-    
-    if (editable) {
-      const iconoEditar = document.createElement('img')
-      divIconos.appendChild(iconoEditar)
-      iconoEditar.classList.add('icono')
-      iconoEditar.setAttribute('title', 'editar')
-      iconoEditar.setAttribute('src', 'iconos/edit.svg')
-      iconoEditar.onclick = this.pulsarEditar.bind(this, tarea)
+      if (tarea.calificacion_empresa !== null) { editable = false }
+      if (revisiones > 0) { editable = false }
+    }
 
+    if (editable) {
+      const tdIconoEliminar = document.createElement('td')
+      tdIconoEliminar.setAttribute('rowspan', '2')
+      tdIconoEliminar.classList.add('centrado-vertical')
+      tdIconoEliminar.classList.add('centrado-horizontal')
       const iconoEliminar = document.createElement('img')
-      divIconos.appendChild(iconoEliminar)
       iconoEliminar.classList.add('icono')
       iconoEliminar.setAttribute('title', 'eliminar')
       iconoEliminar.setAttribute('src', 'iconos/delete.svg')
       iconoEliminar.onclick = this.pulsarEliminar.bind(this, tarea)
+      const enlaceEliminar = document.createElement('a')
+      enlaceEliminar.setAttribute('href', '#')
+      enlaceEliminar.appendChild(iconoEliminar)
+      tdIconoEliminar.appendChild(enlaceEliminar)
+      tr1.appendChild(tdIconoEliminar)
     } else {
       const iconoConsultar = document.createElement('img')
-      divIconos.appendChild(iconoConsultar)
       iconoConsultar.classList.add('icono')
       iconoConsultar.setAttribute('title', 'consultar')
       iconoConsultar.setAttribute('src', 'iconos/visibility.svg')
       iconoConsultar.onclick = this.pulsarConsultar.bind(this, tarea)
+      const tdIconoConsultar = document.createElement('td')
+      tdIconoConsultar.setAttribute('rowspan', '2')
+      tdIconoConsultar.appendChild(iconoConsultar)
+      tr1.appendChild(tdIconoConsultar)
     }
-    tarea.modulos.forEach(this.crearSpanModulo.bind(this, div))
-    const spanTarea = document.createElement('span')
-    div.appendChild(spanTarea)
-    spanTarea.classList.add('tarea')
-    spanTarea.onclick = this.pulsarEditar.bind(this, tarea)
-    // Si es profesor, ponemos el aviso de tarea pendiente de corrección
+
+    // Segundo TR
+    const tr2 = document.createElement('tr')
+    tbody.appendChild(tr2)
+
+    // Primer TD con la fecha
+    const tdFecha = document.createElement('td')
+    tdFecha.textContent = tarea.fecha
+    tdFecha.title = 'Fecha de inicio'
+    tdFecha.classList.add('centrado-horizontal')
+    tr2.appendChild(tdFecha)
+
+    // Segundo TD con la calificación de la empresa
+    const tdCalificacionEmpresa = document.createElement('td')
+    if (tarea.calificacion_empresa) {
+      tdCalificacionEmpresa.textContent += tarea.calificacion_empresa
+    } else {
+      tdCalificacionEmpresa.textContent += 'Sin calificación de empresa'
+    }
+    tdCalificacionEmpresa.classList.add('centrado-horizontal')
+    tr2.appendChild(tdCalificacionEmpresa)
+
+    // Cuarto TD con la cantidad de revisiones
+    const tdRevisiones = document.createElement('td')
+    tdRevisiones.textContent = `${revisiones}/${tarea.modulos.length}`
+    tdRevisiones.classList.add('centrado-horizontal')
+    tdRevisiones.title = 'Revisiones de profesores'
+    tr2.appendChild(tdRevisiones)
+
+    // Verificar si es profesor y si hay tareas pendientes de revisión (Exclamacion)
     if (this.controlador.getUsuario().rol === 'profesor') {
       if (revisiones < tarea.modulos.length) {
         const spanAviso = document.createElement('span')
-        spanTarea.appendChild(spanAviso)
         spanAviso.classList.add('tarea_pendiente')
         spanAviso.textContent = '!'
         spanAviso.setAttribute('title', 'pendiente de revisión')
+        tdTitulo.insertBefore(spanAviso, tdTitulo.firstChild)
       }
     }
-		spanTarea.appendChild(document.createTextNode(texto))
+
+    // Agregar la tabla al contenedor base
+    this.base.appendChild(tabla)
   }
+
 
   // TODO: DRY con vistaalumnos.js
   /**
