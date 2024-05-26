@@ -39,31 +39,6 @@ export class VistaAltaAlumno extends Vista{
 
   }
 
-    /**
-     * Carga los cursos en el select de la vista.
-     */
-    cargarCursos(){
-      this.cursos = []
-      this.controlador.getCursos()
-        .then(cursos => {
-
-          let option1 = document.createElement('option')
-          this.selectCurso.appendChild(option1)
-          option1.value = ''
-          option1.textContent = 'Seleccione'
-          option1.disabled = 'true'
-
-          for(let i=0; i<cursos.length; i++){
-            this.cursos[i]=cursos[i]
-            let option = document.createElement('option')
-            this.selectCurso.appendChild(option)
-            option.value = cursos[i].id
-            option.textContent = cursos[i].codigo
-          }
-        })
-        .catch(error => console.log(error))
-    }
-
   /**
    * Realiza el alta de un alumno.
    */
@@ -151,6 +126,23 @@ export class VistaAltaAlumno extends Vista{
       this.errorEmail.style.display = 'none'
       this.errorCurso.style.display = 'none'
     }
+
+  /**
+   * Carga los datos de los cursos en el select.
+   * @param cursos Lista de cursos.
+   */
+  cargarDatos(cursos) {
+    // Limpiar las opciones existentes del select
+    this.selectCurso.innerHTML = '';
+
+    // Recorrer los cursos y agregar opciones al select
+    for(let i = 0; i < cursos.length; i++){
+      let option = document.createElement('option');
+      option.value = cursos[i].id;
+      option.textContent = cursos[i].codigo;
+      this.selectCurso.appendChild(option);
+    }
+  }
 
 
 }
