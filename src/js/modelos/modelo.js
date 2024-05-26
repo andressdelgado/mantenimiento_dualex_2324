@@ -114,6 +114,11 @@ export class Modelo {
     return Rest.delete('gestionalumnos', [alumnoId])
   }
 
+  altaAlumno (alumno) {
+    console.log(alumno)
+    return Rest.post('gestionalumnos', [], alumno)
+  }
+
   /**
     Devuelve la información del informe de evaluación de un alumno.
     @param alumno {Alumno} Datos del alumno.

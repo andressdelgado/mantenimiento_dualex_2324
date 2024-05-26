@@ -228,6 +228,7 @@ class DualEx {
 
     this.vistaMenu.verGestionAlumnos()
     this.vistaAlumnosListado.cargarFiltroCursos()
+    this.vistaAlumnoAlta.limpiarCampos()
     this.ocultarVistas()
     this.vistaAlumnosListado.mostrar(true)
   }
@@ -239,8 +240,31 @@ class DualEx {
     if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
 
     this.vistaMenu.verAltaAlumno()
+    this.vistaAlumnoAlta.cargarCursos()
     this.ocultarVistas()
-    this.vistaAlumnoAlta.mostrar(true)
+    new Promise((resolve) => {
+      this.vistaAlumnoAlta.mostrar(true);
+      resolve();
+    }).then(() => {
+      this.vistaAlumnoAlta.inputNombre.focus();
+    }).catch((error) => {
+      console.error('Error mostrando vista de alta de alumno:', error);
+    });
+  }
+
+  /**
+   * Realiza una petición para insertar un nuevo alumno.
+   */
+  altaAlumno (alumno) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.altaAlumno(alumno)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El alumno se creó correctamente', VistaMensaje.OK)
+        this.vistaAlumnoAlta.limpiarCampos()
+        this.vistaAlumnosListado.cargarFiltrado()
+      })
+      .catch(error => this.gestionarError(error))
   }
 
   /**

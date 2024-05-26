@@ -826,6 +826,12 @@ span.alumno:hover{
 #divAltaAlumno input{
 	margin: 0.3rem;
 }
+#divAltaAlumno .error{
+	display: none;
+	color: red;
+	font-weight: bold;
+	margin-left: 41%
+}
 #divAltaAlumno button{
 	cursor: pointer;
 	background-color: blue;
@@ -867,7 +873,6 @@ span.alumno:hover{
 
 #divAltaAlumno>label>input{
 	margin-left: 15%;
-
 }
 #divAltaAlumno>h1{
 	text-align: center;

@@ -25,4 +25,26 @@ class DAOGestionAlumnos{
         BD::ejecutar($sql, $params);
     }
 
+    public static function insertarAlumno($alumno){
+        $sql = "INSERT INTO usuario (nombre, apellidos, email) ";
+        $sql .= "VALUES (:nombre, :apellidos, :email)";
+
+        $params = array(
+            ':nombre' => $alumno->nombre,
+            ':apellidos' => $alumno->apellidos,
+            ':email' => $alumno->email
+        );
+
+        $usuarioId = BD::ejecutar($sql, $params);
+
+        $sql = "INSERT INTO alumno (id, id_curso) VALUES (:id, :curso)";
+
+        $params = array(
+            ':id' => $usuarioId,
+            ':curso' => $alumno->curso
+        );
+
+        BD::ejecutar($sql, $params);
+    }
+
 }

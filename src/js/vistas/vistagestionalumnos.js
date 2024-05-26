@@ -28,7 +28,6 @@ export class VistaGestionAlumnos extends Vista{
    * Carga los cursos en el select de la vista.
    */
   cargarFiltroCursos(){
-    console.log('cargarFiltroCursos')
     this.cursos = []
     this.controlador.getCursos()
       .then(cursos => {

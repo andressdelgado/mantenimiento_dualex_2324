@@ -34,4 +34,16 @@ class GestionAlumnos{
         }
     }
 
+    function post($pathParams, $queryParams, $alumno, $usuario){
+        if ($usuario->rol == 'profesor' || $usuario->rol == 'coordinador'){
+            DAOGestionAlumnos::insertarAlumno($alumno);
+            header('HTTP/1.1 200 OK');
+            die();
+        }
+        else{
+            header('HTTP/1.1 401 Unauthorized');
+            die();
+        }
+    }
+
 }

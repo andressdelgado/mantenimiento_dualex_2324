@@ -264,26 +264,26 @@
 	<div id="divAltaAlumno">
 		<h1>Añadir - Alumno</h1>
 		<div class="divFlex">
-			<label for="nombre">Nombre:</label>
-			<input type="text" id="nombre" placeholder="(Nombre)" />
+			<label for="nombreAlumno">Nombre:</label>
+			<input type="text" id="nombreAlumno" placeholder="(Nombre)" />
 		</div>
+		<small id="errorNombreAlumno" class="error">Formato erróneo, solo caracteres</small>
 		<div class="divFlex">
-			<label for="apellidos">Apellidos:</label>
-			<input type="text" id="apellidos" placeholder="(Apellidos)" />
+			<label for="apellidosAlumno">Apellidos:</label>
+			<input type="text" id="apellidosAlumno" placeholder="(Apellidos)" />
 		</div>
+		<small id="errorApellidosAlumno" class="error">Formato erróneo, solo caracteres</small>
 		<div class="divFlex">
-			<label for="email">Email:</label>
-			<input type="text" id="email" placeholder="(Email)" />
+			<label for="emailAlumno">Email:</label>
+			<input type="text" id="emailAlumno" placeholder="(Email)" />
 		</div>
+		<small id="errorEmailAlumno" class="error">Formato erróneo</small>
 		<div class="divFlex">
-			<label for="selectCicloAltaAlumno">Ciclo:</label>
+			<label for="selectCicloAltaAlumno">Curso:</label>
 			<select id="selectCicloAltaAlumno">
-				<option disabled selected>Selecciona un ciclo</option>
-				<option>DAW</option>
-				<option>SMR</option>
-				<option>...</option>
 			</select>
 		</div>
+		<small id="errorCursoAlumno" class="error">Debe seleccionar un curso</small>
 		<div class="divFlexBotones">
 			<button id="btnAnadirAltaAlumno">Añadir</button>
 			<button id="btnLimpiarAltaAlumno" style="background-color: darkred">Limpiar</button>

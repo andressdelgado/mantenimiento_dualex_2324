@@ -63,7 +63,7 @@ export class VistaMenu extends Vista{
     this.base.appendChild(h1)
     h1.appendChild(document.createTextNode('Alta de Alumno'))
     h1.appendChild(this.crearIconoAyuda('Muestra el el formulario para dar de alta a un alumno'))
-    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionAlumnos().bind(this.controlador, false)))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionAlumnos.bind(this.controlador, false)));
     this.verLogout(2)
     this.verAcercaDe()
   }
