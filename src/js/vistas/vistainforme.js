@@ -68,16 +68,6 @@ export class VistaInforme extends Vista {
     for (const textarea of this.textAreas) { textarea.value = '' }
   }
 
-  /**
-    Cambia los input de texto y los textarea para mostrarlos como texto (no como inputs ni textareas).
-  **/
-  combinar () {
-    for (const elemento of this.base.querySelectorAll("input[type='text'], textarea")) {
-      elemento.parentElement.insertBefore(document.createTextNode(elemento.value), elemento)
-      elemento.remove()
-    }
-  }
-
   _crearGrid (informe, div) {
     // Mejor si primero lo borramos
     while (div.children.length > 0) { div.lastChild.remove() }

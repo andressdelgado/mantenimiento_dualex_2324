@@ -19,6 +19,18 @@ import { VistaTarea } from './vistas/vistatarea.js'
 import { VistaAlumnos } from './vistas/vistaalumnos.js'
 // Informe de Alumno
 import { VistaInforme } from './vistas/vistainforme.js'
+// Vista del alta de Empresa
+import { VistaEmpresa } from './vistas/vistaempresa.js'
+//Vista del listado de Empresas
+import { VistaEmpresas } from './vistas/vistaempresas.js'
+//Vista de editar empresa
+import { VistaEditarEmpresa } from './vistas/vistaeditarempresa.js'
+//vista Profesores
+import { VistaProfesores } from './vistas/vistaprofesores.js'
+//Vista del menú del Coordinador
+import { Vistaconvenio } from './vistas/vistaconvenio.js'
+import { VistaConvenios } from './vistas/vistaconvenios.js'
+import { VistaMenuCoordinador } from './vistas/vistamenucoordinador.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
 
@@ -51,6 +63,13 @@ class DualEx {
     this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
+    this.vistaEmpresa = new VistaEmpresa(this, document.getElementById('divEmpresa'))
+    this.vistaEmpresas = new VistaEmpresas(this, document.getElementById('divEmpresas'))
+    this.vistaEditarEmpresa = new VistaEditarEmpresa(this, document.getElementById('divEditarEmpresa'))
+    this.vistaProfesores = new VistaProfesores(this, document.getElementById('divProfesores'))
+    this.vistaConvenio = new Vistaconvenio(this, document.getElementById('divConvenio')) // Vista alta convenios
+    this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios')) // Vista listado convenios
+    this.vistaMenuCoordinador = new VistaMenuCoordinador(this, document.getElementById('divMenuCoordinador'))
     this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
     this.vistaLogin.mostrar()
   }
@@ -80,6 +99,9 @@ class DualEx {
             this.mostrarTareasAlumno(this.#usuario)
             break
           case 'profesor':
+            this.mostrarAlumnos()
+            break
+          case 'coordinador':
             this.mostrarAlumnos()
             break
           default:
@@ -126,7 +148,7 @@ class DualEx {
   mostrarTareasAlumno (alumno) {
     this.alumno = alumno
     // Para saber volver cuando sea el profesor
-    if (this.#usuario.rol === 'profesor') {
+    if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador') {
       if (!alumno) {
         alumno = this.alumnoMostrado 
         this.alumno = this.alumnoMostrado
@@ -157,7 +179,7 @@ class DualEx {
   **/
   mostrarInformeAlumno (alumno, periodo) {
     this.alumno = alumno
-    if (this.#usuario.rol !== 'profesor') return
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') return
     this.ocultarVistas()
     this.modelo.getInformeAlumno(alumno, periodo)
       .then(informe => {
@@ -174,7 +196,7 @@ class DualEx {
     @param borrar {Boolean} Indica si hay que borrar la lista de alumnos anterior.
   **/
   mostrarAlumnos (borrar = true) {
-    if (this.#usuario.rol !== 'profesor') { throw Error('Operación no permitida.') }
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
     this.modelo.getAlumnosProfesor()
       .then(alumnos => {
         this.vistaMenu.verAlumnosProfesor()
@@ -182,6 +204,8 @@ class DualEx {
             this.vistaAlumnos.cargar(alumnos)
         this.ocultarVistas()
         this.vistaAlumnos.mostrar(true)
+        if (this.#usuario.rol === 'coordinador')
+          this.vistaMenuCoordinador.mostrar(true) 
       })
       .catch(error => this.gestionarError(error))
   }
@@ -245,15 +269,13 @@ class DualEx {
       .then(resultado => {
         if(!siguienteTarea){
           this.vistaMensaje.mostrar('La tarea se modificó correctamente', VistaMensaje.OK)
-          if (this.#usuario.rol === 'profesor') {
+          if (this.#usuario.rol === 'profesor' || this.#usuario.rol === 'coordinador')
             this.mostrarTareasAlumno(this.alumnoMostrado) 
-          } 
-          else {
+          else 
             this.mostrarTareasAlumno(this.#usuario) 
-          }
         }
-				else
-					this.mostrarTarea(siguienteTarea)
+		else
+			this.mostrarTarea(siguienteTarea)
       })
       .catch(error => this.gestionarError(error))
   }
@@ -281,7 +303,6 @@ class DualEx {
     Imprime la vista actual.
   **/
   imprimir () {
-    this.vistaInforme.combinar()
     window.print()
   }
 
@@ -355,6 +376,148 @@ class DualEx {
   cargarNombreTarea(tarea){
     console.log(tarea.titulo)
     this.vistaMenu.verTarea(tarea)
+  }
+  
+   /**
+   * Crea una nueva empresa.
+   * @param {Empresa} datosdelaempresa - Datos de la nueva empresa.
+   */
+   crearEmpresa(datosdelaempresa) {
+    this.modelo.crearEmpresa(datosdelaempresa);
+  }
+
+  /**
+   * Borra una empresa.
+   * @param {number} id - ID de la empresa a borrar.
+   * @returns {Promise} - Promesa que se resuelve cuando se borra la empresa.
+   */
+  borrarEmpresa(id) {
+    return this.modelo.borrarEmpresa(id)
+      .then(() => {
+        this.irAVistaEmpresas();
+      })
+      .catch(error => this.gestionarError(error));
+  }
+
+  /**
+   * Obtiene los datos de una empresa por su ID.
+   * @param {number} id - ID de la empresa.
+   * @returns {Promise} - Promesa que se resuelve con los datos de la empresa.
+   */
+  mostrarDatosEmpresa(id) {
+    return this.modelo.getEmpresaById(id);
+  }
+
+  /**
+   * Edita una empresa.
+   * @param {Object} datosEmpresa - Datos de la empresa a editar.
+   * @returns {Promise} - Promesa que se resuelve cuando se edita la empresa.
+   */
+  editarEmpresa(datosEmpresa) {
+    return this.modelo.editarEmpresa(datosEmpresa);
+  }
+
+  /**
+   * Navega a la vista de alumnos.
+   */
+  irAVistaAlumnos() {
+    this.ocultarVistas();
+    this.vistaAlumnos.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de convenios.
+   */
+  irAVistaConvenios() {
+    this.ocultarVistas()
+    this.vistaMenu.verConvenios()
+    this.vistaConvenios.mostrar(true)
+  }
+
+  /**
+   * Navega a la vista de profesores.
+   */
+  irAVistaProfesores() {
+    this.ocultarVistas();
+    this.vistaProfesores.mostrar(true);
+  }
+
+  /**
+   * Navega a la vista de empresas.
+   */
+  irAVistaEmpresas() {
+    this.ocultarVistas();
+    this.vistaMenu.verEmpresas();
+    this.vistaEmpresas.cargarEmpresas();
+    this.vistaEmpresas.mostrar(true);
+  }
+
+  /**
+   * Obtiene la lista de empresas.
+   * @returns {Promise} - Promesa que se resuelve con la lista de empresas.
+   */
+  mostrarEmpresas() {
+    return this.modelo.getEmpresas();
+  }
+
+  /**
+   * Muestra la vista para crear una nueva empresa.
+   */
+  mostrarVistaEmpresa() {
+    this.ocultarVistas();
+    this.vistaMenu.crearEmpresa();
+    this.vistaEmpresa.mostrar(true);
+  }
+
+  mostrarVistaConvenio(){
+    this.ocultarVistas()
+    this.vistaMenu.crearConvenio()
+    this.vistaConvenio.mostrar(true)
+  }
+
+  /**
+   * Realiza una peticion de alta de convenio
+   * @param formData Datos para la peticion
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  enviarSolicitudConvenio (formData) {
+    return Rest.post('convenio', [], formData, false)
+      // .then(respuesta => {
+      //   if (respuesta.status === 200) {
+      //     console.log('Se realizó la consulta')
+      //     this.vistaConvenio.mostrar(false)
+      //     this.vistaConvenios.mostrar(true)
+      //   } else {
+      //     console.error('Hubo un error al realizar la consulta')
+      //   }
+      // })
+      // .catch(error => {
+      //   console.error('Error al realizar la solicitud:', error)
+      // })
+  }
+
+  /**
+   * Realiza una petición para obtener los datos de la tabla ciclos
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosCiclo () {
+    return Rest.get('ciclo')
+  }
+
+  /**
+   * Realiza una petición para obtener los datos de la tabla empresa
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosEmpresa () {
+    return Rest.get('empresa')
+  }
+
+  /**
+   * Realiza una petición para obtener los datos de la tabla convenio
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosConvenios () {
+    return Rest.get('convenio')
   }
   
 }
