@@ -549,10 +549,12 @@ input.invalid {
 	text-align: center;
 }
 
-#centrado-vertical {
+#divTareas .centrado-vertical {
 	vertical-align: middle;
+	width: 10%;
 }
-#tdModulos{
+
+#divTareas .tdModulos{
 	width: 15%;
 }
 
@@ -596,6 +598,12 @@ input.invalid {
 #divTareas .tarea_pendiente{
 	font-weight: bold;
 	color: red;
+}
+#divTareas .retrasada{
+    background-color: yellow;
+}
+#divTareas .muyRetrasada{
+    background-color: red;
 }
 
 /* Reglas de VistaDialogo */

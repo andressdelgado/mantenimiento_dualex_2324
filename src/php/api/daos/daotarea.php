@@ -80,6 +80,11 @@ class DAOTarea{
 		$sql .= ', Modulo.id AS id_modulo, Modulo.codigo, Modulo.titulo AS modulo_titulo, Modulo.color_fondo, Modulo.color_letra ';
 		$sql .= ', Actividad_Modulo_Tarea.revisado AS modulo_revisado, Actividad_Modulo_Tarea.comentario AS modulo_comentario ';
 		$sql .= ', Alumno.id_curso AS id_curso ';
+		$sql .= ', CASE  WHEN Actividad_Modulo_Tarea.revisado = 0 AND Modulo_Profesor.id_profesor = :id_profesor  THEN ';
+		$sql .= ' CASE ';
+    	$sql .= ' WHEN DATEDIFF(NOW(), Tarea.fecha_fin) > 7 THEN 1 ';
+        $sql .= ' WHEN DATEDIFF(NOW(), Tarea.fecha_fin) > 10 THEN 2 ELSE 0 ';
+        $sql .= ' END ELSE -1 END AS retrasada '; 
 		$sql .= 'FROM Tarea ';
 		$sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';
 		$sql .= 'LEFT JOIN Calificacion ON Calificacion.id = Tarea.id_calificacion_empresa ';

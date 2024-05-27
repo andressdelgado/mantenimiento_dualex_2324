@@ -46,7 +46,7 @@ export class VistaTareas extends Vista {
     // Primer TD con los módulos
     const tdModulos = document.createElement('td')
     tdModulos.setAttribute('rowspan', '2')
-    tdModulos.setAttribute('id', 'tdModulos')
+    tdModulos.classList.add('tdModulos')
     tarea.modulos.forEach(this.crearSpanModulo.bind(this, tdModulos))
     tr1.appendChild(tdModulos)
 
@@ -56,6 +56,10 @@ export class VistaTareas extends Vista {
     tdTitulo.setAttribute('colspan', '4')
     tdTitulo.textContent = tarea.titulo
     tdTitulo.onclick = this.pulsarEditar.bind(this, tarea)
+    if(tarea.retrasada === 1)
+        tdTitulo.classList.add('retrasada')
+    if(tarea.retrasada === 2)
+        tdTitulo.classList.add('muyRetrasada')
     tr1.appendChild(tdTitulo)
 
     // Tercer TD con el icono de eliminar
@@ -63,14 +67,14 @@ export class VistaTareas extends Vista {
     let editable = true
 
     if (this.controlador.getUsuario().rol === 'alumno') {
-      if (tarea.calificacion_empresa != null) { editable = false }
+      if (tarea.calificacion_empresa !== null) { editable = false }
       if (revisiones > 0) { editable = false }
     }
 
     if (editable) {
       const tdIconoEliminar = document.createElement('td')
       tdIconoEliminar.setAttribute('rowspan', '2')
-      tdIconoEliminar.setAttribute('id', 'centrado-vertical')
+      tdIconoEliminar.classList.add('centrado-vertical')
       tdIconoEliminar.classList.add('centrado-horizontal')
       const iconoEliminar = document.createElement('img')
       iconoEliminar.classList.add('icono')
