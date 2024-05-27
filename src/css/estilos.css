@@ -818,18 +818,18 @@ span.alumno:hover{
     position: relative;
 }
 
-#divMenuCoordinador > h2 {
+#divMenuCoordinador h2 {
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
 }
 
-#divMenuCoordinador > p {
+#divMenuCoordinador p {
     font-size: 12px;
     margin-top: 0;
 }
 
-#divMenuCoordinador > button {
+#divMenuCoordinador button {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -859,18 +859,18 @@ span.alumno:hover{
 	position: relative;
   }
   
-  #divMenuCoordinador > h2{
+  #divMenuCoordinador h2{
 	font-size: 18px;
 	font-weight: bold;
 	margin-top: 0;
   }
   
-  #divMenuCoordinador > p{
+  #divMenuCoordinador p{
 	font-size: 12px;
 	margin-top: 0;
   }
   
-  #divMenuCoordinador > button{
+  #divMenuCoordinador button{
 	position: absolute;
 	bottom: 10px;
 	right: 10px;
@@ -878,10 +878,12 @@ span.alumno:hover{
 	height: 30px;
 	background-color: blue;
 	color: white;
+	border-color: white;
 	text-align: center;
 	line-height: 30px;
 	font-size: 14px;
 	text-decoration: none;
+	font-weight: bold;
   }
   
   #divEmpresas {
@@ -894,22 +896,7 @@ span.alumno:hover{
     align-items: flex-start;
 }
 
-#divEmpresa > button, #divEditarEmpresa > button {
-    background-color: rgb(4, 0, 128);
-    color: white;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 0.2rem;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    margin-bottom: 0.8rem;
-    margin-left: 5%;
-}
 
-#divEmpresa > button, #divEditarEmpresa > button {
-    background-color: rgb(0, 0, 80);
-}
 .empresa-item {
     display: flex;
     justify-content: space-between;
