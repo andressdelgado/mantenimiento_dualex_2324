@@ -353,25 +353,25 @@ legend{
 h1{
 	text-align: center; /* Centra el contenido del div */
 }
-#tablaListaConvenios {
+#divConvenios table {
 	border-collapse: collapse;
 	width: 90%;
 	margin: auto;
 	margin-top: 20px; /* Añade un margen superior a la tabla */
 }
 
-#tablaListaConvenios th, #tablaListaConvenios td {
+#divConvenios th, #divConvenios td {
 	text-align: center; /* Centra el contenido de las celdas */
 	padding: 8px;
 	border: 1px solid #ddd;
 }
 
-#tablaListaConvenios th {
+#divConvenios th {
 	background-color: #f0f0f0;
 }
 
-#tablaListaConvenios th:first-child,
-#tablaListaConvenios td:first-child {
+#divConvenios th:first-child,
+#divConvenios td:first-child {
 	text-align: left;
 }
 
