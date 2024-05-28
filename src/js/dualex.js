@@ -557,14 +557,6 @@ class DualEx {
   }
 
   /**
-   * Navega a la vista de alumnos.
-   */
-  irAVistaAlumnos() {
-    this.ocultarVistas();
-    this.vistaAlumnos.mostrar(true);
-  }
-
-  /**
    * Navega a la vista de convenios.
    */
   irAVistaConvenios() {
