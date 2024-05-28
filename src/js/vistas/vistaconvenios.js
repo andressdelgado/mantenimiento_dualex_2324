@@ -99,7 +99,7 @@ export class VistaConvenios extends Vista {
         })
       })
       .catch(error => {
-        console.error('Error al cargar los convenios:', error)
+        this.controlador.gestionarError(error)
       })
   }
 

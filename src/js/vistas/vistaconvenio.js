@@ -13,17 +13,18 @@ export class Vistaconvenio extends Vista {
   constructor (controlador, base) {
     super(controlador)
     this.base = base
+
     // Cogemos referencias a los elementos del interfaz
     // Inputs
-    this.inputTitulo = document.getElementById('tituloConvenio')
-    this.inputFechaFirma = document.getElementById('fechaFirma')
-    this.inputDocumento = document.getElementById('documento')
+    this.inputTitulo = this.base.querySelectorAll('input')[0]
+    this.inputFechaFirma = this.base.querySelectorAll('input')[1]
+    this.inputDocumento = this.base.querySelectorAll('input')[2]
     // Bontones
-    this.btnAnadir = document.getElementById('btnAnadir')
-    this.btnLimpiar = document.getElementById('btnLimpiar')
+    this.btnAnadir = this.base.querySelectorAll('button')[0]
+    this.btnLimpiar = this.base.querySelectorAll('button')[1]
     // Selects
-    this.selectCiclo = document.getElementById('selectCiclo')
-    this.selectEmpresa = document.getElementById('selectEmpresa')
+    this.selectCiclo = this.base.querySelectorAll('select')[0]
+    this.selectEmpresa = this.base.querySelectorAll('select')[1]
 
     // Ejecutar metodos necesarios
     this.cargarDatos()
@@ -62,12 +63,12 @@ export class Vistaconvenio extends Vista {
         ciclos.forEach(ciclo => {
           const option = document.createElement('option')
           option.value = ciclo.id
-          option.textContent = ciclo.grado
+          option.textContent = ciclo.nombre
           this.selectCiclo.appendChild(option)
         })
       })
       .catch(error => {
-        console.error('Error al cargar los ciclos:', error)
+        this.controlador.gestionarError(error)
       })
   }
 
@@ -85,7 +86,7 @@ export class Vistaconvenio extends Vista {
         })
       })
       .catch(error => {
-        console.error('Error al cargar las empresas:', error)
+        this.controlador.gestionarError(error)
       })
   }
 
@@ -109,7 +110,7 @@ export class Vistaconvenio extends Vista {
         // Se envia al completar la lectura del archivo
         this.controlador.enviarSolicitudConvenio(convenioData)
           .catch(error => {
-            console.error('Error al realizar la solicitud:', error)
+            this.controlador.gestionarError(error)
           })
       }
 

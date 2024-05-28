@@ -511,7 +511,7 @@ class DualEx {
         this.irAVistaConvenios()
       })
       .catch(error => {
-        console.error('Error al realizar la solicitud:', error)
+        this.gestionarError(error)
       })
   }
 
