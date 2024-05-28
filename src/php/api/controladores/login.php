@@ -55,7 +55,6 @@ class Login{
         }
 		$usuario->autorizacion = openssl_encrypt(json_encode($usuario), self::$algoritmo_encriptacion, self::$clave, 0, self::$iv);
     	//print_r(openssl_get_cipher_methods()); //Muestra los algoritmos de encriptación disponibles
-
 		header('Content-type: application/json; charset=utf-8');
     	header('HTTP/1.1 200 OK');
     	echo json_encode($usuario);

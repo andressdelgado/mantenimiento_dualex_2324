@@ -12,10 +12,10 @@ class Convenio{
         @param $usuario {Usuario} Usuario que realiza la petición.
      * */
     function post($pathParams, $queryParams, $body, $usuario){
-        //if ($usuario->rol != 'coordinador') {
-        //    header('HTTP/1.1 401 Unauthorized');
-        //    die();
-        //}
+        if ($usuario->rol != 'coordinador') {
+            header('HTTP/1.1 401 Unauthorized');
+            die();
+        }
         // Extraer datos del body
         $titulo = $body->tituloConvenio;
         $fecha_firma = $body->fechaFirma;
@@ -30,8 +30,6 @@ class Convenio{
             $id = DAOConvenio::insertar($titulo, $fecha_firma, $documento_convenio, $id_ciclo, $id_empresa);
             if (!empty($id)) {
                 header('HTTP/1.1 200 OK');
-                $localizacion = '/convenio/'.$id; //id insertado
-                echo $localizacion;
                 die();
             } else {
                 header('HTTP/1.1 500 Internal Server Error');

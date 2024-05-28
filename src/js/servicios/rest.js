@@ -58,13 +58,11 @@ export class Rest {
       headers: Rest._getHeaders(),
       body: JSON.stringify(requestBody)
     }
-
     // Construimos la petición
     return fetch(Rest._construirURL(path, pathParams), opciones) // Hacemos la petición
       .then(respuesta => {
         // Control de Errores
         if (!respuesta.ok) { throw Error(`${respuesta.status} - ${respuesta.statusText}`) }
-
         if (json) return respuesta.json() // Si fuera json.
         // La respuesta es un texto con la URL del recurso creado.
         else return respuesta.text()

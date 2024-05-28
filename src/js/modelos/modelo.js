@@ -22,6 +22,10 @@ export class Modelo {
     return Rest.get('alumno', ['profesor'])
   }
 
+  getEmpresas(){
+    return Rest.get('empresa')
+  }
+
   /**
     Devuelve la lista de tareas de un alumno.
     @param alumno {Alumno} Datos del alumno.
@@ -172,4 +176,41 @@ export class Modelo {
       queryParams.set('periodo', periodo)
       return Rest.get('modulo', ['moduloNota'], queryParams)
     }
+
+    /**
+     * Crea una empresa.
+     * @param {Empresa} empresa - Datos de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    crearEmpresa(empresa) {
+      return Rest.post('empresa', [], empresa);
+    }
+
+    /**
+     * Borra una empresa por su ID.
+     * @param {number} id - ID de la empresa a borrar.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    borrarEmpresa(id) {
+      return Rest.delete('empresa', [id]);
+    }
+
+    /**
+     * Obtiene los datos de una empresa por su ID.
+     * @param {number} id - ID de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    getEmpresaById(id) {
+      return Rest.get('empresa', [id]);
+    }
+
+    /**
+     * Edita una empresa.
+     * @param {Empresa} datosdelaempresa - Datos actualizados de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    editarEmpresa(datosdelaempresa) {
+      return Rest.put('empresa', [], datosdelaempresa);
+    }
+
 }
