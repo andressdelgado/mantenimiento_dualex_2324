@@ -31,7 +31,7 @@ legend{
 /* Inicialmente ocultamos las vistas #divConvenio */
 #divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme,
 #divCreditos, #divConvenio, #divConvenios, .gestionAlumno, #divGestionAlumnos,
-#divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme, #divCreditos, #divConvenio, #divConvenios, #divEmpresa, #divEmpresas, #divEditarEmpresa, #divMenuCoordinador, #divProfesores, #divConvenios{
+#divEmpresa, #divEmpresas, #divEditarEmpresa, #divMenuCoordinador, #divProfesores{
 	display: none;
 }
 
