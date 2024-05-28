@@ -514,7 +514,7 @@ input.invalid {
 }
 #divEmpresa button{
 	cursor: pointer;
-	background-color: blue;
+	background-color: red;
 	border: none;
 	color: white;
 	margin: 1rem;
@@ -569,7 +569,7 @@ input.invalid {
 }
 #divEditarEmpresa button{
 	cursor: pointer;
-	background-color: blue;
+	background-color: red;
 	border: none;
 	color: white;
 	margin: 1rem;
