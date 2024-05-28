@@ -31,41 +31,71 @@ export class VistaEmpresas extends Vista {
           return;
         }
 
-        // Crear un contenedor para las empresas
-        const divEmpresas = document.createElement('div');
-        divEmpresas.id = 'divEmpresas2';
+        
 
         // Agregar cada empresa como un elemento de div
         empresas.forEach(empresa => {
           const itemEmpresa = document.createElement('div');
           itemEmpresa.classList.add('empresa-item');
-
-          itemEmpresa.innerHTML = `
-            <div class="empresa-info">
-              <span><strong>ID:</strong> ${empresa.id}</span>
-              <span><strong>Siglas:</strong> ${empresa.siglas}</span>
-              <span><strong>Nombre:</strong> ${empresa.nombre}</span>
-              <span><strong>Notas:</strong> ${empresa.notas}</span>
-            </div>
-            <div class="iconos">
-              <img src="./iconos/edit.svg" class="icono editar" alt="Editar">
-              <img src="./iconos/delete.svg" class="icono borrar" alt="Borrar">
-            </div>
-          `;
-
-          itemEmpresa.querySelector('.editar').addEventListener('click', () => {
+        
+          const empresaInfo = document.createElement('div');
+          empresaInfo.classList.add('empresa-info');
+        
+          const idSpan = document.createElement('span');
+          const idStrong = document.createElement('strong');
+          idStrong.textContent = 'ID: ';
+          idSpan.appendChild(idStrong);
+          idSpan.appendChild(document.createTextNode(empresa.id));
+          empresaInfo.appendChild(idSpan);
+        
+          const siglasSpan = document.createElement('span');
+          const siglasStrong = document.createElement('strong');
+          siglasStrong.textContent = 'Siglas: ';
+          siglasSpan.appendChild(siglasStrong);
+          siglasSpan.appendChild(document.createTextNode(empresa.siglas));
+          empresaInfo.appendChild(siglasSpan);
+        
+          const nombreSpan = document.createElement('span');
+          const nombreStrong = document.createElement('strong');
+          nombreStrong.textContent = 'Nombre: ';
+          nombreSpan.appendChild(nombreStrong);
+          nombreSpan.appendChild(document.createTextNode(empresa.nombre));
+          empresaInfo.appendChild(nombreSpan);
+        
+          const notasSpan = document.createElement('span');
+          const notasStrong = document.createElement('strong');
+          notasStrong.textContent = 'Notas: ';
+          notasSpan.appendChild(notasStrong);
+          notasSpan.appendChild(document.createTextNode(empresa.notas));
+          empresaInfo.appendChild(notasSpan);
+        
+          itemEmpresa.appendChild(empresaInfo);
+        
+          const iconosDiv = document.createElement('div');
+          iconosDiv.classList.add('iconos');
+        
+          const editarImg = document.createElement('img');
+          editarImg.src = "./iconos/edit.svg";
+          editarImg.classList.add('icono', 'editar');
+          editarImg.alt = "Editar";
+          editarImg.addEventListener('click', () => {
             this.handleClickEditar(empresa.id);
           });
-
-          itemEmpresa.querySelector('.borrar').addEventListener('click', () => {
+          iconosDiv.appendChild(editarImg);
+        
+          const borrarImg = document.createElement('img');
+          borrarImg.src = "./iconos/delete.svg";
+          borrarImg.classList.add('icono', 'borrar');
+          borrarImg.alt = "Borrar";
+          borrarImg.addEventListener('click', () => {
             this.handleClickBorrar(empresa.id);
           });
-
+          iconosDiv.appendChild(borrarImg);
+        
+          itemEmpresa.appendChild(iconosDiv);
+        
           divEmpresas.appendChild(itemEmpresa);
         });
-
-        // Agregar el contenedor de empresas
-        this.base.appendChild(divEmpresas);
       })
       .catch(error => {
         // Manejar errores en caso de que la promesa sea rechazada
