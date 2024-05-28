@@ -174,9 +174,9 @@ CREATE TABLE IF NOT EXISTS `Dualex` (
 -- Volcando estructura para tabla dualex3.empresa
 CREATE TABLE IF NOT EXISTS `Empresa` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `cif` char(9) DEFAULT NULL,
-  `direccion` varchar(256) DEFAULT NULL,
-  `nombre` varchar(256) DEFAULT NULL,
+  `siglas` varchar(30) DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `notas` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
