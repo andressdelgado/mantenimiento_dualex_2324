@@ -355,25 +355,25 @@ legend{
 h1{
 	text-align: center; /* Centra el contenido del div */
 }
-#tablaListaConvenios {
+#divConvenios table {
 	border-collapse: collapse;
 	width: 90%;
 	margin: auto;
 	margin-top: 20px; /* Añade un margen superior a la tabla */
 }
 
-#tablaListaConvenios th, #tablaListaConvenios td {
+#divConvenios th, #divConvenios td {
 	text-align: center; /* Centra el contenido de las celdas */
 	padding: 8px;
 	border: 1px solid #ddd;
 }
 
-#tablaListaConvenios th {
+#divConvenios th {
 	background-color: #f0f0f0;
 }
 
-#tablaListaConvenios th:first-child,
-#tablaListaConvenios td:first-child {
+#divConvenios th:first-child,
+#divConvenios td:first-child {
 	text-align: left;
 }
 
@@ -436,7 +436,7 @@ input.invalid {
 }
 #divMenuBusqueda{
 	margin-bottom: 21px!important;
-    border-bottom-color: white!important;
+	border-bottom-color: white!important;
 }
 #divEmpresa{
 	width: 40%;
@@ -635,8 +635,8 @@ input.invalid {
 	position: absolute;
 	height: auto !important;
 	z-index: 1;
- 	border-radius: 0.5rem;
- 	box-shadow: 0.1rem 0.1rem 0.1rem grey;
+	border-radius: 0.5rem;
+	box-shadow: 0.1rem 0.1rem 0.1rem grey;
 	background-color: whitesmoke;
 	padding: 1rem;
 	line-height: 1.5rem;
@@ -654,7 +654,7 @@ input.invalid {
 	padding: 2rem;
 }
 #divTareas>div {
-  	margin-bottom: 0.5rem;
+	margin-bottom: 0.5rem;
 	border-bottom: 1px solid lightgrey;
 	min-height: 1.5rem;
 }
@@ -692,10 +692,12 @@ input.invalid {
 	text-align: center;
 }
 
-#centrado-vertical {
+#divTareas .centrado-vertical {
 	vertical-align: middle;
+	width: 10%;
 }
-#tdModulos{
+
+#divTareas .tdModulos{
 	width: 15%;
 }
 
@@ -723,7 +725,7 @@ input.invalid {
 }
 #divTareas .icono:hover{
 	background-color: lightblue;
-  	border-radius: 0.7rem;
+	border-radius: 0.7rem;
 }
 #divTareas .modulo{
 	font-size: 0.8rem;
@@ -740,61 +742,67 @@ input.invalid {
 	font-weight: bold;
 	color: red;
 }
+#divTareas .retrasada{
+	background-color: yellow;
+}
+#divTareas .muyRetrasada{
+	background-color: red;
+}
 
 /* Reglas de VistaDialogo */
 #divDialogo{
-  /* Ref. https://www.w3schools.com/howto/howto_css_modals.asp */
-  display: none;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+	/* Ref. https://www.w3schools.com/howto/howto_css_modals.asp */
+	display: none;
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
 #divDialogo > div{
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 2rem;
-  border: 1px solid #888;
-  border-radius: 0.5rem;
-  width: 80%; /* Could be more or less, depending on screen size */
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 2rem;
+	border: 1px solid #888;
+	border-radius: 0.5rem;
+	width: 80%; /* Could be more or less, depending on screen size */
 }
 #divDialogo span {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 }
 #divDialogo span:hover, #divDialogo span:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
 #divDialogo button{
-  cursor: pointer;
-  border: none;
-  margin: 1rem;
-  margin-left: 5rem;
-  padding: 0.5rem 1.5rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1.2rem;
+	cursor: pointer;
+	border: none;
+	margin: 1rem;
+	margin-left: 5rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
 }
 #divDialogo button:nth-of-type(1){
-  background-color: green;
-  color: white;
+	background-color: green;
+	color: white;
 }
 #divDialogo button:nth-of-type(2){
-  background-color: red;
-  color: white;
+	background-color: red;
+	color: white;
 }
 #divDialogo button:hover{
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 /* Reglas de VistaInforme */
@@ -938,18 +946,18 @@ span.alumno:hover{
 
 #imagen1,#imagen2,#imagen3{
 	/*display: none !important; */
-    width: 80px;
-    height: 80px;
-    float: right;
-    margin-left: 5px;
+	width: 80px;
+	height: 80px;
+	float: right;
+	margin-left: 5px;
 }
 
 #spanImg1,#spanImg2,#spanImg3{
 	/*display: none !important; */
-    width: 40px;
-    height: 40px;
-    float: right;
-    margin-left: 5px;
+	width: 40px;
+	height: 40px;
+	float: right;
+	margin-left: 5px;
 	background-image: url('../iconos/delete.svg');
 	background-repeat: no-repeat;
 	background-size: contain;

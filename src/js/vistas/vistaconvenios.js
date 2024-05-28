@@ -15,7 +15,7 @@ export class VistaConvenios extends Vista {
     this.base = base
     // Cogemos referencias a los elementos del interfaz
     // Tabla
-    this.tablaConvenios = document.getElementById('tablaListaConvenios')
+    this.tablaConvenios = this.base.querySelectorAll('table')[0]
 
     // Ejecutar metodos necesarios
     this.cargarDatosConvenios()
@@ -99,7 +99,7 @@ export class VistaConvenios extends Vista {
         })
       })
       .catch(error => {
-        console.error('Error al cargar los convenios:', error)
+        this.controlador.gestionarError(error)
       })
   }
 

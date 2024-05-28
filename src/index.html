@@ -9,7 +9,7 @@
 
 	<link rel=stylesheet href=css/reset.css />
 	<link rel=stylesheet href=css/estilos.css />
-<!--	<link rel=manifest href=manifest.json />-->
+	<link rel=manifest href=manifest.json />
 </head>
 
 <body>
@@ -128,7 +128,9 @@
 		<div>
 
 		</div>
+
 	</div>
+
 
 	<div id="divEmpresa">
 		<div class="divFlex">
@@ -259,42 +261,42 @@
 
 	<div id="divConvenio" class='vistaConvenios'>
 		<div class="divFlex">
-			<label for="tituloConvenio">Titulo:</label>
-			<input type="text" id="tituloConvenio" placeholder="(Titulo del documento)" />
+			<label>Titulo:</label>
+			<input type="text"  placeholder="(Titulo del documento)" />
 		</div>
 		<span id="errorTitulo" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
-			<label for="fechaFirma">Fecha de Firma del delegado:</label>
-			<input type="date" id="fechaFirma" placeholder="(Fecha firma)" />
+			<label>Fecha de Firma del delegado:</label>
+			<input type="date" placeholder="(Fecha firma)" />
 		</div>
 		<span id="errorFechaFirma" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
-			<label for="documento">Documento:</label>
-			<input type="file" id="documento" accept=".pdf" size="10485760"/>
+			<label>Documento:</label>
+			<input type="file"  accept=".pdf" size="10485760"/>
 		</div>
 		<span id="errorDocumento" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
-			<label for="selectCiclo">Ciclo:</label>
-			<select id="selectCiclo">
+			<label>Ciclo:</label>
+			<select>
 				<!-- Options -->
 			</select>
 		</div>
 		<div class="divFlex">
-			<label for="selectEmpresa">Empresa:</label>
-			<select id="selectEmpresa">
+			<label>Empresa:</label>
+			<select>
 				<!-- options -->
 			</select>
 		</div>
 		<div class="divFlexBotones">
-			<button id="btnAnadir">Añadir</button>
-			<button id="btnLimpiar" style="background-color: darkred">Limpiar</button>
+			<button>Añadir</button>
+			<button style="background-color: darkred">Limpiar</button>
 		</div>
 	</div>
 
 	<div id="divConvenios">
 		<h1 id="tituloConvenios">Convenios</h1>
 
-		<table id="tablaListaConvenios">
+		<table>
 
 		</table>
 	</div>
