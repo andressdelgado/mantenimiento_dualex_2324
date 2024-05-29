@@ -42,16 +42,17 @@ export class VistaEmpresa extends Vista {
    * Método anadirEmpresa: Maneja la creación de una nueva empresa.
    */
   anadirEmpresa() {
-    if (this.comprobarVacio()) {
-      const empresaData = {
-        siglas: this.inputSiglas.value,
-        nombre: this.inputNombre.value,
-        notas: this.inputNotas.value,
-      };
-      // Se envía al completar la lectura del formulario
-      this.controlador.crearEmpresa(empresaData);
-    } else {
-      console.log('Los datos introducidos no tienen un formato válido');
+    try{
+      if (this.comprobarVacio()) {
+        const empresaData = {
+          siglas: this.inputSiglas.value,
+          nombre: this.inputNombre.value,
+          notas: this.inputNotas.value,
+        };
+        // Se envía al completar la lectura del formulario
+        this.controlador.crearEmpresa(empresaData);
+      }} catch (e) {
+      this.controlador.gestionarError(e)
     }
   }
 

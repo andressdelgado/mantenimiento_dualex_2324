@@ -48,12 +48,13 @@ export class VistaEditarEmpresa extends Vista {
     let siglas = this.inputSiglas.value;
     let nombre = this.inputNombre.value;
     let notas = this.inputNotas.value;
-
-    if (this.comprobarVacio(siglas, nombre, notas)) {
-      const empresaData = { id, siglas, nombre, notas }; // Pasar id como parte del objeto
-      this.controlador.editarEmpresa(empresaData);
-    } else {
-      console.log('Los datos introducidos no tienen un formato válido');
+    try{
+      if (this.comprobarVacio(siglas, nombre, notas)) {
+        const empresaData = { id, siglas, nombre, notas }; // Pasar id como parte del objeto
+        this.controlador.editarEmpresa(empresaData);
+      }
+    }catch (e) {
+      this.controlador.gestionarError(e)
     }
   }
 
