@@ -14,8 +14,6 @@ export class VistaAltaAlumno extends Vista{
     this.base = base
 
     // Cogemos referencias a los elementos del interfaz
-    this.divAltaAlumno = document.getElementById('divAltaAlumno')
-
     this.inputNombre = document.getElementById('nombreAlumno')
     this.inputApellidos = document.getElementById('apellidosAlumno')
     this.inputEmail = document.getElementById('emailAlumno')
@@ -61,7 +59,7 @@ export class VistaAltaAlumno extends Vista{
    */
     comprobacion() {
       let isValid = true
-      const regex = /^[a-zA-Z\s]+$/
+      const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
       const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
 
       if (this.inputNombre.value === '' || this.inputNombre.value === null ||
