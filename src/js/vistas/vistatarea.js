@@ -77,7 +77,7 @@ export class VistaTarea extends Vista{
           }
         } else {
           for (const modulo of tarea.modulos) {
-            if (modulo.calificacion) { this.deshabilitarActividades(true) }
+            if (modulo.revisado) { this.deshabilitarActividades(true) }
           }
         }
       })

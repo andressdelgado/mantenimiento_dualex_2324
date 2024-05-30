@@ -108,10 +108,10 @@
 				<option value=null>Sin Calificar</option>
 			</select>
 		</label><br />
-			<label>Comentario:<br />
+		<label>Comentario:<br />
 			<textarea placeholder='Comentario del tutor de empresa'></textarea>
 		</label><br />
-			<hr />
+		<hr />
 
 		<h2>Evaluaciones de Profesores</h2>
 		<div></div>
@@ -127,46 +127,6 @@
 	<div id=divAlumnos>
 		<div>
 
-		</div>
-
-	</div>
-
-
-	<div id="divEmpresa">
-		<div class="divFlex">
-			<label for="siglas">Siglas:</label>
-			<input type="text" id="siglas" placeholder="(Siglas de la empresa)" />
-		</div>
-		<div class="divFlex">
-			<label for="nombreEmpresa">Nombre de la empresa:</label>
-			<input type="text" id="nombreEmpresa" placeholder="(Nombre de la empresa)" />
-		</div>
-		<div class="divFlex">
-			<label for="notas">Notas:</label>
-			<textarea id="notas"></textarea>
-		</div>
-		<div class="divFlexBotones">
-			<button id="btnAnadirEmpresa">Añadir</button>
-			<button id="volver-aniadir">Cancelar</button>
-		</div>
-	</div>
-
-	<div id="divEditarEmpresa">
-		<div class="divFlex">
-			<label for="siglasEditar">Siglas:</label>
-			<input type="text" id="siglasEditar" placeholder="(Siglas de la empresa)" />
-		</div>
-		<div class="divFlex">
-			<label for="nombreEmpresaEditar">Nombre de la empresa:</label>
-			<input type="text" id="nombreEmpresaEditar" placeholder="(Nombre de la empresa)" />
-		</div>
-		<div class="divFlex">
-			<label for="notasEditar">Notas:</label>
-			<textarea id="notasEditar"></textarea>
-		</div>
-		<div class="divFlexBotones">
-			<button id="btnEditar">Editar</button>
-			<button id="volver-editar">Cancelar</button>
 		</div>
 	</div>
 
@@ -229,7 +189,7 @@
 				<div><input name=cr type=radio /></div>
 
 				<div>Otros aspectos:
-				<br/><textarea rows=1 cols=40 placeholder=Descripción ></textarea></div>
+					<br/><textarea rows=1 cols=40 placeholder='Nada a destacar' ></textarea></div>
 				<div><input name=otros type=radio /></div>
 				<div><input name=otros type=radio /></div>
 				<div><input name=otros type=radio /></div>
@@ -237,7 +197,7 @@
 		</div>
 		<div>
 			<p><strong>3.- OBSERVACIONES, ASUNTOS TRATADOS Y DECISIONES TOMADAS:</strong></p>
-			<textarea rows=1 cols=50 placeholder=Observaciones ></textarea>
+			<textarea rows=1 cols=50 placeholder='Sin observaciones' ></textarea>
 			<p>En <input type=text placeholder=localidad />, a <input type=text placeholder=día size=15 /> de <input type=text placeholder=mes size=10 /> de <input type=text placeholder=año size=4 />.</p>
 			<p><strong>El tutor del centro de trabajo:</strong></p>
 			<p><strong>Fdo. <input type=text placeholder='Nombre del tutor' /></strong></p>
@@ -250,13 +210,29 @@
 		</div>
 	</div>
 
-	<div id=divCreditos>
-		<h2>Versión 1.2</h2>
-		<p>Dualex es una aplicación para la evaluación de alumnos de Ciclos Formativos en formación DUAL.</p>
-		<p><strong>Dirección Técnica</strong>: Pedro Risco &lt;prisco@fundacionloyola.es&gt;</p>
-		<p><strong>Programación</strong>: Miguel Jaque &lt;mjaque@migueljaque.com&gt;</p>
-		<p><strong>Fecha de Publicación</strong>: Julio 2022</p>
-		<p><strong>Licencia</strong>: <a href="licencia.html">GPL v3</a></p>
+	<div id="divMenuCoordinador">
+		<div id="divMenuCoordinadorWraper">
+			<div class="divMenuCoordinadorBox">
+				<h2>Alumnos</h2>
+				<p>Gestión de los alumnos</p>
+				<button id="botonAlumnos">Entrar</button>
+			</div>
+			<div class="divMenuCoordinadorBox" style='display:none'>
+				<h2>Profesores</h2>
+				<p>Gestión de los profesores</p>
+				<button id="botonProfesores">Entrar</button>
+			</div>
+			<div class="divMenuCoordinadorBox">
+				<h2>Empresas</h2>
+				<p>Gestión de las empresas</p>
+				<button id="botonEmpresa">Entrar</button>
+			</div>
+			<div class="divMenuCoordinadorBox">
+				<h2>Convenios</h2>
+				<p>Gestión de los convenios</p>
+				<button id="botonConvenios">Entrar</button>
+			</div>
+		</div>
 	</div>
 
 	<div id="divConvenio" class='vistaConvenios'>
@@ -264,17 +240,17 @@
 			<label>Titulo:</label>
 			<input type="text"  placeholder="(Titulo del documento)" />
 		</div>
-		<span id="errorTitulo" class="error" style="color: red; margin-left: 41%"></span>
+		<span id="errorTitulo" class="error"></span>
 		<div class="divFlex">
 			<label>Fecha de Firma del delegado:</label>
 			<input type="date" placeholder="(Fecha firma)" />
 		</div>
-		<span id="errorFechaFirma" class="error" style="color: red; margin-left: 41%"></span>
+		<span id="errorFechaFirma" class="error"></span>
 		<div class="divFlex">
 			<label>Documento:</label>
 			<input type="file"  accept=".pdf" size="10485760"/>
 		</div>
-		<span id="errorDocumento" class="error" style="color: red; margin-left: 41%"></span>
+		<span id="errorDocumento" class="error"></span>
 		<div class="divFlex">
 			<label>Ciclo:</label>
 			<select>
@@ -289,52 +265,57 @@
 		</div>
 		<div class="divFlexBotones">
 			<button>Añadir</button>
-			<button style="background-color: darkred">Limpiar</button>
+			<button>Limpiar</button>
 		</div>
 	</div>
 
 	<div id="divConvenios">
-		<h1 id="tituloConvenios">Convenios</h1>
-
 		<table>
 
 		</table>
 	</div>
 
-
-	<div id="divMenuCoordinador">
-		<div id="divMenuCoordinadorWraper">
-		  <div class="divMenuCoordinadorBox">
-			<h2>Alumnos</h2>
-			<p>Gestión de los alumnos</p>
-			<button id="botonAlumnos">Entrar</button>
-		  </div>
-		  <div class="divMenuCoordinadorBox">
-			<h2>Profesores</h2>
-			<p>Gestión de los profesores</p>
-			<button id="botonProfesores">Entrar</button>
-		  </div>
-		  <div class="divMenuCoordinadorBox">
-			<h2>Empresas</h2>
-			<p>Gestión de las empresas</p>
-			<button id="botonEmpresa">Entrar</button>
-		  </div>
-		  <div class="divMenuCoordinadorBox">
-			<h2>Convenios</h2>
-			<p>Gestión de los convenios</p>
-			<button id="botonConvenios">Entrar</button>
-		  </div>
-	  	</div>
+	<div id="divEmpresa">
+		<div class="divFlex">
+			<label for="siglas">Siglas:</label>
+			<input type="text" id="siglas" placeholder="(Siglas de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="nombreEmpresa">Nombre de la empresa:</label>
+			<input type="text" id="nombreEmpresa" placeholder="(Nombre de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="notas">Notas:</label>
+			<textarea id="notas"></textarea>
+		</div>
+		<div class="divFlexBotones">
+			<button id="btnAnadirEmpresa">Añadir</button>
+			<button id="volver-aniadir">Cancelar</button>
+		</div>
 	</div>
 
-	  <div id="divEmpresas">
-		<div>
-
+	<div id="divEditarEmpresa">
+		<div class="divFlex">
+			<label for="siglasEditar">Siglas:</label>
+			<input type="text" id="siglasEditar" placeholder="(Siglas de la empresa)" />
 		</div>
-	  </div>
+		<div class="divFlex">
+			<label for="nombreEmpresaEditar">Nombre de la empresa:</label>
+			<input type="text" id="nombreEmpresaEditar" placeholder="(Nombre de la empresa)" />
+		</div>
+		<div class="divFlex">
+			<label for="notasEditar">Notas:</label>
+			<textarea id="notasEditar"></textarea>
+		</div>
+		<div class="divFlexBotones">
+			<button id="btnEditar">Editar</button>
+			<button id="volver-editar">Volver</button>
+		</div>
+	</div>
 
-	  <div id="divProfesores">
-	  </div>
+	<div id="divEmpresas">
+		<div></div>
+	</div>
 
 	<div id="divAltaAlumno" class="gestionAlumno">
 		<h1>Añadir - Alumno</h1>
@@ -397,7 +378,6 @@
 
 
 	<div id='divGestionAlumnos'>
-		<h1>Listado - Gestión - Alumnos</h1>
 		<p>
 			<label for="selectCursoListadoAlumnos">Curso: </label>
 			<select id="selectCursoListadoAlumnos">
@@ -409,6 +389,18 @@
 		</section>
 	</div>
 
+
+	<div id="divProfesores">
+	</div>
+
+	<div id=divCreditos>
+		<h2>Versión 1.2</h2>
+		<p>Dualex es una aplicación para la evaluación de alumnos de Ciclos Formativos en formación DUAL.</p>
+		<p><strong>Dirección Técnica</strong>: Pedro Risco &lt;prisco@fundacionloyola.es&gt;</p>
+		<p><strong>Programación</strong>: Miguel Jaque &lt;mjaque@migueljaque.com&gt;</p>
+		<p><strong>Fecha de Publicación</strong>: Julio 2022</p>
+		<p><strong>Licencia</strong>: <a href="licencia.html">GPL v3</a></p>
+	</div>
 	<script type=module src=js/dualex.js></script>
 </body>
 

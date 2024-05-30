@@ -42,17 +42,16 @@ export class VistaEmpresa extends Vista {
    * Método anadirEmpresa: Maneja la creación de una nueva empresa.
    */
   anadirEmpresa() {
-    try{
-      if (this.comprobarVacio()) {
-        const empresaData = {
-          siglas: this.inputSiglas.value,
-          nombre: this.inputNombre.value,
-          notas: this.inputNotas.value,
-        };
-        // Se envía al completar la lectura del formulario
-        this.controlador.crearEmpresa(empresaData);
-      }} catch (e) {
-      this.controlador.gestionarError(e)
+    if (this.comprobarVacio()) {
+      const empresaData = {
+        siglas: this.inputSiglas.value,
+        nombre: this.inputNombre.value,
+        notas: this.inputNotas.value,
+      };
+      // Se envía al completar la lectura del formulario
+      this.controlador.crearEmpresa(empresaData)
+    } else {
+      this.controlador.gestionarError('Los datos introducidos no tienen un formato válido');
     }
   }
 
@@ -78,12 +77,18 @@ export class VistaEmpresa extends Vista {
       this.inputNombre.classList.remove('valid');
       camposValidos = false;
     }
+    /*
     if (notas === '') {
       this.inputNotas.classList.add('invalid');
       this.inputNotas.classList.remove('valid');
       camposValidos = false;
-    }
+    }*/
 
     return camposValidos;
+  }
+  
+  mostrar(ver){
+  	super.mostrar(ver)
+  	this.inputSiglas.focus()
   }
 }

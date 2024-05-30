@@ -28,7 +28,7 @@ legend{
 	padding: 0 0.5rem;
 }
 
-/* Inicialmente ocultamos las vistas #divConvenio */
+/* Inicialmente ocultamos las vistas */
 #divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme,
 #divCreditos, #divConvenio, #divConvenios, .gestionAlumno, #divGestionAlumnos,
 #divEmpresa, #divEmpresas, #divEditarEmpresa, #divMenuCoordinador, #divProfesores{
@@ -331,6 +331,13 @@ legend{
 #divConvenio>label>input{
 	margin-left: 15%;
 }
+#divConvenio > span{
+	margin-left: 41%;
+	color: red;
+}
+#divConvenio button:nth-child(2){
+	background-color: red;
+}
 
 #divEditarEmpresa{
 	width: 40%;
@@ -512,6 +519,15 @@ input.invalid {
 #divEmpresa input{
 	margin: 0.3rem;
 }
+
+#divEditarEmpresa button:first-of-type {
+	background-color: blue;
+ }
+
+ #divEmpresa button:first-of-type {
+	background-color: blue;
+}
+
 #divEmpresa button{
 	cursor: pointer;
 	background-color: red;
@@ -633,15 +649,6 @@ input.invalid {
 	margin-top: 2%;
 	flex-direction: row-reverse;
 }
-/* Estilos para el estado válido */
-input.valid {
-	border-color: green; /* Cambia el borde a verde */
-}
-
-/* Estilos para el estado inválido */
-input.invalid {
-	border-color: red; /* Cambia el borde a rojo */
-}
 @media (max-width: 1056px) {
 	#buscador{
 		margin-left: 25%;
@@ -710,6 +717,104 @@ input.invalid {
 	cursor: pointer;
 }
 
+
+#buscador{
+	margin-left: 35%;
+	margin-bottom: 52px;
+	margin-right: 2px;
+	background-color: white;
+	border:1px solid black;
+	border-radius: 5px;
+	padding-left: 11px;
+	width: 200px;
+	height: 18px;
+}
+#filtro{
+	margin-left: 30px;
+	width:200px;
+	background-color: white;
+	border:1px solid black;
+	border-radius: 10px;
+	padding-left: 11px;
+	height: 23px;
+}
+#btnBuscar{
+	background-color: white;
+	border:1px solid black;
+	border-radius: 3px;
+}
+#divMenuBusqueda{
+	margin-bottom: 21px!important;
+    border-bottom-color: white!important;
+}
+@media (max-width: 1056px) {
+	#buscador{
+		margin-left: 25%;
+		margin-bottom: 50px;
+		margin-right: 2px;
+	}
+}
+@media (max-width: 725px) {
+	#buscador{
+		margin-left: 15%;
+		margin-bottom: 50px;
+		margin-right: 2px;
+	}
+}
+@media (max-width: 652px) {
+	#buscador{
+		margin-left: 10%;
+		margin-bottom: 10px;
+		margin-right: 2px;
+	}
+	#filtro{
+		margin-left: 10% !important;
+		display: block;
+		width:150px;
+		margin-bottom: 50px;
+	}
+	#divMenuBusqueda{
+		margin-bottom: 40px!important;
+		border-bottom-color: white!important;
+	}
+}
+@media (max-width: 500px) {
+	#buscador{
+		margin-bottom: 10px;
+		margin-right: 2px;
+
+	}
+	#filtro{
+		margin-left: 10% !important;
+		display: block;
+		width:150px;
+		margin-bottom: 50px;
+	}
+	#divMenuBusqueda{
+		margin-bottom: 40px!important;
+		border-bottom-color: white!important;
+	}
+
+}
+
+/* Reglas de VistaMenuContexto */
+.vistamenucontexto{
+	display: none;
+	position: absolute;
+	height: auto !important;
+	z-index: 1;
+ 	border-radius: 0.5rem;
+ 	box-shadow: 0.1rem 0.1rem 0.1rem grey;
+	background-color: whitesmoke;
+	padding: 1rem;
+	line-height: 1.5rem;
+}
+.vistamenucontexto a {
+	color: blue;
+	text-decoration: none;
+	cursor: pointer;
+}
+
 /* Reglas de VistaTareas */
 #divTareas {
 	width: 90%;
@@ -717,7 +822,7 @@ input.invalid {
 	padding: 2rem;
 }
 #divTareas>div {
-	margin-bottom: 0.5rem;
+  	margin-bottom: 0.5rem;
 	border-bottom: 1px solid lightgrey;
 	min-height: 1.5rem;
 }
@@ -788,7 +893,7 @@ input.invalid {
 }
 #divTareas .icono:hover{
 	background-color: lightblue;
-	border-radius: 0.7rem;
+  	border-radius: 0.7rem;
 }
 #divTareas .modulo{
 	font-size: 0.8rem;
@@ -806,66 +911,66 @@ input.invalid {
 	color: red;
 }
 #divTareas .retrasada{
-	background-color: yellow;
+    background-color: yellow;
 }
 #divTareas .muyRetrasada{
-	background-color: red;
+    background-color: red;
 }
 
 /* Reglas de VistaDialogo */
 #divDialogo{
-	/* Ref. https://www.w3schools.com/howto/howto_css_modals.asp */
-	display: none;
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0,0,0); /* Fallback color */
-	background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+  /* Ref. https://www.w3schools.com/howto/howto_css_modals.asp */
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
 #divDialogo > div{
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 2rem;
-	border: 1px solid #888;
-	border-radius: 0.5rem;
-	width: 80%; /* Could be more or less, depending on screen size */
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 2rem;
+  border: 1px solid #888;
+  border-radius: 0.5rem;
+  width: 80%; /* Could be more or less, depending on screen size */
 }
 #divDialogo span {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 #divDialogo span:hover, #divDialogo span:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 #divDialogo button{
-	cursor: pointer;
-	border: none;
-	margin: 1rem;
-	margin-left: 5rem;
-	padding: 0.5rem 1.5rem;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  margin: 1rem;
+  margin-left: 5rem;
+  padding: 0.5rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
 }
 #divDialogo button:nth-of-type(1){
-	background-color: green;
-	color: white;
+  background-color: green;
+  color: white;
 }
 #divDialogo button:nth-of-type(2){
-	background-color: red;
-	color: white;
+  background-color: red;
+  color: white;
 }
 #divDialogo button:hover{
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Reglas de VistaInforme */
@@ -1009,23 +1114,133 @@ span.alumno:hover{
 
 #imagen1,#imagen2,#imagen3{
 	/*display: none !important; */
-	width: 80px;
-	height: 80px;
-	float: right;
-	margin-left: 5px;
+    width: 80px;
+    height: 80px;
+    float: right;
+    margin-left: 5px;
 }
 
 #spanImg1,#spanImg2,#spanImg3{
 	/*display: none !important; */
-	width: 40px;
-	height: 40px;
-	float: right;
-	margin-left: 5px;
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-left: 5px;
 	background-image: url('../iconos/delete.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 }
 
+#divEmpresa{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+#divEmpresa input{
+	margin: 0.3rem;
+}
+#divEmpresa button{
+	cursor: pointer;
+	background-color: red;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+#divEmpresa button:hover{
+	text-decoration: underline;
+}
+#divEmpresa p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divEmpresa p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+#divEmpresa p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+#divEmpresa p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+#divEmpresa>label{
+	display: block;
+	width: 30%;
+}
+
+#divEmpresa>label>input{
+	margin-left: 15%;
+
+}
+
+#divEditarEmpresa{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+#divEditarEmpresa input{
+	margin: 0.3rem;
+}
+#divEditarEmpresa button{
+	cursor: pointer;
+	background-color: red;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+#divEditarEmpresa button:hover{
+	text-decoration: underline;
+}
+#divEditarEmpresa p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+#divEditarEmpresa p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+#divEditarEmpresa p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+#divEditarEmpresa p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+#divEditarEmpresa>label{
+	display: block;
+	width: 30%;
+}
+
+#divEditarEmpresa>label>input{
+	margin-left: 15%;
+}
+
+/* REGLAS del divMenuCoordinador */
 #divMenuCoordinador {
     margin: auto;
     width: 100%;
@@ -1059,18 +1274,18 @@ span.alumno:hover{
     position: relative;
 }
 
-#divMenuCoordinador h2 {
+#divMenuCoordinador > h2 {
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
 }
 
-#divMenuCoordinador p {
+#divMenuCoordinador > p {
     font-size: 12px;
     margin-top: 0;
 }
 
-#divMenuCoordinador button {
+#divMenuCoordinador > button {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -1119,12 +1334,10 @@ span.alumno:hover{
 	height: 30px;
 	background-color: blue;
 	color: white;
-	border-color: white;
 	text-align: center;
 	line-height: 30px;
 	font-size: 14px;
 	text-decoration: none;
-	font-weight: bold;
   }
 
   #divEmpresas {

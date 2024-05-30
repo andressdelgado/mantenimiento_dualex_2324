@@ -15,7 +15,7 @@ export class VistaConvenios extends Vista {
     this.base = base
     // Cogemos referencias a los elementos del interfaz
     // Tabla
-    this.tablaConvenios = this.base.querySelectorAll('table')[0]
+    this.tablaConvenios = this.base.getElementsByTagName('table')[0]
 
     // Ejecutar metodos necesarios
     this.cargarDatosConvenios()

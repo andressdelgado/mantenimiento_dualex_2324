@@ -59,7 +59,7 @@ export class VistaAltaAlumno extends Vista{
    */
     comprobacion() {
       let isValid = true
-      const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
+      const regex = /^[a-zA-Z\s]+$/
       const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
 
       if (this.inputNombre.value === '' || this.inputNombre.value === null ||
@@ -141,6 +141,4 @@ export class VistaAltaAlumno extends Vista{
       this.selectCurso.appendChild(option);
     }
   }
-
-
 }

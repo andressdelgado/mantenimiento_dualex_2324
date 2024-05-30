@@ -80,11 +80,12 @@ export class VistaEditarEmpresa extends Vista {
       this.inputNombre.classList.remove('valid');
       camposValidos = false;
     }
+    /*
     if (notas === '') {
       this.inputNotas.classList.add('invalid');
       this.inputNotas.classList.remove('valid');
       camposValidos = false;
-    }
+    }*/
 
     return camposValidos;
   }

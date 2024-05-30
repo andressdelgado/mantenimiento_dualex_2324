@@ -13,7 +13,6 @@ export class Vistaconvenio extends Vista {
   constructor (controlador, base) {
     super(controlador)
     this.base = base
-
     // Cogemos referencias a los elementos del interfaz
     // Inputs
     this.inputTitulo = this.base.querySelectorAll('input')[0]
@@ -25,9 +24,6 @@ export class Vistaconvenio extends Vista {
     // Selects
     this.selectCiclo = this.base.querySelectorAll('select')[0]
     this.selectEmpresa = this.base.querySelectorAll('select')[1]
-
-    // Ejecutar metodos necesarios
-    this.cargarDatos()
 
     // Asociamos eventos
     this.btnLimpiar.onclick = this.limpiar.bind(this)
@@ -50,6 +46,11 @@ export class Vistaconvenio extends Vista {
    * Carga los datos de los ciclos y las empresas en sus respectivos select.
    */
   cargarDatos () {
+    this.limpiar()
+    for (const option of this.selectCiclo.querySelectorAll('option'))
+      option.remove()
+    for (const option of this.selectEmpresa.querySelectorAll('option'))
+      option.remove()
     this.cargarDatosCiclos()
     this.cargarDatosEmpresas()
   }
@@ -117,7 +118,8 @@ export class Vistaconvenio extends Vista {
       // Lectura del archivo para poder tener en reader.result el resultado. Es un metodo asincrono por eso mismo el .onload
       reader.readAsDataURL(file) // Formato Base64
     } else {
-      console.log('Los datos introducidos no tienen un formato valido')
+      let error = new Error('Los datos introducidos no tienen un formato valido')
+      this.controlador.gestionarError(error)
     }
   }
 
@@ -217,6 +219,12 @@ export class Vistaconvenio extends Vista {
 
     return camposValidos
   }
+
+  mostrar (ver) {
+  	super.mostrar(ver)
+  	if (ver) {
+      this.inputTitulo.focus()
+      this.cargarDatos()
+    }
+  }
 }
-// // eslint-disable-next-line no-new
-// window.onload = () => { new Vistaconvenio() }

@@ -20,7 +20,7 @@ class Empresa {
         $nombre = $empresa->nombre;
         $notas = $empresa->notas;
         // Validaciones
-        if (!empty($siglas) && !empty($nombre) && !empty($notas)) {
+        if (!empty($siglas) && !empty($nombre)) {
             // Alta empresa
             $id = DAOEmpresa::insertar($empresa);
             if (!empty($id)) {
