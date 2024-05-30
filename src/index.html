@@ -187,7 +187,7 @@
 			<p>Gestión de los alumnos</p>
 			<button id="botonAlumnos">Entrar</button>
 		  </div>
-		  <div class="divMenuCoordinadorBox">
+		  <div class="divMenuCoordinadorBox" style='display:none'>
 			<h2>Profesores</h2>
 			<p>Gestión de los profesores</p>
 			<button id="botonProfesores">Entrar</button>
@@ -207,41 +207,42 @@
 	
     <div id="divConvenio" class='vistaConvenios'>
 		<div class="divFlex">
-			<label for="tituloConvenio">Titulo:</label>
-			<input type="text" id="tituloConvenio" placeholder="(Titulo del documento)" />
+			<label>Titulo:</label>
+			<input type="text"  placeholder="(Titulo del documento)" />
 		</div>
 		<span id="errorTitulo" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
-			<label for="fechaFirma">Fecha de Firma del delegado:</label>
-			<input type="date" id="fechaFirma" placeholder="(Fecha firma)" />
+			<label>Fecha de Firma del delegado:</label>
+			<input type="date" placeholder="(Fecha firma)" />
 		</div>
 		<span id="errorFechaFirma" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
-			<label for="documento">Documento:</label>
-			<input type="file" id="documento" accept=".pdf" size="10485760"/>
+			<label>Documento:</label>
+			<input type="file"  accept=".pdf" size="10485760"/>
 		</div>
 		<span id="errorDocumento" class="error" style="color: red; margin-left: 41%"></span>
 		<div class="divFlex">
-			<label for="selectCiclo">Ciclo:</label>
-			<select id="selectCiclo">
+			<label>Ciclo:</label>
+			<select>
 				<!-- Options -->
 			</select>
 		</div>
 		<div class="divFlex">
-			<label for="selectEmpresa">Empresa:</label>
-			<select id="selectEmpresa">
+			<label>Empresa:</label>
+			<select>
 				<!-- options -->
 			</select>
 		</div>
 		<div class="divFlexBotones">
-			<button id="btnAnadir">Añadir</button>
-			<button id="btnLimpiar" style="background-color: darkred">Limpiar</button>
+			<button>Añadir</button>
+			<button style="background-color: darkred">Limpiar</button>
 		</div>
 	</div>
 
 	<div id="divConvenios">
-		<h1 id="tituloConvenios">Convenios</h1>
-		<table id="tablaListaConvenios"></table>
+		<table>
+
+		</table>
 	</div>
 
 	<div id="divEmpresa">
@@ -259,7 +260,7 @@
 		</div>
 		<div class="divFlexBotones">
 			<button id="btnAnadirEmpresa">Añadir</button>
-			<button id="volver-aniadir">Volver</button>
+			<button id="volver-aniadir">Cancelar</button>
 		</div>	
 	</div>
 
@@ -283,7 +284,81 @@
 	</div>
 
 	<div id="divEmpresas">
+		<div></div>
 	</div>
+
+	<div id="divAltaAlumno" class="gestionAlumno">
+		<h1>Añadir - Alumno</h1>
+		<div class="divFlex">
+			<label for="nombreAlumno">Nombre:</label>
+			<input type="text" id="nombreAlumno" placeholder="(Nombre)" />
+		</div>
+		<small id="errorNombreAlumno" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="apellidosAlumno">Apellidos:</label>
+			<input type="text" id="apellidosAlumno" placeholder="(Apellidos)" />
+		</div>
+		<small id="errorApellidosAlumno" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="emailAlumno">Email:</label>
+			<input type="text" id="emailAlumno" placeholder="(Email)" />
+		</div>
+		<small id="errorEmailAlumno" class="error">Formato erróneo</small>
+		<div class="divFlex">
+			<label for="selectCicloAltaAlumno">Curso:</label>
+			<select id="selectCicloAltaAlumno">
+			</select>
+		</div>
+		<small id="errorCursoAlumno" class="error">Debe seleccionar un curso</small>
+		<div class="divFlexBotones">
+			<button id="btnAnadirAltaAlumno">Añadir</button>
+			<button id="btnLimpiarAltaAlumno" style="background-color: darkred">Limpiar</button>
+			<button id="btnCancelarAltaAlumno" style="background-color: red">Cancelar</button>
+		</div>
+	</div>
+
+	<div id="divModificarAlumno" class="gestionAlumno">
+		<h1>Modificar - Alumno</h1>
+		<div class="divFlex">
+			<label for="nombreAlumnoMod">Nombre:</label>
+			<input type="text" id="nombreAlumnoMod" placeholder="(Nombre)" />
+		</div>
+		<small id="errorNombreAlumnoMod" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="apellidosAlumnoMod">Apellidos:</label>
+			<input type="text" id="apellidosAlumnoMod" placeholder="(Apellidos)" />
+		</div>
+		<small id="errorApellidosAlumnoMod" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="emailAlumnoMod">Email:</label>
+			<input type="text" id="emailAlumnoMod" placeholder="(Email)" />
+		</div>
+		<small id="errorEmailAlumnoMod" class="error">Formato erróneo</small>
+		<div class="divFlex">
+			<label for="selectCicloModAlumno">Curso:</label>
+			<select id="selectCicloModAlumno">
+			</select>
+		</div>
+		<small id="errorCursoAlumnoMod" class="error">Debe seleccionar un curso</small>
+		<div class="divFlexBotones">
+			<button id="btnAnadirModAlumno">Modificar</button>
+			<button id="btnCancelarModAlumno" style="background-color: red">Cancelar</button>
+		</div>
+	</div>
+
+
+	<div id='divGestionAlumnos'>
+		<p>
+			<label for="selectCursoListadoAlumnos">Curso: </label>
+			<select id="selectCursoListadoAlumnos">
+
+			</select>
+		</p>
+		<section id="gestionAlumnosListado">
+
+		</section>
+	</div>
+
 
 	<div id="divProfesores">
 	</div>

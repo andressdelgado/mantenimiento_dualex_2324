@@ -165,4 +165,118 @@ export class VistaMenu extends Vista{
   crearIconoAyuda (texto) {
     return this.crearIcono('help.svg', null, texto)
   }
+  
+  /**
+ * Método verEmpresas: muestra la lista de empresas en la interfaz de usuario.
+ * Este método verifica el rol del usuario y muestra los elementos correspondientes en la interfaz.
+ * Si el usuario es un coordinador, muestra la lista de empresas con opciones para agregar una nueva empresa y volver atrás.
+ * @returns {void}
+ */
+  verEmpresas () {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Lista de Empresas')
+      this.base.appendChild(this.crearIcono('add.svg', 2, 'Nueva empresa', this.controlador.mostrarVistaEmpresa.bind(this.controlador, null)))
+    }
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false)))
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+/**
+ * Método crearEmpresa: muestra la interfaz para agregar una nueva empresa.
+ * Este método verifica el rol del usuario y muestra los elementos correspondientes en la interfaz.
+ * Si el usuario es un coordinador, muestra la interfaz para agregar una nueva empresa.
+ * @returns {void}
+ */
+  crearEmpresa () {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Alta de Empresas')
+    }
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.irAVistaEmpresas.bind(this.controlador, false)))
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+
+  /*editarEmpresa () {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Editar empresa')
+    }
+    this.verLogout(2)
+    this.verAcercaDe()
+  }*/
+  verConvenios () {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Lista de Convenios')
+      this.base.appendChild(this.crearIcono('add.svg', 2, 'Nuevo Convenio', this.controlador.mostrarVistaConvenio.bind(this.controlador, null)))
+      this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false)))
+    }
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  crearConvenio() {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Alta de Convenios')
+      this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.irAVistaConvenios.bind(this.controlador, false)))
+    }
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+  
+   /**
+   Muestra el menú asociado a la lista de gestión de alumnos.
+   El menú incluye: título, logout y add.
+   **/
+  verGestionAlumnos () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Listado de Alumnos'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el listado de alumnos para ser gestionados por el profesor o coordinador'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false)));
+    this.base.appendChild(this.crearIcono('add.svg', 2, 'nuevo alumno', this.controlador.mostrarAltaAlumno.bind(this.controlador, null)))
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  /**
+   Muestra el menú asociado a el alta de alumnos.
+   El menú incluye: título, logout y retorno.
+   **/
+  verAltaAlumno () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Alta de Alumno'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el el formulario para dar de alta a un alumno'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionAlumnos.bind(this.controlador, false)));
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  verModificarAlumno () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Modificar Alumno'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el el formulario para modificar los datos de un alumno'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionAlumnos.bind(this.controlador, false)));
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
 }

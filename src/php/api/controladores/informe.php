@@ -14,7 +14,7 @@ class Informe{
 		@return {Array} Datos del informe
 	**/
 	function get($pathParams, $queryParams, $usuario){
-		if ($usuario->rol != 'profesor'){
+		if ($usuario->rol != 'profesor' && $usuario->rol != 'coordinador'){
       		header('HTTP/1.1 401 Unauthorized');
 			die();
 		}

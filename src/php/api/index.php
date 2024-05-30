@@ -56,6 +56,7 @@
 		//Inyección de dependencias
 		Login::$clave = $config['clave_encriptacion'];
 		Login::$algoritmo_encriptacion = $config['algoritmo_encriptacion'];
+		Login::$coordinador = $config['coordinador'];
 		if(array_key_exists('Authorization2', apache_request_headers())){
 			$autorizacion = apache_request_headers()['Authorization2'];
 			if ($autorizacion != "null")
@@ -93,6 +94,22 @@
 			case 'modulo':
 				require_once('./controladores/modulo.php');
 				$controlador = new Modulo();
+				break;
+			case 'convenio':
+                require_once ('./controladores/convenio.php');
+                $controlador = new Convenio();
+                break;
+            case 'ciclo':
+                require_once ('./controladores/ciclo.php');
+                $controlador = new Ciclo();
+                break;
+            case 'empresa':
+                require_once ('./controladores/empresa.php');
+                $controlador = new Empresa();
+                break;
+      case 'gestionalumnos':
+				require_once ('./controladores/gestionalumnos.php');
+				$controlador = new GestionAlumnos();
 				break;
 			case 'calificacion':
 			case 'curso':

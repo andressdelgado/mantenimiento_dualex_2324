@@ -134,4 +134,83 @@ export class Modelo {
       queryParams.set('periodo', periodo)
       return Rest.get('modulo', ['moduloNota'], queryParams)
     }
+    
+    getEmpresas(){
+        return Rest.get('empresa')
+    }
+    
+    /**
+     * Crea una empresa.
+     * @param {Empresa} empresa - Datos de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    crearEmpresa(empresa) {
+      return Rest.post('empresa', [], empresa);
+    }
+
+    /**
+     * Borra una empresa por su ID.
+     * @param {number} id - ID de la empresa a borrar.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    borrarEmpresa(id) {
+      return Rest.delete('empresa', [id]);
+    }
+
+    /**
+     * Obtiene los datos de una empresa por su ID.
+     * @param {number} id - ID de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    getEmpresaById(id) {
+      return Rest.get('empresa', [id]);
+    }
+
+    /**
+     * Edita una empresa.
+     * @param {Empresa} datosdelaempresa - Datos actualizados de la empresa.
+     * @return {Promise} - Devuelve la promesa asociada a la petición.
+     */
+    editarEmpresa(datosdelaempresa) {
+      return Rest.put('empresa', [], datosdelaempresa);
+    }
+    
+      /**
+   Devuelve la lista de alumnos por curso.
+   La lista está formada por los alumnos que están asignados a un curso.
+   @return {Promise} Devuelve la promesa asociada a la petición.
+   **/
+  getAlumnosByCurso (curso) {
+    const queryParams = new Map()
+    queryParams.set('curso', curso)
+    return Rest.get('gestionalumnos', [], queryParams)
+  }
+
+  /**
+   Borrar un alumno.
+   @param alumnoId {Number} Identificador del alumno.
+   @return {Promise} Devuelve la promesa asociada a la petición.
+   **/
+  borrarAlumno (alumnoId) {
+    return Rest.delete('gestionalumnos', [alumnoId])
+  }
+
+  /**
+   * Realiza el alta de un alumno.
+   * @param alumno {} Datos del alumno.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  altaAlumno (alumno) {
+    return Rest.post('gestionalumnos', [], alumno)
+  }
+
+  /**
+   * Modifica un alumno.
+   * @param alumno {} Datos del alumno.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  modificarAlumno (alumno) {
+    return Rest.put('gestionalumnos', [], alumno)
+  }
+
 }

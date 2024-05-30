@@ -24,7 +24,7 @@ class Tarea{
 						header('HTTP/1.1 403 Forbidden');
 						die();
 					}
-					if ($usuario->rol == 'profesor')
+					if ($usuario->rol == 'profesor' || $usuario->rol == 'coordinador')
 						$resultado = DAOTarea::verTareasDeAlumnoComoProfesor($queryParams['id'], $usuario->id);
 					if ($usuario->rol == 'alumno')
 						$resultado = DAOTarea::verTareasDeAlumno($usuario->id);
@@ -87,7 +87,7 @@ class Tarea{
 		/*for ($i = 0; $i < count($tarea->evaluaciones); $i++)
 			if ($tarea->evaluaciones[$i]->calificacion === "")
 				$tarea->evaluaciones[$i]->calificacion = null;
-		*/
+        */
     	$id = DAOTarea::modificar($tarea, $usuario);
 
 		if (self::$email_aviso){
@@ -113,7 +113,7 @@ class Tarea{
 		@param $usuario {Usuario} Usuario que realiza la petición.
 	**/
 	function delete($pathParams, $queryParams, $usuario){
-	    if ($usuario->rol == 'profesor')
+	    if ($usuario->rol == 'profesor' || $usuario->rol == 'coordinador')
     	    $id = DAOTarea::borrarTareaProfesor($pathParams[0]);
     	else
     	    $id = DAOTarea::borrarTareaAlumno($pathParams[0], $usuario);

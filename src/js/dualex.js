@@ -31,6 +31,12 @@ import { VistaProfesores } from './vistas/vistaprofesores.js'
 import { Vistaconvenio } from './vistas/vistaconvenio.js'
 import { VistaConvenios } from './vistas/vistaconvenios.js'
 import { VistaMenuCoordinador } from './vistas/vistamenucoordinador.js'
+// Vista de alta de alumno
+import { VistaAltaAlumno } from './vistas/vistaaltaalumno.js'
+// Vista de modificación de alumno
+import { VistaModificarAlumno } from './vistas/vistamodificaralumno.js'
+// Vista de Gestión de alumnos
+import { VistaGestionAlumnos } from './vistas/vistagestionalumnos.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
 
@@ -63,14 +69,17 @@ class DualEx {
     this.vistaTarea = new VistaTarea(this, document.getElementById('divTarea'))
     this.vistaTareas = new VistaTareas(this, document.getElementById('divTareas'))
     this.vistaInforme = new VistaInforme(this, document.getElementById('divInforme'))
+    this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
     this.vistaEmpresa = new VistaEmpresa(this, document.getElementById('divEmpresa'))
+    this.vistaMenuCoordinador = new VistaMenuCoordinador(this, document.getElementById('divMenuCoordinador'))
     this.vistaEmpresas = new VistaEmpresas(this, document.getElementById('divEmpresas'))
     this.vistaEditarEmpresa = new VistaEditarEmpresa(this, document.getElementById('divEditarEmpresa'))
     this.vistaProfesores = new VistaProfesores(this, document.getElementById('divProfesores'))
     this.vistaConvenio = new Vistaconvenio(this, document.getElementById('divConvenio')) // Vista alta convenios
     this.vistaConvenios = new VistaConvenios(this, document.getElementById('divConvenios')) // Vista listado convenios
-    this.vistaMenuCoordinador = new VistaMenuCoordinador(this, document.getElementById('divMenuCoordinador'))
-    this.vistaCreditos = new VistaCreditos(this, document.getElementById('divCreditos'))
+    this.vistaAlumnoAlta = new VistaAltaAlumno(this, document.getElementById('divAltaAlumno'))
+    this.vistaAlumnosListado = new VistaGestionAlumnos(this, document.getElementById('divGestionAlumnos'))
+    this.vistaModificarAlumno = new VistaModificarAlumno(this, document.getElementById('divModificarAlumno'))
     this.vistaLogin.mostrar()
   }
 
@@ -139,7 +148,18 @@ class DualEx {
     this.vistaAlumnos.mostrar(false)
     this.vistaInforme.mostrar(false)
     this.vistaCreditos.mostrar(false)
+    this.vistaAlumnoAlta.mostrar(false)
+    this.vistaAlumnosListado.mostrar(false)
+    this.vistaModificarAlumno.mostrar(false)
+    this.vistaEmpresa.mostrar(false)
+    this.vistaEmpresas.mostrar(false)
+    this.vistaEditarEmpresa.mostrar(false)
+    this.vistaMenuCoordinador.mostrar(false)
+    this.vistaConvenio.mostrar(false)
+    this.vistaConvenios.mostrar(false)
+    this.vistaProfesores.mostrar(false)
   }
+
 
   /**
     Muestra la vista de tareas del alumno.
@@ -227,6 +247,91 @@ class DualEx {
       this.ocultarVistas()
       this.vistaTarea.mostrar(true)
     }
+  }
+
+/**
+   * Muestra la vista de gestion de alumnos.
+   */
+  mostrarGestionAlumnos () {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.vistaMenu.verGestionAlumnos()
+    this.vistaAlumnosListado.cargarFiltroCursos()
+    this.vistaAlumnoAlta.limpiarCampos()
+    this.ocultarVistas()
+    this.vistaAlumnosListado.mostrar(true)
+  }
+
+  /**
+   * Muestra la vista de alta de alumno.
+   */
+  mostrarAltaAlumno () {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.vistaMenu.verAltaAlumno()
+    this.vistaAlumnoAlta.cargarDatos(this.vistaAlumnosListado.cursos)
+    this.ocultarVistas()
+    new Promise((resolve) => {
+      this.vistaAlumnoAlta.mostrar(true);
+      resolve();
+    }).then(() => {
+      this.vistaAlumnoAlta.inputNombre.focus();
+    }).catch((error) => {
+      console.error('Error mostrando vista de alta de alumno:', error);
+    });
+  }
+
+  /**
+   * Muestra la vista de modificación de alumno.
+   * @param alumno {} Datos del alumno a modificar.
+   * @param cursos {} Lista de cursos.
+   */
+  mostrarModificarAlumno (alumno, cursos) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.vistaMenu.verModificarAlumno()
+    this.vistaModificarAlumno.cargarDatos(alumno, cursos)
+
+    this.ocultarVistas()
+    new Promise((resolve) => {
+      this.vistaModificarAlumno.mostrar(true);
+      resolve();
+    }).then(() => {
+      this.vistaModificarAlumno.inputNombre.focus();
+    }).catch((error) => {
+      console.error('Error mostrando vista de modificación de alumno:', error);
+    });
+  }
+
+  /**
+   * Realiza una petición para insertar un nuevo alumno.
+   * @param alumno {} Datos del alumno a insertar.
+   */
+  altaAlumno (alumno) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.altaAlumno(alumno)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El alumno se creó correctamente', VistaMensaje.OK)
+        this.vistaAlumnoAlta.limpiarCampos()
+        this.vistaAlumnosListado.cargarFiltrado()
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Realiza una petición para modificar un alumno.
+   * @param alumno {} Datos del alumno a modificar.
+   */
+  modificarAlumno (alumno) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.modificarAlumno(alumno)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El alumno se actualizó correctamente', VistaMensaje.OK)
+        this.vistaAlumnosListado.cargarFiltrado()
+      })
+      .catch(error => this.gestionarError(error))
   }
 
   /**
@@ -383,7 +488,11 @@ class DualEx {
    * @param {Empresa} datosdelaempresa - Datos de la nueva empresa.
    */
    crearEmpresa(datosdelaempresa) {
-    this.modelo.crearEmpresa(datosdelaempresa);
+    this.modelo.crearEmpresa(datosdelaempresa)
+    .then( () => {this.irAVistaEmpresas()} )
+    .catch(error => {
+        this.gestionarError(error)
+      })
   }
 
   /**
@@ -414,7 +523,11 @@ class DualEx {
    * @returns {Promise} - Promesa que se resuelve cuando se edita la empresa.
    */
   editarEmpresa(datosEmpresa) {
-    return this.modelo.editarEmpresa(datosEmpresa);
+    return this.modelo.editarEmpresa(datosEmpresa)
+    .then( () => {this.irAVistaEmpresas()} )
+    .catch(error => {
+        this.gestionarError(error)
+      })
   }
 
   /**
@@ -482,18 +595,13 @@ class DualEx {
    */
   enviarSolicitudConvenio (formData) {
     return Rest.post('convenio', [], formData, false)
-      // .then(respuesta => {
-      //   if (respuesta.status === 200) {
-      //     console.log('Se realizó la consulta')
-      //     this.vistaConvenio.mostrar(false)
-      //     this.vistaConvenios.mostrar(true)
-      //   } else {
-      //     console.error('Hubo un error al realizar la consulta')
-      //   }
-      // })
-      // .catch(error => {
-      //   console.error('Error al realizar la solicitud:', error)
-      // })
+      .then(respuesta => {
+        this.vistaConvenios.cargarDatosConvenios()
+        this.irAVistaConvenios()
+      })
+      .catch(error => {
+        this.gestionarError(error)
+      })
   }
 
   /**
@@ -518,6 +626,29 @@ class DualEx {
    */
   recibirDatosConvenios () {
     return Rest.get('convenio')
+  }
+  
+  /**
+   * Develve la lista de alumnos de un curso
+   * @returns array
+   */
+  getAlumnosByCurso(curso){
+    return this.modelo.getAlumnosByCurso(curso)
+  }
+  
+  eliminarAlumno (alumnoId, alumnoNombre) {
+    const titulo = `¿Realmente quiere ELIMINAR al alumno  "${alumnoNombre}"?`
+    const mensaje = 'Esta operación no puede deshacerse.'
+    this.vistaDialogo.abrir(titulo, mensaje, confirmar => {
+      if (confirmar) {
+        this.modelo.borrarAlumno(alumnoId)
+          .then(respuesta => {
+            this.vistaMensaje.mostrar('El alumno se eliminó correctamente.', VistaMensaje.OK)
+            this.vistaAlumnosListado.cargarFiltrado()
+          })
+          .catch(error => this.gestionarError(error))
+      } else { this.vistaDialogo.cerrar() }
+    })
   }
   
 }
