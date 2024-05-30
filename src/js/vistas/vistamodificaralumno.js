@@ -121,6 +121,7 @@ export class VistaModificarAlumno extends Vista{
    * @param cursos Lista de cursos.
    */
   cargarDatos(alumno, cursos) {
+    this.limpiarCampos()
     this.alumno = alumno
 
     this.inputNombre.value = alumno.nombre.trim();
@@ -142,6 +143,14 @@ export class VistaModificarAlumno extends Vista{
         option.selected = true;
       }
     }
+  }
+
+  limpiarCampos() {
+    this.inputNombre.value = ''
+    this.inputApellidos.value = ''
+    this.inputEmail.value = ''
+    this.selectCurso.value = ''
+    this.ocultarErrores()
   }
 
 

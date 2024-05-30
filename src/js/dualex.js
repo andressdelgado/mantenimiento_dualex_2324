@@ -277,6 +277,7 @@ class DualEx {
     if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
 
     this.vistaMenu.verAltaAlumno()
+    this.vistaAlumnoAlta.limpiarCampos()
     this.vistaAlumnoAlta.cargarDatos(this.vistaAlumnosListado.cursos)
     this.ocultarVistas()
     new Promise((resolve) => {
