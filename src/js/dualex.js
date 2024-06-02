@@ -545,6 +545,7 @@ class DualEx {
     this.ocultarVistas()
     this.vistaMenu.verConvenios()
     this.vistaConvenios.mostrar(true)
+    this.vistaConvenios.cargarDatosConvenios()
   }
 
   /**

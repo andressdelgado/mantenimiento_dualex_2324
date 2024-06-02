@@ -13,12 +13,8 @@ export class VistaConvenios extends Vista {
   constructor (controlador, base) {
     super(controlador)
     this.base = base
-    // Cogemos referencias a los elementos del interfaz
-    // Tabla
+    // Cogemos la referencia de la tabla de la interfaz
     this.tablaConvenios = this.base.getElementsByTagName('table')[0]
-
-    // Ejecutar metodos necesarios
-    this.cargarDatosConvenios()
   }
 
   /**
@@ -59,6 +55,10 @@ export class VistaConvenios extends Vista {
         // Añadir fila de encabezados al thead de la tabla
         const cabeceraTabla = this.tablaConvenios.createTHead()
         cabeceraTabla.appendChild(encabezados)
+
+        if (!convenios || convenios.length === 0) {
+          throw new Error('No hay convenios registrados')
+        }
 
         // Sobre cada convenio crear fila de la tabla
         convenios.forEach(convenio => {
