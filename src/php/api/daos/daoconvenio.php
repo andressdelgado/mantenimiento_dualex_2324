@@ -33,7 +33,7 @@ class DAOConvenio{
         $sql = "SELECT Convenio.id, Convenio.titulo, Convenio.fecha_firma, Convenio.documento, Ciclo.nombre AS nombreCiclo, Empresa.nombre AS nombreEmpresa FROM Convenio ";
         $sql .= "INNER JOIN Ciclo ON Convenio.id_ciclo = Ciclo.id ";
         $sql .= "INNER JOIN Empresa ON Convenio.id_empresa = Empresa.id ";
-        $sql .= "ORDER BY Convenio.id ";
+        $sql .= "ORDER BY Convenio.fecha_firma DESC";
 
         $params = array();
 
