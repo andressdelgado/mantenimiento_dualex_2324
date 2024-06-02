@@ -40,6 +40,7 @@ export class Vistaconvenio extends Vista {
     this.inputTitulo.value = ''
     this.inputFechaFirma.value = ''
     this.inputDocumento.value = ''
+    this.ocultarMensajesErrores()
   }
 
   /**
@@ -226,5 +227,13 @@ export class Vistaconvenio extends Vista {
       this.inputTitulo.focus()
       this.cargarDatos()
     }
+  }
+
+  ocultarMensajesErrores () {
+    this.inputTitulo.classList.remove('invalid')
+    this.inputTitulo.classList.remove('valid')
+    document.getElementById('errorTitulo').textContent = ''
+    document.getElementById('errorFechaFirma').textContent = ''
+    document.getElementById('errorDocumento').textContent = ''
   }
 }
