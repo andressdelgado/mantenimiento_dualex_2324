@@ -40,20 +40,30 @@ export class Vistaconvenio extends Vista {
     this.inputTitulo.value = ''
     this.inputFechaFirma.value = ''
     this.inputDocumento.value = ''
-		for (const option of this.selectCiclo.querySelectorAll('option'))
-	  	option.remove()
-	  for (const option of this.selectEmpresa.querySelectorAll('option'))
-			option.remove()
+    this.ocultarMensajesErrores()
   }
 
   /**
    * Carga los datos de los ciclos y las empresas en sus respectivos select.
    */
   cargarDatos () {
-		this.limpiar()
+	this.limpiar()
+    for (const option of this.selectCiclo.querySelectorAll('option'))
+        option.remove()
+    for (const option of this.selectEmpresa.querySelectorAll('option'))
+        option.remove()
     this.cargarDatosCiclos()
     this.cargarDatosEmpresas()
   }
+  
+  ocultarMensajesErrores () {
+    this.inputTitulo.classList.remove('invalid')
+    this.inputTitulo.classList.remove('valid')
+    document.getElementById('errorTitulo').textContent = ''
+    document.getElementById('errorFechaFirma').textContent = ''
+    document.getElementById('errorDocumento').textContent = ''
+  }
+
 
   /**
    * Carga los ciclos en el select de ciclos.

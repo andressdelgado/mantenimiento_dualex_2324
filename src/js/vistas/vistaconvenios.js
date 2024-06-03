@@ -18,7 +18,7 @@ export class VistaConvenios extends Vista {
     this.tablaConvenios = this.base.getElementsByTagName('table')[0]
 
     // Ejecutar metodos necesarios
-    this.cargarDatosConvenios()
+    
   }
 
   /**
@@ -29,6 +29,9 @@ export class VistaConvenios extends Vista {
       .then(convenios => {
         // Limpiar contenido actual de la tabla
         this.tablaConvenios.innerHTML = ''
+        
+        if (!convenios || convenios.length === 0) 
+            throw new Error('No hay convenios registrados')
 
         // Crear encabezados
         const encabezados = document.createElement('tr')

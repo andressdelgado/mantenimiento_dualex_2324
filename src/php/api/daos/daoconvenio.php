@@ -14,12 +14,12 @@ class DAOConvenio{
      * @param $id_empresa {Integer} Identificador de la empresa.
      * @return false|string|null {Integer} Identificador del convenio insertado.
      */
-    public static function insertar($titulo, $fecha_firma, $documento, $id_ciclo, $id_empresa){
-        $sql = 'INSERT INTO Convenio(titulo, fecha_firma, documento, id_ciclo, id_empresa)';
-        $sql .= 'VALUES (:titulo, :fecha_firma, :documento, :id_ciclo, :id_empresa)';
+    public static function insertar($titulo, $fecha_firma, $documento, $id_ciclo, $id_empresa, $id_profesor){
+        $sql = 'INSERT INTO Convenio(titulo, fecha_firma, documento, id_ciclo, id_empresa, id_profesor)';
+        $sql .= 'VALUES (:titulo, :fecha_firma, :documento, :id_ciclo, :id_empresa, :id_profesor)';
 
         $params = array('titulo'=>$titulo, 'fecha_firma' => $fecha_firma,
-            'documento'=> $documento, 'id_ciclo'=>$id_ciclo, 'id_empresa'=>$id_empresa);
+            'documento'=> $documento, 'id_ciclo'=>$id_ciclo, 'id_empresa'=>$id_empresa, 'id_profesor' => $id_profesor);
 
         $id = BD::insertar($sql,$params);
         return $id;
@@ -27,15 +27,17 @@ class DAOConvenio{
 
     /**
      * Devuelve un array con los datos de los convenios.
+     * @param $id_profesor Identificador del profesor
      * @return {Array[Convenio]} Array de convenios.
      */
-    public static function verConvenios(){
+    public static function verConvenios($id_profesor){
         $sql = "SELECT Convenio.id, Convenio.titulo, Convenio.fecha_firma, Convenio.documento, Ciclo.nombre AS nombreCiclo, Empresa.nombre AS nombreEmpresa FROM Convenio ";
         $sql .= "INNER JOIN Ciclo ON Convenio.id_ciclo = Ciclo.id ";
         $sql .= "INNER JOIN Empresa ON Convenio.id_empresa = Empresa.id ";
-        $sql .= "ORDER BY Convenio.id ";
+        $sql .= "WHERE id_profesor = :id_profesor ";
+        $sql .= "ORDER BY Convenio.fecha_firma DESC";
 
-        $params = array();
+        $params = array('id_profesor' => $id_profesor);
 
         return BD::seleccionar($sql, $params);
     }
