@@ -51,6 +51,7 @@ class Login{
 		//Completamos los datos del usuario
 		$usuario->email = $payload['email'];
 		if ($payload['email'] === self::$coordinador){
+		//if (in_array($payload['email'], self::$coordinador)){
             $usuario->rol = 'coordinador';
         }
 		$usuario->autorizacion = openssl_encrypt(json_encode($usuario), self::$algoritmo_encriptacion, self::$clave, 0, self::$iv);

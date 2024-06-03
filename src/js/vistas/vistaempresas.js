@@ -41,31 +41,32 @@ export class VistaEmpresas extends Vista {
           const empresaInfo = document.createElement('div');
           empresaInfo.classList.add('empresa-info');
         
-          const idSpan = document.createElement('span');
+          /*const idSpan = document.createElement('span');
           const idStrong = document.createElement('strong');
           idStrong.textContent = 'ID: ';
           idSpan.appendChild(idStrong);
           idSpan.appendChild(document.createTextNode(empresa.id));
-          empresaInfo.appendChild(idSpan);
+          empresaInfo.appendChild(idSpan);*/
         
           const siglasSpan = document.createElement('span');
-          const siglasStrong = document.createElement('strong');
-          siglasStrong.textContent = 'Siglas: ';
-          siglasSpan.appendChild(siglasStrong);
+          //const siglasStrong = document.createElement('strong');
+          //siglasStrong.textContent = 'Siglas: ';
+          //siglasSpan.appendChild(siglasStrong);
           siglasSpan.appendChild(document.createTextNode(empresa.siglas));
           empresaInfo.appendChild(siglasSpan);
         
           const nombreSpan = document.createElement('span');
-          const nombreStrong = document.createElement('strong');
-          nombreStrong.textContent = 'Nombre: ';
-          nombreSpan.appendChild(nombreStrong);
+          //const nombreStrong = document.createElement('strong');
+          //nombreStrong.textContent = 'Nombre: ';
+          //nombreSpan.appendChild(nombreStrong);
           nombreSpan.appendChild(document.createTextNode(empresa.nombre));
           empresaInfo.appendChild(nombreSpan);
         
           const notasSpan = document.createElement('span');
-          const notasStrong = document.createElement('strong');
-          notasStrong.textContent = 'Notas: ';
-          notasSpan.appendChild(notasStrong);
+          //const notasStrong = document.createElement('strong');
+          //notasStrong.textContent = 'Notas: ';
+          //notasSpan.appendChild(notasStrong);
+          empresaInfo.appendChild(document.createElement('br'))
           notasSpan.appendChild(document.createTextNode(empresa.notas));
           empresaInfo.appendChild(notasSpan);
         

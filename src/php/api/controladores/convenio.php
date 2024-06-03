@@ -27,7 +27,7 @@ class Convenio{
         if (!empty($titulo) && strlen($titulo) > 0 && strlen($titulo) <= 255 && $titulo !== ' '
             && !empty($fecha_firma) && !empty($documento_convenio)) {
             // Alta convenio
-            $id = DAOConvenio::insertar($titulo, $fecha_firma, $documento_convenio, $id_ciclo, $id_empresa);
+            $id = DAOConvenio::insertar($titulo, $fecha_firma, $documento_convenio, $id_ciclo, $id_empresa, $usuario->id);
             if (!empty($id)) {
                 header('HTTP/1.1 200 OK');
                 die();
@@ -49,7 +49,7 @@ class Convenio{
         @return {Array[Convenio]}
      * */
     function get($pathParams, $queryParams, $usuario){
-        $resultado = DAOConvenio::verConvenios();
+        $resultado = DAOConvenio::verConvenios($usuario->id);
         $json = json_encode($resultado);
         header('Content-type: application/json; charset=utf-8');
         header('HTTP/1.1 200 OK');

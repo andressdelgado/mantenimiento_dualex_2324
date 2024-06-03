@@ -125,11 +125,13 @@ CREATE TABLE IF NOT EXISTS `Convenio` (
   `documento` longblob DEFAULT NULL,
   `id_ciclo` int(10) unsigned NOT NULL,
   `id_empresa` int(10) unsigned NOT NULL,
+  `id_profesor` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_convenio_ciclo` (`id_ciclo`),
   KEY `fk_convenio_empresa` (`id_empresa`),
   CONSTRAINT `fk_convenio_ciclo` FOREIGN KEY (`id_ciclo`) REFERENCES `Ciclo` (`id`),
   CONSTRAINT `fk_convenio_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `Empresa` (`id`)
+  CONSTRAINT `fk_convenio_profesor` FOREIGN KEY (`id_profesor`) REFERENCES `Profesor` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.

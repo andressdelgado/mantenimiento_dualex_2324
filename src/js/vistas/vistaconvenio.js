@@ -47,14 +47,23 @@ export class Vistaconvenio extends Vista {
    * Carga los datos de los ciclos y las empresas en sus respectivos select.
    */
   cargarDatos () {
-    this.limpiar()
+	this.limpiar()
     for (const option of this.selectCiclo.querySelectorAll('option'))
-      option.remove()
+        option.remove()
     for (const option of this.selectEmpresa.querySelectorAll('option'))
-      option.remove()
+        option.remove()
     this.cargarDatosCiclos()
     this.cargarDatosEmpresas()
   }
+
+  ocultarMensajesErrores () {
+    this.inputTitulo.classList.remove('invalid')
+    this.inputTitulo.classList.remove('valid')
+    document.getElementById('errorTitulo').textContent = ''
+    document.getElementById('errorFechaFirma').textContent = ''
+    document.getElementById('errorDocumento').textContent = ''
+  }
+
 
   /**
    * Carga los ciclos en el select de ciclos.
@@ -221,19 +230,11 @@ export class Vistaconvenio extends Vista {
     return camposValidos
   }
 
-  mostrar (ver) {
+  mostrar(ver){
   	super.mostrar(ver)
-  	if (ver) {
+  	if (ver){
       this.inputTitulo.focus()
       this.cargarDatos()
     }
-  }
-
-  ocultarMensajesErrores () {
-    this.inputTitulo.classList.remove('invalid')
-    this.inputTitulo.classList.remove('valid')
-    document.getElementById('errorTitulo').textContent = ''
-    document.getElementById('errorFechaFirma').textContent = ''
-    document.getElementById('errorDocumento').textContent = ''
   }
 }

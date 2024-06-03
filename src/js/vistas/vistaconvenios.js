@@ -26,6 +26,9 @@ export class VistaConvenios extends Vista {
         // Limpiar contenido actual de la tabla
         this.tablaConvenios.innerHTML = ''
 
+        if (!convenios || convenios.length === 0)
+            throw new Error('No hay convenios registrados')
+
         // Crear encabezados
         const encabezados = document.createElement('tr')
 
@@ -55,10 +58,6 @@ export class VistaConvenios extends Vista {
         // Añadir fila de encabezados al thead de la tabla
         const cabeceraTabla = this.tablaConvenios.createTHead()
         cabeceraTabla.appendChild(encabezados)
-
-        if (!convenios || convenios.length === 0) {
-          throw new Error('No hay convenios registrados')
-        }
 
         // Sobre cada convenio crear fila de la tabla
         convenios.forEach(convenio => {
