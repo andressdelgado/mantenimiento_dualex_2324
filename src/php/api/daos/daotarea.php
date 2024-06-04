@@ -82,8 +82,8 @@ class DAOTarea{
         $sql .= ', Alumno.id_curso AS id_curso ';
         $sql .= ', CASE  WHEN Actividad_Modulo_Tarea.revisado = 0 AND Modulo_Profesor.id_profesor = :id_profesor  THEN ';
         $sql .= ' CASE ';
-        $sql .= ' WHEN DATEDIFF(NOW(), Tarea.fecha_fin) > 7 THEN 1 ';
-        $sql .= ' WHEN DATEDIFF(NOW(), Tarea.fecha_fin) > 10 THEN 2 ELSE 0 ';
+        $sql .= ' WHEN DATEDIFF(NOW(), Tarea.fecha_fin) > 10 THEN 1 ';
+        $sql .= ' WHEN DATEDIFF(NOW(), Tarea.fecha_fin) > 7 THEN 2 ELSE 0 ';
         $sql .= ' END ELSE -1 END AS retrasada ';
         $sql .= 'FROM Tarea ';
         $sql .= 'JOIN Alumno ON Alumno.id = Tarea.id_alumno ';

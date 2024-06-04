@@ -57,9 +57,9 @@ export class VistaTareas extends Vista {
     tdTitulo.textContent = tarea.titulo
     tdTitulo.onclick = this.pulsarEditar.bind(this, tarea)
     if(tarea.retrasada === 1)
-        tdTitulo.classList.add('retrasada')
-    if(tarea.retrasada === 2)
         tdTitulo.classList.add('muyRetrasada')
+    if(tarea.retrasada === 2)
+        tdTitulo.classList.add('retrasada')
     tr1.appendChild(tdTitulo)
 
     // Tercer TD con el icono de eliminar

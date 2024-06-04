@@ -49,7 +49,7 @@ export class VistaConvenios extends Vista {
         thVerConvenio.textContent = 'Ver Convenio'
 
         const thModificar = document.createElement('th')
-        thModificar.textContent = 'Modificar'
+        thModificar.textContent = 'Editar'
 
         const thBorrar = document.createElement('th')
         thBorrar.textContent = 'Borrar'
