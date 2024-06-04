@@ -5,6 +5,8 @@ import { Vista } from './vista.js'
  Sirve para dar de alta a un convenio.
  **/
 export class Vistaconvenio extends Vista {
+  documentoConvenioE = null
+  idConvenio = null
   /**
    Constructor de la clase.
    @param {Object} controlador Controlador de la vista principal.
@@ -24,6 +26,8 @@ export class Vistaconvenio extends Vista {
     // Selects
     this.selectCiclo = this.base.querySelectorAll('select')[0]
     this.selectEmpresa = this.base.querySelectorAll('select')[1]
+    // Parrafo
+    this.avisoParrafo = document.querySelector('.divFlex p')
 
     // Asociamos eventos
     this.btnLimpiar.onclick = this.limpiar.bind(this)
@@ -49,9 +53,15 @@ export class Vistaconvenio extends Vista {
   cargarDatos () {
 	this.limpiar()
     for (const option of this.selectCiclo.querySelectorAll('option'))
-        option.remove()
+      option.remove()
     for (const option of this.selectEmpresa.querySelectorAll('option'))
-        option.remove()
+      option.remove()
+    // Si el boton es editar, se cambia a añadir
+    if (this.btnAnadir.innerHTML === 'Editar') {
+      this.avisoParrafo.textContent = ''
+      this.btnAnadir.innerHTML = 'Añadir'
+      this.btnAnadir.onclick = this.anadirConvenio.bind(this)
+    }
     this.cargarDatosCiclos()
     this.cargarDatosEmpresas()
   }
@@ -218,7 +228,10 @@ export class Vistaconvenio extends Vista {
     camposValidos = this.validarFechaFirma()
 
     // Comprobar el campo de documento
-    const file = this.inputDocumento.files[0]
+    let file = this.inputDocumento.files[0]
+    if (this.inputDocumento.files.length === 0) {
+      file = this.documentoConvenioE
+    }
     const errorDocumento = document.getElementById('errorDocumento')
     if (file === undefined) {
       errorDocumento.textContent = 'Debe seleccionar un documento.'
@@ -230,11 +243,101 @@ export class Vistaconvenio extends Vista {
     return camposValidos
   }
 
-  mostrar(ver){
+  /**
+   * Sobreescribe el metodo mostrar de la clase Vista.
+   * @param ver - {boolean} Indica si se muestra o no la vista.
+   * @param datosConvenio - {Object} Datos del convenio a editar.
+   */
+  mostrar (ver, datosConvenio) {
   	super.mostrar(ver)
-  	if (ver){
+  	if (ver) {
       this.inputTitulo.focus()
       this.cargarDatos()
+    }
+    if (datosConvenio) {
+      setTimeout(() => {
+        this.cargarEdicionConvenios(datosConvenio)
+      }, 25)
+    }
+  }
+
+  /**
+   * Carga los datos del convenio a editar.
+   * @param datosConvenio
+   */
+  cargarEdicionConvenios (datosConvenio) {
+    this.documentoConvenioE = datosConvenio[0].documento
+    this.idConvenio = datosConvenio[0].id
+
+    // Relleno los campos con los datos del convenio
+    this.inputTitulo.value = datosConvenio[0].titulo
+    this.inputFechaFirma.value = datosConvenio[0].fecha_firma
+    this.selectCiclo.value = datosConvenio[0].id_ciclo
+    this.selectEmpresa.value = datosConvenio[0].id_empresa
+
+    // El boton de añadir se cambia a editar
+    this.btnAnadir.innerHTML = 'Editar'
+    this.btnAnadir.onclick = this.editarConvenio.bind(this)
+
+    // Crear aviso
+    if (this.avisoParrafo) {
+      this.avisoParrafo.textContent = 'Si introduce un nuevo documento se sustituirá el actual'
+    }
+  }
+
+  /**
+   * Método por el cual se edita un convenio.
+   */
+  editarConvenio () {
+    let file = null
+    let modoTratarDocumento = 0
+    if (this.inputDocumento.files.length === 0) {
+      file = this.documentoConvenioE
+    } else {
+      file = this.inputDocumento.files[0]
+      modoTratarDocumento = 1
+    }
+
+    // Hago la edicion del convenio dependiendo de si se ha introducido un nuevo convenio o se mantiene el que está
+    if (this.comprobarVacio() && this.validarTituloUsuario() && this.validarFechaFirma()) {
+      if (modoTratarDocumento === 0) {
+        // Preparo los datos
+        const convenioData = {
+          tituloConvenio: this.inputTitulo.value,
+          fechaFirma: this.inputFechaFirma.value,
+          documento: file,
+          id_ciclo: this.selectCiclo.value,
+          id_empresa: this.selectEmpresa.value
+        }
+        // Hago la edicion del convenio
+        this.controlador.editarConveino(this.idConvenio, convenioData)
+          .catch(error => {
+            this.controlador.gestionarError(error)
+          })
+      } else {
+        if (this.validarDocumento()) {
+          const reader = new FileReader()
+
+          reader.onload = () => {
+            const convenioData = {
+              tituloConvenio: this.inputTitulo.value,
+              fechaFirma: this.inputFechaFirma.value,
+              documento: reader.result,
+              id_ciclo: this.selectCiclo.value,
+              id_empresa: this.selectEmpresa.value
+            }
+            // Se ejecuta al completar la lectura del archivo
+            this.controlador.editarConveino(this.idConvenio, convenioData)
+              .catch(error => {
+                this.controlador.gestionarError(error)
+              })
+          }
+          reader.readAsDataURL(file) // Es metodo asincrono
+        }
+      }
+    } else {
+      const error = new Error('Los datos introducidos no tienen un formato valido')
+      this.controlador.gestionarError(error)
     }
   }
 }

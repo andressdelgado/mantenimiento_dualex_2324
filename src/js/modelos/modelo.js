@@ -134,11 +134,11 @@ export class Modelo {
       queryParams.set('periodo', periodo)
       return Rest.get('modulo', ['moduloNota'], queryParams)
     }
-    
+
     getEmpresas(){
         return Rest.get('empresa')
     }
-    
+
     /**
      * Crea una empresa.
      * @param {Empresa} empresa - Datos de la empresa.
@@ -174,7 +174,7 @@ export class Modelo {
     editarEmpresa(datosdelaempresa) {
       return Rest.put('empresa', [], datosdelaempresa);
     }
-    
+
       /**
    Devuelve la lista de alumnos por curso.
    La lista está formada por los alumnos que están asignados a un curso.
@@ -213,4 +213,64 @@ export class Modelo {
     return Rest.put('gestionalumnos', [], alumno)
   }
 
+  /**
+   * Peticion que realiza una inserccion de un convenio.
+   * @param datos - {Object} Datos del convenio.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  insertarConvenio (datos) {
+    return Rest.post('convenio', [], datos, false)
+  }
+
+  /**
+   * Peticion que devuelve los datos de un ciclo por su id.
+   * @param id - {Number} Identificador del ciclo.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosCiclo () {
+    return Rest.get('ciclo')
+  }
+
+  /**
+   * Peticion que devuelve los datos de las empresas.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosEmpresa () {
+    return Rest.get('empresa')
+  }
+
+  /**
+   * Peticion que devuelve los datos de los convenios.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  recibirDatosConvenios () {
+    return Rest.get('convenio')
+  }
+
+  /**
+   * Peticion que edita los datos de un convenio por su id.
+   * @param id - {Number} Identificador del convenio.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  editarConvenio (id, datos) {
+    return Rest.put('convenio', [id], datos)
+  }
+
+  /**
+   * Peticion que devuelve los datos de un convenio por su id.
+   * @param id - {Number} Identificador del convenio.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  getConvenioById (id) {
+    return Rest.get('convenio', [id])
+  }
+
+  /**
+   * Peticion que borra un convenio por su id.
+   * @param id - {Number} Identificador del convenio.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  borrarConvenioById (id) {
+    return Rest.delete('convenio', [id])
+  }
 }

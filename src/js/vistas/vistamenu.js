@@ -14,7 +14,7 @@ export class VistaMenu extends Vista{
   constructor (controlador, base) {
 	super(controlador, 'flex')
     this.base = base
-  
+
     // Cogemos referencias a los elementos del interfaz
 
     // Asociamos eventos
@@ -165,7 +165,7 @@ export class VistaMenu extends Vista{
   crearIconoAyuda (texto) {
     return this.crearIcono('help.svg', null, texto)
   }
-  
+
   /**
  * Método verEmpresas: muestra la lista de empresas en la interfaz de usuario.
  * Este método verifica el rol del usuario y muestra los elementos correspondientes en la interfaz.
@@ -201,16 +201,9 @@ export class VistaMenu extends Vista{
     this.verAcercaDe()
   }
 
-
-  /*editarEmpresa () {
-    this.limpiar()
-    this.verUsuario()
-    if (this.controlador.getUsuario().rol === 'coordinador') {
-      this.verTitulo('Editar empresa')
-    }
-    this.verLogout(2)
-    this.verAcercaDe()
-  }*/
+  /**
+   * Muestra el menu correspondiente a la lista de convenios en la interfaz de usuario.
+   */
   verConvenios () {
     this.limpiar()
     this.verUsuario()
@@ -223,6 +216,9 @@ export class VistaMenu extends Vista{
     this.verAcercaDe()
   }
 
+  /**
+   * Muestra el menu correspondiente al alta de convenios en la interfaz de usuario.
+   */
   crearConvenio() {
     this.limpiar()
     this.verUsuario()
@@ -233,7 +229,7 @@ export class VistaMenu extends Vista{
     this.verLogout(2)
     this.verAcercaDe()
   }
-  
+
    /**
    Muestra el menú asociado a la lista de gestión de alumnos.
    El menú incluye: título, logout y add.
@@ -279,4 +275,17 @@ export class VistaMenu extends Vista{
     this.verAcercaDe()
   }
 
+  /**
+   * Muestra el menu correspondiente a la edicion de convenios en la interfaz de usuario.
+   */
+  crearConvenioEditar () {
+    this.limpiar()
+    this.verUsuario()
+    if (this.controlador.getUsuario().rol === 'coordinador') {
+      this.verTitulo('Editar Convenio')
+      this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.irAVistaConvenios.bind(this.controlador, false)))
+    }
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
 }

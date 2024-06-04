@@ -41,4 +41,47 @@ class DAOConvenio{
 
         return BD::seleccionar($sql, $params);
     }
+
+    /**
+     * Muestra los datos de un convenio especifico.
+     * @param $id {Integer} Identificador del convenio.
+     * @return array|false {Array} Datos del convenio.
+     */
+    public static function mostrarDatosConvenio($id){
+        $sql = "SELECT c.*,ci.nombre AS nombre_ciclo, e.nombre AS nombre_empresa FROM Convenio c ";
+        $sql .= "INNER JOIN Ciclo ci ON c.id_ciclo = ci.id ";
+        $sql .= "INNER JOIN Empresa e ON c.id_empresa = e.id ";
+        $sql .= "WHERE c.id = ?";
+        return BD::seleccionar($sql, [$id]);
+    }
+
+    /**
+     * Edita un convenio en la base de datos.
+     * @param $id {Integer} Identificador del convenio que se quiere editar.
+     * @param $titulo {String} Título del convenio.
+     * @param $fecha_firma {Date} Fecha de firma del convenio.
+     * @param $documento {String} Contenido del documento del convenio codificado en B64.
+     * @param $id_ciclo {Integer} Identificador del ciclo.
+     * @param $id_empresa {Integer} Identificador de la empresa.
+     * @return false|string|null {String} Identificador del convenio insertado.
+ */
+    public static function editarConvenio($id,$titulo, $fecha_firma, $documento, $id_ciclo, $id_empresa, $id_profesor){
+        $sql = "UPDATE Convenio ";
+        $sql .= "SET titulo = :titulo, fecha_firma = :fecha_firma, documento = :documento, id_ciclo = :id_ciclo, id_empresa = :id_empresa, id_profesor = :id_profesor ";
+        $sql .= "WHERE id = :id";
+
+        $params = array('id' => $id, 'titulo' => $titulo, 'fecha_firma' => $fecha_firma, 'documento' => $documento, 'id_ciclo' => $id_ciclo, 'id_empresa' => $id_empresa, 'id_profesor' => $id_profesor);
+
+        return BD::actualizar($sql, $params);
+    }
+
+    /**
+     * Borra un convenio de la base de datos.
+     * @param $id {Integer} Identificador del convenio que se quiere borrar.
+     * @return false|string|null {String} Identificador del convenio borrado.
+     */
+    public static function borrarConvenio($id){
+        $sql = "DELETE FROM Convenio WHERE id = ?";
+        return BD::borrar($sql, [$id]);
+    }
 }

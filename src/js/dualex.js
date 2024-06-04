@@ -583,7 +583,10 @@ class DualEx {
     this.vistaEmpresa.mostrar(true);
   }
 
-  mostrarVistaConvenio(){
+  /**
+   * Muestra la vista para dar de alta un convenio.
+   */
+  mostrarVistaConvenio () {
     this.ocultarVistas()
     this.vistaMenu.crearConvenio()
     this.vistaConvenio.mostrar(true)
@@ -595,7 +598,7 @@ class DualEx {
    * @returns {Promise} Devuelve la promesa asociada a la petición.
    */
   enviarSolicitudConvenio (formData) {
-    return Rest.post('convenio', [], formData, false)
+    return this.modelo.insertarConvenio(formData)
       .then(respuesta => {
         this.vistaMensaje.mostrar('El convenio se creó correctamente', VistaMensaje.OK)
         this.vistaConvenios.cargarDatosConvenios()
@@ -611,7 +614,7 @@ class DualEx {
    * @returns {Promise} Devuelve la promesa asociada a la petición.
    */
   recibirDatosCiclo () {
-    return Rest.get('ciclo')
+    return this.modelo.recibirDatosCiclo()
   }
 
   /**
@@ -619,7 +622,7 @@ class DualEx {
    * @returns {Promise} Devuelve la promesa asociada a la petición.
    */
   recibirDatosEmpresa () {
-    return Rest.get('empresa')
+    return this.modelo.recibirDatosEmpresa()
   }
 
   /**
@@ -627,7 +630,7 @@ class DualEx {
    * @returns {Promise} Devuelve la promesa asociada a la petición.
    */
   recibirDatosConvenios () {
-    return Rest.get('convenio')
+    return this.modelo.recibirDatosConvenios()
   }
 
   /**
@@ -653,6 +656,57 @@ class DualEx {
     })
   }
 
+  /**
+   * Borra un convenio.
+   * @param id - {Number} ID del convenio que se quiere borrar.
+   * @returns {Promise} - Promesa que se resuelve cuando se borra el convenio.
+   */
+  borrarConvenio (id) {
+    return this.modelo.borrarConvenioById(id)
+      .then(() => {
+        this.vistaMensaje.mostrar('El convenio ha sido eliminado', VistaMensaje.OK)
+        this.irAVistaConvenios()
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Obtiene los datos de un convenio en concreto
+   * @param id - {Number} ID del convenio que se quiere obtener sus datos.
+   * @returns {Promise} - Promesa que se resuelve con los datos del convenio.
+   */
+  obtenerDatosConvenioById (id) {
+    return this.modelo.getConvenioById(id)
+      .then(datosConvenio => {
+        this.mostrarVistaConvenioE(datosConvenio)
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Muestra la vista de edición de un convenio.
+   * @param datosConvenio - {Object} Datos del convenio a editar.
+   */
+  mostrarVistaConvenioE (datosConvenio) {
+    this.ocultarVistas()
+    this.vistaMenu.crearConvenioEditar()
+    this.vistaConvenio.mostrar(true, datosConvenio)
+  }
+
+  /**
+   * Edita un convenio.
+   * @param id - {Number} ID del convenio que se quiere editar.
+   * @param datosConvenio - {Object} Datos del convenio a editar.
+   * @returns {Promise<void>} - Promesa que se resuelve cuando se edita el convenio.
+   */
+  editarConveino (id, datosConvenio) {
+    return this.modelo.editarConvenio(id, datosConvenio)
+      .then(() => {
+        this.vistaMensaje.mostrar('El convenio se ha actualizado correctamente', VistaMensaje.OK)
+        this.irAVistaConvenios()
+      })
+      .catch(error => this.gestionarError(error))
+  }
 }
 
 /* eslint-disable no-new */
