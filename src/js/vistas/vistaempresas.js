@@ -37,10 +37,12 @@ export class VistaEmpresas extends Vista {
         empresas.forEach(empresa => {
           const itemEmpresa = document.createElement('div');
           itemEmpresa.classList.add('empresa-item');
-        
+          
           const empresaInfo = document.createElement('div');
           empresaInfo.classList.add('empresa-info');
-        
+          empresaInfo.addEventListener('click', () => {
+            this.handleClickEditar(empresa.id);
+          });
           /*const idSpan = document.createElement('span');
           const idStrong = document.createElement('strong');
           idStrong.textContent = 'ID: ';

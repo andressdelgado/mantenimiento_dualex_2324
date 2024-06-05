@@ -1345,6 +1345,10 @@ span.alumno:hover{
 	text-decoration: none;
   }
 
+  #divMenuCoordinador button:hover{
+	cursor: pointer;
+  }
+
   #divEmpresas {
     transition: opacity 1s;
     width: 90%;
@@ -1364,6 +1368,11 @@ span.alumno:hover{
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ddd;
+}
+
+.empresa-info:hover{
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .empresa-info span {
