@@ -14,7 +14,7 @@
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 	}
-	
+
 	try{
 		//Inyección de dependencias
 		require_once('./servicios/bd.php');
@@ -107,10 +107,14 @@
                 require_once ('./controladores/empresa.php');
                 $controlador = new Empresa();
                 break;
-      case 'gestionalumnos':
+            case 'gestionalumnos':
 				require_once ('./controladores/gestionalumnos.php');
 				$controlador = new GestionAlumnos();
 				break;
+            case 'gestionprofesores':
+                require_once('./controladores/gestionprofesores.php');
+                $controlador = new gestionprofesores();
+                break;
 			case 'calificacion':
 			case 'curso':
 			case 'periodo':
@@ -121,7 +125,7 @@
 				header('HTTP/1.1 501 Not Implemented');
 				die();
 		}
-		
+
 		if ($controlador)
 			switch($metodo){
 					case 'GET':

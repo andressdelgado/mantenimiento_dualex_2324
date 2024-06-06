@@ -31,7 +31,8 @@ legend{
 /* Inicialmente ocultamos las vistas */
 #divLogin, #divDialogo, #divAlumnos, #divTarea, #divTareas, #divInforme,
 #divCreditos, #divConvenio, #divConvenios, .gestionAlumno, #divGestionAlumnos,
-#divEmpresa, #divEmpresas, #divEditarEmpresa, #divMenuCoordinador, #divProfesores{
+#divEmpresa, #divEmpresas, #divEditarEmpresa, #divMenuCoordinador, #divProfesores,
+.gestionProfesor, #divGestionProfesores{
 	display: none;
 }
 
@@ -1507,4 +1508,121 @@ span.alumno:hover{
 #gestionAlumnosListado>div>.iconos>.icono:hover{
 	background-color: lightblue;
 	border-radius: 0.7rem;
+}
+
+/* Reglas de VistaAltaProfesor y VistaModificarProfesor */
+
+.gestionProfesor{
+	width: 40%;
+	margin: 5rem auto;
+	padding: 2rem;
+	border: 2px solid blue;
+	border-radius: 1rem;
+	transition: opacity 1s;
+}
+.gestionProfesor input{
+	margin: 0.3rem;
+}
+.gestionProfesor .error{
+	display: none;
+	color: red;
+	font-weight: bold;
+	margin-left: 41%
+}
+.gestionProfesor button{
+	cursor: pointer;
+	background-color: blue;
+	border: none;
+	color: white;
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.2rem;
+}
+.gestionProfesor button:hover{
+	text-decoration: underline;
+}
+.gestionProfesor p{
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+}
+.gestionProfesor p:first-of-type{
+	cursor: pointer;
+	color: blue;
+}
+.gestionProfesor p:first-of-type:hover{
+	text-decoration: underline;
+}
+/* Párrafo de Error */
+.gestionProfesor p:nth-of-type(2){
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+
+.gestionProfesor>label{
+	display: block;
+	width: 30%;
+}
+
+.gestionProfesor>label>input{
+	margin-left: 15%;
+}
+.gestionProfesor>h1{
+	text-align: center;
+	color: blue;
+}
+.gestionProfesor>.divFlex>input[type=text], .gestionProfesor>.divFlex>select{
+	padding-left: 0.5rem;
+	margin: 4px;
+}
+.gestionProfesor>.divFlex>select{
+	min-width: 20%;
+}
+
+/* Reglas de VistaGestionProfesor */
+
+#divGestionProfesores {
+	max-width: 90%;
+	margin: 1rem;
+	padding: 10rem 2rem;
+}
+#gestionProfesoresListado>div {
+	border-bottom: 1px solid lightgrey;
+	height: 2rem;
+}
+#divGestionProfesores>p {
+	height: 5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#divGestionProfesores>p>select{
+	padding-left: 0.5rem;
+	min-width: 10%;
+}
+#divGestionProfesores>p>label{
+	margin-right: 0.5rem;
+}
+#gestionProfesoresListado>div>.iconos{
+	position:absolute;
+	left: 90%;
+	white-space: nowrap;
+}
+#gestionProfesoresListado>div>.iconos>.icono{
+	display: inline;
+	width: 1.5rem;
+	cursor: pointer;
+}
+#gestionProfesoresListado>div>.iconos>.icono:hover{
+	background-color: lightblue;
+	border-radius: 0.7rem;
+}
+span.profesor:hover{
+	color:blue;
+	cursor: pointer;
+	font-weight: bold;
 }

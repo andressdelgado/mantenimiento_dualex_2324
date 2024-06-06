@@ -217,7 +217,7 @@
 				<p>Gestión de los alumnos</p>
 				<button id="botonAlumnos">Entrar</button>
 			</div>
-			<div class="divMenuCoordinadorBox" style='display:none'>
+			<div class="divMenuCoordinadorBox">
 				<h2>Profesores</h2>
 				<p>Gestión de los profesores</p>
 				<button id="botonProfesores">Entrar</button>
@@ -388,6 +388,60 @@
 			</select>
 		</p>
 		<section id="gestionAlumnosListado">
+
+		</section>
+	</div>
+
+	<div id="divAltaProfesor" class="gestionProfesor">
+		<h1>Añadir - Profesor</h1>
+		<div class="divFlex">
+			<label for="nombreProfesor">Nombre:</label>
+			<input type="text" id="nombreProfesor" placeholder="(Nombre)" />
+		</div>
+		<small id="errorNombreProfesor" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="apellidosProfesor">Apellidos:</label>
+			<input type="text" id="apellidosProfesor" placeholder="(Apellidos)" />
+		</div>
+		<small id="errorApellidosProfesor" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="emailProfesor">Email:</label>
+			<input type="text" id="emailProfesor" placeholder="(Email)" />
+		</div>
+		<small id="errorEmailProfesor" class="error">Formato erróneo</small>
+		<div class="divFlexBotones">
+			<button id="btnAnadirAltaProfesor">Añadir</button>
+			<button id="btnLimpiarAltaProfesor" style="background-color: darkred">Limpiar</button>
+			<button id="btnCancelarAltaProfesor" style="background-color: red">Cancelar</button>
+		</div>
+	</div>
+
+	<div id="divModificarProfesor" class="gestionProfesor">
+		<h1>Modificar - Profesor</h1>
+		<div class="divFlex">
+			<label for="nombreProfesorMod">Nombre:</label>
+			<input type="text" id="nombreProfesorMod" placeholder="(Nombre)" />
+		</div>
+		<small id="errorNombreProfesorMod" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="apellidosProfesorMod">Apellidos:</label>
+			<input type="text" id="apellidosProfesorMod" placeholder="(Apellidos)" />
+		</div>
+		<small id="errorApellidosProfesorMod" class="error">Formato erróneo, solo caracteres</small>
+		<div class="divFlex">
+			<label for="emailProfesorMod">Email:</label>
+			<input type="text" id="emailProfesorMod" placeholder="(Email)" />
+		</div>
+		<small id="errorEmailProfesorMod" class="error">Formato erróneo</small>
+		<div class="divFlexBotones">
+			<button id="btnAnadirModProfesor">Modificar</button>
+			<button id="btnCancelarModProfesor" style="background-color: red">Cancelar</button>
+		</div>
+	</div>
+
+
+	<div id='divGestionProfesores'>
+		<section id="gestionProfesoresListado">
 
 		</section>
 	</div>

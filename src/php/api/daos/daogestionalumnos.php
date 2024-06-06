@@ -35,7 +35,7 @@ class DAOGestionAlumnos{
             ':apellidos' => $alumno->apellidos,
             ':email' => $alumno->email
         );
-        $usuarioId = BD::ejecutar($sql, $params);
+        $usuarioId = BD::ejecutar($sql, $params, true);
 
         $sql = "INSERT INTO Alumno (id, id_curso) ";
         $sql .= "VALUES (:id, :curso)";

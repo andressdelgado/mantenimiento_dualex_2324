@@ -288,4 +288,49 @@ export class VistaMenu extends Vista{
     this.verLogout(2)
     this.verAcercaDe()
   }
+
+  /**
+   Muestra el menú asociado a la lista de gestión de alumnos.
+   El menú incluye: título, logout y add.
+   **/
+  verGestionProfesores () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Listado de Profesores'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el listado de profesores para ser gestionados por el coordinador'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarAlumnos.bind(this.controlador, false)));
+    this.base.appendChild(this.crearIcono('add.svg', 2, 'nuevo profesor', this.controlador.mostrarAltaProfesor.bind(this.controlador, null)))
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  /**
+   Muestra el menú asociado a el alta de alumnos.
+   El menú incluye: título, logout y retorno.
+   **/
+  verAltaProfesor () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Alta de Profesor'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el el formulario para dar de alta a un profesor'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionProfesores.bind(this.controlador, false)));
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
+
+  verModificarProfesor () {
+    this.limpiar()
+    this.verUsuario()
+    const h1 = document.createElement('h1')
+    this.base.appendChild(h1)
+    h1.appendChild(document.createTextNode('Modificar Profesor'))
+    h1.appendChild(this.crearIconoAyuda('Muestra el el formulario para modificar los datos de un profesor'))
+    this.base.appendChild(this.crearIcono('volver.svg', 1, 'volver', this.controlador.mostrarGestionProfesores.bind(this.controlador, false)));
+    this.verLogout(2)
+    this.verAcercaDe()
+  }
 }

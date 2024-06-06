@@ -39,6 +39,12 @@ import { VistaModificarAlumno } from './vistas/vistamodificaralumno.js'
 import { VistaGestionAlumnos } from './vistas/vistagestionalumnos.js'
 // Créditos
 import { VistaCreditos } from './vistas/vistacreditos.js'
+// Vista de Gestión de profesores
+import { VistaGestionProfesores } from './vistas/vistagestionprofesores.js'
+// Vista de alta de profesor
+import { VistaAltaProfesor } from './vistas/vistaaltaprofesor.js'
+// Vista de modificación de profesor
+import { VistaModificarProfesor } from './vistas/vistamodificarprofesor.js'
 
 // Servicios
 import { Rest } from './servicios/rest.js'
@@ -80,6 +86,9 @@ class DualEx {
     this.vistaAlumnoAlta = new VistaAltaAlumno(this, document.getElementById('divAltaAlumno'))
     this.vistaAlumnosListado = new VistaGestionAlumnos(this, document.getElementById('divGestionAlumnos'))
     this.vistaModificarAlumno = new VistaModificarAlumno(this, document.getElementById('divModificarAlumno'))
+    this.vistaProfesoresListado = new VistaGestionProfesores(this, document.getElementById('divGestionProfesores'))
+    this.vistaProfesorAlta = new VistaAltaProfesor(this, document.getElementById('divAltaProfesor'))
+    this.vistaModificarProfesor = new VistaModificarProfesor(this, document.getElementById('divModificarProfesor'))
     this.vistaLogin.mostrar()
   }
 
@@ -158,6 +167,9 @@ class DualEx {
     this.vistaConvenio.mostrar(false)
     this.vistaConvenios.mostrar(false)
     this.vistaProfesores.mostrar(false)
+    this.vistaProfesoresListado.mostrar(false)
+    this.vistaProfesorAlta.mostrar(false)
+    this.vistaModificarProfesor.mostrar(false)
   }
 
 
@@ -704,6 +716,149 @@ class DualEx {
       .then(() => {
         this.vistaMensaje.mostrar('El convenio se ha actualizado correctamente', VistaMensaje.OK)
         this.irAVistaConvenios()
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Muestra la vista de gestion de profesores.
+   */
+  mostrarGestionProfesores () {
+    if (this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.vistaMenu.verGestionProfesores()
+    this.vistaProfesorAlta.limpiarCampos()
+    this.vistaProfesoresListado.limpiar()
+    this.vistaProfesoresListado.cargarFiltrado()
+    this.ocultarVistas()
+    this.vistaProfesoresListado.mostrar(true)
+  }
+
+  /**
+   * Muestra la vista de alta de profesor.
+   */
+  mostrarAltaProfesor () {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.vistaMenu.verAltaProfesor()
+    this.ocultarVistas()
+    new Promise((resolve) => {
+      this.vistaProfesorAlta.mostrar(true);
+      resolve();
+    }).then(() => {
+      this.vistaProfesorAlta.inputNombre.focus();
+    }).catch((error) => {
+      console.error('Error mostrando vista de alta de profesor:', error);
+    });
+  }
+
+  /**
+   * Muestra la vista de modificación de profesor.
+   * @param profesor {} Datos del profesor a modificar.
+   */
+  mostrarModificarProfesor (profesor) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.vistaMenu.verModificarProfesor()
+    this.vistaModificarProfesor.cargarDatos(profesor)
+
+    this.ocultarVistas()
+    new Promise((resolve) => {
+      this.vistaModificarProfesor.mostrar(true);
+      resolve();
+    }).then(() => {
+      this.vistaModificarProfesor.inputNombre.focus();
+    }).catch((error) => {
+      console.error('Error mostrando vista de modificación de profesor:', error);
+    });
+  }
+
+  /**
+   * Realiza una petición para insertar un nuevo profesor.
+   * @param profesor {} Datos del profesor a insertar.
+   */
+  altaProfesor (profesor) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.altaProfesor(profesor)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El profesor se creó correctamente', VistaMensaje.OK)
+        this.vistaProfesorAlta.limpiarCampos()
+        this.mostrarGestionProfesores()
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Realiza una petición para modificar un profesor.
+   * @param profesor {} Datos del profesor a modificar.
+   */
+  modificarProfesor (profesor) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.modificarProfesor(profesor)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El profesor se actualizó correctamente', VistaMensaje.OK)
+        this.mostrarGestionProfesores()
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Develve la lista de profesores de un curso
+   * @returns array
+   */
+  getProfesores(){
+    return this.modelo.getProfesores()
+  }
+
+  /**
+   * Elimina un profesor.
+   * @param profesorId - {Number} ID del profesor que se quiere borrar.
+   * @param profesorNombre - {String} Nombre del profesor que se quiere borrar.
+   */
+  eliminarProfesor (profesorId, profesorNombre) {
+    const titulo = `¿Realmente quiere ELIMINAR al profesor  "${profesorNombre}"?`
+    const mensaje = 'Esta operación no puede deshacerse.'
+    this.vistaDialogo.abrir(titulo, mensaje, confirmar => {
+      if (confirmar) {
+        this.modelo.borrarProfesor(profesorId)
+          .then(respuesta => {
+            this.vistaMensaje.mostrar('El profesor se eliminó correctamente.', VistaMensaje.OK)
+            this.vistaProfesoresListado.cargarFiltrado()
+          })
+          .catch(error => this.gestionarError(error))
+      } else { this.vistaDialogo.cerrar() }
+    })
+  }
+
+  /**
+   * Realiza una petición para insertar un nuevo profesor.
+   * @param profesor {} Datos del profesor a insertar.
+   */
+  altaProfesor (profesor) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.altaProfesor(profesor)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El profesor se creó correctamente', VistaMensaje.OK)
+        this.vistaProfesorAlta.limpiarCampos()
+        this.vistaProfesoresListado.cargarFiltrado()
+      })
+      .catch(error => this.gestionarError(error))
+  }
+
+  /**
+   * Realiza una petición para modificar un profesor.
+   * @param profesor {} Datos del profesor a modificar.
+   */
+  modificarProfesor (profesor) {
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+
+    this.modelo.modificarProfesor(profesor)
+      .then(resultado => {
+        this.vistaMensaje.mostrar('El profesor se actualizó correctamente', VistaMensaje.OK)
+        this.vistaProfesoresListado.cargarFiltrado()
       })
       .catch(error => this.gestionarError(error))
   }

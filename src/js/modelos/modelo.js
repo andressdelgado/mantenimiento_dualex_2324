@@ -273,4 +273,40 @@ export class Modelo {
   borrarConvenioById (id) {
     return Rest.delete('convenio', [id])
   }
+
+  /**
+   Devuelve la lista de profesores por curso.
+   La lista está formada por los profesores que están asignados a un curso.
+   @return {Promise} Devuelve la promesa asociada a la petición.
+   **/
+  getProfesores () {
+    return Rest.get('gestionprofesores')
+  }
+
+  /**
+   Borrar un profesor.
+   @param profesorId {Number} Identificador del profesor.
+   @return {Promise} Devuelve la promesa asociada a la petición.
+   **/
+  borrarProfesor (profesorId) {
+    return Rest.delete('gestionprofesores', [profesorId])
+  }
+
+  /**
+   * Realiza el alta de un profesor.
+   * @param profesor {} Datos del profesor.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  altaProfesor (profesor) {
+    return Rest.post('gestionprofesores', [], profesor)
+  }
+
+  /**
+   * Modifica un profesor.
+   * @param profesor {} Datos del profesor.
+   * @returns {Promise} Devuelve la promesa asociada a la petición.
+   */
+  modificarProfesor (profesor) {
+    return Rest.put('gestionprofesores', [], profesor)
+  }
 }

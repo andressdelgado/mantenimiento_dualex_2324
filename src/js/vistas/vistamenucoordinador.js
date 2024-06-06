@@ -44,7 +44,7 @@ export class VistaMenuCoordinador extends Vista {
    * Navega a la vista de profesores.
    **/
   irAVistaProfesores() {
-    this.controlador.irAVistaProfesores();
+    this.controlador.mostrarGestionProfesores();
   }
 
   /**
