@@ -26,7 +26,7 @@ export class VistaGestionProfesores extends Vista{
    * Carga los profesores en el listado filtrados por curso.
    */
   cargarFiltrado(){
-    this.listaProfesores.innerHTML = ''
+    this.limpiar()
     this.controlador.getProfesores()
       .then(profesores => {
         if (profesores.length > 0){
@@ -86,13 +86,13 @@ export class VistaGestionProfesores extends Vista{
    * @param profesor {} Datos modificables del profesor.
    */
   modificarProfesor (profesor) {
-    this.controlador.mostrarModificarProfesor(profesor, this.cursos)
+    this.controlador.mostrarModificarProfesor(profesor)
   }
 
   /**
    * Limpia la lista de profesores.
    */
-  limpiar(){
+  limpiar() {
     this.listaProfesores.innerHTML = ''
   }
 

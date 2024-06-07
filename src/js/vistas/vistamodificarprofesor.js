@@ -48,7 +48,6 @@ export class VistaModificarProfesor extends Vista{
           id: this.profesor.id
         }
         this.controlador.modificarProfesor(profesor)
-        this.cancelar()
       }
     }
 

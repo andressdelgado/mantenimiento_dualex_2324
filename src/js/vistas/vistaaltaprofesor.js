@@ -49,7 +49,6 @@ export class VistaAltaProfesor extends Vista{
         }
         this.controlador.altaProfesor(profesor)
         this.limpiarCampos()
-        this.cancelar()
       }
     }
 

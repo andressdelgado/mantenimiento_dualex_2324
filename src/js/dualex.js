@@ -727,7 +727,6 @@ class DualEx {
     if (this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
 
     this.vistaMenu.verGestionProfesores()
-    this.vistaProfesorAlta.limpiarCampos()
     this.vistaProfesoresListado.limpiar()
     this.vistaProfesoresListado.cargarFiltrado()
     this.ocultarVistas()
@@ -774,37 +773,6 @@ class DualEx {
   }
 
   /**
-   * Realiza una petición para insertar un nuevo profesor.
-   * @param profesor {} Datos del profesor a insertar.
-   */
-  altaProfesor (profesor) {
-    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
-
-    this.modelo.altaProfesor(profesor)
-      .then(resultado => {
-        this.vistaMensaje.mostrar('El profesor se creó correctamente', VistaMensaje.OK)
-        this.vistaProfesorAlta.limpiarCampos()
-        this.mostrarGestionProfesores()
-      })
-      .catch(error => this.gestionarError(error))
-  }
-
-  /**
-   * Realiza una petición para modificar un profesor.
-   * @param profesor {} Datos del profesor a modificar.
-   */
-  modificarProfesor (profesor) {
-    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
-
-    this.modelo.modificarProfesor(profesor)
-      .then(resultado => {
-        this.vistaMensaje.mostrar('El profesor se actualizó correctamente', VistaMensaje.OK)
-        this.mostrarGestionProfesores()
-      })
-      .catch(error => this.gestionarError(error))
-  }
-
-  /**
    * Develve la lista de profesores de un curso
    * @returns array
    */
@@ -824,8 +792,8 @@ class DualEx {
       if (confirmar) {
         this.modelo.borrarProfesor(profesorId)
           .then(respuesta => {
+            this.mostrarGestionProfesores()
             this.vistaMensaje.mostrar('El profesor se eliminó correctamente.', VistaMensaje.OK)
-            this.vistaProfesoresListado.cargarFiltrado()
           })
           .catch(error => this.gestionarError(error))
       } else { this.vistaDialogo.cerrar() }
@@ -837,13 +805,15 @@ class DualEx {
    * @param profesor {} Datos del profesor a insertar.
    */
   altaProfesor (profesor) {
-    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') { throw Error('Operación no permitida.') }
+    if (this.#usuario.rol !== 'profesor' && this.#usuario.rol !== 'coordinador') {
+      throw Error('Operación no permitida.')
+    }
 
     this.modelo.altaProfesor(profesor)
       .then(resultado => {
+        this.mostrarGestionProfesores()
         this.vistaMensaje.mostrar('El profesor se creó correctamente', VistaMensaje.OK)
         this.vistaProfesorAlta.limpiarCampos()
-        this.vistaProfesoresListado.cargarFiltrado()
       })
       .catch(error => this.gestionarError(error))
   }
@@ -857,8 +827,8 @@ class DualEx {
 
     this.modelo.modificarProfesor(profesor)
       .then(resultado => {
+        this.mostrarGestionProfesores()
         this.vistaMensaje.mostrar('El profesor se actualizó correctamente', VistaMensaje.OK)
-        this.vistaProfesoresListado.cargarFiltrado()
       })
       .catch(error => this.gestionarError(error))
   }
